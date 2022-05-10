@@ -9,6 +9,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using PasteBook.WebApi.Data;
+using PasteBook.WebApi.Helpers;
+using PasteBook.WebApi.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -38,6 +40,12 @@ namespace PasteBook.WebApi
             var connectionString = Configuration.GetValue<string>("ConnectionString");
             services.AddDbContext<PasteBookDb>(options => options.UseSqlServer(connectionString));
             services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+            //DINAGDAG
+            services.AddCors();
+            services.AddHttpContextAccessor();
+            services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));
+            services.AddScoped<IUserService, UserService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -60,6 +68,9 @@ namespace PasteBook.WebApi
             app.UseRouting();
 
             app.UseAuthorization();
+
+            //
+            app.UseMiddleware<JwtMiddleware>();
 
             app.UseEndpoints(endpoints =>
             {
