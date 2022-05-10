@@ -10,7 +10,7 @@ using PasteBook.WebApi.Data;
 namespace PasteBook.WebApi.Migrations
 {
     [DbContext(typeof(PasteBookDb))]
-    [Migration("20220510060415_InitialCreate")]
+    [Migration("20220510091206_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -48,19 +48,16 @@ namespace PasteBook.WebApi.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("EmailAddress")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<byte[]>("Password")
                         .HasColumnType("varbinary(max)");
 
                     b.Property<byte[]>("PasswordKey")
                         .HasColumnType("varbinary(max)");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
                     b.HasKey("AuthenticationId");
-
-                    b.HasIndex("UserId")
-                        .IsUnique();
 
                     b.ToTable("Authentication");
                 });
@@ -161,10 +158,10 @@ namespace PasteBook.WebApi.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("BirthDate")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("AuthenticationId")
+                        .HasColumnType("int");
 
-                    b.Property<string>("EmailAddress")
+                    b.Property<string>("BirthDate")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("FirstName")
@@ -183,6 +180,9 @@ namespace PasteBook.WebApi.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("UserId");
+
+                    b.HasIndex("AuthenticationId")
+                        .IsUnique();
 
                     b.ToTable("Users");
                 });
@@ -216,15 +216,6 @@ namespace PasteBook.WebApi.Migrations
                         .IsRequired();
 
                     b.Navigation("User");
-                });
-
-            modelBuilder.Entity("PasteBook.WebApi.Models.Authentication", b =>
-                {
-                    b.HasOne("PasteBook.WebApi.Models.User", null)
-                        .WithOne("Authentication")
-                        .HasForeignKey("PasteBook.WebApi.Models.Authentication", "UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("PasteBook.WebApi.Models.Comment", b =>
@@ -271,6 +262,17 @@ namespace PasteBook.WebApi.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("PasteBook.WebApi.Models.User", b =>
+                {
+                    b.HasOne("PasteBook.WebApi.Models.Authentication", "Authentication")
+                        .WithOne("User")
+                        .HasForeignKey("PasteBook.WebApi.Models.User", "AuthenticationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Authentication");
+                });
+
             modelBuilder.Entity("PasteBook.WebApi.Models.UserFriend", b =>
                 {
                     b.HasOne("PasteBook.WebApi.Models.User", "User")
@@ -287,6 +289,11 @@ namespace PasteBook.WebApi.Migrations
                     b.Navigation("Photos");
                 });
 
+            modelBuilder.Entity("PasteBook.WebApi.Models.Authentication", b =>
+                {
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("PasteBook.WebApi.Models.Post", b =>
                 {
                     b.Navigation("Comments");
@@ -297,8 +304,6 @@ namespace PasteBook.WebApi.Migrations
             modelBuilder.Entity("PasteBook.WebApi.Models.User", b =>
                 {
                     b.Navigation("Albums");
-
-                    b.Navigation("Authentication");
 
                     b.Navigation("Posts");
 
