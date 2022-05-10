@@ -10,10 +10,6 @@ namespace PasteBook.WebApi.Models
         [Key]
         public int UserId { get; set; }
         public string EmailAddress { get; set; }
-        [JsonIgnore]
-        public string Password { get; set; }
-        [JsonIgnore]
-        public string PasswordKey { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string BirthDate { get; set; }
@@ -23,5 +19,6 @@ namespace PasteBook.WebApi.Models
         public ICollection<Post> Posts { get; set; }
         public ICollection<UserFriend> UserFriends { get; set; }
         public ICollection<Album> Albums { get; set; }
+        public Authentication Authentication { get; set; }
     }
 }

@@ -2,7 +2,9 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PasteBook.WebApi.Data;
+using PasteBook.WebApi.DataObjectTransfer;
 using PasteBook.WebApi.Models;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace PasteBook.WebApi.Controllers
@@ -14,7 +16,7 @@ namespace PasteBook.WebApi.Controllers
         public IUnitOfWork UnitOfWork { get; private set; }
         public UserController(IUnitOfWork unitOfWork)
         {
-            UnitOfWork = unitOfWork;
+            this.UnitOfWork = unitOfWork;
         }
 
         [HttpGet]
@@ -27,29 +29,35 @@ namespace PasteBook.WebApi.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetUserById(int id)
         {
-            var employee = await UnitOfWork.UserRepository.FindByPrimaryKey(id);
-            if (employee is object)
+            var user = await UnitOfWork.UserRepository.FindByPrimaryKey(id);
+            if (user is object)
             {
-                return Ok(employee);
+                return Ok(user);
             }
             return NotFound();
         }
 
-        [HttpPost]
-        public async Task<IActionResult> Post([FromBody] User user)
+        [HttpPost("register")]
+        public async Task<IActionResult> Register([FromBody] UserRegistration user)
         {
-            var newUser = await UnitOfWork.UserRepository.Insert(user);
+            var existingUser = await UnitOfWork.UserRepository.Find(u => u.EmailAddress.Equals(user.EmailAddress));
+            if (existingUser.Count() > 0)
+            {
+                return BadRequest();
+            }
+            var newUser = await UnitOfWork.UserRepository.Register(user);
             await UnitOfWork.CommitAsync();
+            await UnitOfWork.AuthenticationRepository.HashPassword(newUser.UserId, user.Password);
             return StatusCode(StatusCodes.Status201Created, newUser);
         }
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
-            var employee = await UnitOfWork.UserRepository.FindByPrimaryKey(id);
-            if (employee is object)
+            var user = await UnitOfWork.UserRepository.FindByPrimaryKey(id);
+            if (user is object)
             {
-                UnitOfWork.UserRepository.Delete(employee);
+                UnitOfWork.UserRepository.Delete(user);
                 await UnitOfWork.CommitAsync();
                 return NoContent();
             }
@@ -69,8 +77,8 @@ namespace PasteBook.WebApi.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                var employee = await UnitOfWork.UserRepository.FindByPrimaryKey(id);
-                if (employee is null)
+                var existingUser = await UnitOfWork.UserRepository.FindByPrimaryKey(id);
+                if (existingUser is null)
                 {
                     return NotFound();
                 }
