@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace PasteBook.WebApi.Models
 {
@@ -9,7 +10,9 @@ namespace PasteBook.WebApi.Models
         [Key]
         public int UserId { get; set; }
         public string EmailAddress { get; set; }
+        [JsonIgnore]
         public string Password { get; set; }
+        [JsonIgnore]
         public string PasswordKey { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
