@@ -32,7 +32,7 @@ namespace PasteBook.WebApi.Data
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Server=BMMBQG3;Database=PasteBookDb;User Id=sa;Password=sqlserver");
+                optionsBuilder.UseSqlServer("Server=9MMBQG3\\TRIAL;Database=PasteBookDb;User Id=sa;Password=P@ssw0rd");
             }
         }
     }
