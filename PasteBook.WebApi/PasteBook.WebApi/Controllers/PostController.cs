@@ -23,7 +23,7 @@ namespace PasteBook.WebApi.Controllers
             return Ok(users);
         }
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetPostsById(int id)
+        public async Task<IActionResult> GetPostById(int id)
         {
             var posts = await UnitOfWork.PostRepository.FindByPrimaryKey(id);
             if (posts is object)

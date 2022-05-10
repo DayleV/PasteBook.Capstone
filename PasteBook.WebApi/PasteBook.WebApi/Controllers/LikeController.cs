@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 
 namespace PasteBook.WebApi.Controllers
 {
+    [Route("likes")]
+    [ApiController]
     public class LikeController : ControllerBase
     {
         public IUnitOfWork UnitOfWork { get; private set; }

@@ -1,5 +1,7 @@
 ﻿using PasteBook.WebApi.Data;
 using PasteBook.WebApi.Models;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace PasteBook.WebApi.Repositories
 {
@@ -10,6 +12,7 @@ namespace PasteBook.WebApi.Repositories
     {
         public PostRepository(PasteBookDb context) : base(context)
         {
+
         }
     }
 }
