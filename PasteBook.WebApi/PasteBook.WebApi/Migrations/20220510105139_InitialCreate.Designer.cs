@@ -10,7 +10,7 @@ using PasteBook.WebApi.Data;
 namespace PasteBook.WebApi.Migrations
 {
     [DbContext(typeof(PasteBookDb))]
-    [Migration("20220510091206_InitialCreate")]
+    [Migration("20220510105139_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -59,7 +59,7 @@ namespace PasteBook.WebApi.Migrations
 
                     b.HasKey("AuthenticationId");
 
-                    b.ToTable("Authentication");
+                    b.ToTable("Authentications");
                 });
 
             modelBuilder.Entity("PasteBook.WebApi.Models.Comment", b =>

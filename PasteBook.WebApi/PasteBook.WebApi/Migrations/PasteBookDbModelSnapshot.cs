@@ -57,7 +57,7 @@ namespace PasteBook.WebApi.Migrations
 
                     b.HasKey("AuthenticationId");
 
-                    b.ToTable("Authentication");
+                    b.ToTable("Authentications");
                 });
 
             modelBuilder.Entity("PasteBook.WebApi.Models.Comment", b =>

@@ -19,17 +19,6 @@ namespace PasteBook.WebApi.Controllers
             this.UnitOfWork = unitOfWork;
         }
 
-        [HttpPost("/register")]
-        public async Task<IActionResult> Register([FromBody] UserRegistration user)
-        {
-            if (ModelState.IsValid)
-            {
-                var Auth = await UnitOfWork.AuthenticationRepository.EncryptAuthentication(user);
-                return StatusCode(StatusCodes.Status201Created, user);
-            }
-            return BadRequest();
-        }
-
         [HttpGet]
         public async Task<IActionResult> GetUsers()
         {

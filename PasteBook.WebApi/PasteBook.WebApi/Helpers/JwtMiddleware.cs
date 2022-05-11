@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using PasteBook.WebApi.Data;
 using PasteBook.WebApi.Services;
 using System;
 using System.IdentityModel.Tokens.Jwt;
@@ -21,20 +22,20 @@ namespace PasteBook.WebApi.Helpers
             this.appSettings = appSettings.Value;
         }
 
-        public async Task Invoke(HttpContext context, IUserService userService)
+        public async Task Invoke(HttpContext context)
         {
             var token = context.Request.Headers["Authorization"].FirstOrDefault()?.Split(" ").Last();
 
             if (token != null)
             {
-                attachUserToContext(context, userService, token);
+                AttachUserToContext(context, token);
             }
 
 
             await this.next(context);
         }
 
-        private void attachUserToContext(HttpContext context, IUserService userService, string token)
+        private void AttachUserToContext(HttpContext context, string token)
         {
             try
             {
@@ -53,10 +54,11 @@ namespace PasteBook.WebApi.Helpers
                 }, out SecurityToken validatedToken);
 
                 var jwtToken = (JwtSecurityToken)validatedToken;
-                var userId = int.Parse(jwtToken.Claims.First(x => x.Type == "id").Value);
+                var authId = int.Parse(jwtToken.Claims.First(x => x.Type == "AuthId").Value);
+                var userId = int.Parse(jwtToken.Claims.First(x => x.Type == "UserId").Value);
 
                 // attach user to context on successful jwt validation
-                context.Items["User"] = userService.GetById(userId);
+                context.Items["AuthId"] = authId;
             }
             catch (Exception e)
             {

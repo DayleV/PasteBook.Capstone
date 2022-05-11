@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace PasteBook.WebApi.Web
+namespace PasteBook.WebApi.DataObjectTransfer
 {
     public class AuthenticateRequest
     {
@@ -8,6 +8,6 @@ namespace PasteBook.WebApi.Web
         public string EmailAddress { get; set; }
 
         [Required]
-        public string LastName { get; set; }
+        public string Password { get; set; }
     }
 }

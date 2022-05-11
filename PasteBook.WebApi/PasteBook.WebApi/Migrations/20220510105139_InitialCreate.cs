@@ -8,7 +8,7 @@ namespace PasteBook.WebApi.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Authentication",
+                name: "Authentications",
                 columns: table => new
                 {
                     AuthenticationId = table.Column<int>(type: "int", nullable: false)
@@ -19,7 +19,7 @@ namespace PasteBook.WebApi.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Authentication", x => x.AuthenticationId);
+                    table.PrimaryKey("PK_Authentications", x => x.AuthenticationId);
                 });
 
             migrationBuilder.CreateTable(
@@ -40,9 +40,9 @@ namespace PasteBook.WebApi.Migrations
                 {
                     table.PrimaryKey("PK_Users", x => x.UserId);
                     table.ForeignKey(
-                        name: "FK_Users_Authentication_AuthenticationId",
+                        name: "FK_Users_Authentications_AuthenticationId",
                         column: x => x.AuthenticationId,
-                        principalTable: "Authentication",
+                        principalTable: "Authentications",
                         principalColumn: "AuthenticationId",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -231,7 +231,7 @@ namespace PasteBook.WebApi.Migrations
                 name: "Users");
 
             migrationBuilder.DropTable(
-                name: "Authentication");
+                name: "Authentications");
         }
     }
 }
