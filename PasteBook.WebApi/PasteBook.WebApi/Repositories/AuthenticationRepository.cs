@@ -5,32 +5,33 @@ using System.Security.Cryptography;
 using System.Threading.Tasks;
 using System.Linq;
 using System.Text;
+using PasteBook.WebApi.DataTransferObject;
 
 namespace PasteBook.WebApi.Repositories
 {
     public interface IAuthenticationRepository : IBaseRepository<Authentication>
     {
-        public Task<Authentication> EncryptAuthentication(UserRegistration user);
-        public Task<User> Authenticate(AuthenticateRequest model);
+        public Task<Authentication> EmailExist(string email);
+        public Task<Authentication> InsertEncryptedUser(UserRegistration user, EncryptPassword encrypt);
+        //public Task<User> Authenticate(AuthenticateRequest model);
     }
     public class AuthenticationRepository : GenericRepository<Authentication>, IAuthenticationRepository
     {
         public AuthenticationRepository(PasteBookDb context) : base(context)
         {
         }
-        public async Task<Authentication> EncryptAuthentication(UserRegistration user)
+        public async Task<Authentication> EmailExist(string email)
         {
-            byte[] hashedPassword, saltKey;
-            using (var hmac = new HMACSHA512())
-            {
-                saltKey = hmac.Key;
-                hashedPassword = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(user.Password));
-            }
+            var auth = await Find(e => e.EmailAddress.Equals(email));
+            return auth.FirstOrDefault();
+        }
+        public async Task<Authentication> InsertEncryptedUser(UserRegistration user, EncryptPassword encrypt)
+        {
             Authentication authentication = new Authentication
             {
                 EmailAddress = user.EmailAddress,
-                Password = hashedPassword,
-                PasswordKey = saltKey,
+                Password = encrypt.Password,
+                PasswordKey = encrypt.PasswordKey,
                 User = new User
                 {
                     FirstName = user.FirstName,

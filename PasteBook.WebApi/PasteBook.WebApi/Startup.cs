@@ -46,6 +46,7 @@ namespace PasteBook.WebApi
             services.AddHttpContextAccessor();
             services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IAuthenticationService, AuthenticationService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
