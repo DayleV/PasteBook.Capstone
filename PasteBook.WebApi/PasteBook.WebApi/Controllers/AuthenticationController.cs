@@ -7,18 +7,25 @@ using Microsoft.AspNetCore.Http;
 using PasteBook.WebApi.Data;
 using System.Threading.Tasks;
 using System.Linq;
+using PasteBook.WebApi.DataTransferObject;
+using PasteBook.WebApi.Models;
 
 namespace PasteBook.WebApi.Controllers
 {
     [ApiController]
     public class AuthenticationController : ControllerBase
     {
-        private IUserService userService;
+        private readonly IUserService userService;
+        private readonly IAuthenticationService authenticationService;
         private readonly IHttpContextAccessor httpContextAccessor;
         public IUnitOfWork UnitOfWork { get; private set; }
-        public AuthenticationController(IUserService userService, IHttpContextAccessor httpContextAccessor, IUnitOfWork unitOfWork)
+        public AuthenticationController(IUserService userService, 
+            IAuthenticationService authenticationService, 
+            IHttpContextAccessor httpContextAccessor, 
+            IUnitOfWork unitOfWork)
         {
             this.userService = userService;
+            this.authenticationService = authenticationService;
             this.httpContextAccessor = httpContextAccessor;
             this.UnitOfWork = unitOfWork;
         }
@@ -26,33 +33,71 @@ namespace PasteBook.WebApi.Controllers
         [HttpPost("/register")]
         public async Task<IActionResult> Register([FromBody] UserRegistration user)
         {
-            var existingEmail = await this.UnitOfWork.AuthenticationRepository.Find(e => e.EmailAddress.Equals(user.EmailAddress));
-            if (existingEmail.Count() > 0)
+            var auth = await UnitOfWork.AuthenticationRepository.EmailExist(user.EmailAddress);
+            if (auth != null)
                 return BadRequest(new { message = "Email Already Exist" });
-            if (ModelState.IsValid)
-            {
-                var Auth = await UnitOfWork.AuthenticationRepository.EncryptAuthentication(user);
-                return StatusCode(StatusCodes.Status201Created, new { message = "Account Successfuly Created"});
-            }
-            return BadRequest(new { message = "Something Went Wrong" });
+
+            var encryptPassword = authenticationService.Encrypt(user.Password);
+            await UnitOfWork.AuthenticationRepository.InsertEncryptedUser(user, encryptPassword);
+            return StatusCode(StatusCodes.Status201Created, new { message = "Account Successfuly Created" });
         }
 
-        [AllowAnonymous]
         [HttpPost("login")]
         public async Task<IActionResult> Authenticate(AuthenticateRequest model)
         {
-            var user = await this.UnitOfWork.AuthenticationRepository.Authenticate(model);
+            var auth = await UnitOfWork.AuthenticationRepository.EmailExist(model.EmailAddress);
 
-            if (user == null)
-            {
-                return BadRequest(new { message = "Username or password is incorrect" });
-            }
+            if (auth == null)
+                return Unauthorized(new { message = "Email Does Not Exist" });
 
-            var response = this.userService.GenerateResponse(user);
+            var isAuthenticated = authenticationService.Authenticate(auth, model.Password);
 
+            if(!isAuthenticated)
+                return Unauthorized(new { message = "Password is incorrect" });
+
+            var user = await UnitOfWork.UserRepository.Find(u => u.AuthenticationId.Equals(auth.AuthenticationId));
+            var response = this.userService.GenerateResponse(user.FirstOrDefault());
             return Ok(response);
         }
 
+        [HttpPost("change-password")]
+        public async Task<IActionResult> ChangePassword(ChangePasswordRequest model)
+        {
+            var auth = await UnitOfWork.AuthenticationRepository.FindByPrimaryKey(model.AuthId);
+
+            if (auth == null)
+                return Unauthorized(new { message = "Invalid Authentication" });
+
+            var isAuthenticated = authenticationService.Authenticate(auth, model.OldPassword);
+
+            if (!isAuthenticated)
+                return Unauthorized(new { message = "Password is incorrect" });
+
+            if(model.EmailAddress != null)
+            {
+                var existingEmail = await UnitOfWork.AuthenticationRepository.EmailExist(model.EmailAddress);
+                if (existingEmail != null)
+                    return BadRequest(new { message = "Email Already Exist" });
+
+                auth.EmailAddress = model.EmailAddress;
+            }
+
+            if (model.NewPassword != null)
+            {
+                var encryptPassword = authenticationService.Encrypt(model.NewPassword);
+
+                auth.Password = encryptPassword.Password;
+                auth.PasswordKey = encryptPassword.PasswordKey;
+            }
+
+            UnitOfWork.AuthenticationRepository.Update(auth);
+            await UnitOfWork.CommitAsync();
+
+            return Ok(new { message = "Account Successfuly Updated" });
+        }
+
+
+        //sample authorize route
         [AuthorizeAccess]
         [HttpGet("/some")]
         public async Task<IActionResult> GetAll()
@@ -60,5 +105,6 @@ namespace PasteBook.WebApi.Controllers
             var users = await UnitOfWork.UserRepository.FindAll();
             return Ok(users);
         }
+
     }
 }

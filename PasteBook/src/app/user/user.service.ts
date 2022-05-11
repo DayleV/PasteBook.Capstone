@@ -15,8 +15,10 @@ export class UserService {
 
   constructor(private http: HttpClient, 
     private configService: ConfigurationService) {
+
       this.apiUrl = this.configService.settings.apiUrl + API_ENDPOINT;
       console.log(this.apiUrl);
+
     }
 
   getUsers(): Observable<IUsers[]> {
