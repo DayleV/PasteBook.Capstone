@@ -1,10 +1,16 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { catchError, Observable, of } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { IUsers } from './Model/users';
+import { IPost, IUsers } from './Model/users';
 import { ConfigurationService } from '../configuration/configuration.service';
 
 const API_ENDPOINT = "users";
+
+const httpOptions = {
+  headers: new HttpHeaders({
+    'Content-Type': 'application/json'
+  })
+};
 
 @Injectable({
   providedIn: 'root'
@@ -23,6 +29,10 @@ export class UserService {
 
   getUsers(): Observable<IUsers[]> {
     return this.http.get<IUsers[]>(this.apiUrl);
+  }
+
+  postPost(entity: IPost): Observable<IPost> {
+    return this.http.post<IPost>(this.configService.settings.apiUrl + 'posts', entity, httpOptions);
   }
 
 }
