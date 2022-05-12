@@ -80,7 +80,6 @@ namespace PasteBook.WebApi
 
             app.UseAuthorization();
 
-            //
             app.UseMiddleware<JwtMiddleware>();
 
             app.UseEndpoints(endpoints =>
