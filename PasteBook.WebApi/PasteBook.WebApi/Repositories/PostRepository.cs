@@ -1,4 +1,6 @@
-﻿using PasteBook.WebApi.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using PasteBook.WebApi.Data;
+using PasteBook.WebApi.DataTransferObject;
 using PasteBook.WebApi.Models;
 using System.Collections.Generic;
 using System.Linq;
