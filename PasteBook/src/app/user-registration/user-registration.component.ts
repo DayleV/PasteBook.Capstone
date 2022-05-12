@@ -1,18 +1,16 @@
-import { Component, OnInit,} from '@angular/core';
-import { DatePipe } from '@angular/common';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { Observable, tap } from 'rxjs';
-import { IUserRegistrations } from './Model/userregistrations';
-import { RegistrationService } from './registration.service';
+import { IUser_Registrations } from './Model/user-registrations';
+import { UserRegistrationService } from './user-registration.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
-  selector: 'app-registration',
-  templateUrl: './registration.component.html',
-  styleUrls: ['./registration.component.scss']
+  selector: 'app-user-registration',
+  templateUrl: './user-registration.component.html',
+  styleUrls: ['./user-registration.component.scss']
 })
-
-export class RegistrationComponent implements OnInit {
-  newUser: IUserRegistrations = {
+export class UserRegistrationComponent implements OnInit {
+  newUser: IUser_Registrations = {
     EmailAddress: "",
     Password: "",
     FirstName: "",
@@ -25,7 +23,7 @@ export class RegistrationComponent implements OnInit {
   registrationform = new FormGroup({
     EmailAddress: new FormControl('', [
       Validators.required,
-      Validators.pattern(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{3,}))$/g)
+      Validators.pattern(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/g)
     ]),
       Password: new FormControl('', [
       Validators.required,
@@ -35,18 +33,19 @@ export class RegistrationComponent implements OnInit {
     // ]),
     FirstName: new FormControl('', [
       Validators.required,
-      Validators.minLength(4),
-      Validators.pattern(/^[A-Za-z ]+$/)
+      Validators.pattern(/^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/g)
     ]),
     LastName: new FormControl('', [
       Validators.required,
-      Validators.pattern(/^[A-Za-z ]+$/)
+      Validators.pattern(/^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/g)
     ]),
     Birthday: new FormControl('', [
       Validators.required
     ]),
     Gender: new FormControl('', [
-      Validators.pattern(/^[A-Za-z ]+$/)
+      Validators.minLength(4),
+      Validators.maxLength(6),
+      Validators.pattern(/^[a-zA-Z]+(([',.-][a-zA-Z])?[a-zA-Z]*)*$/g)
     ]),
     MobileNumber: new FormControl('', [
       Validators.pattern(/^09[0-9]{9}$/g)
@@ -86,18 +85,27 @@ export class RegistrationComponent implements OnInit {
     return this.registrationform.get('MobileNumber');
   }
   
-  constructor(private registrationService: RegistrationService, public datepipe: DatePipe) {}
+  userregistration$: Observable<IUser_Registrations[]> | undefined;
+  
+  constructor(private userregistrationService: UserRegistrationService) {}
 
   ngOnInit(): void {  }
 
   addNewUser(): void {
+    // const user = {
+    //   EmailAddress: this.newUser.EmailAddress,
+    //   Password: this.newUser.Password,
+    //   FirstName: this.newUser.FirstName,
+    //   LastName: this.newUser.LastName,
+    //   Birthday: this.newUser.Birthday,
+    //   Gender: this.newUser.Gender,
+    //   MobileNumber: this.newUser.MobileNumber
+    // }
     // this.userfriendService.addFriend(this.userfriend);
     // console.log(this.userfriend);
-    // this.customSubmit.emit(this.registrationform.value);
-    this.registrationService.addUser(this.newUser).subscribe(newUser => this.newUser = newUser);
-    this.registrationform.reset();
+    this.userregistrationService.addUser(this.newUser).subscribe(newUser => this.newUser = newUser);
+    console.log("Success!");
   }
-  myFunction(){
-    let date =this.datepipe.transform(this.newUser.Birthday, 'yyyy-MM-dd');
-   }
+
+
 }
