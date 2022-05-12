@@ -7,13 +7,15 @@ import { LoginComponent } from './login/login.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { UserComponent } from './user/user.component';
 import { UserFriendComponent } from './user-friend/user-friend.component';
+import { PhotosComponent } from './new-album/view-album/photos/photos.component';
 
 const routes: Routes = [
   {path: 'users', component: UserComponent},
   {path: 'registration', component: RegistrationComponent},
   {path: 'view-albums', component: ViewAlbumComponent},
   {path: 'add-album', component: AddAlbumComponent},
-  {path: 'posts', component: PostComponent}
+  {path: 'view-albums/:id', component: PhotosComponent},
+  {path: 'posts', component: PostComponent},
   {path: 'login', component: LoginComponent},
   {path: 'userfriends', component: UserFriendComponent},
 ];

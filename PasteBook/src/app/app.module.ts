@@ -7,15 +7,12 @@ import { AppComponent } from './app.component';
 import { UserComponent } from './user/user.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { PostComponent } from './post/post.component';
-<<<<<<< HEAD
-import { FormsModule } from '@angular/forms';
-import { ViewAlbumComponent } from './new-album/view-album/view-album.component';
-import { AddAlbumComponent } from './new-album/add-album/add-album.component';
-=======
 import { LoginComponent } from './login/login.component';
 import { FormsModule } from '@angular/forms';
 import { UserFriendComponent } from './user-friend/user-friend.component';
->>>>>>> 5fd2c14639dc5adc50bdff85243f9949f859b163
+import { ViewAlbumComponent } from './new-album/view-album/view-album.component';
+import { AddAlbumComponent } from './new-album/add-album/add-album.component';
+import { PhotosComponent } from './new-album/view-album/photos/photos.component';
 
 @NgModule({
   declarations: [
@@ -23,13 +20,11 @@ import { UserFriendComponent } from './user-friend/user-friend.component';
     UserComponent,
     RegistrationComponent,
     PostComponent,
-<<<<<<< HEAD
     ViewAlbumComponent,
-    AddAlbumComponent
-=======
+    AddAlbumComponent,
     LoginComponent,
-    UserFriendComponent
->>>>>>> 5fd2c14639dc5adc50bdff85243f9949f859b163
+    UserFriendComponent,
+    PhotosComponent
   ],
   imports: [
     BrowserModule,
