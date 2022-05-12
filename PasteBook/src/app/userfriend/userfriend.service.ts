@@ -12,8 +12,8 @@ const API_ENDPOINT = "userfriends";
 export class UserfriendService {
   apiUrl: string = "";
 
-  constructor(private http: HttpClient, 
-    private configService: ConfigurationService) {
+  
+  constructor(private http: HttpClient, private configService: ConfigurationService) {
       this.apiUrl = this.configService.settings.apiUrl + API_ENDPOINT;
       console.log(this.apiUrl);
     }
@@ -21,5 +21,10 @@ export class UserfriendService {
   getUserFriends(): Observable<IUserFriends[]> {
     return this.http.get<IUserFriends[]>(this.apiUrl);
   }
+
+  addFriend(entity: IUserFriends): Observable<IUserFriends> {
+  return this.http.post<IUserFriends>(this.apiUrl, entity);
+  }
+
 
 }
