@@ -12,14 +12,10 @@ import { DatePipe } from '@angular/common';
 })
 
 export class PostComponent implements OnInit {
-
-  todayDate : Date = new Date();
   
   post: IPost = {
-    PostId: 1,
-    UserId: 1,
-    PostContent: 'PostContent',
-    PostDate: this.todayDate 
+    UserId: 2,
+    PostContent: '',
   }
   post$: Observable<IPost[]> | undefined;
 
@@ -29,9 +25,11 @@ export class PostComponent implements OnInit {
     this.post$ = this.postService.getAllPost();
   }
 
-  addNewPost() {
+  addPost(): void{
+    const data = {
+      UserId : this.post.UserId,
+      PostContent: this.post.PostContent
+    };
     this.postService.addPost(this.post).subscribe(post => this.post == post);
-    console.log("success");
   }
-
 }

@@ -11,7 +11,6 @@ const API_ENDPOINT = "posts";
   providedIn: 'root'
 })
 export class PostService {
-  api = "https://localhost:44368/"
   apiUrl: string = "";
 
   constructor(private http: HttpClient, 

@@ -2,18 +2,16 @@
     <div class="submit-form">
       <div>
         <div class="form-group">
-          <label for="title">Post</label>
+          <label for="title">Album</label>
           <input
             type="text"
             class="form-control"
             id="title"
             required
-            [(ngModel)]="post.PostContent"
-            name="postContent"
+            [(ngModel)]="album.AlbumName"
+            name="albumName"
           />
         </div>
-        <button (click)="addPost()" class="btn btn-success">Add Post</button>
-      </div>
+        <button (click)="addAlbum()" class="btn btn-success" routerLink="/view-albums">Add Album</button>
     </div>
-  </div>
-  
+</div>

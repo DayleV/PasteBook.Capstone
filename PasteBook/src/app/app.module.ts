@@ -8,6 +8,9 @@ import { UserComponent } from './user/user.component';
 import { UserfriendComponent } from './userfriend/userfriend.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { PostComponent } from './post/post.component';
+import { FormsModule } from '@angular/forms';
+import { ViewAlbumComponent } from './new-album/view-album/view-album.component';
+import { AddAlbumComponent } from './new-album/add-album/add-album.component';
 
 @NgModule({
   declarations: [
@@ -15,12 +18,15 @@ import { PostComponent } from './post/post.component';
     UserComponent,
     UserfriendComponent,
     RegistrationComponent,
-    PostComponent
+    PostComponent,
+    ViewAlbumComponent,
+    AddAlbumComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
