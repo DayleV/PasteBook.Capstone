@@ -12,6 +12,5 @@ namespace PasteBook.WebApi.Models
         public string CommentContent { get; set; }
         public string CommentDate { get; set; }
         public Post Post { get; set; }
-
     }
 }
