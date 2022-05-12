@@ -5,17 +5,17 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { UserComponent } from './user/user.component';
-import { UserfriendComponent } from './userfriend/userfriend.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { PostComponent } from './post/post.component';
+import { UserFriendComponent } from './user-friend/user-friend.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     UserComponent,
-    UserfriendComponent,
     RegistrationComponent,
-    PostComponent
+    PostComponent,
+    UserFriendComponent
   ],
   imports: [
     BrowserModule,
