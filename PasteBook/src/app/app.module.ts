@@ -19,7 +19,7 @@ import { UserFriendComponent } from './user-friend/user-friend.component';
     UserComponent,
     PostComponent,
     CommentComponent,
-    LikeComponent
+    LikeComponent,
     RegistrationComponent,
     PostComponent,
     LoginComponent,
