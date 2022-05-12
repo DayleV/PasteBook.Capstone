@@ -7,13 +7,15 @@ import { AppComponent } from './app.component';
 import { UserComponent } from './user/user.component';
 import { UserfriendComponent } from './userfriend/userfriend.component';
 import { RegistrationComponent } from './registration/registration.component';
+import { PostComponent } from './post/post.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     UserComponent,
     UserfriendComponent,
-    RegistrationComponent
+    RegistrationComponent,
+    PostComponent
   ],
   imports: [
     BrowserModule,
