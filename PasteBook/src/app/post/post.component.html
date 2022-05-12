@@ -1,19 +1,29 @@
-<div style="width: 400px; margin: auto;">
+
+  <div style="width: 400px; margin: auto;">
     <div class="submit-form">
       <div>
         <div class="form-group">
-          <label for="title">Post</label>
-          <input
-            type="text"
-            class="form-control"
-            id="title"
-            required
-            [(ngModel)]="post.PostContent"
-            name="postContent"
-          />
+          <label for="title"><h2>Post</h2></label>
+          <form #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate>
+            <input
+                    type="text"
+                    class="form-control"
+                    ngModel
+                    id="title"
+                    required
+                    [(ngModel)]="newPost.PostContent"
+                    name="renderPost"
+                    style="margin-bottom:14px"
+                  />
+                  <button (click)="postOnClick()" class="btn btn-success">Add Post</button>
+                  <!-- <button (click)="postOnClick()" >Submit</button> -->
+          </form>
         </div>
-        <button (click)="addPost()" class="btn btn-success">Add Post</button>
+        
+        <!-- <p>{{posts$|async|json}}</p> -->
+        <p *ngFor="let post of postText">
+            {{post.renderPost}}
+        </p>
       </div>
     </div>
   </div>
-  
