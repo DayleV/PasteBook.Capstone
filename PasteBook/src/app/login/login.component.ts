@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Observable } from 'rxjs';
 import { AuthService } from '../security/auth.service';
 import { UserAuthBase } from '../security/Model/user-auth-base';
 import { Login } from './Model/login';
@@ -16,6 +15,7 @@ export class LoginComponent implements OnInit {
     emailAddress: '',
     password: ''
   }
+
   response!: UserAuthBase;
   constructor(private authService: AuthService) { }
 
@@ -23,7 +23,6 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit(form: NgForm){
-    this.authService.login(this.login).subscribe(response => this.response = response);;
+    this.authService.login(this.login).subscribe(response => this.response = response);
   }
-
 }

@@ -10,6 +10,7 @@ import { PostComponent } from './post/post.component';
 import { LoginComponent } from './login/login.component';
 import { FormsModule } from '@angular/forms';
 import { UserFriendComponent } from './user-friend/user-friend.component';
+import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,7 @@ import { UserFriendComponent } from './user-friend/user-friend.component';
     HttpClientModule,
     FormsModule
   ],
-  providers: [],
+  providers: [{ provide: JWT_OPTIONS, useValue: JWT_OPTIONS}, JwtHelperService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
