@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Runtime.Serialization;
 using System.Text.Json.Serialization;
 
 namespace PasteBook.WebApi.Models
@@ -16,9 +17,16 @@ namespace PasteBook.WebApi.Models
         public string Gender { get; set; }
         public string MobileNumber { get; set; }
         public string ProfileBlurb { get; set; }
+
         public ICollection<Post> Posts { get; set; }
+
         public ICollection<UserFriend> UserFriends { get; set; }
+
         public ICollection<Album> Albums { get; set; }
+
+        public ICollection<Comment> Comments { get; set; }
+
+        public ICollection<Like> Likes { get; set; }
         public Authentication Authentication { get; set; }
     }
 }

@@ -3,6 +3,10 @@ using Microsoft.AspNetCore.Mvc;
 using PasteBook.WebApi.Data;
 using PasteBook.WebApi.Models;
 using System.Threading.Tasks;
+using System.Linq;
+using Newtonsoft.Json;
+using PasteBook.WebApi.DataTransferObject;
+using Microsoft.EntityFrameworkCore;
 
 namespace PasteBook.WebApi.Controllers
 {
@@ -11,6 +15,7 @@ namespace PasteBook.WebApi.Controllers
     public class PostController : ControllerBase
     {
         public IUnitOfWork UnitOfWork { get; private set; }
+
         public PostController(IUnitOfWork unitOfWork)
         {
             UnitOfWork = unitOfWork;
@@ -25,11 +30,21 @@ namespace PasteBook.WebApi.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetPostById(int id)
         {
-            var posts = await UnitOfWork.PostRepository.FindByPrimaryKey(id);
-            if (posts is object)
+            var posts = await UnitOfWork.PostRepository.Find(p => p.PostId == id);
+            var postComments = await UnitOfWork.CommentRepository.Find(c => c.PostId == id);
+            var postLikes = await UnitOfWork.LikeRepository.Find(l => l.PostId == id);
+
+            //Wrap Post metadata into PostDTO
+            var postData = new PostDTO
             {
-                return Ok(posts);
-            }
+                Post = posts.ToList(),
+                Comments = postComments.ToList(),
+                Likes = postLikes.ToList()
+            };
+            if (postData is object)
+            {
+                return Ok(postData);
+            };
             return NotFound();
         }
 
