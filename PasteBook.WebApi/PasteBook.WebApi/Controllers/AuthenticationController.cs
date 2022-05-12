@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Linq;
 using PasteBook.WebApi.DataTransferObject;
 using PasteBook.WebApi.Models;
+using System;
 
 namespace PasteBook.WebApi.Controllers
 {
@@ -18,28 +19,43 @@ namespace PasteBook.WebApi.Controllers
         private readonly IUserService userService;
         private readonly IAuthenticationService authenticationService;
         private readonly IHttpContextAccessor httpContextAccessor;
+        private readonly IMailService mailService;
         public IUnitOfWork UnitOfWork { get; private set; }
         public AuthenticationController(IUserService userService, 
             IAuthenticationService authenticationService, 
             IHttpContextAccessor httpContextAccessor, 
-            IUnitOfWork unitOfWork)
+            IUnitOfWork unitOfWork,
+            IMailService mailService)
         {
             this.userService = userService;
             this.authenticationService = authenticationService;
             this.httpContextAccessor = httpContextAccessor;
             this.UnitOfWork = unitOfWork;
+            this.mailService = mailService;
         }
 
         [HttpPost("/register")]
         public async Task<IActionResult> Register([FromBody] UserRegistration user)
         {
-            var auth = await UnitOfWork.AuthenticationRepository.EmailExist(user.EmailAddress);
-            if (auth != null)
-                return BadRequest(new { message = "Email Already Exist" });
+            try
+            {
+                var auth = await UnitOfWork.AuthenticationRepository.EmailExist(user.EmailAddress);
+                if (auth != null)
+                {
+                    return BadRequest(new { message = "Email Already Exist" });
 
-            var encryptPassword = authenticationService.Encrypt(user.Password);
-            await UnitOfWork.AuthenticationRepository.InsertEncryptedUser(user, encryptPassword);
-            return StatusCode(StatusCodes.Status201Created, new { message = "Account Successfuly Created" });
+                }
+                var encryptPassword = authenticationService.Encrypt(user.Password);
+                await UnitOfWork.AuthenticationRepository.InsertEncryptedUser(user, encryptPassword);
+                await mailService.SendEmailAsync(user);
+                return StatusCode(StatusCodes.Status201Created, new { message = "Account Successfuly Created" });
+            }
+            catch (Exception ex)
+            {
+
+                return BadRequest();
+            }
+
         }
 
         [HttpPost("login")]

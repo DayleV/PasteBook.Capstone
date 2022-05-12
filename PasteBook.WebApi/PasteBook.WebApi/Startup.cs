@@ -11,6 +11,7 @@ using Microsoft.OpenApi.Models;
 using PasteBook.WebApi.Data;
 using PasteBook.WebApi.Helpers;
 using PasteBook.WebApi.Services;
+using PasteBook.WebApi.Settings;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,7 +31,6 @@ namespace PasteBook.WebApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
@@ -42,11 +42,19 @@ namespace PasteBook.WebApi
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             //DINAGDAG
-            services.AddCors();
+            services.Configure<MailSetting>(Configuration.GetSection("MailSettings"));
+            services.AddTransient<IMailService, Services.MailService>();
+
+            services.AddCors(c =>
+            {
+                c.AddPolicy("AllowOrigin", options => options.AllowAnyOrigin());
+            });
+
             services.AddHttpContextAccessor();
             services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IAuthenticationService, AuthenticationService>();
+            services.AddScoped<IMailService, MailService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
