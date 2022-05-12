@@ -16,12 +16,7 @@ namespace PasteBook.WebApi.Models
         public User User { get; set; }
 
         //To Solve Self Referencing Loop for Post's like and comments, using Mvc.NewtonsoftJson package, (See https://stackoverflow.com/questions/7397207/json-net-error-self-referencing-loop-detected-for-type)
-        [JsonIgnore]
-        [IgnoreDataMember]
         public ICollection<Like> Likes { get; set; }
-
-        [JsonIgnore]
-        [IgnoreDataMember]
         public ICollection<Comment> Comments { get; set; }
     }
 }

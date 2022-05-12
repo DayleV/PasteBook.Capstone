@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { IPost } from './Model/posts';
+import { Observable, of} from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { IPosts } from './Model/posts';
 import { ConfigurationService } from '../configuration/configuration.service';
-
 
 const API_ENDPOINT = "posts";
 
@@ -11,7 +10,6 @@ const API_ENDPOINT = "posts";
   providedIn: 'root'
 })
 export class PostService {
-  api = "https://localhost:44368/"
   apiUrl: string = "";
 
   constructor(private http: HttpClient, 
@@ -20,12 +18,12 @@ export class PostService {
       console.log(this.apiUrl);
     }
 
-    getAllPost(): Observable<IPost[]> {  
-      return this.http.get<IPost[]>(this.apiUrl);  
+    getPosts(): Observable<IPosts[]> {
+      return this.http.get<IPosts[]>(this.apiUrl);
     } 
 
-    addPost(entity: IPost): Observable<IPost> {  
-      console.log(entity);
-      return this.http.post<IPost>(this.apiUrl, entity);  
-    } 
-}
+    addPosts(entity: IPosts): Observable<IPosts> {
+      return this.http.post<IPosts>(this.apiUrl, entity);
+    }
+
+  }

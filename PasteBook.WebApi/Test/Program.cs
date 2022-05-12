@@ -29,7 +29,7 @@ namespace Test
 
         //    Console.WriteLine(JsonConvert.SerializeObject(users));
         //}
-        static async Task Main(string[] args)
+        /*static async Task Main(string[] args)
         {
             DB context = new DB();
 

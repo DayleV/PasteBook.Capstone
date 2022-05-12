@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Runtime.Serialization;
 using System.Text.Json.Serialization;
 
@@ -13,20 +14,18 @@ namespace PasteBook.WebApi.Models
         public int AuthenticationId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public string BirthDate { get; set; }
+        //updated by ward
+        [Column(TypeName="Date")]
+        public DateTime BirthDate { get; set; }
         public string Gender { get; set; }
         public string MobileNumber { get; set; }
         public string ProfileBlurb { get; set; }
 
         public ICollection<Post> Posts { get; set; }
-
         public ICollection<UserFriend> UserFriends { get; set; }
-
         public ICollection<Album> Albums { get; set; }
-
-        public ICollection<Comment> Comments { get; set; }
-
-        public ICollection<Like> Likes { get; set; }
+        public ICollection<Notification> Notifications { get; set; }
+        public ICollection<FriendRequest> FriendRequests { get; set; }
         public Authentication Authentication { get; set; }
     }
 }

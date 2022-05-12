@@ -1,37 +1,103 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,} from '@angular/core';
+import { DatePipe } from '@angular/common';
 import { Observable, tap } from 'rxjs';
 import { IUserRegistrations } from './Model/userregistrations';
 import { RegistrationService } from './registration.service';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-registration',
   templateUrl: './registration.component.html',
   styleUrls: ['./registration.component.scss']
 })
+
 export class RegistrationComponent implements OnInit {
   newUser: IUserRegistrations = {
-    EmailAddress: "sadadada",
-    Password: "asdasdas",
-    FirstName: "asdasdasd",
-    LastName: "dfdscxzcsd",
-    Birthday: "dsjfjhugfisd",
-    Gender: "female",
-    MobileNumber: "0921334348"
-  };
-
-  
-  userregistration$: Observable<IUserRegistrations[]> | undefined;
-
-  constructor(private registrationService: RegistrationService) { }
-
-  ngOnInit(): void {
-    
+    EmailAddress: "",
+    Password: "",
+    FirstName: "",
+    LastName: "",
+    Birthday: "",
+    Gender: "",
+    MobileNumber: ""
   }
-  addNewUser() {
+
+  registrationform = new FormGroup({
+    EmailAddress: new FormControl('', [
+      Validators.required,
+      Validators.pattern(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{3,}))$/g)
+    ]),
+      Password: new FormControl('', [
+      Validators.required,
+    ]),
+    // ConfirmPassword: new FormControl('', [
+    //   Validators.required,
+    // ]),
+    FirstName: new FormControl('', [
+      Validators.required,
+      Validators.minLength(4),
+      Validators.pattern(/^[A-Za-z ]+$/)
+    ]),
+    LastName: new FormControl('', [
+      Validators.required,
+      Validators.pattern(/^[A-Za-z ]+$/)
+    ]),
+    Birthday: new FormControl('', [
+      Validators.required
+    ]),
+    Gender: new FormControl('', [
+      Validators.pattern(/^[A-Za-z ]+$/)
+    ]),
+    MobileNumber: new FormControl('', [
+      Validators.pattern(/^09[0-9]{9}$/g)
+    ]),
+  });
+  // @Output() customSubmit = new EventEmitter();
+
+  // onSubmit() {
+  //   this.customSubmit.emit(this.registrationform.value);
+  // }
+
+  get EmailAddress() {
+    return this.registrationform.get('EmailAddress');
+  }
+
+  get Password() {
+    return this.registrationform.get('Password');
+  }
+
+  get FirstName() {
+    return this.registrationform.get('FirstName');
+  }
+  
+  get LastName() {
+    return this.registrationform.get('LastName');
+  }
+  
+  get Birthday() {
+    return this.registrationform.get('Birthday');
+  }
+  
+  get Gender() {
+    return this.registrationform.get('Gender');
+  }
+  
+  get MobileNumber() {
+    return this.registrationform.get('MobileNumber');
+  }
+  
+  constructor(private registrationService: RegistrationService, public datepipe: DatePipe) {}
+
+  ngOnInit(): void {  }
+
+  addNewUser(): void {
     // this.userfriendService.addFriend(this.userfriend);
     // console.log(this.userfriend);
+    // this.customSubmit.emit(this.registrationform.value);
     this.registrationService.addUser(this.newUser).subscribe(newUser => this.newUser = newUser);
-    console.log("Success!");
+    this.registrationform.reset();
   }
-
+  myFunction(){
+    let date =this.datepipe.transform(this.newUser.Birthday, 'yyyy-MM-dd');
+   }
 }
