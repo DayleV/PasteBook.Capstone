@@ -1,37 +1,46 @@
-import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
-import { IPost } from './Model/posts';
-import { FormBuilder, Validators } from '@angular/forms';
+import { Component, Input, NgModule, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { Observable, tap } from 'rxjs';
+import { IPosts } from './Model/posts';
 import { PostService } from './post.service';
-import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-post',
   templateUrl: './post.component.html',
   styleUrls: ['./post.component.scss']
 })
-
 export class PostComponent implements OnInit {
+  newPost: IPosts = {
+    UserId: 2,
+    PostContent: ''
+  };
 
-  todayDate : Date = new Date();
-  
-  post: IPost = {
-    PostId: 1,
-    UserId: 1,
-    PostContent: 'PostContent',
-    PostDate: this.todayDate 
+  postText: any[];
+
+  posts$: Observable<IPosts[]> | undefined;
+
+  constructor(private postService: PostService) {
+    this.postText = [];
   }
-  post$: Observable<IPost[]> | undefined;
-
-  constructor(private postService: PostService) {}
 
   ngOnInit(): void {
-    this.post$ = this.postService.getAllPost();
+    this.posts$ = this.postService.getPosts(); 
   }
 
-  addNewPost() {
-    this.postService.addPost(this.post).subscribe(post => this.post == post);
-    console.log("success");
+  postOnClick(): void{
+    const data = {
+      UserId : this.newPost.UserId,
+      PostContent: this.newPost.PostContent
+    };
+    this.postService.addPosts(this.newPost).subscribe(newPost => this.newPost == newPost);
+    console.log(this.newPost);
+  }
+
+  onSubmit(f: NgForm): void{
+    let renderPost = f.value.renderPost;
+    this.postText.push({
+      'renderPost': renderPost
+    })
   }
 
 }

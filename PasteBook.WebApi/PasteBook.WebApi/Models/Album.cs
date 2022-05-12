@@ -10,7 +10,7 @@ namespace PasteBook.WebApi.Models
         public int AlbumId { get; set; }
         public int UserId { get; set; }
         public string AlbumName { get; set; }
-
+        public string AlbumDescription { get; set; }
         public ICollection<Photo> Photos { get; set; }
         public User User { get; set; }
     }

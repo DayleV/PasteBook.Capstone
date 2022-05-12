@@ -7,8 +7,11 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { UserComponent } from './user/user.component';
+import { CommentComponent } from './post/comment/comment.component';
+import { LikeComponent } from './post/like/like.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { PostComponent } from './post/post.component';
+import { LoginComponent } from './login/login.component';
 import { UserFriendComponent } from './user-friend/user-friend.component';
 import { UserRegistrationComponent } from './user-registration/user-registration.component';
 
@@ -16,18 +19,23 @@ import { UserRegistrationComponent } from './user-registration/user-registration
   declarations: [
     AppComponent,
     UserComponent,
+    PostComponent,
+    CommentComponent,
+    LikeComponent,
     RegistrationComponent,
     PostComponent,
     UserFriendComponent,
-    UserRegistrationComponent
+    UserRegistrationComponent,
+    LoginComponent,
+    UserFriendComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule,
     ReactiveFormsModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

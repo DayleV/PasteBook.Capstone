@@ -31,7 +31,7 @@ namespace PasteBook.WebApi.Migrations
                     AuthenticationId = table.Column<int>(type: "int", nullable: false),
                     FirstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    BirthDate = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    BirthDate = table.Column<string>(type: "date", nullable: true),
                     Gender = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     MobileNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ProfileBlurb = table.Column<string>(type: "nvarchar(max)", nullable: true)

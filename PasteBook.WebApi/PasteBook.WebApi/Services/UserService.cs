@@ -12,7 +12,7 @@ namespace PasteBook.WebApi.Services
 {
     public interface IUserService
     {
-        public string GenerateResponse(User user);
+        public AuthenticateResponse GenerateResponse(User user);
     }
 
     public class UserService : IUserService
@@ -22,9 +22,11 @@ namespace PasteBook.WebApi.Services
         {
             this.appSettings = appSettings.Value;
         }
-        public string GenerateResponse(User user)
+        public AuthenticateResponse GenerateResponse(User user)
         {
-            return generateJwtToken(user);
+            var token = generateJwtToken(user);
+
+            return new AuthenticateResponse(user, token);
         }
         private string generateJwtToken(User user)
         {

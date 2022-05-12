@@ -1,15 +1,16 @@
 import { Injectable } from '@angular/core';
 import { Observable, of} from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { IPosts } from './Model/posts';
-import { ConfigurationService } from '../configuration/configuration.service';
+import { ILikes } from './Model/likes';
+import { ConfigurationService } from 'src/app/configuration/configuration.service';
 
-const API_ENDPOINT = "posts";
+const API_ENDPOINT = "likes";
 
 @Injectable({
   providedIn: 'root'
 })
-export class PostService {
+export class LikeService {
+
   apiUrl: string = "";
 
   constructor(private http: HttpClient, 
@@ -18,12 +19,11 @@ export class PostService {
       console.log(this.apiUrl);
     }
 
-    getPosts(): Observable<IPosts[]> {
-      return this.http.get<IPosts[]>(this.apiUrl);
+    getLikes(): Observable<ILikes[]> {
+      return this.http.get<ILikes[]>(this.apiUrl);
     } 
 
-    addPosts(entity: IPosts): Observable<IPosts> {
-      return this.http.post<IPosts>(this.apiUrl, entity);
+    addLikes(entity: ILikes): Observable<ILikes> {
+      return this.http.post<ILikes>(this.apiUrl, entity);
     }
-
-  }
+}
