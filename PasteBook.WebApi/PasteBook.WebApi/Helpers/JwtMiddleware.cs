@@ -49,22 +49,16 @@ namespace PasteBook.WebApi.Helpers
                     ValidateIssuer = true,
                     ValidAudience = this.appSettings.Audience,
                     ValidateAudience = true,
-                    // set clockskew to zero so tokens expire exactly at token expiration time (instead of 5 minutes later)
                     ClockSkew = TimeSpan.Zero
                 }, out SecurityToken validatedToken);
 
                 var jwtToken = (JwtSecurityToken)validatedToken;
-                var authId = int.Parse(jwtToken.Claims.First(x => x.Type == "AuthId").Value);
                 var userId = int.Parse(jwtToken.Claims.First(x => x.Type == "UserId").Value);
-
-                // attach user to context on successful jwt validation
-                context.Items["AuthId"] = authId;
+                context.Items["UserId"] = userId;
             }
             catch (Exception e)
             {
-                // do nothing if jwt validation fails
-                // user is not attached to context so request won't have access to secure routes
-                Console.WriteLine(e);
+                throw new Exception(e.Message);
             }
         }
     }

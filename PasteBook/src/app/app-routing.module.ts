@@ -4,6 +4,7 @@ import { CommentComponent } from './post/comment/comment.component';
 import { LikeComponent } from './post/like/like.component';
 import { PostComponent } from './post/post.component';
 import { UserComponent } from './user/user.component';
+import { UserFriendComponent } from './user-friend/user-friend.component';
 
 const routes: Routes = [
   {path: 'users', component: UserComponent},

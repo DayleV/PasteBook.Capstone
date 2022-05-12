@@ -10,7 +10,6 @@ const API_ENDPOINT = "posts";
   providedIn: 'root'
 })
 export class PostService {
-
   apiUrl: string = "";
 
   constructor(private http: HttpClient, 
