@@ -41,7 +41,6 @@ namespace PasteBook.WebApi
             services.AddDbContext<PasteBookDb>(options => options.UseSqlServer(connectionString));
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
-            //DINAGDAG
             services.AddCors();
             services.AddHttpContextAccessor();
             services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));
@@ -70,7 +69,6 @@ namespace PasteBook.WebApi
 
             app.UseAuthorization();
 
-            //
             app.UseMiddleware<JwtMiddleware>();
 
             app.UseEndpoints(endpoints =>

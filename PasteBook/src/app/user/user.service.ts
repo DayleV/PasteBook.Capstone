@@ -26,7 +26,6 @@ export class UserService {
       console.log(this.apiUrl);
 
     }
-
   getUsers(): Observable<IUsers[]> {
     return this.http.get<IUsers[]>(this.apiUrl);
   }
