@@ -37,6 +37,18 @@ namespace Test
             var users = await unitOfWork.UserRepository.FindAll();
 
             Console.WriteLine(JsonConvert.SerializeObject(users));
+        }*/
+
+        static async Task Main(string[] args)
+        {
+            DB context = new DB();
+
+            IUnitOfWork unitOfWork = new UnitOfWork(context);
+            var users = await unitOfWork.UserRepository.FindAll();
+            var postLikes = await unitOfWork.LikeRepository.Find(c => c.PostId == 2);
+            int id = 2;
+
+            Console.WriteLine(JsonConvert.SerializeObject(postLikes));
         }
     }
 }
