@@ -27,14 +27,6 @@ export class PostComponent implements OnInit {
     this.posts$ = this.postService.getPosts(); 
   }
 
-<<<<<<< HEAD
-  addPost(): void{
-    const data = {
-      UserId : this.post.UserId,
-      PostContent: this.post.PostContent
-    };
-    this.postService.addPost(this.post).subscribe(post => this.post == post);
-=======
   postOnClick(): void{
     const data = {
       UserId : this.newPost.UserId,
@@ -49,6 +41,5 @@ export class PostComponent implements OnInit {
     this.postText.push({
       'renderPost': renderPost
     })
->>>>>>> 6def3ff7a18334747ea7309275b0e54829d956a4
   }
 }

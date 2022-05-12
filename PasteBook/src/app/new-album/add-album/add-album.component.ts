@@ -12,8 +12,9 @@ import { IAlbum } from '../model/album';
 export class AddAlbumComponent implements OnInit {
 
   album: IAlbum = {
-    UserId: 3,
-    AlbumName: ''
+    UserId: 1,
+    AlbumName: '',
+    AlbumDescription: ''
   }
   album$: Observable<IAlbum[]> | undefined;
 
