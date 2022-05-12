@@ -33,8 +33,8 @@ export class AlbumService {
     return this.http.get<IAlbum[]>(this.apiUrl);
   }
   
-  getAlbum(id: number): Observable<IAlbum> {
-    return this.http.get<IAlbum>(`${this.apiUrl}/${id}'`);
+  getAlbum(id: string): Observable<IAlbum> {
+    return this.http.get<IAlbum>(`${this.apiUrl}/${id}`, httpOptions);
   }
 
   addAlbum(entity: IAlbum): Observable<IAlbum> {

@@ -14,15 +14,11 @@ import { PhotosComponent } from './new-album/view-album/photos/photos.component'
 
 const routes: Routes = [
   {path: 'users', component: UserComponent},
-  {path: 'registration', component: RegistrationComponent},
   {path: 'view-albums', component: ViewAlbumComponent},
   {path: 'add-album', component: AddAlbumComponent},
   {path: 'view-albums/:id', component: PhotosComponent},
-  {path: 'posts', component: PostComponent},
   {path: 'login', component: LoginComponent},
-  {path: 'userfriends', component: UserFriendComponent},
-  {path: 'user-friends', component: UserFriendComponent},
-  {path: 'user-registration', component: UserRegistrationComponent},
+  {path: 'friends', component: UserFriendComponent},
   {path: 'registration', component: RegistrationComponent},
   {path: 'posts', component: PostComponent},
   {path: 'posts/comments', component: CommentComponent},

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { tap } from 'rxjs';
 import { AlbumService } from '../../album.service';
 import { IAlbum } from '../../model/album';
 
@@ -11,7 +12,7 @@ import { IAlbum } from '../../model/album';
 export class PhotosComponent implements OnInit {
 
   album: IAlbum | any = [];
-  id: number = 0;
+  id: string = '';
   route: ActivatedRoute;
 
 
@@ -20,9 +21,11 @@ export class PhotosComponent implements OnInit {
    }
 
   ngOnInit(): void{
-    this.id = Number(this.route.snapshot.paramMap.get('id'));
+    this.id = this.route.snapshot.paramMap.get('id') as string;
 
-    this.albumService.getAlbum(this.id).subscribe(album => {
+    this.albumService.getAlbum(this.id)
+    .pipe(tap(a=>console.log(a)))
+    .subscribe(album => {
       this.album = album;
       });
       console.log(this.id)

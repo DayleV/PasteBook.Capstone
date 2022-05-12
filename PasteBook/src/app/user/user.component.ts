@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable, tap } from 'rxjs';
 import { AuthService } from '../security/auth.service';
-import { IPost, IUsers } from './Model/users';
+import { IAlbum, IPost, IUsers } from './Model/users';
 import { UserService } from './user.service';
 
 @Component({
@@ -14,6 +14,7 @@ export class UserComponent implements OnInit {
   users: IUsers[] = [];
   users$: Observable<IUsers[]> | undefined;
   post: IPost | undefined;
+  a!: IAlbum;
 
   newPost: IPost = {
     UserId: 1,
@@ -30,10 +31,16 @@ export class UserComponent implements OnInit {
 
     this.users$ = this.userService.getUsers();
   }
+  
+  album(){
+    this.userService.getPostById().subscribe(post => this.a = post);
+  }
 
   some(){
     this.userService.postPost(this.newPost).subscribe(post => this.post = post);
-  }token(){
+  }
+  
+  token(){
     let token = localStorage.getItem("token");
     console.log(token);
   }

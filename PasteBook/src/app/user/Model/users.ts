@@ -11,3 +11,10 @@ export interface IPost {
     PostContent: string | undefined;
     PostDate: string | undefined;
 }
+
+export interface IAlbum {
+    AlbumId?: number;
+    UserId: number | undefined;
+    AlbumName: string | undefined;
+    AlbumDescription: string | undefined;
+}
