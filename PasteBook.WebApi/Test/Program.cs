@@ -22,10 +22,19 @@ namespace Test
     }
     public class Program
     {
-        /*static void Main(string[] args)
+        //static void Main(string[] args)
+        //{
+        //    DB context = new DB();
+        //    var users = context.Users.ToList();
+
+        //    Console.WriteLine(JsonConvert.SerializeObject(users));
+        //}
+        static async Task Main(string[] args)
         {
             DB context = new DB();
-            var users = context.Users.ToList();
+
+            IUnitOfWork unitOfWork = new UnitOfWork(context);
+            var users = await unitOfWork.UserRepository.FindAll();
 
             Console.WriteLine(JsonConvert.SerializeObject(users));
         }*/

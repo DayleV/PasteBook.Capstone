@@ -37,22 +37,22 @@ namespace PasteBook.WebApi.Controllers
             return NotFound();
         }
 
-        [HttpPost("register")]
-        public async Task<IActionResult> Register([FromBody] UserRegistration user)
+        [HttpPost]
+        public async Task<IActionResult> Post([FromBody] User user)
         {
-            var existingUser = await UnitOfWork.UserRepository.Find(u => u.EmailAddress.Equals(user.EmailAddress));
-            if (existingUser.Count() > 0)
+            if (ModelState.IsValid)
             {
-                return BadRequest();
+                var newUser = await UnitOfWork.UserRepository.Insert(user);
+                await UnitOfWork.CommitAsync();
+
+                return StatusCode(StatusCodes.Status201Created, newUser);
             }
-            var newUser = await UnitOfWork.UserRepository.Register(user);
-            await UnitOfWork.CommitAsync();
-            await UnitOfWork.AuthenticationRepository.HashPassword(newUser.UserId, user.Password);
-            return StatusCode(StatusCodes.Status201Created, newUser);
+
+            return BadRequest();
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> DeleteUser(int id)
         {
             var user = await UnitOfWork.UserRepository.FindByPrimaryKey(id);
             if (user is object)
@@ -64,7 +64,7 @@ namespace PasteBook.WebApi.Controllers
             return NotFound();
         }
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put(int id, User user)
+        public async Task<IActionResult> PutUser(int id, User user)
         {
             if (id != user.UserId)
             {

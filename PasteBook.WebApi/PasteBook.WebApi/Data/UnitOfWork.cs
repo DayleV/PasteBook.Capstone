@@ -13,6 +13,7 @@ namespace PasteBook.WebApi.Data
         public IAlbumRepository AlbumRepository { get; }
         public IPostRepository PostRepository { get; }
         public ILikeRepository LikeRepository { get; }
+        public IUserFriendRepository UserFriendRepository { get; }
         public IAuthenticationRepository AuthenticationRepository { get; }
     }
 
@@ -22,6 +23,7 @@ namespace PasteBook.WebApi.Data
         private PasteBookDb context;
 
         public IUserRepository UserRepository { get; private set; }
+        public IUserFriendRepository UserFriendRepository { get; private set; }
         public ICommentRepository CommentRepository { get; private set; }
         public IAlbumRepository AlbumRepository { get; private set; }
         public IPostRepository PostRepository { get; private set; }
@@ -32,6 +34,7 @@ namespace PasteBook.WebApi.Data
         {
             this.context = context;
             this.UserRepository = new UserRepository(context);
+            this.UserFriendRepository = new UserFriendRepository(context);
             this.CommentRepository = new CommentRepository(context);
             this.AlbumRepository = new AlbumRepository(context);
             this.PostRepository = new PostRepository(context);

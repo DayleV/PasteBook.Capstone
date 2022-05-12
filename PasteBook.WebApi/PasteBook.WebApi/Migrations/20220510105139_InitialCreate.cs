@@ -8,12 +8,27 @@ namespace PasteBook.WebApi.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "Authentications",
+                columns: table => new
+                {
+                    AuthenticationId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    EmailAddress = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Password = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
+                    PasswordKey = table.Column<byte[]>(type: "varbinary(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Authentications", x => x.AuthenticationId);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Users",
                 columns: table => new
                 {
                     UserId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    EmailAddress = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    AuthenticationId = table.Column<int>(type: "int", nullable: false),
                     FirstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     BirthDate = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -24,6 +39,12 @@ namespace PasteBook.WebApi.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Users", x => x.UserId);
+                    table.ForeignKey(
+                        name: "FK_Users_Authentications_AuthenticationId",
+                        column: x => x.AuthenticationId,
+                        principalTable: "Authentications",
+                        principalColumn: "AuthenticationId",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -40,27 +61,6 @@ namespace PasteBook.WebApi.Migrations
                     table.PrimaryKey("PK_Albums", x => x.AlbumId);
                     table.ForeignKey(
                         name: "FK_Albums_Users_UserId",
-                        column: x => x.UserId,
-                        principalTable: "Users",
-                        principalColumn: "UserId",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Authentication",
-                columns: table => new
-                {
-                    AuthenticationId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    UserId = table.Column<int>(type: "int", nullable: false),
-                    Password = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
-                    PasswordKey = table.Column<byte[]>(type: "varbinary(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Authentication", x => x.AuthenticationId);
-                    table.ForeignKey(
-                        name: "FK_Authentication_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
                         principalColumn: "UserId",
@@ -176,12 +176,6 @@ namespace PasteBook.WebApi.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Authentication_UserId",
-                table: "Authentication",
-                column: "UserId",
-                unique: true);
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Comments_PostId",
                 table: "Comments",
                 column: "PostId");
@@ -205,13 +199,16 @@ namespace PasteBook.WebApi.Migrations
                 name: "IX_UserFriends_UserId",
                 table: "UserFriends",
                 column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Users_AuthenticationId",
+                table: "Users",
+                column: "AuthenticationId",
+                unique: true);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "Authentication");
-
             migrationBuilder.DropTable(
                 name: "Comments");
 
@@ -232,6 +229,9 @@ namespace PasteBook.WebApi.Migrations
 
             migrationBuilder.DropTable(
                 name: "Users");
+
+            migrationBuilder.DropTable(
+                name: "Authentications");
         }
     }
 }

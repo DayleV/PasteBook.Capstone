@@ -9,6 +9,7 @@ namespace PasteBook.WebApi.Models
         public int UserFriendId { get; set; }
         public int UserId { get; set; }
         public int FriendId { get; set; }
+        public bool Status { get; set; }
         public User User { get; set; }
     }
 }
