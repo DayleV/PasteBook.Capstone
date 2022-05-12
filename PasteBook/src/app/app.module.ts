@@ -6,6 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { UserComponent } from './user/user.component';
 import { UserfriendComponent } from './userfriend/userfriend.component';
+import { RegistrationComponent } from './registration/registration.component';
 import { PostComponent } from './post/post.component';
 
 @NgModule({
@@ -13,6 +14,7 @@ import { PostComponent } from './post/post.component';
     AppComponent,
     UserComponent,
     UserfriendComponent,
+    RegistrationComponent,
     PostComponent
   ],
   imports: [
