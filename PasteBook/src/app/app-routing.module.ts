@@ -4,7 +4,6 @@ import { AddAlbumComponent } from './new-album/add-album/add-album.component';
 import { ViewAlbumComponent } from './new-album/view-album/view-album.component';
 import { PostComponent } from './post/post.component';
 import { LoginComponent } from './login/login.component';
-import { UserRegistrationComponent } from './user-registration/user-registration.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { CommentComponent } from './post/comment/comment.component';
 import { LikeComponent } from './post/like/like.component';
@@ -27,6 +26,8 @@ const routes: Routes = [
   {path: 'view-albums', component: ViewAlbumComponent},
   {path: 'add-album', component: AddAlbumComponent},
   {path: 'view-albums/:id', component: PhotosComponent},
+  {path: 'posts', component: PostComponent},
+  {path: 'user-friends', component: UserFriendComponent},
   {
     path: 'login', component: LoginComponent, 
     canActivate:[LoginGuard]
@@ -39,7 +40,8 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, 
+    { enableTracing: true })],
   exports: [RouterModule],
   providers:[
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}

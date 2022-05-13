@@ -29,7 +29,6 @@ import { NavigationBarComponent } from './navigation-bar/navigation-bar.componen
     PostComponent,
     CommentComponent,
     LikeComponent,
-    RegistrationComponent,
     PostComponent,
     ViewAlbumComponent,
     AddAlbumComponent,
@@ -38,6 +37,7 @@ import { NavigationBarComponent } from './navigation-bar/navigation-bar.componen
     LoginComponent,
     UserFriendComponent,
     PhotosComponent,
+    RegistrationComponent,
     ProfileComponent,
     HomePageComponent,
     NavigationBarComponent

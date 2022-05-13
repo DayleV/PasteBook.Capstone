@@ -1,5 +1,4 @@
-import { Component, OnInit,} from '@angular/core';
-import { DatePipe } from '@angular/common';
+import { Component, OnInit, Output, EventEmitter} from '@angular/core';
 import { Observable, tap } from 'rxjs';
 import { IUserRegistrations } from './Model/userregistrations';
 import { RegistrationService } from './registration.service';
@@ -17,12 +16,15 @@ export class RegistrationComponent implements OnInit {
     Password: "",
     FirstName: "",
     LastName: "",
-    Birthday: "",
+    Birthdate: "",
     Gender: "",
     MobileNumber: ""
   }
 
-  registrationform = new FormGroup({
+  constructor(private registrationService: RegistrationService) {}
+
+  registrationform = new FormGroup(
+    {
     EmailAddress: new FormControl('', [
       Validators.required,
       Validators.pattern(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{3,}))$/g)
@@ -30,9 +32,9 @@ export class RegistrationComponent implements OnInit {
       Password: new FormControl('', [
       Validators.required,
     ]),
-    // ConfirmPassword: new FormControl('', [
-    //   Validators.required,
-    // ]),
+    ConfirmPassword: new FormControl('', [
+      Validators.required,
+    ]),
     FirstName: new FormControl('', [
       Validators.required,
       Validators.minLength(4),
@@ -42,7 +44,7 @@ export class RegistrationComponent implements OnInit {
       Validators.required,
       Validators.pattern(/^[A-Za-z ]+$/)
     ]),
-    Birthday: new FormControl('', [
+    Birthdate: new FormControl('', [
       Validators.required
     ]),
     Gender: new FormControl('', [
@@ -50,13 +52,15 @@ export class RegistrationComponent implements OnInit {
     ]),
     MobileNumber: new FormControl('', [
       Validators.pattern(/^09[0-9]{9}$/g)
-    ]),
-  });
-  // @Output() customSubmit = new EventEmitter();
+    ]), 
+  },
+  
+  );
+  @Output() customSubmit = new EventEmitter();
 
-  // onSubmit() {
-  //   this.customSubmit.emit(this.registrationform.value);
-  // }
+  onSubmit() {
+    this.customSubmit.emit(this.registrationform.value);
+  }
 
   get EmailAddress() {
     return this.registrationform.get('EmailAddress');
@@ -74,8 +78,8 @@ export class RegistrationComponent implements OnInit {
     return this.registrationform.get('LastName');
   }
   
-  get Birthday() {
-    return this.registrationform.get('Birthday');
+  get Birthdate() {
+    return this.registrationform.get('Birthdate');
   }
   
   get Gender() {
@@ -85,19 +89,14 @@ export class RegistrationComponent implements OnInit {
   get MobileNumber() {
     return this.registrationform.get('MobileNumber');
   }
-  
-  constructor(private registrationService: RegistrationService, public datepipe: DatePipe) {}
 
   ngOnInit(): void {  }
 
   addNewUser(): void {
     // this.userfriendService.addFriend(this.userfriend);
     // console.log(this.userfriend);
-    // this.customSubmit.emit(this.registrationform.value);
+    this.newUser = this.registrationform.value;
     this.registrationService.addUser(this.newUser).subscribe(newUser => this.newUser = newUser);
     this.registrationform.reset();
   }
-  myFunction(){
-    let date =this.datepipe.transform(this.newUser.Birthday, 'yyyy-MM-dd');
-   }
 }
