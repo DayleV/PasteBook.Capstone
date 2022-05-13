@@ -20,6 +20,7 @@ import { PhotosComponent } from './new-album/view-album/photos/photos.component'
 import { UserRegistrationComponent } from './user-registration/user-registration.component';
 import { ProfileComponent } from './profile/profile.component';
 import { HomePageComponent } from './home-page/home-page.component';
+import { NavigationBarComponent } from './navigation-bar/navigation-bar.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { HomePageComponent } from './home-page/home-page.component';
     UserFriendComponent,
     PhotosComponent,
     ProfileComponent,
-    HomePageComponent
+    HomePageComponent,
+    NavigationBarComponent
   ],
   imports: [
     BrowserModule,

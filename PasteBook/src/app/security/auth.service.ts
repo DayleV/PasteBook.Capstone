@@ -30,7 +30,7 @@ export class AuthService {
     );
   }
 
-  private setSession(token: string) {
+  public setSession(token: string) {
     if(token){
       localStorage.setItem('token', JSON.stringify(token));
       // sessionStorage.setItem('token', JSON.stringify(token));

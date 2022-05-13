@@ -18,13 +18,19 @@ import { AuthInterceptor } from './security/interceptor/auth.interceptor';
 import { LoginGuard } from './security/guard/login.guard';
 
 const routes: Routes = [
-  // {path: '', component: HomePageComponent, pathMatch: 'full'},
-  {path: 'home', component: HomePageComponent, canActivate:[AuthenticatedGuard]},
+  {
+    path: '', component: HomePageComponent, 
+    canActivate:[AuthenticatedGuard], 
+    pathMatch: 'full'
+  },
   {path: 'users', component: UserComponent},
   {path: 'view-albums', component: ViewAlbumComponent},
   {path: 'add-album', component: AddAlbumComponent},
   {path: 'view-albums/:id', component: PhotosComponent},
-  {path: 'login', component: LoginComponent, canActivate:[LoginGuard]},
+  {
+    path: 'login', component: LoginComponent, 
+    canActivate:[LoginGuard]
+  },
   {path: 'friends', component: UserFriendComponent},
   {path: 'registration', component: RegistrationComponent},
   {path: 'posts', component: PostComponent},
