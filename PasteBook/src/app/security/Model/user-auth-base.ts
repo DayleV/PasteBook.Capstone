@@ -1,3 +1,3 @@
 export interface UserAuthBase {
-    token: string;
+    token?: string;
 }

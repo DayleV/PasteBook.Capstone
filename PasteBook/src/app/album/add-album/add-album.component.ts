@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AlbumService } from '../album.service';
 import { IAlbum } from '../model/album';
@@ -18,7 +18,7 @@ export class AddAlbumComponent implements OnInit {
   }
   album$: Observable<IAlbum[]> | undefined;
 
-  constructor(private albumService: AlbumService, route: ActivatedRoute) 
+  constructor(private albumService: AlbumService, route: ActivatedRoute, private router: Router) 
   { 
   }
 
@@ -27,5 +27,6 @@ export class AddAlbumComponent implements OnInit {
 
   addAlbum(): void {
     this.albumService.addAlbum(this.album).subscribe(album => this.album == album);
+    this.router.navigate(['view-albums']);
   }
 }

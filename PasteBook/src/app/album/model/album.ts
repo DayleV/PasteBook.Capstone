@@ -3,5 +3,5 @@ export interface IAlbum{
     UserId: number,
     AlbumName: string,
     AlbumDescription: string,
-    Photo?: null
+    Photo?: File
 }

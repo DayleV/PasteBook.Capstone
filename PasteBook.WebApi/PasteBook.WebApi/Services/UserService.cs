@@ -26,7 +26,7 @@ namespace PasteBook.WebApi.Services
         {
             var token = generateJwtToken(user);
 
-            return new AuthenticateResponse(user, token);
+            return new AuthenticateResponse(token);
         }
         private string generateJwtToken(User user)
         {
@@ -36,7 +36,9 @@ namespace PasteBook.WebApi.Services
             {
                 Subject = new ClaimsIdentity(new[]
                 {
-                    new Claim("UserId", user.UserId.ToString())
+                    new Claim("UserId", user.UserId.ToString()),
+                    new Claim("FirstName", user.FirstName),
+                    new Claim("LastName", user.LastName)
                 }),
                 Expires = DateTime.UtcNow.AddDays(this.appSettings.DurationInDays),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature),

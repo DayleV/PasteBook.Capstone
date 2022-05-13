@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
-import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
 import { AuthService } from '../security/auth.service';
-import { UserAuthBase } from '../security/Model/user-auth-base';
 import { Login } from './Model/login';
 
 @Component({
@@ -16,14 +14,17 @@ export class LoginComponent implements OnInit {
     emailAddress: '',
     password: ''
   }
-  response!: UserAuthBase;
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
   }
 
-  onSubmit(form: NgForm){
-    this.authService.login(this.login).subscribe(response => this.response = response);;
+  onSubmit(){
+    this.authService.login(this.login)
+    .pipe()
+    .subscribe(response => {
+      if(response.token)
+        this.router.navigateByUrl('/');
+    });
   }
-
 }
