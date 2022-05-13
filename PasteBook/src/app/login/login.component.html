@@ -1,6 +1,5 @@
-<p>login works!</p>
 <div style="width: 500px;">
-    <form #form="ngForm" (ngSubmit)="onSubmit(form)">
+    <form #form="ngForm" (ngSubmit)="onSubmit()">
         <div class="form-group">
           <label for="emailAddress">Email address</label>
           <input #email="ngModel" name="emailAddress" type="email" [(ngModel)]="login.emailAddress" class="form-control" id="emailAddress" aria-describedby="emailHelp" placeholder="Enter email">
@@ -12,6 +11,4 @@
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
-    {{login | json}}
-    {{response | json}}
 </div>

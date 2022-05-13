@@ -15,6 +15,7 @@ namespace PasteBook.WebApi.Data
         public ILikeRepository LikeRepository { get; }
         public IUserFriendRepository UserFriendRepository { get; }
         public IAuthenticationRepository AuthenticationRepository { get; }
+        public IPhotoRepository PhotoRepository { get; }
     }
 
     public class UnitOfWork : IUnitOfWork, IDisposable
@@ -29,6 +30,7 @@ namespace PasteBook.WebApi.Data
         public IPostRepository PostRepository { get; private set; }
         public ILikeRepository LikeRepository { get; private set; }
         public IAuthenticationRepository AuthenticationRepository { get; private set; }
+        public IPhotoRepository PhotoRepository { get; private set; }
 
         public UnitOfWork(PasteBookDb context)
         {
@@ -39,6 +41,7 @@ namespace PasteBook.WebApi.Data
             this.AlbumRepository = new AlbumRepository(context);
             this.PostRepository = new PostRepository(context);
             this.LikeRepository = new LikeRepository(context);
+            this.PhotoRepository = new PhotoRepository(context);
             this.AuthenticationRepository = new AuthenticationRepository(context);
         }
 

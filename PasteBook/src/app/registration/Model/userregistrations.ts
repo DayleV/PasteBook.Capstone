@@ -3,7 +3,7 @@ export interface IUserRegistrations {
     Password: string;
     FirstName: string;
     LastName: string;
-    Birthday: string;
+    Birthdate: string;
     Gender: string;
     MobileNumber: string;
 }

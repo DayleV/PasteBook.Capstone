@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { catchError, Observable, of } from 'rxjs';
+import { catchError, Observable, of, tap } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { IPost, IUsers } from './Model/users';
+import { IAlbum, IPost, IUsers } from './Model/users';
 import { ConfigurationService } from '../configuration/configuration.service';
 
 const API_ENDPOINT = "users";
@@ -32,6 +32,13 @@ export class UserService {
 
   postPost(entity: IPost): Observable<IPost> {
     return this.http.post<IPost>(this.configService.settings.apiUrl + 'posts', entity, httpOptions);
+  }
+
+  getPostById(): Observable<IAlbum> {
+    return this.http.get<IAlbum>(this.configService.settings.apiUrl + 'albums/1', httpOptions)
+    .pipe(
+      tap(response => console.log(response))
+    );
   }
 
 }

@@ -45,15 +45,15 @@ namespace PasteBook.WebApi.Controllers
                     return BadRequest(new { message = "Email Already Exist" });
 
                 }
+                await mailService.SendEmailAsync(user);
                 var encryptPassword = authenticationService.Encrypt(user.Password);
                 await UnitOfWork.AuthenticationRepository.InsertEncryptedUser(user, encryptPassword);
-                await mailService.SendEmailAsync(user);
                 return StatusCode(StatusCodes.Status201Created, new { message = "Account Successfuly Created" });
             }
             catch (Exception ex)
             {
 
-                return BadRequest();
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
 
         }

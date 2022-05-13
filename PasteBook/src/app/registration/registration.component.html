@@ -3,7 +3,7 @@
   <div>
     <label for="EmailAddress">Email Address</label>
     <input
-      type="text"
+      type="email"
       name="EmailAddress"
       class="ng-valid"
       formControlName="EmailAddress"
@@ -86,19 +86,27 @@
     </div>
   </div>
   <div>
-    <label for="Birthday">Birthday</label>
+    <label for="Birthdate">Birthdate</label>
     <input
       type="date"
-      name="Birthday"
+      name="Birthdate"
       class="ng-valid"
-      formControlName="Birthday"
-      [(ngModel)]="newUser.Birthday"
+      [(ngModel)]="newUser.Birthdate"
+      formControlName="Birthdate"
       required
     >
-    <div *ngIf="registrationform.controls['Birthday'].invalid 
-                && (registrationform.controls['Birthday'].dirty 
-                || registrationform.controls['Birthday'].touched)">
-      <div *ngIf="Birthday?.errors?.['required']">
+    <!-- <div 
+    for="Birthdate"
+    [(ngModel)]="newUser.Birthdate"
+    name="Birthdate"
+    formControlName="Birthdate"
+    hidden>
+      <input type="text" value="{{ newUser.Birthdate | date: 'YYYY-MM-dd' }}" hidden>
+    </div> -->
+    <div *ngIf="registrationform.controls['Birthdate'].invalid 
+                && (registrationform.controls['Birthdate'].dirty 
+                || registrationform.controls['Birthdate'].touched)">
+      <div *ngIf="Birthdate?.errors?.['required']">
         This field is required.
       </div>
     </div>
@@ -125,6 +133,7 @@
       type="text"
       name="MobileNumber"
       formControlName="MobileNumber"
+      [(ngModel)]="newUser.MobileNumber"
     >
    <div *ngIf="registrationform.controls['MobileNumber'].invalid 
                 && (registrationform.controls['MobileNumber'].dirty 
@@ -134,11 +143,11 @@
       </div>
     </div>
   </div>
-  <input type="submit" value="Submit" >
-  <!-- <input type="submit" value="Submit" [disabled]="registrationform.invalid"> 
-[(ngModel)]="newUser.MobileNumber"
--->
+  <input type="submit" value="Submit">
+  <!-- <input type="submit" value="Submit" [disabled]="registrationform.invalid">  -->
+
 </form>
+<p>{{registrationform.value | json}}</p>
 <!-- <button type="button" class="btn btn-primary" (click)="addNewUser()">Add</button>
 
 <div style="width: 400px; margin: auto;">
