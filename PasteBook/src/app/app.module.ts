@@ -13,10 +13,11 @@ import { RegistrationComponent } from './registration/registration.component';
 import { PostComponent } from './post/post.component';
 import { LoginComponent } from './login/login.component';
 import { UserFriendComponent } from './user-friend/user-friend.component';
-import { ViewAlbumComponent } from './new-album/view-album/view-album.component';
-import { AddAlbumComponent } from './new-album/add-album/add-album.component';
-import { PhotosComponent } from './new-album/view-album/photos/photos.component';
+import { ViewAlbumComponent } from './album/view-album/view-album.component';
+import { AddAlbumComponent } from './album/add-album/add-album.component';
 import { UserRegistrationComponent } from './user-registration/user-registration.component';
+import { SelectedAlbumComponent } from './album/view-album/selected-album/selected-album.component';
+import { PhotoComponent } from './album/view-album/selected-album/photo/photo.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { UserRegistrationComponent } from './user-registration/user-registration
     UserRegistrationComponent,
     LoginComponent,
     UserFriendComponent,
-    PhotosComponent
+    SelectedAlbumComponent,
+    PhotoComponent
   ],
   imports: [
     BrowserModule,

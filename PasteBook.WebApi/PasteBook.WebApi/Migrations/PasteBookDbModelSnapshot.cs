@@ -180,9 +180,6 @@ namespace PasteBook.WebApi.Migrations
                     b.Property<int>("AlbumId")
                         .HasColumnType("int");
 
-                    b.Property<string>("Image")
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("PhotoId");
 
                     b.HasIndex("AlbumId");

@@ -34,7 +34,7 @@ export class AlbumService {
   }
   
   getAlbum(id: number): Observable<IAlbum> {
-    return this.http.get<IAlbum>(`${this.apiUrl}/${id}'`);
+    return this.http.get<IAlbum>(`${this.apiUrl}/${id}`);
   }
 
   addAlbum(entity: IAlbum): Observable<IAlbum> {
@@ -48,5 +48,4 @@ export class AlbumService {
   delete(id: number): Observable<IAlbum> {
     return this.http.delete<IAlbum>(`${this.apiUrl}/${id}`);
   }
-
 }
