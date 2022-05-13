@@ -7,6 +7,7 @@ using System.Linq;
 using Newtonsoft.Json;
 using PasteBook.WebApi.DataTransferObject;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 
 namespace PasteBook.WebApi.Controllers
 {
@@ -27,6 +28,28 @@ namespace PasteBook.WebApi.Controllers
             var users = await UnitOfWork.PostRepository.FindAll();
             return Ok(users);
         }
+
+        [HttpGet("/timeline/{UserId}")]
+        public async Task<IActionResult> GetPostsByUserId(int UserId, int friendId)
+        {
+            List<NewsFeedItem> userFeed = new List<NewsFeedItem>();
+            var userPosts = await UnitOfWork.PostRepository.Find(p => p.UserId == UserId);
+            var userPostsArranged = userPosts.OrderByDescending(p => p.PostDate).ToList();
+            foreach (Post post in userPostsArranged)
+            {
+                var postComments = await UnitOfWork.CommentRepository.Find(c => c.PostId == post.PostId);
+                var postLikes = await UnitOfWork.LikeRepository.Find(l => l.PostId == post.PostId);
+                userFeed.Add(new NewsFeedItem
+                {
+                    Post = post,
+                    CommentCount = postComments.Count(),
+                    LikeCount = postLikes.Count()
+                });
+            }
+            return Ok(userFeed);
+        }
+
+
         [HttpGet("{id}")]
         public async Task<IActionResult> GetPostById(int id)
         {
