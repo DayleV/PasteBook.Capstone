@@ -14,12 +14,10 @@ namespace PasteBook.WebApi.Controllers
     [ApiController]
     public class PhotoController : ControllerBase
     {
-        public IWebHostEnvironment Host;
         public IUnitOfWork UnitOfWork { get; private set; }
         public IPhotoService PhotoService { get; private set; }
-        public PhotoController(IWebHostEnvironment Host, IUnitOfWork unitOfWork, IPhotoService PhotoService)
+        public PhotoController(IUnitOfWork unitOfWork, IPhotoService PhotoService)
         {
-            this.Host = Host;
             this.UnitOfWork = unitOfWork;
             this.PhotoService = PhotoService;
         }
