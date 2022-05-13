@@ -11,6 +11,7 @@ import { LikeComponent } from './post/like/like.component';
 import { UserComponent } from './user/user.component';
 import { UserFriendComponent } from './user-friend/user-friend.component';
 import { PhotosComponent } from './new-album/view-album/photos/photos.component';
+import { PostdirectoryComponent } from './post/postdirectory/postdirectory.component';
 
 const routes: Routes = [
   {path: 'users', component: UserComponent},
@@ -26,7 +27,8 @@ const routes: Routes = [
   {path: 'registration', component: RegistrationComponent},
   {path: 'posts', component: PostComponent},
   {path: 'posts/comments', component: CommentComponent},
-  {path: 'posts/likes', component: LikeComponent}
+  {path: 'posts/likes', component: LikeComponent},
+  {path: 'posts/{id}', component: PostdirectoryComponent}
 ];
 
 @NgModule({

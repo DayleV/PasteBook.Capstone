@@ -17,6 +17,7 @@ import { ViewAlbumComponent } from './new-album/view-album/view-album.component'
 import { AddAlbumComponent } from './new-album/add-album/add-album.component';
 import { PhotosComponent } from './new-album/view-album/photos/photos.component';
 import { UserRegistrationComponent } from './user-registration/user-registration.component';
+import { PostdirectoryComponent } from './post/postdirectory/postdirectory.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { UserRegistrationComponent } from './user-registration/user-registration
     UserRegistrationComponent,
     LoginComponent,
     UserFriendComponent,
-    PhotosComponent
+    PhotosComponent,
+    PostdirectoryComponent
   ],
   imports: [
     BrowserModule,
