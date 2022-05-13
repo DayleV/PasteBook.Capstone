@@ -25,7 +25,6 @@ import { UserRegistrationComponent } from './user-registration/user-registration
     PostComponent,
     CommentComponent,
     LikeComponent,
-    RegistrationComponent,
     PostComponent,
     ViewAlbumComponent,
     AddAlbumComponent,
@@ -33,7 +32,8 @@ import { UserRegistrationComponent } from './user-registration/user-registration
     UserRegistrationComponent,
     LoginComponent,
     UserFriendComponent,
-    PhotosComponent
+    PhotosComponent,
+    RegistrationComponent
   ],
   imports: [
     BrowserModule,
