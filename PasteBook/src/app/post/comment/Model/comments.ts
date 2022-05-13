@@ -3,5 +3,5 @@ export interface IComments {
     PostId: number,
     UserId: number,
     CommentContent: string,
-    CommentDate: string
+    CommentDate?: string
 }

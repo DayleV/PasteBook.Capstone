@@ -31,7 +31,7 @@ namespace PasteBook.WebApi.Migrations
                     AuthenticationId = table.Column<int>(type: "int", nullable: false),
                     FirstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    BirthDate = table.Column<string>(type: "date", nullable: true),
+                    BirthDate = table.Column<DateTime>(type: "Date", nullable: false),
                     Gender = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     MobileNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ProfileBlurb = table.Column<string>(type: "nvarchar(max)", nullable: true)
@@ -54,13 +54,61 @@ namespace PasteBook.WebApi.Migrations
                     AlbumId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     UserId = table.Column<int>(type: "int", nullable: false),
-                    AlbumName = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    AlbumName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    AlbumDescription = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Albums", x => x.AlbumId);
                     table.ForeignKey(
                         name: "FK_Albums_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "UserId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "FriendRequest",
+                columns: table => new
+                {
+                    FriendRequestId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    FriendId = table.Column<int>(type: "int", nullable: false),
+                    RequestStatus = table.Column<int>(type: "int", nullable: false),
+                    UserId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_FriendRequest", x => x.FriendRequestId);
+                    table.ForeignKey(
+                        name: "FK_FriendRequest_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "UserId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Notification",
+                columns: table => new
+                {
+                    NotificationId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    NotifReadStatus = table.Column<bool>(type: "bit", nullable: false),
+                    NotifDateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    FriendId = table.Column<int>(type: "int", nullable: false),
+                    FriendRequestId = table.Column<int>(type: "int", nullable: true),
+                    CommentId = table.Column<int>(type: "int", nullable: true),
+                    PostId = table.Column<int>(type: "int", nullable: true),
+                    LikeId = table.Column<int>(type: "int", nullable: true),
+                    UserId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Notification", x => x.NotificationId);
+                    table.ForeignKey(
+                        name: "FK_Notification_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
                         principalColumn: "UserId",
@@ -95,7 +143,8 @@ namespace PasteBook.WebApi.Migrations
                     UserFriendId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     UserId = table.Column<int>(type: "int", nullable: false),
-                    FriendId = table.Column<int>(type: "int", nullable: false)
+                    FriendId = table.Column<int>(type: "int", nullable: false),
+                    Status = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -115,7 +164,8 @@ namespace PasteBook.WebApi.Migrations
                     PhotoId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     AlbumId = table.Column<int>(type: "int", nullable: false),
-                    Image = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Image = table.Column<string>(type: "varchar(max)", nullable: true),
+                    DateTime = table.Column<DateTime>(type: "datetime", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -181,9 +231,19 @@ namespace PasteBook.WebApi.Migrations
                 column: "PostId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_FriendRequest_UserId",
+                table: "FriendRequest",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Likes_PostId",
                 table: "Likes",
                 column: "PostId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Notification_UserId",
+                table: "Notification",
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Photos_AlbumId",
@@ -213,7 +273,13 @@ namespace PasteBook.WebApi.Migrations
                 name: "Comments");
 
             migrationBuilder.DropTable(
+                name: "FriendRequest");
+
+            migrationBuilder.DropTable(
                 name: "Likes");
+
+            migrationBuilder.DropTable(
+                name: "Notification");
 
             migrationBuilder.DropTable(
                 name: "Photos");

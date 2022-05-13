@@ -179,10 +179,11 @@ namespace PasteBook.WebApi.Migrations
 
                     b.Property<int>("AlbumId")
                         .HasColumnType("int");
+                    b.Property<DateTime>("DateTime")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Image")
                         .HasColumnType("nvarchar(max)");
-
                     b.HasKey("PhotoId");
 
                     b.HasIndex("AlbumId");

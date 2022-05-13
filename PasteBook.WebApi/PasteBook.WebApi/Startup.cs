@@ -57,6 +57,7 @@ namespace PasteBook.WebApi
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IAuthenticationService, AuthenticationService>();
             services.AddScoped<IMailService, MailService>();
+            services.AddScoped<IPhotoService, PhotoService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
