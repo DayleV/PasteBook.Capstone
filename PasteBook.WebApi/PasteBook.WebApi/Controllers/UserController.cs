@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PasteBook.WebApi.Data;
 using PasteBook.WebApi.DataObjectTransfer;
+using PasteBook.WebApi.Helpers;
 using PasteBook.WebApi.Models;
 using System.Linq;
 using System.Threading.Tasks;
@@ -19,6 +20,7 @@ namespace PasteBook.WebApi.Controllers
             this.UnitOfWork = unitOfWork;
         }
 
+        [AuthorizeAccess]
         [HttpGet]
         public async Task<IActionResult> GetUsers()
         {

@@ -41,8 +41,8 @@ export class UserComponent implements OnInit {
   }
   
   token(){
-    let token = localStorage.getItem("token");
-    console.log(token);
+    console.log('local'+localStorage.getItem("token"));
+    // console.log('session'+sessionStorage.getItem("token"));
   }
 
   isLoggedIn(){

@@ -10,12 +10,6 @@ import { UserAuthBase } from './Model/user-auth-base';
 
 const API_ENDPOINT = "login";
 
-const httpOptions = {
-  headers: new HttpHeaders({
-    'Content-Type': 'application/json'
-  })
-};
-
 @Injectable({
   providedIn: 'root'
 })
@@ -30,7 +24,7 @@ export class AuthService {
     }
 
   login(login: Login): Observable<UserAuthBase>{
-    return this.http.post<UserAuthBase>(this.apiUrl, login, httpOptions)
+    return this.http.post<UserAuthBase>(this.apiUrl, login)
     .pipe(
       tap(response => response.token? this.setSession(response.token): null)
     );
@@ -39,13 +33,14 @@ export class AuthService {
   private setSession(token: string) {
     if(token){
       localStorage.setItem('token', JSON.stringify(token));
+      // sessionStorage.setItem('token', JSON.stringify(token));
     }
   }
 
   private GetTokenDecode(token: string): token{
     let tokenObject: token = {};
     let decodedToken = this.jwtHelper.decodeToken(token);
-    tokenObject.tokenPayload = JSON.stringify(decodedToken);
+    tokenObject.tokenPayload = decodedToken;
     tokenObject.expirationDate = this.jwtHelper.getTokenExpirationDate(token);
     return tokenObject;
   }
@@ -60,10 +55,9 @@ export class AuthService {
       let decodedToken = this.GetTokenDecode(token!);
       let user: UserAuth = {
         token: token!,
-        userId: 0,
-        firstName: "",
-        lastName: "",
-        emailAddress: ""
+        userId: decodedToken.tokenPayload.UserId,
+        firstName: decodedToken.tokenPayload.FirstName,
+        lastName: decodedToken.tokenPayload.LastName
       };
       return user;
     }

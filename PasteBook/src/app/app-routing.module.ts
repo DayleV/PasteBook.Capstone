@@ -11,13 +11,20 @@ import { LikeComponent } from './post/like/like.component';
 import { UserComponent } from './user/user.component';
 import { UserFriendComponent } from './user-friend/user-friend.component';
 import { PhotosComponent } from './new-album/view-album/photos/photos.component';
+import { HomePageComponent } from './home-page/home-page.component';
+import { AuthenticatedGuard } from './security/guard/authenticated.guard';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptor } from './security/interceptor/auth.interceptor';
+import { LoginGuard } from './security/guard/login.guard';
 
 const routes: Routes = [
+  // {path: '', component: HomePageComponent, pathMatch: 'full'},
+  {path: 'home', component: HomePageComponent, canActivate:[AuthenticatedGuard]},
   {path: 'users', component: UserComponent},
   {path: 'view-albums', component: ViewAlbumComponent},
   {path: 'add-album', component: AddAlbumComponent},
   {path: 'view-albums/:id', component: PhotosComponent},
-  {path: 'login', component: LoginComponent},
+  {path: 'login', component: LoginComponent, canActivate:[LoginGuard]},
   {path: 'friends', component: UserFriendComponent},
   {path: 'registration', component: RegistrationComponent},
   {path: 'posts', component: PostComponent},
@@ -27,6 +34,9 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers:[
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}
+  ]
 })
 export class AppRoutingModule { }
