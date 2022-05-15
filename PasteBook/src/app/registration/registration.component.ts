@@ -14,6 +14,7 @@ export class RegistrationComponent implements OnInit {
   newUser: IUserRegistrations = {
     EmailAddress: "",
     Password: "",
+    ConfirmPassword: "",
     FirstName: "",
     LastName: "",
     Birthdate: "",
