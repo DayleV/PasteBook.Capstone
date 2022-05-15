@@ -42,8 +42,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, 
-    { enableTracing: true })],
+  imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
   providers:[
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}

@@ -1,10 +1,9 @@
-<p>user works!</p>
-<p>{{users|json}}</p>
+<!-- <p>{{users|json}}</p>
 <p>{{users$|async|json}}</p>
-<button type="button" class="btn btn-primary">Primary</button>
+<button type="button" class="btn btn-primary">Primary</button> -->
 <!-- <button (click)="some()">Add Post</button> -->
 
-<p>{{post|json}}</p>
+<!-- <p>{{post|json}}</p>
 
 
 <button type="submit" class="btn btn-primary" (click)="token()">token</button>
@@ -13,4 +12,17 @@
 <button type="submit" class="btn btn-primary" (click)="isLoggedOut()">isLoggedOut</button>
 <button type="submit" class="btn btn-primary" (click)="getLoggedInUser()">getLoggedInUser</button>
 <br>
-<button type="submit" class="btn btn-primary" (click)="album()">album</button>
+<button type="submit" class="btn btn-primary" (click)="album()">album</button> -->
+
+<p>user works!</p>
+
+<div *ngIf="users | async as users">
+    <table>
+        <tr *ngFor="let user of users">
+            <td>{{user.firstName}}</td>
+            <td>{{user.lastName}}</td>
+        </tr>
+    </table>
+</div>
+
+<p>2: {{users|async|json}}</p>

@@ -20,7 +20,7 @@ namespace PasteBook.WebApi.Controllers
             this.UnitOfWork = unitOfWork;
         }
 
-        [AuthorizeAccess]
+        //[AuthorizeAccess]
         [HttpGet]
         public async Task<IActionResult> GetUsers()
         {

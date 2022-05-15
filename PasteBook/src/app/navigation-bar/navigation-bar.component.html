@@ -15,7 +15,7 @@
             <span class="nav-link" href="#">CurrentUser({{user?.firstName}})</span>
           </li>     
           <li class="nav-item">
-            <a class="nav-link" href="/">home</a>
+            <a class="nav-link" [routerLink]="['/']">home</a>
           </li>  
           <li class="nav-item">
             <a class="nav-link" href="#">notification</a>
@@ -25,7 +25,10 @@
           </li> 
           <li class="nav-item">
             <button class="btn btn-primary" type="submit" (click)="logout()">logout</button>
-          </li>     
+          </li>          
+          <li class="nav-item">
+            <a class="nav-link" [routerLink]="['users']">users</a>
+          </li> 
         </ul> 
       </div>
     </div>
