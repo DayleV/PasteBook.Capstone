@@ -1,2 +1,13 @@
 <p>user-friend works!</p>
-<button type="button" class="btn btn-primary" (click)="addNewUser_Friend()">Add</button>
+<p>Logged In User: {{loggedInUser.firstName}}</p>
+<input name="search" type="text" [(ngModel)]="search" id="search" placeholder="Search Friends" (keyup)="EmitSearch()">
+{{search}}
+<p>List of Friends</p>
+<div *ngIf="userFriends$ | async as friends">
+    <table>
+        <tr *ngFor="let friend of friends">
+            <td>{{friend.friendId.firstName}}</td>
+            <td>{{friend.friendId.lastName}}</td>
+        </tr>
+    </table>
+</div>

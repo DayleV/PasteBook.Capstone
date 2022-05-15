@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { Observable, tap } from 'rxjs';
+import { BehaviorSubject, Observable, of, tap } from 'rxjs';
 import { ConfigurationService } from '../configuration/configuration.service';
 import { Login } from '../login/Model/login';
 import { token } from './Model/token';
@@ -15,6 +15,7 @@ const API_ENDPOINT = "login";
 })
 export class AuthService {
   apiUrl: string = "";
+  isLoggedIn$ = new BehaviorSubject<boolean>(false);
 
   constructor(private http: HttpClient, 
     private configService: ConfigurationService,
@@ -33,6 +34,7 @@ export class AuthService {
   public setSession(token: string) {
     if(token){
       localStorage.setItem('token', JSON.stringify(token));
+      this.isLoggedIn$.next(true);
       // sessionStorage.setItem('token', JSON.stringify(token));
     }
   }
@@ -47,6 +49,7 @@ export class AuthService {
 
   logout(): void{
     localStorage.removeItem("token");
+    this.isLoggedIn$.next(false);
   }
 
   getLoggedInUser(): UserAuth | null {
