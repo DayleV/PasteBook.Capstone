@@ -15,9 +15,7 @@ export class SelectedAlbumComponent implements OnInit {
 
   
   album: IAlbum | any = [];
-  photo: IPhoto = {
-    AlbumId: 5
-  };
+  photo: IPhoto | any = [];
 
   id: number = 0;
   route: ActivatedRoute;

@@ -7,7 +7,7 @@ namespace PasteBook.WebApi.Services
 {
     public interface IPhotoService
     {
-        public string SavePath(IFormFile file);
+        public string SavePath(IFormFile file, int userId);
     }
     public class PhotoService: IPhotoService
     {
@@ -17,11 +17,16 @@ namespace PasteBook.WebApi.Services
             this.Host = Host;
         }
 
-        public string SavePath(IFormFile file)
+        public string SavePath(IFormFile file, int userId)
         {
             FileInfo fi = new FileInfo(file.FileName);
             var newFileName = "Image_" + DateTime.Now.TimeOfDay.Milliseconds + fi.Extension;
-            var path = Path.Combine("", Host.ContentRootPath + "\\Images\\" + newFileName);
+            var newPath = Host.ContentRootPath + "\\Images\\" + userId + "\\" ;
+            if (!Directory.Exists(newPath))
+            {
+                Directory.CreateDirectory(newPath);
+            }
+            var path = Path.Combine("", newPath + newFileName);
             using (var stream = new FileStream(path, FileMode.Create))
             {
                 file.CopyTo(stream);

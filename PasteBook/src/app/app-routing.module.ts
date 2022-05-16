@@ -16,6 +16,7 @@ import { AuthenticatedGuard } from './security/guard/authenticated.guard';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './security/interceptor/auth.interceptor';
 import { LoginGuard } from './security/guard/login.guard';
+import { TimelineComponent } from './timeline/timeline.component';
 
 const routes: Routes = [
   {
@@ -37,7 +38,8 @@ const routes: Routes = [
   {path: 'posts', component: PostComponent},
   {path: 'posts/comments', component: CommentComponent},
   {path: 'posts/likes', component: LikeComponent},
-  {path: 'posts/{id}', component: PostdirectoryComponent}
+  {path: 'posts/:id', component: PostdirectoryComponent},
+  {path: ':string', component: TimelineComponent}
 ];
 
 @NgModule({

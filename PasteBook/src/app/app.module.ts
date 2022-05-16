@@ -27,7 +27,9 @@ import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
 import { ProfileComponent } from './profile/profile.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { NavigationBarComponent } from './navigation-bar/navigation-bar.component';
+import { TimelineComponent } from './timeline/timeline.component';
 import { NewsfeedComponent } from './home-page/newsfeed/newsfeed.component';
+import { SettingComponent } from './setting/setting.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +51,9 @@ import { NewsfeedComponent } from './home-page/newsfeed/newsfeed.component';
     ProfileComponent,
     HomePageComponent,
     NavigationBarComponent,
-    NewsfeedComponent
+    TimelineComponent,
+    NewsfeedComponent,
+    SettingComponent
   ],
   imports: [
     BrowserModule,

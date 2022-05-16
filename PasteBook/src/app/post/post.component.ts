@@ -28,28 +28,4 @@ export class PostComponent implements OnInit {
     this.posts$ = this.postService.getPosts(); 
   }
 
-  // postOnClick(): void{
-  //   if(this.newPost.PostContent == ''){
-  //     console.log("cannot be null")
-  //   }else{
-  //     const data = {
-  //       UserId : this.newPost.UserId,
-  //       PostContent: this.newPost.PostContent
-  //     };
-  //     this.postService.addPosts(this.newPost).subscribe(newPost => this.newPost == newPost);
-  //     console.log(this.newPost);
-  //   }   
-  // }
-
-  // onSubmit(f: NgForm): void{
-  //   if(this.newPost.PostContent == ''){
-  //     console.warn("connot be null");    
-  //   }else{
-  //     let renderPost = f.value.renderPost;
-  //     this.postText.push({
-  //     'renderPost': renderPost
-  //   })
-  //   }    
-  // }
-
 }
