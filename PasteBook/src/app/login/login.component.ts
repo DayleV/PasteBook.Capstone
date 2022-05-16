@@ -7,7 +7,7 @@ import { Login } from './Model/login';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss', '../fonts/material-design-iconic-font/css/material-design-iconic-font.min.css']
 })
 export class LoginComponent implements OnInit {
 

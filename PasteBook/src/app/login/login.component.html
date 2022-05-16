@@ -1,47 +1,54 @@
-<div style="width: 500px;">
-    <form #form="ngForm" [formGroup]="loginform" (ngSubmit)="onSubmit()">
-        <div class="form-group">
+<div class="wrapper" style="background-image: url('../images/bg-registration-form-2.jpg')">
+  <div class="inner">
+    <form [formGroup]="loginform" (ngSubmit)="onSubmit()">
+      <h3>Log In</h3>
+      <div class="form-group">
+        <div class="form-wrapper">
           <label for="emailAddress">Email address</label>
-          <input 
-          formControlName="emailAddress" 
-          name="emailAddress" 
-          type="text" 
-          class="form-control ng-valid" 
-          id="emailAddress" 
-          aria-describedby="emailHelp" 
-          placeholder="Enter email"
-          required>
-          <div *ngIf="loginform.controls['emailAddress'].invalid
-                && (loginform.controls['emailAddress'].dirty 
-                || loginform.controls['emailAddress'].touched)">
-            <div *ngIf="emailAddress?.errors?.['required']">
-              This field is required.
+            <input 
+            formControlName="emailAddress" 
+            name="emailAddress" 
+            type="text" 
+            class="form-control ng-valid" 
+            id="emailAddress" 
+            aria-describedby="emailHelp" 
+            placeholder="Enter email"
+            required>
+            <div *ngIf="loginform.controls['emailAddress'].invalid
+                  && (loginform.controls['emailAddress'].dirty 
+                  || loginform.controls['emailAddress'].touched)">
+              <div *ngIf="emailAddress?.errors?.['required']">
+                This field is required.
+              </div>
+              <div *ngIf="emailAddress?.errors?.['pattern']">
+                Please enter a valid email address.
+              </div>
             </div>
-            <div *ngIf="emailAddress?.errors?.['pattern']">
-              Please enter a valid email address.
-            </div>
+            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
         </div>
-          <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-        </div>
-        <div class="form-group">
+        <div class="form-wrapper">
           <label for="password">Password</label>
-          <input 
-          type="password" 
-          name="password" 
-          class="form-control ng-valid" 
-          id="password" 
-          formControlName="password"
-          placeholder="Password"
-          required>
-          <div *ngIf="loginform.controls['password'].invalid 
-          && (loginform.controls['password'].dirty 
-          || loginform.controls['password'].touched)">
-            <div *ngIf="password?.errors?.['required']">
-              This field is required.
+            <input 
+            type="password" 
+            name="password" 
+            class="form-control ng-valid" 
+            id="password" 
+            formControlName="password"
+            placeholder="Password"
+            required>
+            <div *ngIf="loginform.controls['password'].invalid 
+            && (loginform.controls['password'].dirty 
+            || loginform.controls['password'].touched)">
+              <div *ngIf="password?.errors?.['required']">
+                This field is required.
+              </div>
             </div>
-          </div>
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+      <button type="submit">Submit</button>
+      <div class="signup">
+        <p>No Account? <a routerLink="/registration">Register</a></p>
+      </div>
     </form>
-    <p>{{loginform.value | json}}</p>
+  </div>
 </div>
