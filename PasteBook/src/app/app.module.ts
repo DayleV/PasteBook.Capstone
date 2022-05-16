@@ -23,6 +23,7 @@ import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
 import { ProfileComponent } from './profile/profile.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { NavigationBarComponent } from './navigation-bar/navigation-bar.component';
+import { TimelineComponent } from './timeline/timeline.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { NavigationBarComponent } from './navigation-bar/navigation-bar.componen
     RegistrationComponent,
     ProfileComponent,
     HomePageComponent,
-    NavigationBarComponent
+    NavigationBarComponent,
+    TimelineComponent
   ],
   imports: [
     BrowserModule,

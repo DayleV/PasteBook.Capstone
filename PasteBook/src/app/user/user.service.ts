@@ -30,6 +30,10 @@ export class UserService {
     return this.http.get<IUsers[]>(this.apiUrl);
   }
 
+  getUsersById(id: number | undefined): Observable<IUsers> {
+    return this.http.get<IUsers>(`${this.apiUrl}/${id}`);
+  }
+
   postPost(entity: IPost): Observable<IPost> {
     return this.http.post<IPost>(this.configService.settings.apiUrl + 'posts', entity, httpOptions);
   }

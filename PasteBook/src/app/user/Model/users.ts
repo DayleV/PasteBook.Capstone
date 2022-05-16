@@ -1,8 +1,8 @@
 export interface IUsers {
-    UserId: number;
-    AuthenticationId: number;
-    FirstName: string;
-    LastName: string;
+    UserId?: number;
+    AuthenticationId?: number;
+    FirstName?: string;
+    LastName?: string;
 }
 
 export interface IPost {

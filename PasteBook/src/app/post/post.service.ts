@@ -22,8 +22,8 @@ export class PostService {
       return this.http.get<IPosts[]>(this.apiUrl);
     } 
 
-    // addPosts(entity: IPosts): Observable<IPosts> {
-    //   return this.http.post<IPosts>(this.apiUrl, entity);
-    // }
+    addPosts(entity: IPosts): Observable<IPosts> {
+      return this.http.post<IPosts>(this.apiUrl, entity);
+    }
 
   }
