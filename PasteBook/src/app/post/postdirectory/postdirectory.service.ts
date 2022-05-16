@@ -11,7 +11,6 @@ const API_ENDPOINT = "posts";
 })
 export class PostdirectoryService {
 
-  _url= "https://localhost:44368/posts";
 
   apiUrl: string = "";
 
@@ -21,7 +20,7 @@ export class PostdirectoryService {
       console.log(this.apiUrl);
     }
     
-    getPosts(): Observable<IPosts[]> {
-      return this.http.get<IPosts[]>(this.apiUrl);
-    } 
+    getPostsById(PostId: number): Observable<IPosts[]> {
+      return this.http.get<IPosts[]>(`${this.apiUrl}/${PostId}`);
+    }
 }
