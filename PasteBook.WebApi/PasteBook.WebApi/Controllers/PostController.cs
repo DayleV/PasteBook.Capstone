@@ -61,7 +61,7 @@ namespace PasteBook.WebApi.Controllers
             var postData = new PostDTO
             {
                 Post = post,
-                Comments = postComments.ToList(),
+                Comments = postComments.OrderByDescending(p => p.CommentId),
                 Likes = postLikes.ToList()
             };
             if (postData is object)
