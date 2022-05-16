@@ -7,7 +7,7 @@ export interface IPosts {
 export interface IPostDetail{
     post?: IPost,
     comments?: IComment[],
-    ILike?: ILike[]
+    likes?: ILike[]
 }
 export interface IPost {
     postId?: number,
