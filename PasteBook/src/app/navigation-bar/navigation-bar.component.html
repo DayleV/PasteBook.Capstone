@@ -11,15 +11,15 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <span class="nav-link" href="#">CurrentUser({{user?.firstName}})</span>
+            <span class="nav-link" [routerLink]="['/']"><i class="fa-solid fa-user"></i></span>
           </li>     
           <li class="nav-item">
-            <a class="nav-link" [routerLink]="['/']">home</a>
+            <a class="nav-link" [routerLink]="['/']"><i class="fa-solid fa-house"></i></a>
           </li> 
           <li>
             <div class="dropdown">
               <button class="btn" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
-                <i class="fa-regular fa-bell"></i>
+                <i class="fa-solid fa-bell"></i>
               </button>
               <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
                 <li><a class="dropdown-item active" href="#">Action</a></li>
@@ -31,10 +31,10 @@
             </div>
           </li>     
           <li class="nav-item">
-            <a class="nav-link" href="#">settings</a>
+            <a class="nav-link" href="#"><i class="fa-solid fa-gear"></i></a>
           </li> 
           <li class="nav-item">
-            <button class="btn" type="submit" (click)="logout()"><i class="fa-solid fa-door-open"></i></button>
+            <button class="btn" type="submit" (click)="logout()"><i class="fa-solid fa-arrow-right-from-bracket"></i></button>
           </li>          
           <li class="nav-item">
             <a class="nav-link" [routerLink]="['users']">users</a>
