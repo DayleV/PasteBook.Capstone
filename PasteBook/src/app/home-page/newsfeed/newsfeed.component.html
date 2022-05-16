@@ -1,0 +1,15 @@
+<p>newsfeed works!</p>
+<!-- <p>{{newsFeedPosts$|async|json}}</p> -->
+<div class="individualpost" *ngFor="let post of newsFeedPosts$ | async; index as i">
+    <!-- <div class="firstname_postheader">{{userFullNameMap.get(post.Post.UserId)}}</div> -->
+    <div class="class postcontent">
+        <p>{{post.post?.userId}}</p>
+        <p>{{post.post?.postContent}}</p>
+        <p>{{post.post?.postDate}}</p>
+    </div>
+    <div class="class likecommentholder">
+        <span><p>{{post.likeCount}}
+        <a text-align="right">{{post.commentCount}}</a></p></span>
+    </div>
+    <hr>
+</div>

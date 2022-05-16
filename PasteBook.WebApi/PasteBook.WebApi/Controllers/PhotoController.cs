@@ -2,10 +2,12 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PasteBook.WebApi.Data;
+using PasteBook.WebApi.DataObjectTransfer;
 using PasteBook.WebApi.Models;
 using PasteBook.WebApi.Services;
 using System;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace PasteBook.WebApi.Controllers
@@ -28,13 +30,14 @@ namespace PasteBook.WebApi.Controllers
             try
             {
                 var files = HttpContext.Request.Form.Files;
+                var albumId = Convert.ToInt32(HttpContext.Request.Form["albumId"]);
                 if (files != null && files.Count > 0)
                 {
                     foreach (var file in files)
                     {
                         var path = this.PhotoService.SavePath(file);
                         Photo photo = new Photo();
-                        photo.AlbumId = 1;
+                        photo.AlbumId = albumId;
                         photo.Image = path;
                         photo.DateTime = DateTime.Now;
                         await this.UnitOfWork.PhotoRepository.Insert(photo);

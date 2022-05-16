@@ -49,6 +49,22 @@ namespace PasteBook.WebApi.Controllers
                 var encryptPassword = authenticationService.Encrypt(user.Password);
                 await UnitOfWork.AuthenticationRepository.InsertEncryptedUser(user, encryptPassword);
                 return StatusCode(StatusCodes.Status201Created, new { message = "Account Successfuly Created" });
+
+                //COMMENT ABOVE AND RUN TO CREATE DUMMY DATA OF AUTH AND USER
+                //string[] acc = {"john", "doe", "jack", "bruce", "wayne"};
+                //foreach(var item in acc)
+                //{
+                //    var u = new UserRegistration
+                //    {
+                //        EmailAddress = item,
+                //        Password = item,
+                //        FirstName = item,
+                //        LastName = item
+                //    };
+                //    var encryptPassword = authenticationService.Encrypt(u.Password);
+                //    await UnitOfWork.AuthenticationRepository.InsertEncryptedUser(u, encryptPassword);
+                //}
+                //return Ok();
             }
             catch (Exception ex)
             {
