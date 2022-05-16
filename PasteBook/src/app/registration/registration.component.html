@@ -46,20 +46,16 @@
       name="ConfirmPassword"
       class="ng-valid"
       formControlName="ConfirmPassword"
-      [(ngModel)]="newUser.Password"
+      [(ngModel)]="newUser.ConfirmPassword"
       required
     >
-    <div *ngIf="registrationform.controls['ConfirmPassword'].invalid 
-                && (registrationform.controls['ConfirmPassword'].dirty 
-                || registrationform.controls['ConfirmPassword'].touched)">
-      <div *ngIf="newUser.Password == newUser.ConfirmPassword">
-        This field is required.
+      <div *ngIf="newUser.Password != newUser.ConfirmPassword">
+        Passwords do not match.
       </div>
       <div *ngIf="Password?.errors?.['required']">
         This field is required.
       </div>
     </div>
-  </div>
   <div>
     <label for="FirstName">First Name</label>
     <input
