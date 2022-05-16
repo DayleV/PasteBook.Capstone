@@ -17,6 +17,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './security/interceptor/auth.interceptor';
 import { LoginGuard } from './security/guard/login.guard';
 import { TimelineComponent } from './timeline/timeline.component';
+import { SettingComponent } from './setting/setting.component';
 
 const routes: Routes = [
   {
@@ -36,7 +37,8 @@ const routes: Routes = [
   {path: 'friends', component: UserFriendComponent},
   {path: 'registration', component: RegistrationComponent},
   {path: 'posts/:id', component: PostComponent},
-  {path: ':string', component: TimelineComponent}
+  {path: ':string', component: TimelineComponent},
+  {path: 'settings', component: SettingComponent}
 ];
 
 @NgModule({

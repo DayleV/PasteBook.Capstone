@@ -1,20 +1,19 @@
 <div style="width: 500px;">
-    <form #form="ngForm" [formGroup]="registrationform" (ngSubmit)="onSubmit()">
+    <form #form="ngForm" [formGroup]="loginform" (ngSubmit)="onSubmit()">
         <div class="form-group">
           <label for="emailAddress">Email address</label>
           <input 
           formControlName="emailAddress" 
           name="emailAddress" 
           type="text" 
-          [(ngModel)]="login.emailAddress" 
           class="form-control ng-valid" 
           id="emailAddress" 
           aria-describedby="emailHelp" 
           placeholder="Enter email"
           required>
-          <div *ngIf="registrationform.controls['emailAddress'].invalid
-                && (registrationform.controls['emailAddress'].dirty 
-                || registrationform.controls['emailAddress'].touched)">
+          <div *ngIf="loginform.controls['emailAddress'].invalid
+                && (loginform.controls['emailAddress'].dirty 
+                || loginform.controls['emailAddress'].touched)">
             <div *ngIf="emailAddress?.errors?.['required']">
               This field is required.
             </div>
@@ -29,14 +28,14 @@
           <input 
           type="password" 
           name="password" 
-          [(ngModel)]="login.password" 
           class="form-control ng-valid" 
           id="password" 
+          formControlName="password"
           placeholder="Password"
           required>
-          <div *ngIf="registrationform.controls['password'].invalid 
-          && (registrationform.controls['password'].dirty 
-          || registrationform.controls['password'].touched)">
+          <div *ngIf="loginform.controls['password'].invalid 
+          && (loginform.controls['password'].dirty 
+          || loginform.controls['password'].touched)">
             <div *ngIf="password?.errors?.['required']">
               This field is required.
             </div>
@@ -44,4 +43,5 @@
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
+    <p>{{loginform.value | json}}</p>
 </div>

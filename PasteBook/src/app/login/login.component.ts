@@ -16,7 +16,7 @@ export class LoginComponent implements OnInit {
     password: ""
   }
 
-  registrationform = new FormGroup(
+  loginform = new FormGroup(
     {
     emailAddress: new FormControl('', [
       Validators.required,
@@ -30,11 +30,11 @@ export class LoginComponent implements OnInit {
   );
 
   get emailAddress() {
-    return this.registrationform.get('emailAddress');
+    return this.loginform.get('emailAddress');
   }
 
   get password() {
-    return this.registrationform.get('password');
+    return this.loginform.get('password');
   }
   
   constructor(private authService: AuthService, private router: Router) { }
@@ -43,6 +43,7 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit(){
+    this.login = this.loginform.value;
     this.authService.login(this.login)
     .pipe()
     .subscribe(response => {

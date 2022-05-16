@@ -95,7 +95,9 @@ namespace PasteBook.WebApi.Controllers
         [HttpPost("change-password")]
         public async Task<IActionResult> ChangePassword(ChangePasswordRequest model)
         {
-            var auth = await UnitOfWork.AuthenticationRepository.FindByPrimaryKey(model.AuthId);
+            //To Get AuthId of UserId
+            User userAuthId = await UnitOfWork.UserRepository.FindByPrimaryKey(model.UserId);
+            var auth = await UnitOfWork.AuthenticationRepository.FindByPrimaryKey(userAuthId.AuthenticationId);
 
             if (auth == null)
                 return Unauthorized(new { message = "Invalid Authentication" });
