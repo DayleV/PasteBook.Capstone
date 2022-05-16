@@ -12,7 +12,7 @@ import { PostService } from './post.service';
 })
 export class PostComponent implements OnInit {
 
-  postDetail$: Observable<IPostDetail> | any;
+  postDetail$!: Observable<IPostDetail>;
   id! :string;
 
   constructor(private postService: PostService, private route: ActivatedRoute) {

@@ -1,6 +1,7 @@
-<p>{{postDetail$|async|json}}</p>
-
 <p>Post Details</p>
-<div *ngIf="postDetail$ | async as postDetail">
-    {{postDetail}}
+<div *ngIf="postDetail$ | async as PostDetail">
+    <p>Post ID : {{PostDetail.post?.postId}}</p>
+    <p>User ID : {{PostDetail.post?.userId}}</p>
+    <p>Post Content : {{PostDetail.post?.postContent}}</p>
+    <p>Post Date : {{PostDetail.post?.postDate}}</p>
 </div>
