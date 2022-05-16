@@ -1,5 +1,4 @@
 import { Component, OnInit, Output, EventEmitter} from '@angular/core';
-import { Observable, tap } from 'rxjs';
 import { IUserRegistrations } from './Model/userregistrations';
 import { RegistrationService } from './registration.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';

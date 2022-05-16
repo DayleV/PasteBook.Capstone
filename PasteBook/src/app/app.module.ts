@@ -2,7 +2,12 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-// import { FlexLayoutModule } from '@angular/flex-layout';
+
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { MatInputModule } from '@angular/material/input';
+import { MatCardModule } from '@angular/material/card';
+import {MatButtonModule} from '@angular/material/button';
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -24,6 +29,7 @@ import { HomePageComponent } from './home-page/home-page.component';
 import { NavigationBarComponent } from './navigation-bar/navigation-bar.component';
 import { TimelineComponent } from './timeline/timeline.component';
 import { NewsfeedComponent } from './home-page/newsfeed/newsfeed.component';
+import { SettingComponent } from './setting/setting.component';
 
 @NgModule({
   declarations: [
@@ -46,14 +52,18 @@ import { NewsfeedComponent } from './home-page/newsfeed/newsfeed.component';
     HomePageComponent,
     NavigationBarComponent,
     TimelineComponent,
-    NewsfeedComponent
+    NewsfeedComponent,
+    SettingComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
-    // FlexLayoutModule,
+    FlexLayoutModule,
+    MatButtonModule,
+    MatCardModule,
+    MatInputModule,
     FormsModule
   ],
   providers: [{ provide: JWT_OPTIONS, useValue: JWT_OPTIONS}, JwtHelperService],
