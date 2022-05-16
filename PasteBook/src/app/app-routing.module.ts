@@ -35,10 +35,7 @@ const routes: Routes = [
   {path: 'posts', component: PostComponent},
   {path: 'friends', component: UserFriendComponent},
   {path: 'registration', component: RegistrationComponent},
-  {path: 'posts', component: PostComponent},
-  {path: 'posts/comments', component: CommentComponent},
-  {path: 'posts/likes', component: LikeComponent},
-  {path: 'posts/:id', component: PostdirectoryComponent},
+  {path: 'posts/:id', component: PostComponent},
   {path: ':string', component: TimelineComponent}
 ];
 

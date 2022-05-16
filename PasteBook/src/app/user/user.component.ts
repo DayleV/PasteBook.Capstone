@@ -22,7 +22,7 @@ export class UserComponent implements OnInit {
   ngOnInit(): void {    
     this.route.queryParamMap.subscribe(
       params => {
-        this.search$.next(params.get('filter')!);
+        params.get('filter')? this.search$.next(params.get('filter')!) : '';
       }
     );
     this.users$ = this.userService.getUsers();

@@ -1,7 +1,8 @@
 import { Component, Input, NgModule, OnInit, Output, EventEmitter } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Observable, pipe, tap } from 'rxjs';
-import { IPosts } from './Model/posts';
+import { ActivatedRoute } from '@angular/router';
+import { BehaviorSubject, Observable, pipe, tap } from 'rxjs';
+import { IPost, IPostDetail, IPosts } from './Model/posts';
 import { PostService } from './post.service';
 
 @Component({
@@ -11,21 +12,18 @@ import { PostService } from './post.service';
 })
 export class PostComponent implements OnInit {
 
-  newPost: IPosts = {
-    UserId: 2,
-    PostContent: ''
-  };
+  postDetail$: Observable<IPostDetail> | any;
+  id! :string;
 
-  postText: any[];
-
-  posts$: Observable<IPosts[]> | any;
-
-  constructor(private postService: PostService) {
-    this.postText = [];
+  constructor(private postService: PostService, private route: ActivatedRoute) {
   }
 
-  ngOnInit(): void {
-    this.posts$ = this.postService.getPosts(); 
+  ngOnInit(): void {       
+    this.route.paramMap.subscribe(
+      params => {
+        this.id = params.get('id')!;
+      });
+    this.postDetail$ = this.postService.getPostsById(this.id)
   }
 
 }

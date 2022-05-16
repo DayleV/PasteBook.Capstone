@@ -53,14 +53,14 @@ namespace PasteBook.WebApi.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetPostById(int id)
         {
-            var posts = await UnitOfWork.PostRepository.Find(p => p.PostId == id);
+            var post = await UnitOfWork.PostRepository.FindByPrimaryKey(id);
             var postComments = await UnitOfWork.CommentRepository.Find(c => c.PostId == id);
             var postLikes = await UnitOfWork.LikeRepository.Find(l => l.PostId == id);
 
             //Wrap Post metadata into PostDTO
             var postData = new PostDTO
             {
-                Post = posts.ToList(),
+                Post = post,
                 Comments = postComments.ToList(),
                 Likes = postLikes.ToList()
             };

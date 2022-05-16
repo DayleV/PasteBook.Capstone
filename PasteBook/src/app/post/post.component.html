@@ -1,1 +1,6 @@
-<p>{{posts$|async|json}}</p>
+<p>{{postDetail$|async|json}}</p>
+
+<p>Post Details</p>
+<div *ngIf="postDetail$ | async as postDetail">
+    {{postDetail}}
+</div>

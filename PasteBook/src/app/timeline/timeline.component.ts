@@ -74,6 +74,6 @@ export class TimelineComponent implements OnInit {
 
   addPost(): void {
     this.post.UserId = this.user.userId;
-    this.postService.addPosts(this.post).subscribe(post => this.post = post);
+    //this.postService.addPosts(this.post).subscribe(post => this.post = post);
   }
 }
