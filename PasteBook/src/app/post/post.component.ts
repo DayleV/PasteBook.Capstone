@@ -2,7 +2,9 @@ import { Component, Input, NgModule, OnInit, Output, EventEmitter } from '@angul
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { BehaviorSubject, Observable, pipe, tap } from 'rxjs';
-import { IPost, IPostDetail, IPosts } from './Model/posts';
+import { AuthService } from '../security/auth.service';
+import { UserAuth } from '../security/Model/user-auth';
+import { ILike, IPost, IPostDetail, IPosts } from './Model/posts';
 import { PostService } from './post.service';
 
 @Component({
@@ -13,17 +15,37 @@ import { PostService } from './post.service';
 export class PostComponent implements OnInit {
 
   postDetail$!: Observable<IPostDetail>;
+  commentCount!: number | undefined;
+  isLiked: boolean = false;
   id! :string;
+  user: UserAuth = {};
 
-  constructor(private postService: PostService, private route: ActivatedRoute) {
+  constructor(private postService: PostService, private route: ActivatedRoute,
+    private authService: AuthService) {
   }
 
   ngOnInit(): void {       
+    this.user = this.authService.getLoggedInUser()!;
     this.route.paramMap.subscribe(
       params => {
         this.id = params.get('id')!;
       });
-    this.postDetail$ = this.postService.getPostsById(this.id)
+    this.postDetail$ = this.postService.getPostsById(this.id).pipe(
+      tap(p => {
+        this.checkLikeStatus(p.likes!);
+      })
+    );
+  }
+
+  checkLikeStatus(likes: ILike[]){
+    console.log(likes);
+    this.commentCount = likes.length;
+
+    likes.forEach(element => {
+      if(element.userId === this.user?.userId){
+        this.isLiked = true;
+      }
+    });
   }
 
 }

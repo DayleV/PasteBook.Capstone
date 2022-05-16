@@ -19,8 +19,6 @@ export class PostService {
     }
     
     getPostsById(PostId: string): Observable<IPostDetail> {
-      return this.http.get<IPostDetail>(`${this.apiUrl}/${PostId}`).pipe(
-        tap(post=>console.log(post))
-      ); ;
+      return this.http.get<IPostDetail>(`${this.apiUrl}/${PostId}`);
     }
   }

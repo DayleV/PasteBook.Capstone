@@ -4,4 +4,13 @@
     <p>User ID : {{PostDetail.post?.userId}}</p>
     <p>Post Content : {{PostDetail.post?.postContent}}</p>
     <p>Post Date : {{PostDetail.post?.postDate}}</p>
+    <p>like count : {{commentCount}}</p>
+    <p>like status : {{isLiked}}</p>
+    <div *ngFor="let comment of PostDetail.comments">
+        <span>Comment ID : {{comment.commentId}}</span>
+        <span>Post ID : {{comment.postId}}</span>
+        <span>User ID : {{comment.userId}}</span>
+        <span>Comment Content : {{comment.commentContent}}</span>
+        <span>Comment Date: {{comment.commentDate}}</span>
+    </div>
 </div>
