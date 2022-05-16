@@ -31,13 +31,14 @@ namespace PasteBook.WebApi.Controllers
             {
                 var files = HttpContext.Request.Form.Files;
                 var albumId = Convert.ToInt32(HttpContext.Request.Form["albumId"]);
+                Album album = await UnitOfWork.AlbumRepository.FindByPrimaryKey(albumId);
                 if (files != null && files.Count > 0)
                 {
                     foreach (var file in files)
                     {
-                        var path = this.PhotoService.SavePath(file);
+                        var path = this.PhotoService.SavePath(file, album.UserId);
                         Photo photo = new Photo();
-                        photo.AlbumId = albumId;
+                        photo.AlbumId = album.AlbumId;
                         photo.Image = path;
                         photo.DateTime = DateTime.Now;
                         await this.UnitOfWork.PhotoRepository.Insert(photo);
