@@ -13,9 +13,17 @@ export class NavigationBarComponent implements OnInit {
   constructor(private authService: AuthService, private router: Router) { }
 
   user: UserAuth = {};
+  searchInput: string = '';
 
   ngOnInit(): void {
     this.user = this.authService.getLoggedInUser()!;
+  }
+
+  search(){
+    this.router.navigate(['/users'],
+    {
+      queryParams: {filter: this.searchInput}
+    });
   }
 
   logout(){
