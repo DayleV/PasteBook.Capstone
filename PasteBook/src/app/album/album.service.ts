@@ -48,4 +48,5 @@ export class AlbumService {
   delete(id: number): Observable<IAlbum> {
     return this.http.delete<IAlbum>(`${this.apiUrl}/${id}`);
   }
+
 }

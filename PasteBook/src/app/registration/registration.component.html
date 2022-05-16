@@ -40,6 +40,23 @@
     </div>
   </div>
   <div>
+    <label for="ConfirmPassword">ConfirmPassword</label>
+    <input
+      type="password"
+      name="ConfirmPassword"
+      class="ng-valid"
+      formControlName="ConfirmPassword"
+      [(ngModel)]="newUser.ConfirmPassword"
+      required
+    >
+      <div *ngIf="newUser.Password != newUser.ConfirmPassword">
+        Passwords do not match.
+      </div>
+      <div *ngIf="Password?.errors?.['required']">
+        This field is required.
+      </div>
+    </div>
+  <div>
     <label for="FirstName">First Name</label>
     <input
       type="text"
@@ -95,14 +112,6 @@
       formControlName="Birthdate"
       required
     >
-    <!-- <div 
-    for="Birthdate"
-    [(ngModel)]="newUser.Birthdate"
-    name="Birthdate"
-    formControlName="Birthdate"
-    hidden>
-      <input type="text" value="{{ newUser.Birthdate | date: 'YYYY-MM-dd' }}" hidden>
-    </div> -->
     <div *ngIf="registrationform.controls['Birthdate'].invalid 
                 && (registrationform.controls['Birthdate'].dirty 
                 || registrationform.controls['Birthdate'].touched)">
