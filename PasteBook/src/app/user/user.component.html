@@ -1,16 +1,10 @@
 <p>user works!</p>
-<p>{{users|json}}</p>
-<p>{{users$|async|json}}</p>
-<button type="button" class="btn btn-primary">Primary</button>
-<!-- <button (click)="some()">Add Post</button> -->
-
-<p>{{post|json}}</p>
-
-
-<button type="submit" class="btn btn-primary" (click)="token()">token</button>
-<button type="submit" class="btn btn-primary" (click)="logout()">logout</button>
-<button type="submit" class="btn btn-primary" (click)="isLoggedIn()">isLoggedIn</button>
-<button type="submit" class="btn btn-primary" (click)="isLoggedOut()">isLoggedOut</button>
-<button type="submit" class="btn btn-primary" (click)="getLoggedInUser()">getLoggedInUser</button>
-<br>
-<button type="submit" class="btn btn-primary" (click)="album()">album</button>
+<p>List of users</p>
+<div *ngIf="filteredUsers$ | async as users">
+    <table>
+        <tr *ngFor="let user of users">
+            <td>{{user.firstName}}</td>
+            <td>{{user.lastName}}</td>
+        </tr>
+    </table>
+</div>

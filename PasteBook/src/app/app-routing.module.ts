@@ -24,16 +24,15 @@ const routes: Routes = [
     canActivate:[AuthenticatedGuard], 
     pathMatch: 'full'
   },
+  {
+    path: 'login', component: LoginComponent, 
+    canActivate:[LoginGuard]
+  },
   {path: 'users', component: UserComponent},
   {path: 'view-albums', component: ViewAlbumComponent},
   {path: 'add-album', component: AddAlbumComponent},
   {path: 'view-albums/:id', component: SelectedAlbumComponent},
   {path: 'posts', component: PostComponent},
-  {path: 'user-friends', component: UserFriendComponent},
-  {
-    path: 'login', component: LoginComponent, 
-    canActivate:[LoginGuard]
-  },
   {path: 'friends', component: UserFriendComponent},
   {path: 'registration', component: RegistrationComponent},
   {path: 'posts', component: PostComponent},
@@ -44,8 +43,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, 
-    { enableTracing: true })],
+  imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
   providers:[
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}

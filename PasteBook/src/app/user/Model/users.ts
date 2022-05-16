@@ -1,8 +1,12 @@
 export interface IUsers {
-    UserId?: number;
-    AuthenticationId?: number;
-    FirstName?: string;
-    LastName?: string;
+    userId?: number;
+    authenticationId?: number;
+    firstName?: string;
+    lastName?: string;
+    birthDate?: string;
+    gender?: string;
+    mobileNumber?: string;
+    profileBlurb?: string;
 }
 
 export interface IPost {

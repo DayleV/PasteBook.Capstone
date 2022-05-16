@@ -1,6 +1,4 @@
-<app-navigation-bar></app-navigation-bar>
+<div *ngIf="isLoggedIn$|async">
+    <app-navigation-bar></app-navigation-bar>
+</div>
 <router-outlet></router-outlet>
-<!-- <a href="/view-albums">View Albums</a><br>
-<a href="/posts">Post</a> -->
-<!-- <app-post></app-post> -->
-<!-- <app-post></app-post> -->

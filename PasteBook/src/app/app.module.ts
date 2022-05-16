@@ -15,7 +15,6 @@ import { LoginComponent } from './login/login.component';
 import { UserFriendComponent } from './user-friend/user-friend.component';
 import { ViewAlbumComponent } from './album/view-album/view-album.component';
 import { AddAlbumComponent } from './album/add-album/add-album.component';
-import { UserRegistrationComponent } from './user-registration/user-registration.component';
 import { PostdirectoryComponent } from './post/postdirectory/postdirectory.component';
 import { SelectedAlbumComponent } from './album/view-album/selected-album/selected-album.component';
 import { PhotoComponent } from './album/view-album/selected-album/photo/photo.component';
@@ -24,6 +23,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { NavigationBarComponent } from './navigation-bar/navigation-bar.component';
 import { TimelineComponent } from './timeline/timeline.component';
+import { NewsfeedComponent } from './home-page/newsfeed/newsfeed.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +36,6 @@ import { TimelineComponent } from './timeline/timeline.component';
     ViewAlbumComponent,
     AddAlbumComponent,
     UserFriendComponent,
-    UserRegistrationComponent,
     LoginComponent,
     UserFriendComponent,
     PostdirectoryComponent,
@@ -46,7 +45,8 @@ import { TimelineComponent } from './timeline/timeline.component';
     ProfileComponent,
     HomePageComponent,
     NavigationBarComponent,
-    TimelineComponent
+    TimelineComponent,
+    NewsfeedComponent
   ],
   imports: [
     BrowserModule,

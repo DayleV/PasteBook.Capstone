@@ -24,15 +24,22 @@ namespace PasteBook.WebApi.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetUserFriendById(int id)
+        public async Task<IActionResult> GetUserFriends(int id)
         {
-            var friend = await UnitOfWork.UserFriendRepository.FindByPrimaryKey(id);
-            if (friend is object)
-            {
-                return Ok(friend);
-            }
-            return NotFound();
+            var friends = await UnitOfWork.UserFriendRepository.Find(u => u.UserId.Equals(id));
+            return Ok(friends);
         }
+
+        //[HttpGet("{id}")]
+        //public async Task<IActionResult> GetUserFriendById(int id)
+        //{
+        //    var friend = await UnitOfWork.UserFriendRepository.FindByPrimaryKey(id);
+        //    if (friend is object)
+        //    {
+        //        return Ok(friend);
+        //    }
+        //    return NotFound();
+        //}
 
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] UserFriend userFriend)
