@@ -17,10 +17,11 @@ namespace PasteBook.WebApi.Models
         public DateTime NotifDateTime { get; set; }
         [Required]
         public int FriendId { get; set; }
-        public int? FriendRequestId { get; set; }
         public int? CommentId { get; set; }
         public int? PostId { get; set; }
         public int? LikeId { get; set; }
+        public int? UserFriendId { get; set; }
+
         //Foreign Key
         public int UserId { get; set; }
         public User User { get; set; }
