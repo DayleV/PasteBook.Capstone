@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { IAlbum } from '../album/model/album';
 import { ConfigurationService } from '../configuration/configuration.service';
+import { INewsFeedPosts } from '../home-page/newsfeed/Model/newsfeedpost';
 import { IPosts } from '../post/Model/posts';
 import { IUsers } from '../user/Model/users';
 

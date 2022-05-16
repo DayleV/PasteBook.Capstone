@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
 import { AlbumService } from '../album/album.service';
 import { IAlbum } from '../album/model/album';
+import { INewsFeedPosts } from '../home-page/newsfeed/Model/newsfeedpost';
 import { IPosts } from '../post/Model/posts';
 import { PostService } from '../post/post.service';
 import { ProfileService } from '../profile/profile.service';
@@ -67,6 +68,7 @@ export class TimelineComponent implements OnInit {
     this.profileService.getPostsByUserId(Number(num)).subscribe(posts => {
       this.posts = posts;
       });
+      console.log(this.posts.length)
 
   }
 
