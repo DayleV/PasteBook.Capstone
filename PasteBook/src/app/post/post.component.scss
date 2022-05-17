@@ -1,0 +1,46 @@
+.postBody {
+    height: 100px;
+
+    Padding: 10px;
+
+    cursor: pointer;
+
+    min-width: 100px;
+
+    text-align: center; 
+}
+
+.likeAndPost{
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid black;
+    padding: 10px;
+}
+
+.likeAndIcon{
+    display: flex;
+    justify-content: space-between;
+}
+
+.commentBody{
+    margin-top: auto;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+}
+
+.commentBox{
+    padding: 20px;
+    border-radius: 15px;
+}
+
+.commentContent{
+    border-bottom: 1px solid black;
+    padding: 10px;
+}
+
+.commentDate{
+    font-size: small;
+    display: flex;
+    justify-content:space-between;
+}
