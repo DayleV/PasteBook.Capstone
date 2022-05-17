@@ -25,6 +25,7 @@ export class ProfileComponent implements OnInit {
   albums$!: Observable<IProfileAlbum[]>;
   users: IUsers | any = [];
   route: ActivatedRoute;
+  checker: boolean = true;
 
   constructor(route: ActivatedRoute, private profileService: ProfileService, 
     private router: Router, private postService: PostService, private authService: AuthService) {
@@ -43,11 +44,15 @@ export class ProfileComponent implements OnInit {
     
     this.posts$ = this.profileService.getPostsByUserId(Number(id));
     this.albums$ = this.profileService.getAlbumsByUserId(Number(id));
+
+    if(id != this.user.userId){
+      this.checker = false;
+    }
   }
 
   addPost(): void {
     this.post.UserId = this.user.userId;
-    this.postService.addPosts(this.post).subscribe(post => this.post = post);
+    this.profileService.addPosts(this.post).subscribe(post => this.post = post);
   }
 
 }

@@ -28,4 +28,9 @@ export class ProfileService {
       console.log(`${this.apiUrl}profile-album/${id}`)
       return this.http.get<IProfileAlbum[]>(`${this.apiUrl}profile-album/${id}`);
     }
+
+    addPosts(entity: IPost): Observable<IPost>{
+      return this.http.post<IPost>(`${this.apiUrl}posts`, entity);
+    }
+
 }
