@@ -4,9 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { MatInputModule } from '@angular/material/input';
-import { MatCardModule } from '@angular/material/card';
-import {MatButtonModule} from '@angular/material/button';
+
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -27,9 +25,9 @@ import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
 import { ProfileComponent } from './profile/profile.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { NavigationBarComponent } from './navigation-bar/navigation-bar.component';
-import { TimelineComponent } from './timeline/timeline.component';
 import { NewsfeedComponent } from './home-page/newsfeed/newsfeed.component';
 import { SettingComponent } from './setting/setting.component';
+import { EditProfileInformationComponent } from './setting/edit-profile-information/edit-profile-information.component';
 import { EditAccountInformationComponent } from './setting/edit-account-information/edit-account-information.component';
 
 @NgModule({
@@ -39,10 +37,8 @@ import { EditAccountInformationComponent } from './setting/edit-account-informat
     PostComponent,
     CommentComponent,
     LikeComponent,
-    PostComponent,
     ViewAlbumComponent,
     AddAlbumComponent,
-    UserFriendComponent,
     LoginComponent,
     UserFriendComponent,
     PostdirectoryComponent,
@@ -52,9 +48,9 @@ import { EditAccountInformationComponent } from './setting/edit-account-informat
     ProfileComponent,
     HomePageComponent,
     NavigationBarComponent,
-    TimelineComponent,
     NewsfeedComponent,
     SettingComponent,
+    EditProfileInformationComponent,
     EditAccountInformationComponent
   ],
   imports: [
@@ -63,9 +59,6 @@ import { EditAccountInformationComponent } from './setting/edit-account-informat
     HttpClientModule,
     ReactiveFormsModule,
     FlexLayoutModule,
-    MatButtonModule,
-    MatCardModule,
-    MatInputModule,
     FormsModule
   ],
   providers: [{ provide: JWT_OPTIONS, useValue: JWT_OPTIONS}, JwtHelperService],

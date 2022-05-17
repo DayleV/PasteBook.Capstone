@@ -1,11 +1,12 @@
 <div>
     <ul>
-      <li *ngFor="let album of albums">
-        <button (click)="deleteAlbum(album.albumId)" id="clear">Delete</button>
-          <a href="/view-albums/{{album.albumId}}">{{album.albumName}}</a>
+      <!-- {{albums$|async|json}} -->
+      <li *ngFor="let album of albums$ | async">
+        <button *ngIf="checker" (click)="deleteAlbum(album.album.albumId!)" id="clear">Delete</button>
+          <a href="{{users.firstName! + users.lastName! + users.userId}}/albums/{{album.album.albumId}}">{{album.album.albumName}}</a>
       </li>
     </ul>
 </div>
 <div>
-  <button routerLink="/add-album">Create New Album</button>
+  <button *ngIf="checker" routerLink="/add-album">Create New Album</button>
 </div>

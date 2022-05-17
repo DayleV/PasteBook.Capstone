@@ -15,7 +15,7 @@
             <input type="text" [(ngModel)]="album.albumDescription">
         </div>
     </div>
-    <div>
+    <div *ngIf="checker">
         <div *ngIf="!isEdit">
             <button (click)="updateAlbum()">Edit</button>
         </div>
@@ -26,7 +26,7 @@
     </div>
 </div>
 <br><br>
-<div>
+<div *ngIf="checker">
     <input type="file" (change)="onFileSelected($event)">
     <input type="button" value="upload" (click)="onUpload()">
 </div>

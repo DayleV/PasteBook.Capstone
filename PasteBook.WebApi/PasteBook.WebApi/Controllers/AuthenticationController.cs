@@ -51,12 +51,12 @@ namespace PasteBook.WebApi.Controllers
                 return StatusCode(StatusCodes.Status201Created, new { message = "Account Successfuly Created" });
 
                 //COMMENT ABOVE AND RUN TO CREATE DUMMY DATA OF AUTH AND USER
-                //string[] acc = {"john", "doe", "jack", "bruce", "wayne"};
-                //foreach(var item in acc)
+                //string[] acc = { "john", "doe", "jack", "bruce", "wayne" };
+                //foreach (var item in acc)
                 //{
                 //    var u = new UserRegistration
                 //    {
-                //        EmailAddress = item,
+                //        EmailAddress = item + "@gmail.com",
                 //        Password = item,
                 //        FirstName = item,
                 //        LastName = item

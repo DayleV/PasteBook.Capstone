@@ -5,19 +5,17 @@ import { ViewAlbumComponent } from './album/view-album/view-album.component';
 import { PostComponent } from './post/post.component';
 import { LoginComponent } from './login/login.component';
 import { RegistrationComponent } from './registration/registration.component';
-import { CommentComponent } from './post/comment/comment.component';
-import { LikeComponent } from './post/like/like.component';
 import { UserComponent } from './user/user.component';
 import { UserFriendComponent } from './user-friend/user-friend.component';
 import { SelectedAlbumComponent } from './album/view-album/selected-album/selected-album.component';
-import { PostdirectoryComponent } from './post/postdirectory/postdirectory.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { AuthenticatedGuard } from './security/guard/authenticated.guard';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './security/interceptor/auth.interceptor';
 import { LoginGuard } from './security/guard/login.guard';
-import { TimelineComponent } from './timeline/timeline.component';
+import { EditProfileInformationComponent } from './setting/edit-profile-information/edit-profile-information.component';
 import { SettingComponent } from './setting/setting.component';
+import { ProfileComponent } from './profile/profile.component';
 
 const routes: Routes = [
   {
@@ -30,14 +28,18 @@ const routes: Routes = [
     canActivate:[LoginGuard]
   },
   {path: 'users', component: UserComponent},
-  {path: 'view-albums', component: ViewAlbumComponent},
+  {path: ':string/albums', component: ViewAlbumComponent},
   {path: 'add-album', component: AddAlbumComponent},
-  {path: 'view-albums/:id', component: SelectedAlbumComponent},
-  {path: 'posts', component: PostComponent},
+  {path: ':string/albums/:id', component: SelectedAlbumComponent},
   {path: 'friends', component: UserFriendComponent},
   {path: 'registration', component: RegistrationComponent},
-  {path: 'posts/:id', component: PostComponent},
-  //{path: ':string', component: TimelineComponent},
+  {path: 'settings/profile', component: EditProfileInformationComponent},
+  {path: 'friends', component: UserFriendComponent},
+  {path: 'registration', component: RegistrationComponent},
+  {
+    path: 'posts/:id', component: PostComponent
+  },
+  {path: ':string', component: ProfileComponent},
   {path: 'settings', component: SettingComponent}
 ];
 

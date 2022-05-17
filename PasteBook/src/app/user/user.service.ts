@@ -29,5 +29,15 @@ export class UserService {
       map(users => users.filter((users: IUsers) => users.userId != this.authService.getLoggedInUser()?.userId))
     );
   }
+
+  //// added to be used for edit profile settings
+  getUserToBeUpdated(UserId?:number):Observable<IUsers>{
+    return this.http.get<IUsers>(this.apiUrl + `/${UserId}`);
+  }
+
+  UpdateUserProfile(UserId?: number, data?: IUsers): Observable<IUsers> {
+    return this.http.put<IUsers>(this.apiUrl + `/${UserId}`,data);
+  }
+
 }
 

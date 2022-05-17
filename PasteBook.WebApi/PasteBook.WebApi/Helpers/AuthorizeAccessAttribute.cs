@@ -11,8 +11,8 @@ namespace PasteBook.WebApi.Helpers
     {
         public void OnAuthorization(AuthorizationFilterContext context)
         {
-            var authId = context.HttpContext.Items["UserId"];
-            if (authId == null)
+            var userId = context.HttpContext.Items["UserId"];
+            if (userId == null)
             {
                 context.Result = new JsonResult(new { message = "Unauthorized" }) { StatusCode = StatusCodes.Status401Unauthorized };
             }

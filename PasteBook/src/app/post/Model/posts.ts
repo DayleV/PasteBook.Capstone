@@ -17,7 +17,7 @@ export interface IPost {
 }
 export interface IComment {
     commentId?: number,
-    postId: number,
+    postId?: number,
     userId?: number,
     commentContent?: string,
     commentDate?: string

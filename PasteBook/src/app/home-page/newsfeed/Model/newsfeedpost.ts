@@ -8,7 +8,7 @@ export interface IPosts {
 export interface INewsFeedPosts{
     post: {
         postId?: number,
-        userId?: number,
+        userId: number,
         postContent: string,
         postDate?: Date
     },

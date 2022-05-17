@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Observable, of, tap} from 'rxjs';
+import { EMPTY, Observable, of, tap} from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { IPost, IPostDetail, IPosts } from './Model/posts';
+import { IComment, ILike, IPost, IPostDetail, IPosts } from './Model/posts';
 import { ConfigurationService } from '../configuration/configuration.service';
 
 const API_ENDPOINT = "posts";
@@ -15,10 +15,25 @@ export class PostService {
   constructor(private http: HttpClient, 
     private configService: ConfigurationService) {
       this.apiUrl = this.configService.settings.apiUrl + API_ENDPOINT;
-      console.log(this.apiUrl);
     }
     
-    getPostsById(PostId: string): Observable<IPostDetail> {
-      return this.http.get<IPostDetail>(`${this.apiUrl}/${PostId}`);
-    }
+  getPostsById(PostId: string): Observable<IPostDetail> {
+    return this.http.get<IPostDetail>(`${this.apiUrl}/${PostId}`);
   }
+  
+  addComment(comment: IComment): Observable<IComment>{
+    return this.http.post<IComment>(this.configService.settings.apiUrl+'comments', comment);
+  }
+
+  likePost(like: ILike): Observable<ILike>{
+    return this.http.post<ILike>(this.configService.settings.apiUrl+'likes', like);
+  }
+
+  unLikePost(id: number): Observable<ILike>{
+    return this.http.delete<ILike>(this.configService.settings.apiUrl+"likes"+"/"+id);
+  }
+
+  getLikes(): Observable<ILike[]> {
+    return this.http.get<ILike[]>(this.configService.settings.apiUrl+'likes');
+  }
+}
