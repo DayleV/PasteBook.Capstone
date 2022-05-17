@@ -34,9 +34,10 @@ export class NewsfeedComponent implements OnInit {
     this.newsFeedPosts$ = this.service.getNewsFeedPosts(this.loggedInUser.userId!);
     this.updateNewsFeedPosts = setInterval(()=>{
       this.newsFeedPosts$ = this.service.getNewsFeedPosts(this.loggedInUser.userId!);
-    }, 3000);
+    }, 60000);
   }
-
+  
+  //To disable refresh when in other routes
   ngOnDestroy(){
     if(this.updateNewsFeedPosts){
       clearInterval(this.updateNewsFeedPosts);
