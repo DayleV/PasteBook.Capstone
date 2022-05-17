@@ -1,13 +1,13 @@
 import { Component, OnInit, Output, EventEmitter} from '@angular/core';
-import { Observable, tap } from 'rxjs';
 import { IUserRegistrations } from './Model/userregistrations';
 import { RegistrationService } from './registration.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-registration',
   templateUrl: './registration.component.html',
-  styleUrls: ['./registration.component.scss']
+  styleUrls: ['./registration.component.scss', '../fonts/material-design-iconic-font/css/material-design-iconic-font.min.css']
 })
 
 export class RegistrationComponent implements OnInit {
@@ -22,7 +22,7 @@ export class RegistrationComponent implements OnInit {
     MobileNumber: ""
   }
 
-  constructor(private registrationService: RegistrationService) {}
+  constructor(private registrationService: RegistrationService, private router: Router) {}
 
   registrationform = new FormGroup(
     {
@@ -99,5 +99,6 @@ export class RegistrationComponent implements OnInit {
     this.newUser = this.registrationform.value;
     this.registrationService.addUser(this.newUser).subscribe(newUser => this.newUser = newUser);
     this.registrationform.reset();
+    this.router.navigateByUrl('/');
   }
 }

@@ -2,7 +2,10 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-// import { FlexLayoutModule } from '@angular/flex-layout';
+
+import { FlexLayoutModule } from '@angular/flex-layout';
+
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -23,6 +26,8 @@ import { ProfileComponent } from './profile/profile.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { NavigationBarComponent } from './navigation-bar/navigation-bar.component';
 import { NewsfeedComponent } from './home-page/newsfeed/newsfeed.component';
+import { SettingComponent } from './setting/setting.component';
+import { EditAccountInformationComponent } from './setting/edit-account-information/edit-account-information.component';
 
 @NgModule({
   declarations: [
@@ -31,10 +36,8 @@ import { NewsfeedComponent } from './home-page/newsfeed/newsfeed.component';
     PostComponent,
     CommentComponent,
     LikeComponent,
-    PostComponent,
     ViewAlbumComponent,
     AddAlbumComponent,
-    UserFriendComponent,
     LoginComponent,
     UserFriendComponent,
     PostdirectoryComponent,
@@ -44,14 +47,16 @@ import { NewsfeedComponent } from './home-page/newsfeed/newsfeed.component';
     ProfileComponent,
     HomePageComponent,
     NavigationBarComponent,
-    NewsfeedComponent
+    NewsfeedComponent,
+    SettingComponent,
+    EditAccountInformationComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
-    // FlexLayoutModule,
+    FlexLayoutModule,
     FormsModule
   ],
   providers: [{ provide: JWT_OPTIONS, useValue: JWT_OPTIONS}, JwtHelperService],

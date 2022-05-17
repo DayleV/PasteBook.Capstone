@@ -17,6 +17,7 @@ export class NewsfeedComponent implements OnInit {
   newsFeedPosts$!:Observable<INewsFeedPosts[]>;
   loggedInUser: UserAuth = {};
   users: IUsers[] = [];
+  updateNewsFeedPosts: any;
 
   //To Map UserId and User's Name
   userFullNameMap: Map<number, string> = new Map();
@@ -27,10 +28,19 @@ export class NewsfeedComponent implements OnInit {
     //To Use User's Profile Data
     this.userService.getUsers().subscribe({
       next: users => this.users = users
-    })
+    });
     
     this.loggedInUser = this.authService.getLoggedInUser()!;
     this.newsFeedPosts$ = this.service.getNewsFeedPosts(this.loggedInUser.userId!);
+    this.updateNewsFeedPosts = setInterval(()=>{
+      this.newsFeedPosts$ = this.service.getNewsFeedPosts(this.loggedInUser.userId!);
+    }, 3000);
+  }
+
+  ngOnDestroy(){
+    if(this.updateNewsFeedPosts){
+      clearInterval(this.updateNewsFeedPosts);
+    }
   }
 
   // refreshUserFullNameMap(){
