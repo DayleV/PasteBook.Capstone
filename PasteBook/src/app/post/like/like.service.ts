@@ -16,7 +16,6 @@ export class LikeService {
   constructor(private http: HttpClient, 
     private configService: ConfigurationService) {
       this.apiUrl = this.configService.settings.apiUrl + API_ENDPOINT;
-      console.log(this.apiUrl);
     }
 
     getLikes(): Observable<ILikes[]> {

@@ -19,7 +19,6 @@ export class UserFriendService {
     private configService: ConfigurationService) {
       this.userApiUrl = this.configService.settings.apiUrl + USERS_API_ENDPOINT;
       this.friendsApiUrl = this.configService.settings.apiUrl + FRIENDS_API_ENDPOINT;
-      console.log(this.userApiUrl);
     }
 
     getUser(): Observable<IUsers[]> {  
