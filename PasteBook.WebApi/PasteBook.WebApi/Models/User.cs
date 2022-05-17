@@ -25,7 +25,6 @@ namespace PasteBook.WebApi.Models
         public ICollection<UserFriend> UserFriends { get; set; }
         public ICollection<Album> Albums { get; set; }
         public ICollection<Notification> Notifications { get; set; }
-        public ICollection<FriendRequest> FriendRequests { get; set; }
         public Authentication Authentication { get; set; }
     }
 }

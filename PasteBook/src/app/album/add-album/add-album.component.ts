@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { AuthService } from 'src/app/security/auth.service';
+import { UserAuth } from 'src/app/security/Model/user-auth';
 import { IUsers } from 'src/app/user/Model/users';
 import { UserService } from 'src/app/user/user.service';
 import { AlbumService } from '../album.service';
@@ -13,35 +15,30 @@ import { IAlbum } from '../model/album';
 })
 export class AddAlbumComponent implements OnInit {
 
-  
-  user: IUsers | any = [];
-  album$: Observable<IAlbum[]> | undefined;
+  user: UserAuth = {};
+
   route: ActivatedRoute;
-  id: number = 0;
   
 
   constructor(private albumService: AlbumService, route: ActivatedRoute, 
-    private router: Router, private userService: UserService) 
+    private router: Router, private authService: AuthService) 
   { 
     this.route = route;
   }
 
   ngOnInit(): void {
-    // this.id = Number(this.route.snapshot.paramMap.get('id'));
-    // this.albumService.getAlbum(this.id).subscribe(album => {
-    //   this.album = album;
-    //   });
+    this.user = this.authService.getLoggedInUser()!;
   }
 
   album: IAlbum = {
     AlbumName: '',
-    UserId: 1,
+    UserId: this.user.userId,
     AlbumDescription: '',
   };
 
   addAlbum(): void {
-    console.log(this.album)
+    this.album.UserId = this.user.userId;
     this.albumService.addAlbum(this.album).subscribe(album => this.album == album);
-    this.router.navigate(['view-albums']);
+    this.router.navigate([`${this.user.firstName! + this.user.lastName! + this.user.userId}/albums`]);
   }
 }

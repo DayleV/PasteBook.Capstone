@@ -51,12 +51,12 @@ namespace PasteBook.WebApi.Controllers
                 return StatusCode(StatusCodes.Status201Created, new { message = "Account Successfuly Created" });
 
                 //COMMENT ABOVE AND RUN TO CREATE DUMMY DATA OF AUTH AND USER
-                //string[] acc = {"john", "doe", "jack", "bruce", "wayne"};
-                //foreach(var item in acc)
+                //string[] acc = { "john", "doe", "jack", "bruce", "wayne" };
+                //foreach (var item in acc)
                 //{
                 //    var u = new UserRegistration
                 //    {
-                //        EmailAddress = item,
+                //        EmailAddress = item + "@gmail.com",
                 //        Password = item,
                 //        FirstName = item,
                 //        LastName = item
@@ -95,7 +95,9 @@ namespace PasteBook.WebApi.Controllers
         [HttpPost("change-password")]
         public async Task<IActionResult> ChangePassword(ChangePasswordRequest model)
         {
-            var auth = await UnitOfWork.AuthenticationRepository.FindByPrimaryKey(model.AuthId);
+            //To Get AuthId of UserId
+            User userAuthId = await UnitOfWork.UserRepository.FindByPrimaryKey(model.UserId);
+            var auth = await UnitOfWork.AuthenticationRepository.FindByPrimaryKey(userAuthId.AuthenticationId);
 
             if (auth == null)
                 return Unauthorized(new { message = "Invalid Authentication" });

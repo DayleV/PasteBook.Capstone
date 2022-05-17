@@ -1,11 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { IAlbum } from '../album/model/album';
 import { ConfigurationService } from '../configuration/configuration.service';
-import { INewsFeedPosts } from '../home-page/newsfeed/Model/newsfeedpost';
-import { IPosts } from '../post/Model/posts';
-import { IUsers } from '../user/Model/users';
+import { IProfileAlbum, IPost, IProfilePosts, IUsers } from './model/profile';
 
 @Injectable({
   providedIn: 'root'
@@ -23,11 +20,12 @@ export class ProfileService {
       return this.http.get<IUsers>(`${this.apiUrl}users/${id}`);
     }
 
-    getPostsByUserId(id: number): Observable<IPosts[]> {
-      return this.http.get<IPosts[]>(`${this.apiUrl}timeline/${id}`);
+    getPostsByUserId(id: number): Observable<IProfilePosts[]> {
+      return this.http.get<IProfilePosts[]>(`${this.apiUrl}timeline/${id}`);
     }
 
-    getAlbumsByUserId(id: number): Observable<IAlbum[]> {
-      return this.http.get<IAlbum[]>(`${this.apiUrl}timeline/${id}`);
+    getAlbumsByUserId(id: number): Observable<IProfileAlbum[]> {
+      console.log(`${this.apiUrl}profile-album/${id}`)
+      return this.http.get<IProfileAlbum[]>(`${this.apiUrl}profile-album/${id}`);
     }
 }

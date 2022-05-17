@@ -89,29 +89,6 @@ namespace PasteBook.WebApi.Migrations
                     b.ToTable("Comments");
                 });
 
-            modelBuilder.Entity("PasteBook.WebApi.Models.FriendRequest", b =>
-                {
-                    b.Property<int>("FriendRequestId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("FriendId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("RequestStatus")
-                        .HasColumnType("int");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("FriendRequestId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("FriendRequest");
-                });
-
             modelBuilder.Entity("PasteBook.WebApi.Models.Like", b =>
                 {
                     b.Property<int>("LikeId")
@@ -145,9 +122,6 @@ namespace PasteBook.WebApi.Migrations
                     b.Property<int>("FriendId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("FriendRequestId")
-                        .HasColumnType("int");
-
                     b.Property<int?>("LikeId")
                         .HasColumnType("int");
 
@@ -158,6 +132,9 @@ namespace PasteBook.WebApi.Migrations
                         .HasColumnType("bit");
 
                     b.Property<int?>("PostId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("UserFriendId")
                         .HasColumnType("int");
 
                     b.Property<int>("UserId")
@@ -179,11 +156,13 @@ namespace PasteBook.WebApi.Migrations
 
                     b.Property<int>("AlbumId")
                         .HasColumnType("int");
+
                     b.Property<DateTime>("DateTime")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Image")
                         .HasColumnType("nvarchar(max)");
+
                     b.HasKey("PhotoId");
 
                     b.HasIndex("AlbumId");
@@ -295,17 +274,6 @@ namespace PasteBook.WebApi.Migrations
                     b.Navigation("Post");
                 });
 
-            modelBuilder.Entity("PasteBook.WebApi.Models.FriendRequest", b =>
-                {
-                    b.HasOne("PasteBook.WebApi.Models.User", "User")
-                        .WithMany("FriendRequests")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("PasteBook.WebApi.Models.Like", b =>
                 {
                     b.HasOne("PasteBook.WebApi.Models.Post", "Post")
@@ -392,8 +360,6 @@ namespace PasteBook.WebApi.Migrations
             modelBuilder.Entity("PasteBook.WebApi.Models.User", b =>
                 {
                     b.Navigation("Albums");
-
-                    b.Navigation("FriendRequests");
 
                     b.Navigation("Notifications");
 

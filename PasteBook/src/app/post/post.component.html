@@ -1,1 +1,38 @@
-<p>{{posts$|async|json}}</p>
+<p>Post Details</p>
+<div *ngIf="postDetail$ | async as PostDetail">
+    <p>Post ID : {{PostDetail.post?.postId}}</p>
+    <p>User ID : {{PostDetail.post?.userId}}</p>
+    <p>Post Content : {{PostDetail.post?.postContent}}</p>
+    <p>Post Date : {{PostDetail.post?.postDate}}</p>
+    <p>like count : {{commentCount}}</p>
+    <div *ngIf="isLiked">
+        <button class="btn btn-default" type="submit" (click)="unLikePost(PostDetail.post?.postId!)">
+            <i [ngClass]="{'fa-solid fa-thumbs-up' : isLiked === true}"></i>
+        </button>
+    </div>
+    <div *ngIf="!isLiked">
+        <button class="btn btn-default" type="submit" (click)="likePost(PostDetail.post?.postId!)">
+            <i [ngClass]="{'fa-regular fa-thumbs-up' : isLiked === false}"></i>
+        </button>
+    </div>
+    <p>Add comment: (enter to add)</p>
+    <input name="comment" type="text" [(ngModel)]="comment" id="comment" placeholder="Enter Comment" (keyup.enter)="AddComment(PostDetail.post?.postId!)">
+    <button *ngIf="showComments; else elseBlock" class="btn btn-default" type="submit" (click)="ShowComments()">
+        <i  class="fa-solid fa-sort-up"></i>
+    </button>
+    <ng-template #elseBlock>
+        <button class="btn btn-default" type="submit" (click)="ShowComments()">
+            <i class="fa-solid fa-caret-down"></i>
+        </button>
+    </ng-template>
+    <div *ngIf="showComments">
+        <div *ngFor="let comment of PostDetail.comments">
+            <span>Comment ID : {{comment.commentId}}</span>
+            <span>Post ID : {{comment.postId}}</span>
+            <span>User ID : {{comment.userId}}</span>
+            <span>Comment Content : {{comment.commentContent}}</span>
+            <span>Comment Date: {{comment.commentDate}}</span>
+        </div>
+    </div>
+</div>
+
