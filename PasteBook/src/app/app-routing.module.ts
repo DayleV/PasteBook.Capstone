@@ -16,7 +16,7 @@ import { AuthenticatedGuard } from './security/guard/authenticated.guard';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './security/interceptor/auth.interceptor';
 import { LoginGuard } from './security/guard/login.guard';
-import { TimelineComponent } from './timeline/timeline.component';
+import { ProfileComponent } from './profile/profile.component';
 
 const routes: Routes = [
   {
@@ -29,9 +29,9 @@ const routes: Routes = [
     canActivate:[LoginGuard]
   },
   {path: 'users', component: UserComponent},
-  {path: 'view-albums', component: ViewAlbumComponent},
+  {path: ':string/albums', component: ViewAlbumComponent},
   {path: 'add-album', component: AddAlbumComponent},
-  {path: 'view-albums/:id', component: SelectedAlbumComponent},
+  {path: ':string/albums/:id', component: SelectedAlbumComponent},
   {path: 'posts', component: PostComponent},
   {path: 'friends', component: UserFriendComponent},
   {path: 'registration', component: RegistrationComponent},
@@ -39,7 +39,7 @@ const routes: Routes = [
   {path: 'posts/comments', component: CommentComponent},
   {path: 'posts/likes', component: LikeComponent},
   {path: 'posts/{id}', component: PostdirectoryComponent},
-  {path: ':string', component: TimelineComponent}
+  {path: ':string', component: ProfileComponent}
 ];
 
 @NgModule({

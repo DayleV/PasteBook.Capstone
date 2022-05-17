@@ -16,4 +16,9 @@ namespace PasteBook.WebApi.DataTransferObject
         public int CommentCount { get; set; }
         public int LikeCount { get; set; }
     }
+
+    public class AlbumItem
+    {
+        public Album Album { get; set; }
+    }
 }

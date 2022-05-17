@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace PasteBook.WebApi.Models
 {
-    public enum requestStatus { 
+    public enum requestStatuss { 
         Pending, Ignored, Accepted
     }
 

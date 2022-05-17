@@ -49,6 +49,23 @@ namespace PasteBook.WebApi.Controllers
             return Ok(userFeed);
         }
 
+        [HttpGet("/profile-album/{UserId}")]
+        public async Task<IActionResult> GetAlbumsByUserId(int UserId, int friendId)
+        {
+            List<AlbumItem> userFeed = new List<AlbumItem>();
+            var userAlbums = await UnitOfWork.AlbumRepository.Find(p => p.UserId == UserId);
+            var userAlbumsArranged = userAlbums.OrderBy(p => p.AlbumName).ToList();
+            foreach (Album album in userAlbumsArranged)
+            {
+                userFeed.Add(new AlbumItem
+                {
+                    Album = album,
+                });
+            }
+
+            return Ok(userFeed);
+        }
+
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetPostById(int id)
