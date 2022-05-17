@@ -25,6 +25,7 @@ import { NavigationBarComponent } from './navigation-bar/navigation-bar.componen
 import { TimelineComponent } from './timeline/timeline.component';
 import { NewsfeedComponent } from './home-page/newsfeed/newsfeed.component';
 import { SettingComponent } from './setting/setting.component';
+import { EditProfileInformationComponent } from './setting/edit-profile-information/edit-profile-information.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { SettingComponent } from './setting/setting.component';
     NavigationBarComponent,
     TimelineComponent,
     NewsfeedComponent,
-    SettingComponent
+    SettingComponent,
+    EditProfileInformationComponent
   ],
   imports: [
     BrowserModule,

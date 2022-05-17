@@ -17,6 +17,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './security/interceptor/auth.interceptor';
 import { LoginGuard } from './security/guard/login.guard';
 import { TimelineComponent } from './timeline/timeline.component';
+import { EditProfileInformationComponent } from './setting/edit-profile-information/edit-profile-information.component';
 
 const routes: Routes = [
   {
@@ -39,7 +40,8 @@ const routes: Routes = [
   {path: 'posts/comments', component: CommentComponent},
   {path: 'posts/likes', component: LikeComponent},
   {path: 'posts/:id', component: PostdirectoryComponent},
-  {path: ':string', component: TimelineComponent}
+  {path: ':string', component: TimelineComponent},
+  {path: 'settings/profile', component: EditProfileInformationComponent}
 ];
 
 @NgModule({
