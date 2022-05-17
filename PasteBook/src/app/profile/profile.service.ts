@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { catchError, EMPTY, Observable, of } from 'rxjs';
 import { ConfigurationService } from '../configuration/configuration.service';
 import { IProfileAlbum, IPost, IProfilePosts, IUsers } from './model/profile';
 
@@ -13,7 +13,6 @@ export class ProfileService {
   constructor(private http: HttpClient, 
     private configService: ConfigurationService) {
       this.apiUrl = this.configService.settings.apiUrl;
-      console.log(this.apiUrl);
     }
 
     getUserById(id: number): Observable<IUsers> {
@@ -25,7 +24,6 @@ export class ProfileService {
     }
 
     getAlbumsByUserId(id: number): Observable<IProfileAlbum[]> {
-      console.log(`${this.apiUrl}profile-album/${id}`)
       return this.http.get<IProfileAlbum[]>(`${this.apiUrl}profile-album/${id}`);
     }
 

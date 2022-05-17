@@ -26,7 +26,6 @@ export class PhotoService {
     private configService: ConfigurationService) {
 
       this.apiUrl = this.configService.settings.apiUrl + API_ENDPOINT;
-      console.log(this.apiUrl);
 
     }
 
@@ -38,19 +37,9 @@ export class PhotoService {
       return this.http.get<IPhoto>(`${this.apiUrl}/${id}`);
     }
   
-    addPhoto(entity: any): Observable<IPhoto> {
-      const formData = new FormData(); 
-        
-      // Store form name as "file" with file data
-      formData.append('image', entity, entity.name);
-        
-      // Make http post request over api
-      // with formData as req
-      console.log(formData)
-      return this.http.post(`${this.apiUrl}/upload`, formData)
-
-      // console.log(entity)
-      // return this.http.post<IPhoto>(`${this.apiUrl}/upload`, entity);
+    addPhoto(entity: IPhoto): Observable<IPhoto> {
+      console.log(entity)
+      return this.http.post<IPhoto>(this.apiUrl, entity);
     }
 
     delete(id: number): Observable<IPhoto> {

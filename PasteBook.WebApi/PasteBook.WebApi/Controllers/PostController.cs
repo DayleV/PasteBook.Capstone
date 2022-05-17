@@ -8,6 +8,8 @@ using Newtonsoft.Json;
 using PasteBook.WebApi.DataTransferObject;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using PasteBook.WebApi.Helpers;
+using System;
 
 namespace PasteBook.WebApi.Controllers
 {
@@ -16,10 +18,13 @@ namespace PasteBook.WebApi.Controllers
     public class PostController : ControllerBase
     {
         public IUnitOfWork UnitOfWork { get; private set; }
+        private readonly IHttpContextAccessor httpContextAccessor;
 
-        public PostController(IUnitOfWork unitOfWork)
+        public PostController(IUnitOfWork unitOfWork,
+            IHttpContextAccessor httpContextAccessor)
         {
             UnitOfWork = unitOfWork;
+            this.httpContextAccessor = httpContextAccessor;
         }
 
         [HttpGet]
@@ -66,25 +71,39 @@ namespace PasteBook.WebApi.Controllers
             return Ok(userFeed);
         }
 
-
+        [AuthorizeAccess]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetPostById(int id)
         {
-            var post = await UnitOfWork.PostRepository.FindByPrimaryKey(id);
-            var postComments = await UnitOfWork.CommentRepository.Find(c => c.PostId == id);
-            var postLikes = await UnitOfWork.LikeRepository.Find(l => l.PostId == id);
+            try
+            {
+                var currentLoggedInUser = this.httpContextAccessor.HttpContext.Items["UserId"];
+                var post = await UnitOfWork.PostRepository.FindByPrimaryKey(id);
+                var validAccess = await this.UnitOfWork.UserFriendRepository.Find(
+                    user => user.UserId.Equals(currentLoggedInUser) || 
+                    (user.UserId.Equals(post.UserId) && user.FriendId.Equals(currentLoggedInUser)));
+                if (validAccess.Count() == 0)
+                    return Unauthorized();
+                var postComments = await UnitOfWork.CommentRepository.Find(c => c.PostId == id);
+                var postLikes = await UnitOfWork.LikeRepository.Find(l => l.PostId == id);
 
-            //Wrap Post metadata into PostDTO
-            var postData = new PostDTO
+                //Wrap Post metadata into PostDTO
+                var postData = new PostDTO
+                {
+                    Post = post,
+                    Comments = postComments.OrderByDescending(p => p.CommentId),
+                    Likes = postLikes.ToList()
+                };
+                if (postData is object)
+                {
+                    return Ok(postData);
+                };
+            }
+            catch(Exception e)
             {
-                Post = post,
-                Comments = postComments.OrderByDescending(p => p.CommentId),
-                Likes = postLikes.ToList()
-            };
-            if (postData is object)
-            {
-                return Ok(postData);
-            };
+
+            }
+            
             return NotFound();
         }
 

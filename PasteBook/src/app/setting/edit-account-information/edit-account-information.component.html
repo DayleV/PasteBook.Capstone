@@ -1,1 +1,111 @@
-<p>edit-account-information works!</p>
+<h2>Edit Account Information</h2>
+<form [formGroup]="updateCredentials" (submit)="updateAccountInformatiom()">
+  <div>
+    <label for="EmailAddress">Email Address</label>
+    <input
+      type="email"
+      name="EmailAddress"
+      class="ng-valid"
+      formControlName="emailAddress"
+      [(ngModel)]="userCredentials.emailAddress"
+      required
+    >
+    <div *ngIf="updateCredentials.controls['emailAddress'].invalid 
+                && (updateCredentials.controls['emailAddress'].dirty 
+                || updateCredentials.controls['emailAddress'].touched)">
+      <div *ngIf="emailAddress?.errors?.['required']">
+        This field is required.
+      </div>
+      <div *ngIf="emailAddress?.errors?.['pattern']">
+        Please enter a valid email address.
+      </div>
+    </div>
+  </div>
+  <div>
+    <label for="EmailAddress">Email Address</label>
+    <input
+      type="email"
+      name="EmailAddress"
+      class="ng-valid"
+      formControlName="emailAddress"
+      [(ngModel)]="userCredentials.emailAddress"
+      required
+    >
+    <div *ngIf="updateCredentials.controls['emailAddress'].invalid 
+                && (updateCredentials.controls['emailAddress'].dirty 
+                || updateCredentials.controls['emailAddress'].touched)">
+      <div *ngIf="emailAddress?.errors?.['required']">
+        This field is required.
+      </div>
+      <div *ngIf="emailAddress?.errors?.['pattern']">
+        Please enter a valid email address.
+      </div>
+    </div>
+  </div>
+  <div>
+    <label for="OldPassword">Enter Old Password</label>
+    <input
+      type="password"
+      name="OldPassword"
+      class="ng-valid"
+      formControlName="oldPassword"
+      [(ngModel)]="userCredentials.oldPassword"
+      required
+    >
+    <div *ngIf="updateCredentials.controls['oldPassword'].invalid 
+                && (updateCredentials.controls['oldPassword'].dirty 
+                || updateCredentials.controls['oldPassword'].touched)">
+      <div *ngIf="oldPassword?.errors?.['required']">
+        This field is required.
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <label for="NewPassword">Enter New Password</label>
+    <input
+      type="password"
+      name="NewPassword"
+      class="ng-valid"
+      formControlName="newPassword"
+      [(ngModel)]="userCredentials.newPassword"
+      required
+    >
+        <div *ngIf="updateCredentials.controls['newPassword'].touched">
+            <div *ngIf="userCredentials.oldPassword == userCredentials.newPassword">
+                New password must not be the same as old password.
+            </div>
+            <div *ngIf="newPassword?.errors?.['required']">
+                This field is required. 
+            </div>
+        </div>  
+    </div>
+
+  <div>
+    <div>
+        <label for="ConfirmNewPassword">Confirm New Password</label>
+        <input
+          type="password"
+          name="NewPassword"
+          class="ng-valid"
+          formControlName="confirmNewPassword"
+          [(ngModel)]="userCredentials.confirmNewPassword"
+          required
+        >
+        <div *ngIf="updateCredentials.controls['confirmNewPassword'].touched">
+            <div *ngIf="userCredentials.newPassword != userCredentials.confirmNewPassword">
+                Passwords do not match.
+            </div>
+            <div *ngIf="newPassword?.errors?.['required']">
+                This field is required.
+            </div>
+        </div>
+    </div>
+    </div>
+
+<input type="submit" value="Submit">
+<!-- <input type="submit" value="Submit" [disabled]="registrationform.invalid">  -->
+</form>
+<p>{{updateCredentials.value | json}}</p>
+
+

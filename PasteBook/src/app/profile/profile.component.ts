@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { catchError, EMPTY, Observable } from 'rxjs';
 import { PostService } from '../post/post.service';
 import { AuthService } from '../security/auth.service';
 import { UserAuth } from '../security/Model/user-auth';
@@ -26,6 +26,7 @@ export class ProfileComponent implements OnInit {
   users: IUsers | any = [];
   route: ActivatedRoute;
   checker: boolean = true;
+  error: boolean = false;
 
   constructor(route: ActivatedRoute, private profileService: ProfileService, 
     private router: Router, private postService: PostService, private authService: AuthService) {
@@ -35,10 +36,17 @@ export class ProfileComponent implements OnInit {
   ngOnInit(): void {
     this.user = this.authService.getLoggedInUser()!;
 
-    var str = (String(this.route.snapshot.paramMap.get('string'))).match(/\d+/);
-    var id = str? str[0]: 0;
+    let str = (String(this.route.snapshot.paramMap.get('string'))).match(/\d+/);
+    let id = str? str[0]: 0;
     
-    this.profileService.getUserById(Number(id)).subscribe(users => {
+    this.profileService.getUserById(Number(id)).pipe(
+      catchError(err => {
+        if(Number(err.status) === 404){
+          this.error = true;
+        }
+        return EMPTY
+      })
+    ).subscribe(users => {
     this.users = users;
     });
     
