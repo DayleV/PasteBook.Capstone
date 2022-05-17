@@ -4,6 +4,8 @@
 <ng-template #elseBlock>
     <p>Post Details</p>
     <div *ngIf="postDetail$ | async as PostDetail">
+        <p>First Name : {{PostDetail.post?.user?.firstName}}</p>
+        <p>Last Name : {{PostDetail.post?.user?.lastName}}</p>
         <p>Post ID : {{PostDetail.post?.postId}}</p>
         <p>User ID : {{PostDetail.post?.userId}}</p>
         <p>Post Content : {{PostDetail.post?.postContent}}</p>

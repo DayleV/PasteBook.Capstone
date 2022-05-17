@@ -20,10 +20,17 @@ namespace PasteBook.WebApi.Models
         public string Gender { get; set; }
         public string MobileNumber { get; set; }
         public string ProfileBlurb { get; set; }
-
+        [JsonIgnore]
+        [IgnoreDataMember]
         public ICollection<Post> Posts { get; set; }
+        [JsonIgnore]
+        [IgnoreDataMember]
         public ICollection<UserFriend> UserFriends { get; set; }
+        [JsonIgnore]
+        [IgnoreDataMember]
         public ICollection<Album> Albums { get; set; }
+        [JsonIgnore]
+        [IgnoreDataMember]
         public ICollection<Notification> Notifications { get; set; }
         public Authentication Authentication { get; set; }
     }

@@ -1,3 +1,5 @@
+import { IUsers } from "src/app/user/Model/users"
+
 export interface IPosts {
     PostId?: number,
     UserId?: number,
@@ -13,7 +15,8 @@ export interface IPost {
     postId?: number,
     userId?: number,
     postContent?: string,
-    postDate?: Date
+    postDate?: Date,
+    user?: IUsers
 }
 export interface IComment {
     commentId?: number,

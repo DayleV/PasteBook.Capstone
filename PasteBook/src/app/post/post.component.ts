@@ -35,6 +35,7 @@ export class PostComponent implements OnInit {
       params => {
         this.id = params.get('id')!;
       });
+      
     this.postDetail$ = this.postService.getPostsById(this.id).pipe(
       catchError(err => {
         this.error = err.status;
