@@ -5,7 +5,7 @@
         <tr *ngFor="let user of users">
             <td>{{user.firstName}}</td>
             <td>{{user.lastName}}</td>
-            <a class="nav-link" [routerLink]="'/'+user.firstName+user.lastName+user.userId"><i class="fa-solid fa-user"></i></a>
+            <a class="nav-link" [routerLink]="'users'+'/'+user.firstName+user.lastName+user.userId"><i class="fa-solid fa-user"></i></a>
         </tr>
     </table>
 </div>

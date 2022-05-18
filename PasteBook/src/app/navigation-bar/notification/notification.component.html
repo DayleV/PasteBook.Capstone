@@ -7,13 +7,13 @@
             <div *ngFor="let notif of notifs">
                 <li>
                     <span *ngIf="notif.userFriendId" class="dropdown-item">
-                        <a [routerLink]="[notif.friendId.firstName + notif.friendId.lastName + notif.friendId.userId]">
+                        <a [routerLink]="['users',notif.friendId.firstName + notif.friendId.lastName + notif.friendId.userId]">
                             {{notif.friendId.firstName}} {{notif.friendId.lastName}}
                         </a>                     
                         sent you a friend request
                     </span>
                     <span *ngIf="notif.postId && !notif.commentId && !notif.likeId" class="dropdown-item">
-                        <a [routerLink]="[notif.friendId.firstName + notif.friendId.lastName + notif.friendId.userId]">
+                        <a [routerLink]="['users',notif.friendId.firstName + notif.friendId.lastName + notif.friendId.userId]">
                             {{notif.friendId.firstName}} {{notif.friendId.lastName}}
                         </a> 
                         has posted in you <span><a [routerLink]="[loggedInUser.firstName! + loggedInUser.lastName + loggedInUser.userId]">
@@ -21,14 +21,14 @@
                         </a></span>
                     </span>
                     <span *ngIf="notif.commentId && notif.postId" class="dropdown-item">
-                        <a [routerLink]="[notif.friendId.firstName + notif.friendId.lastName + notif.friendId.userId]">
+                        <a [routerLink]="['users',notif.friendId.firstName + notif.friendId.lastName + notif.friendId.userId]">
                             {{notif.friendId.firstName}} {{notif.friendId.lastName}}
                         </a> 
                         commented in your <span><a [routerLink]="['posts',notif.postId]">post</a></span>
                         
                     </span>
                     <span *ngIf="notif.likeId && notif.postId" class="dropdown-item">
-                        <a [routerLink]="[notif.friendId.firstName + notif.friendId.lastName + notif.friendId.userId]">
+                        <a [routerLink]="['users',notif.friendId.firstName + notif.friendId.lastName + notif.friendId.userId]">
                             {{notif.friendId.firstName}} {{notif.friendId.lastName}}
                         </a> 
                         has liked your <span><a [routerLink]="['posts',notif.postId]">post</a></span>
