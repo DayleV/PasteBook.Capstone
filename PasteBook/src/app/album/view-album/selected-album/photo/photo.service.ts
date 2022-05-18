@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, catchError, Observable, of } from 'rxjs';
+import { BehaviorSubject, catchError, Observable, of, map } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { IPhoto } from './model/photo';
 import { ConfigurationService } from 'src/app/configuration/configuration.service';
@@ -38,9 +38,11 @@ export class PhotoService {
       return this.http.get<IPhoto>(`${this.apiUrl}/${id}`);
     }
   
-    addPhoto(entity: IPhoto): Observable<IPhoto> {
-      console.log(entity)
-      return this.http.post<IPhoto>(this.apiUrl, entity);
+    addPhoto(fileToUpload: File, albumId?:string){
+      const formData: FormData = new FormData();
+      formData.append('image', fileToUpload, fileToUpload.name);
+      formData.append('albumId', albumId!);
+      return this.http.post(`${this.apiUrl}/upload`, formData);
     }
 
     delete(id: number): Observable<IPhoto> {
