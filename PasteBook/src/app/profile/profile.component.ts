@@ -35,10 +35,12 @@ export class ProfileComponent implements OnInit {
   id: any;
   checker: boolean = true;
   error: boolean = false;
+  isEdit: boolean;
 
   constructor(route: ActivatedRoute, private profileService: ProfileService, 
     private router: Router, private postService: PostService, private authService: AuthService) {
       this.route = route;
+      this.isEdit = false;
   }
 
   async ngOnInit() {
@@ -52,6 +54,8 @@ export class ProfileComponent implements OnInit {
     this.profileService.getUserById(Number(this.id)).subscribe(users => {
     this.users = users;
     });
+
+    this.posts$ = this.profileService.getPostsByUserId(Number(this.id));
 
     this.allFriends = this.profileService.getFriends();
     this.profileUser = this.profileService.getUserById(this.id);
@@ -73,6 +77,7 @@ export class ProfileComponent implements OnInit {
 
   addPost(): void {
     this.post.UserId = this.user.userId;
+    console.log(this.post)
     this.profileService.addPosts(this.post).subscribe(post => this.post = post);
   }
 
@@ -145,6 +150,23 @@ export class ProfileComponent implements OnInit {
         }
       }
     }
+  }
+
+  editBlurb(): void {
+    this.isEdit = true;
+    this.ngOnInit();
+  }
+
+  saveBlurb(id: number | undefined){
+    this.profileService.updateProfile(id, this.users).subscribe(user => this.users == user);
+    this.isEdit = false;
+    this.router.navigate([`users/${this.users.firstName! + this.users.lastName! + this.users.userId}`]);
+    this.ngOnInit();
+  }
+
+  cancelBlurb(): void {
+    this.isEdit = false;
+    this.ngOnInit();
   }
 
 }

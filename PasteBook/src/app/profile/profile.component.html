@@ -51,6 +51,32 @@
       </div>
     </div>
 
+<!-- Profile Blurb -->
+<div>
+    <h5>About Me</h5>
+    <div *ngIf="!isEdit">
+        <input *ngIf="users.profileBlurb != null "
+        type="textarea" name="{{users.profileBlurb}}" 
+        placeholder="{{users.profileBlurb}}" 
+        readonly>
+        <input *ngIf="users.profileBlurb == null "
+        type="textarea" name="{{users.profileBlurb}}" 
+        placeholder="About Me" 
+        readonly>
+    </div>
+    <div *ngIf="isEdit">
+        <input type="text" [(ngModel)]="users.profileBlurb" >
+    </div>
+</div>
+<div *ngIf="checker">
+    <div *ngIf="!isEdit && user.userId == users.userId">
+        <button (click)="editBlurb()">Edit</button>
+    </div>
+    <div *ngIf="isEdit">
+        <button (click)="saveBlurb(user.userId)">Save</button>
+        <button (click)="cancelBlurb()">Cancel</button>
+    </div>
+</div>
 
 <!-- <h2>Timeline</h2>
 <div style="width: 400px; margin: auto;">

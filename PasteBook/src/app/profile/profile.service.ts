@@ -31,14 +31,6 @@ export class ProfileService {
       return this.http.get<IProfileAlbum[]>(`${this.apiUrl}profile-album/${id}`);
     }
 
-    // getFriendRequestsByUserId(id: number | undefined): Observable<IUserFriend[]> {
-    //   return this.http.get<IUserFriend[]>(`${this.apiUrl}friendrequest/${id}`);
-    // }
-
-    // getRequestById(id: number | undefined): Observable<IUser_Friends> {
-    //   return this.http.get<IUser_Friends>(`${this.apiUrl}friendrequest/${id}`);
-    // }
-
     addPosts(entity: IPost): Observable<IPost>{
       return this.http.post<IPost>(`${this.apiUrl}posts`, entity);
     }
@@ -66,6 +58,9 @@ export class ProfileService {
       return this.http.delete<IUser_Friends>(`${this.apiUrl}userfriends/${id}`);
     }
 
-    
-
+    updateProfile(id: number | undefined, entity: IUsers): Observable<IUsers> {
+      console.log(entity)
+      console.log(id)
+      return this.http.put<IUsers>(`${this.apiUrl}users/${id}`, entity);
+    }
 }
