@@ -35,7 +35,6 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.user = this.authService.getLoggedInUser()!;
-
     let str = (String(this.route.snapshot.paramMap.get('string'))).match(/\d+/);
     let id = str? str[0]: 0;
     
