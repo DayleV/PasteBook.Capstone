@@ -1,7 +1,7 @@
 import { Component, Input, NgModule, OnInit, Output, EventEmitter } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { BehaviorSubject, Observable, pipe, tap } from 'rxjs';
+import { BehaviorSubject, catchError, EMPTY, Observable, pipe, tap } from 'rxjs';
 import { AuthService } from '../security/auth.service';
 import { UserAuth } from '../security/Model/user-auth';
 import { IComment, ILike, IPost, IPostDetail, IPosts } from './Model/posts';
@@ -15,13 +15,15 @@ import { PostService } from './post.service';
 export class PostComponent implements OnInit {
 
   postDetail$!: Observable<IPostDetail>;
-  commentCount!: number | undefined;
+  likeCount!: number | undefined;
   isLiked: boolean = false;
   id! :string;
   user: UserAuth = {};
   like!: ILike;
   comment!: string;
   showComments: boolean = false;
+  error!: number;
+  errorMessage: string ='';
 
   constructor(private postService: PostService, private route: ActivatedRoute,
     private authService: AuthService) {
@@ -33,13 +35,28 @@ export class PostComponent implements OnInit {
       params => {
         this.id = params.get('id')!;
       });
+      
     this.postDetail$ = this.postService.getPostsById(this.id).pipe(
+      catchError(err => {
+        this.error = err.status;
+        this.HandleError(err.status);
+        return EMPTY;
+      }),
       tap(p => {
-        this.checkLikeStatus(p.likes!);
+        if(p)
+          this.checkLikeStatus(p.likes!);
       })
     );
   }
+  HandleError(status: number): string{
+    if(status === 404)
+      this.errorMessage = "Post Not Found";
 
+    if(status === 401)
+      this.errorMessage = "Unauthorized Access";
+
+    return this.errorMessage;
+  }
   ShowComments(){
     this.showComments = !this.showComments;
   }
@@ -59,7 +76,7 @@ export class PostComponent implements OnInit {
   }
 
   checkLikeStatus(likes: ILike[]){
-    this.commentCount = likes.length;
+    this.likeCount = likes.length;
     likes.forEach(element => {
       if(Number(element.userId) === Number(this.user.userId)){
         this.isLiked = true;

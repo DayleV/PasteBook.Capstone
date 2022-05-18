@@ -21,7 +21,6 @@ export class AuthService {
     private configService: ConfigurationService,
     private jwtHelper: JwtHelperService) { 
       this.apiUrl = this.configService.settings.apiUrl + API_ENDPOINT;
-      console.log(this.apiUrl);
     }
 
   login(login: Login): Observable<UserAuthBase>{

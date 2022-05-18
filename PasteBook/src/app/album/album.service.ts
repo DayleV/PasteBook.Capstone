@@ -25,7 +25,6 @@ export class AlbumService {
     private configService: ConfigurationService) {
 
       this.apiUrl = this.configService.settings.apiUrl + API_ENDPOINT;
-      console.log(this.apiUrl);
 
     }
 

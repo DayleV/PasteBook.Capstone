@@ -18,18 +18,15 @@ namespace PasteBook.WebApi.Controllers
     {
         private readonly IUserService userService;
         private readonly IAuthenticationService authenticationService;
-        private readonly IHttpContextAccessor httpContextAccessor;
         private readonly IMailService mailService;
         public IUnitOfWork UnitOfWork { get; private set; }
         public AuthenticationController(IUserService userService, 
             IAuthenticationService authenticationService, 
-            IHttpContextAccessor httpContextAccessor, 
             IUnitOfWork unitOfWork,
             IMailService mailService)
         {
             this.userService = userService;
             this.authenticationService = authenticationService;
-            this.httpContextAccessor = httpContextAccessor;
             this.UnitOfWork = unitOfWork;
             this.mailService = mailService;
         }
