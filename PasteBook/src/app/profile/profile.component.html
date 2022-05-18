@@ -6,6 +6,7 @@
           </div>
           <div class="col-6">
             <h2>Timeline</h2>
+            <app-post-display></app-post-display>
     <div style="width: 400px; margin: auto;">
         <div class="submit-form">
             <label for="Post">Post</label>
@@ -39,14 +40,6 @@
         <button>Add Friend</button>
     </div>
 
-    
-    <div>
-        <div *ngFor="let post of posts$ | async">
-            <p>{{post.post.postContent}}</p>
-            <p>{{post.post.postDate | date:'medium'}}</p>
-            <p>Comment: {{post.commentCount}} | Like: {{post.likeCount}}</p>
-        </div>
-    </div>
 </div>
 <ng-template #elseBlock>
     <span>User Not Found</span>
