@@ -6,13 +6,13 @@
         <button type="submit" (click)="addUserFriend()">Add Friend</button>
     </div>
     <ng-template #elseblock>
-        <div *ngIf="friends[0].requesterId != user.userId && !(friends[0].status)">
-            <button (click)="acceptFriendRequest(friends[0].userFriendId, friends[0].friendId, friends[0].userId)">Accept Friend Request</button> 
+        <div *ngIf="friends[0]?.requesterId != user.userId && !(friends[0]?.status)">
+            <button (click)="acceptFriendRequest(friends[0]?.userFriendId, friends[0]?.friendId, friends[0]?.userId)">Accept Friend Request</button> 
         </div>
-        <div *ngIf="friends[0].requesterId == user.userId">
+        <div *ngIf="friends[0]?.requesterId == user.userId">
             <button (click)="cancel(users.userId, user.userId)">Cancel Request</button> 
         </div>
-        <div *ngIf="friends[0].status">
+        <div *ngIf="friends[0]?.status">
             <button (click)="unfriend(users.userId, user.userId)">Unfriend</button>
         </div>
     </ng-template>
