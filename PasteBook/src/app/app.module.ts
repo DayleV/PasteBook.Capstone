@@ -29,6 +29,7 @@ import { NewsfeedComponent } from './home-page/newsfeed/newsfeed.component';
 import { SettingComponent } from './setting/setting.component';
 import { EditProfileInformationComponent } from './setting/edit-profile-information/edit-profile-information.component';
 import { EditAccountInformationComponent } from './setting/edit-account-information/edit-account-information.component';
+import { NotificationComponent } from './navigation-bar/notification/notification.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import { EditAccountInformationComponent } from './setting/edit-account-informat
     NewsfeedComponent,
     SettingComponent,
     EditProfileInformationComponent,
-    EditAccountInformationComponent
+    EditAccountInformationComponent,
+    NotificationComponent
   ],
   imports: [
     BrowserModule,

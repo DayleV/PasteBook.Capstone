@@ -15,7 +15,7 @@ import { PostService } from './post.service';
 export class PostComponent implements OnInit {
 
   postDetail$!: Observable<IPostDetail>;
-  commentCount!: number | undefined;
+  likeCount!: number | undefined;
   isLiked: boolean = false;
   id! :string;
   user: UserAuth = {};
@@ -35,6 +35,7 @@ export class PostComponent implements OnInit {
       params => {
         this.id = params.get('id')!;
       });
+      
     this.postDetail$ = this.postService.getPostsById(this.id).pipe(
       catchError(err => {
         this.error = err.status;
@@ -75,7 +76,7 @@ export class PostComponent implements OnInit {
   }
 
   checkLikeStatus(likes: ILike[]){
-    this.commentCount = likes.length;
+    this.likeCount = likes.length;
     likes.forEach(element => {
       if(Number(element.userId) === Number(this.user.userId)){
         this.isLiked = true;

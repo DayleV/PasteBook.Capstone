@@ -86,6 +86,9 @@ namespace PasteBook.WebApi.Controllers
                     return Unauthorized();
                 var postComments = await UnitOfWork.CommentRepository.Find(c => c.PostId == id);
                 var postLikes = await UnitOfWork.LikeRepository.Find(l => l.PostId == id);
+                var postUser = await UnitOfWork.UserRepository.FindByPrimaryKey(post.UserId);
+
+                post.User = postUser;
 
                 //Wrap Post metadata into PostDTO
                 var postData = new PostDTO

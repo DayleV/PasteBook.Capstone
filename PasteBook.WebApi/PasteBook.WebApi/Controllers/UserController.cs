@@ -73,6 +73,7 @@ namespace PasteBook.WebApi.Controllers
             }
             return NotFound();
         }
+
         [HttpPut("{id}")]
         public async Task<IActionResult> PutUser(int id, User user)
         {
