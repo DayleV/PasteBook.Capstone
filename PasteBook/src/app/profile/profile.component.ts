@@ -15,7 +15,7 @@ import { ProfileService } from './profile.service';
 export class ProfileComponent implements OnInit {
 
   user: UserAuth = {};
-
+  
   post: IPost = {
     UserId: this.user.userId,
     PostContent: ''
@@ -32,7 +32,7 @@ export class ProfileComponent implements OnInit {
     private router: Router, private postService: PostService, private authService: AuthService) {
       this.route = route;
   }
-
+  
   ngOnInit(): void {
     this.user = this.authService.getLoggedInUser()!;
     let str = (String(this.route.snapshot.paramMap.get('string'))).match(/\d+/);

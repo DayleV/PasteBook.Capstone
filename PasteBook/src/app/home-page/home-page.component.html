@@ -1,3 +1,17 @@
 <p>home-page works!</p>
-<app-newsfeed></app-newsfeed>
+<!-- <div *ngIf="!error; else elseBlock" > -->
+    <div class="container">
+        <div class="row">
+          <div class="col">
+            <app-profile-display></app-profile-display>
+          </div>
+          <div class="col-6">
+            <h2>Newsfeed</h2>
+            <app-add-post></app-add-post>
+            <app-newsfeed></app-newsfeed>
+          </div>
+          <div class="col">
+            
 <app-photo></app-photo>
+          </div>
+        </div>
