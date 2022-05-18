@@ -1,0 +1,27 @@
+@font-face {
+	font-family: "Muli-Regular";
+	src: url('../fonts/muli/Muli-Regular.ttf');
+}
+@font-face {
+	font-family: "Muli-SemiBold";
+	src: url('../fonts/muli/Muli-SemiBold.ttf');
+}
+@font-face {
+	font-family: "Muli-Bold";
+	src: url('../fonts/muli/Muli-Bold.ttf');
+}
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+body {
+	font-family: "Muli-Regular";
+	color: #666;
+	font-size: 13px;
+	margin: 0;
+}
+
+img {
+    border-radius: 50%;
+  }

@@ -5,6 +5,7 @@ using PasteBook.WebApi.Data;
 using PasteBook.WebApi.DataObjectTransfer;
 using PasteBook.WebApi.Helpers;
 using PasteBook.WebApi.Models;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -31,10 +32,17 @@ namespace PasteBook.WebApi.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetUserById(int id)
         {
-            var user = await UnitOfWork.UserRepository.FindByPrimaryKey(id);
-            if (user is object)
+            try
             {
-                return Ok(user);
+                var user = await UnitOfWork.UserRepository.FindByPrimaryKey(id);
+                if (user is object)
+                {
+                    return Ok(user);
+                }
+            }
+            catch(Exception e)
+            {
+                
             }
             return NotFound();
         }
@@ -65,6 +73,7 @@ namespace PasteBook.WebApi.Controllers
             }
             return NotFound();
         }
+
         [HttpPut("{id}")]
         public async Task<IActionResult> PutUser(int id, User user)
         {

@@ -11,27 +11,16 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link" [routerLink]="'/'+user.firstName+user.lastName+user.userId"><i class="fa-solid fa-user"></i></a>
+            <a class="nav-link" [routerLink]="'users'+'/'+user.firstName+user.lastName+user.userId"><i class="fa-solid fa-user"></i></a>
           </li>     
           <li class="nav-item">
             <a class="nav-link" [routerLink]="['/']"><i class="fa-solid fa-house"></i></a>
           </li> 
           <li>
-            <div class="dropdown">
-              <button class="btn" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
-                <i class="fa-solid fa-bell"></i>
-              </button>
-              <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
-                <li><a class="dropdown-item active" href="#">Action</a></li>
-                <li><a class="dropdown-item" href="#">Another action</a></li>
-                <li><a class="dropdown-item" href="#">Something else here</a></li>
-                <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="#">Separated link</a></li>
-              </ul>
-            </div>
+            <app-notification></app-notification>
           </li>     
           <li class="nav-item">
-            <a class="nav-link" href="#"><i class="fa-solid fa-gear"></i></a>
+            <a class="nav-link" [routerLink]="['settings']"><i class="fa-solid fa-gear"></i></a>
           </li> 
           <li class="nav-item">
             <button class="btn" type="submit" (click)="logout()"><i class="fa-solid fa-arrow-right-from-bracket"></i></button>

@@ -8,7 +8,7 @@
         <tr *ngFor="let friend of friends">
             <td>{{friend.friendId.firstName}}</td>
             <td>{{friend.friendId.lastName}}</td>
-            <a class="nav-link" [routerLink]="'/'+friend.friendId.firstName+friend.friendId.lastName+friend.friendId.userId"><i class="fa-solid fa-user"></i></a>
+            <a class="nav-link" [routerLink]="'/users'+'/'+friend.friendId.firstName+friend.friendId.lastName+friend.friendId.userId"><i class="fa-solid fa-user"></i></a>
         </tr>
     </table>
 </div>

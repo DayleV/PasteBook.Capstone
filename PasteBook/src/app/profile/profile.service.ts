@@ -13,7 +13,6 @@ export class ProfileService {
   constructor(private http: HttpClient, 
     private configService: ConfigurationService) {
       this.apiUrl = this.configService.settings.apiUrl;
-      console.log(this.apiUrl);
     }
 
     getUserById(id: number | undefined): Observable<IUsers> {

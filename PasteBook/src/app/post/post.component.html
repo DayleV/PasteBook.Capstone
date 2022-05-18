@@ -1,38 +1,58 @@
-<p>Post Details</p>
-<div *ngIf="postDetail$ | async as PostDetail">
-    <p>Post ID : {{PostDetail.post?.postId}}</p>
-    <p>User ID : {{PostDetail.post?.userId}}</p>
-    <p>Post Content : {{PostDetail.post?.postContent}}</p>
-    <p>Post Date : {{PostDetail.post?.postDate}}</p>
-    <p>like count : {{commentCount}}</p>
-    <div *ngIf="isLiked">
-        <button class="btn btn-default" type="submit" (click)="unLikePost(PostDetail.post?.postId!)">
-            <i [ngClass]="{'fa-solid fa-thumbs-up' : isLiked === true}"></i>
-        </button>
-    </div>
-    <div *ngIf="!isLiked">
-        <button class="btn btn-default" type="submit" (click)="likePost(PostDetail.post?.postId!)">
-            <i [ngClass]="{'fa-regular fa-thumbs-up' : isLiked === false}"></i>
-        </button>
-    </div>
-    <p>Add comment: (enter to add)</p>
-    <input name="comment" type="text" [(ngModel)]="comment" id="comment" placeholder="Enter Comment" (keyup.enter)="AddComment(PostDetail.post?.postId!)">
-    <button *ngIf="showComments; else elseBlock" class="btn btn-default" type="submit" (click)="ShowComments()">
-        <i  class="fa-solid fa-sort-up"></i>
-    </button>
-    <ng-template #elseBlock>
-        <button class="btn btn-default" type="submit" (click)="ShowComments()">
-            <i class="fa-solid fa-caret-down"></i>
-        </button>
-    </ng-template>
-    <div *ngIf="showComments">
-        <div *ngFor="let comment of PostDetail.comments">
-            <span>Comment ID : {{comment.commentId}}</span>
-            <span>Post ID : {{comment.postId}}</span>
-            <span>User ID : {{comment.userId}}</span>
-            <span>Comment Content : {{comment.commentContent}}</span>
-            <span>Comment Date: {{comment.commentDate}}</span>
+<div *ngIf="error > 0; else elseBlock">
+    <h1>{{errorMessage}}</h1>
+</div>
+<ng-template #elseBlock><div *ngIf="postDetail$ | async as PostDetail">
+    <!-- <p>Post ID : {{PostDetail.post?.postId}}</p>
+    <p>User ID : {{PostDetail.post?.userId}}</p> -->
+    <p>First Name : {{PostDetail.post?.user?.firstName}}</p>
+    <p>Last Name : {{PostDetail.post?.user?.lastName}}</p>
+    <div class="postBody" class="container-sm">
+        <p>Post Content : {{PostDetail.post?.postContent}}</p>
+        <div class="likeAndPost">
+            <div class="likeAndIcon">
+                <p>like count : {{likeCount}}</p>
+                <div *ngIf="isLiked">
+                    <button class="btn btn-default" type="submit" (click)="unLikePost(PostDetail.post?.postId!)">
+                        <i [ngClass]="{'fa-solid fa-thumbs-up' : isLiked === true}"></i>
+                    </button>
+                </div>
+                <div *ngIf="!isLiked">
+                    <button class="btn btn-default" type="submit" (click)="likePost(PostDetail.post?.postId!, PostDetail.post?.user?.userId!)">
+                        <i [ngClass]="{'fa-regular fa-thumbs-up' : isLiked === false}"></i>
+                    </button>
+                </div>
+            </div>
+            <p>Post Date : {{PostDetail.post?.postDate}}</p>                
         </div>
     </div>
-</div>
 
+    <div class="commentBody">       
+        <input class="commentBox" size="130" name="comment" type="text" [(ngModel)]="comment" id="comment" placeholder="Enter Comment"
+            (keyup.enter)="AddComment(PostDetail.post?.postId!, PostDetail.post?.user?.userId!)">
+        <button *ngIf="showComments; else elseBlock" class="btn btn-default" type="submit" (click)="ShowComments()">
+            <i class="fa-solid fa-sort-up"></i>
+        </button>
+        <ng-template #elseBlock>
+            <button class="btn btn-default" type="submit" (click)="ShowComments()">
+                <i class="fa-solid fa-caret-down"></i>
+            </button>
+        </ng-template>      
+        <!-- <p>Add comment: (enter to add)</p> -->
+    </div>
+    <div *ngIf="showComments" class="container-sm">
+        <div *ngFor="let comment of PostDetail.comments" class="commentContent">
+            <!-- <span>Comment ID : {{comment.commentId}}</span>
+            <span>Post ID : {{comment.postId}}</span>
+            <span>User ID : {{comment.userId}}</span> -->
+             
+            <span class="commentDate">
+                Comment Date: {{comment.commentDate}}
+            </span> 
+            <br>
+            <span >Comment Content : {{comment.commentContent}}</span>          
+        </div>
+        <br>
+        </div>
+    </div>
+
+</ng-template>

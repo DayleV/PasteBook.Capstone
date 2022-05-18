@@ -48,13 +48,14 @@ a:hover {
 	background-repeat: no-repeat;
 	display: flex;
 	align-items: center;
+	background-image: url('../images/bg-registration-form-2.jpg');
 }
 .inner {
 	min-width: 850px;
 	margin: auto;
 	padding-top: 68px;
 	padding-bottom: 48px;
-	background: url('../images/registration-form-2.jpg');
+	background-image: url('../images/registration-form-2.jpg');
 	h3 {
 		text-transform: uppercase;
 		font-size: 22px;
@@ -98,15 +99,15 @@ form {
 		border: 1px solid #ae3c33;
 	}
 }
-select {
-	-moz-appearance: none;
-    -webkit-appearance: none;
-    cursor: pointer;
-    padding-left: 20px;
- 	option[value=""][disabled] {
- 		display: none;
- 	}
-}
+// select {
+// 	-moz-appearance: none;
+//     -webkit-appearance: none;
+//     cursor: pointer;
+//     padding-left: 20px;
+//  	option[value=""][disabled] {
+//  		display: none;
+//  	}
+// }
 button {
 	border: none;
 	width: 152px;
@@ -162,44 +163,44 @@ button {
 		}
 	}
 }
-.checkbox {
-	position: relative;
-	label {
-		padding-left: 22px;
-		cursor: pointer;
-	}
-	input {
-		position: absolute;
-	    opacity: 0;
-	    cursor: pointer;
-	}
-	input:checked ~ .checkmark:after {
-		display: block;
-	}
-}
-.checkmark {
-	position: absolute;
-    top: 50%;
-    left: 0;
-    transform: translateY(-50%);
-    height: 12px;
-    width: 13px;
-    border-radius: 2px;
-    background-color: #ebebeb;
-    border: 1px solid #ccc;
-    font-family: Material-Design-Iconic-Font;
-    color: #000;
-    font-size: 10px;
-    font-weight: bolder;
-	&:after {
-	    position: absolute;
-	    top: 50%;
-	    left: 50%;
-	    transform: translate(-50%,-50%);
-	    display: none;
-	    content: '\f26b';
-	}
-}
+// .checkbox {
+// 	position: relative;
+// 	label {
+// 		padding-left: 22px;
+// 		cursor: pointer;
+// 	}
+// 	input {
+// 		position: absolute;
+// 	    opacity: 0;
+// 	    cursor: pointer;
+// 	}
+// 	input:checked ~ .checkmark:after {
+// 		display: block;
+// 	}
+// }
+// .checkmark {
+// 	position: absolute;
+//     top: 50%;
+//     left: 0;
+//     transform: translateY(-50%);
+//     height: 12px;
+//     width: 13px;
+//     border-radius: 2px;
+//     background-color: #ebebeb;
+//     border: 1px solid #ccc;
+//     font-family: Material-Design-Iconic-Font;
+//     color: #000;
+//     font-size: 10px;
+//     font-weight: bolder;
+// 	&:after {
+// 	    position: absolute;
+// 	    top: 50%;
+// 	    left: 50%;
+// 	    transform: translate(-50%,-50%);
+// 	    display: none;
+// 	    content: '\f26b';
+// 	}
+// }
 
 @media (max-width: 1199px) { 
 	

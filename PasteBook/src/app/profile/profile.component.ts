@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { combineLatest, map, Observable } from 'rxjs';
+import { catchError, EMPTY } from 'rxjs';
 import { PostService } from '../post/post.service';
 import { AuthService } from '../security/auth.service';
 import { UserAuth } from '../security/Model/user-auth';
@@ -35,6 +36,7 @@ export class ProfileComponent implements OnInit {
   route: ActivatedRoute;
   id: any;
   checker: boolean = true;
+  error: boolean = false;
 
   constructor(route: ActivatedRoute, private profileService: ProfileService, 
     private router: Router, private postService: PostService, private authService: AuthService) {

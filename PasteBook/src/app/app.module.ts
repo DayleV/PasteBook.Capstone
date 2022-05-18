@@ -29,6 +29,10 @@ import { NewsfeedComponent } from './home-page/newsfeed/newsfeed.component';
 import { SettingComponent } from './setting/setting.component';
 import { EditProfileInformationComponent } from './setting/edit-profile-information/edit-profile-information.component';
 import { EditAccountInformationComponent } from './setting/edit-account-information/edit-account-information.component';
+import { NotificationComponent } from './navigation-bar/notification/notification.component';
+import { ProfileDisplayComponent } from './profile-display/profile-display.component';
+import { PostDisplayComponent } from './post-display/post-display.component';
+import { AddPostComponent } from './add-post/add-post.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +55,11 @@ import { EditAccountInformationComponent } from './setting/edit-account-informat
     NewsfeedComponent,
     SettingComponent,
     EditProfileInformationComponent,
-    EditAccountInformationComponent
+    EditAccountInformationComponent,
+    NotificationComponent,
+    ProfileDisplayComponent,
+    PostDisplayComponent,
+    AddPostComponent
   ],
   imports: [
     BrowserModule,
