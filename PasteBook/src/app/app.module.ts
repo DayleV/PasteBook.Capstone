@@ -30,6 +30,7 @@ import { SettingComponent } from './setting/setting.component';
 import { EditProfileInformationComponent } from './setting/edit-profile-information/edit-profile-information.component';
 import { EditAccountInformationComponent } from './setting/edit-account-information/edit-account-information.component';
 import { NotificationComponent } from './navigation-bar/notification/notification.component';
+import { ProfileDisplayComponent } from './profile-display/profile-display.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import { NotificationComponent } from './navigation-bar/notification/notificatio
     SettingComponent,
     EditProfileInformationComponent,
     EditAccountInformationComponent,
-    NotificationComponent
+    NotificationComponent,
+    ProfileDisplayComponent
   ],
   imports: [
     BrowserModule,
