@@ -17,7 +17,7 @@
                     </button>
                 </div>
                 <div *ngIf="!isLiked">
-                    <button class="btn btn-default" type="submit" (click)="likePost(PostDetail.post?.postId!)">
+                    <button class="btn btn-default" type="submit" (click)="likePost(PostDetail.post?.postId!, PostDetail.post?.user?.userId!)">
                         <i [ngClass]="{'fa-regular fa-thumbs-up' : isLiked === false}"></i>
                     </button>
                 </div>
@@ -28,7 +28,7 @@
 
     <div class="commentBody">       
         <input class="commentBox" size="130" name="comment" type="text" [(ngModel)]="comment" id="comment" placeholder="Enter Comment"
-            (keyup.enter)="AddComment(PostDetail.post?.postId!)">
+            (keyup.enter)="AddComment(PostDetail.post?.postId!, PostDetail.post?.user?.userId!)">
         <button *ngIf="showComments; else elseBlock" class="btn btn-default" type="submit" (click)="ShowComments()">
             <i class="fa-solid fa-sort-up"></i>
         </button>
