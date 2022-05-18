@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs';
 import { AlbumService } from 'src/app/album/album.service';
 import { ConfigurationService } from 'src/app/configuration/configuration.service';
 import { IPhoto } from './model/photo';
@@ -20,6 +21,7 @@ export class PhotoComponent implements OnInit {
   selectedFile: File | null = null;
   serverResponse:string = '';
   apiUrl: string = "";
+  photoList$!:Observable<IPhoto[]>;
   // newPhoto: IPhoto = {
   //   albumId: 0,
   //   Image: null
@@ -36,6 +38,7 @@ export class PhotoComponent implements OnInit {
     //to assign current album page to albumId
     this.currentAlbumId = this.route.snapshot.paramMap.get('id')!;
     this.albumId = this.currentAlbumId;
+    this.photoList$ = this.photoService.getPhotosByAlbumId(this.albumId);
     //this.newPhoto.albumId = Number(this.currentAlbumId);
     // this.uploadPhotoForm.controls['albumId'].setValue(this.currentAlbumId);
   }

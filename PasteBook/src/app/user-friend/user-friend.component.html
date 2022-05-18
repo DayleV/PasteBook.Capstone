@@ -1,14 +1,24 @@
 <p>user-friend works!</p>
-<p>Logged In User: {{loggedInUser.firstName}}</p>
-<input name="search" type="text" [(ngModel)]="search" id="search" placeholder="Search Friends" (keyup)="EmitSearch()">
-{{search}}
-<p>List of Friends</p>
-<div *ngIf="userFriends$ | async as friends">
-    <table>
-        <tr *ngFor="let friend of friends">
-            <td>{{friend.friendId.firstName}}</td>
-            <td>{{friend.friendId.lastName}}</td>
-            <a class="nav-link" [routerLink]="'/users'+'/'+friend.friendId.firstName+friend.friendId.lastName+friend.friendId.userId"><i class="fa-solid fa-user"></i></a>
-        </tr>
-    </table>
+<div class="container">
+    <h3>Logged In User: {{loggedInUser.firstName}}</h3>
+    <div id="searchFriendsBody">
+        <input name="search" type="text" [(ngModel)]="search" id="search" placeholder="Search Friends list"
+            (keyup)="EmitSearch()">
+        <i class='fas fa-search'></i>
+        {{search}}
+        <div id="listOfFriendsBody">
+            <h6>List of Friends</h6>
+            <div *ngIf="userFriends$ | async as friends">
+                <table>
+                    <tr *ngFor="let friend of friends">
+                        <td>{{friend.friendId.firstName}}</td>
+                        <td>{{friend.friendId.lastName}}</td>
+                        <a class="nav-link"
+                            [routerLink]="'/users'+'/'+friend.friendId.firstName+friend.friendId.lastName+friend.friendId.userId"><i
+                                class="fa-solid fa-user"></i></a>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
 </div>

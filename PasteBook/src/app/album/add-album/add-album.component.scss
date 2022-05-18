@@ -1,6 +1,14 @@
+#title{
+    padding-top: 20px;
+}
+
+
 #addAlbumBody{
-    padding: 20px;
+    padding-top: 30px;
     border-top: 2px solid black;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
 
     input{
         border-radius: 15px;
@@ -9,8 +17,13 @@
 
 #albumDescriptionTextbox{
     height: 60px;
+    width: 400px;
 }
 
 #createNewAlbum{
     font-weight: bold;
+}
+
+#albumNameAndDescriptionBody{
+    padding-left: 40px;
 }
