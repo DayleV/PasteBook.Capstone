@@ -77,6 +77,9 @@ namespace PasteBook.WebApi
 
             app.UseHttpsRedirection();
 
+            //To Allow Use of wwwroot folder from Angular
+            app.UseStaticFiles();
+
             app.UseRouting();
 
             app.UseAuthorization();
