@@ -1,4 +1,7 @@
 <p>upload photo works!</p>
+<div class="albumphotos" *ngFor="let photos of photoList$ | async; index as i">
+    <img [src]="apiUrl + photos.image" width="200" height="200">
+</div>
 <div class="container">
         <div class="form-group">
             <label for="file">Choose file</label>   
@@ -8,5 +11,4 @@
         </div>
         <h2>SAMPLE IMAGE</h2>
         <img [src]="apiUrl">
-        <img src="https://localhost:44368/Images/Image_202205181532041.png">
 </div>

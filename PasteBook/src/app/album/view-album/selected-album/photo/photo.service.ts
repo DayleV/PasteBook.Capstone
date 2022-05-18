@@ -44,6 +44,10 @@ export class PhotoService {
       return this.http.post(`${this.apiUrl}/upload`, formData);
     }
 
+    getPhotosByAlbumId(albumId:string): Observable<IPhoto[]>{
+      return this.http.get<IPhoto[]>(`${this.apiUrl}/byAlbum/${albumId}`);
+    }
+
     delete(id: number): Observable<IPhoto> {
       return this.http.delete<IPhoto>(`${this.apiUrl}/${id}`);
     }

@@ -1,1 +1,18 @@
 <p>display-friends works!</p>
+
+<div class="container">
+    <h3>{{loggedInUser.firstName}}'s Friends</h3>
+
+    <div *ngIf="userFriends$ | async as friends ">
+        <table>
+            <tr *ngFor="let friend of friends">
+                <td>{{friend.friendId.firstName}}</td>
+                <td>{{friend.friendId.lastName}}</td>
+                <a class="nav-link"
+                    [routerLink]="'/users'+'/'+friend.friendId.firstName+friend.friendId.lastName+friend.friendId.userId"><i
+                        class="fa-solid fa-user"></i></a>
+            </tr>
+        </table>
+    </div>
+
+</div>

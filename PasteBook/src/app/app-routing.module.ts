@@ -39,7 +39,7 @@ const routes: Routes = [
   {
     path: 'posts/:id', component: PostComponent
   },
-  {path: 'users/:string', component: ProfileComponent},
+  {path: ':string', component: ProfileComponent},
   {path: 'settings', component: SettingComponent}
 ];
 

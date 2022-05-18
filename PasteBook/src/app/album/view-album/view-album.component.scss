@@ -1,0 +1,32 @@
+#title{
+    padding-top: 20px;
+}
+
+#createNewAlbum{
+    text-decoration: none;
+    color: black;
+    &:hover{
+        font-weight: bold;
+    }
+}
+
+#editAlbumList{
+    text-decoration: none;
+    color: black;
+    &:hover{
+        font-weight: bold;
+    }
+}
+
+#albumBody{
+    border-top: 2px solid black;
+    padding: 20px;
+}
+
+#albumName{
+    text-decoration: none;
+    color: black;
+    &:hover{
+        color:rgb(70, 69, 69);
+    }
+}
