@@ -16,7 +16,7 @@ import { ProfileService } from './profile.service';
 export class ProfileComponent implements OnInit {
 
   user: UserAuth = {};
-
+  
   post: IPost = {
     UserId: this.user.userId,
     PostContent: ''

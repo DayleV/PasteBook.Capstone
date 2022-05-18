@@ -1,1 +1,14 @@
-<p>add-post works!</p>
+
+    <div class="submit-form form-group" >
+        <input
+        style="display: inline"
+        type="text"
+        class="form-control form-wrapper"
+        id="title"
+        required
+        placeholder="Post.."
+        [(ngModel)]="post.PostContent"
+        name="Description"
+        />
+        <button (click)="addPost()" class="btn btn-success">Post</button>
+    </div>
