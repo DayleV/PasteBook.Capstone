@@ -47,7 +47,7 @@ namespace PasteBook.WebApi.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutUser(int id)
+        public async Task<IActionResult> PutNotification(int id)
         {
             try
             {
