@@ -6,13 +6,11 @@ namespace PasteBook.WebApi.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AlterColumn<int>(
+            migrationBuilder.AddColumn<int>(
                 name: "RequesterId",
                 table: "UserFriends",
                 type: "int",
-                nullable: false,
-                oldClrType: typeof(bool),
-                oldType: "bit");
+                nullable: false);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
