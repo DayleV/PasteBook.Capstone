@@ -1,19 +1,23 @@
 <div class="container">
-  <h3>My Albums</h3>
+  <h3 id="title">My Albums</h3>
   <p>
     <span id="createNewAlbum">Create New Album</span> | <span id="editAlbumList">Edit Album List</span>
   </p>
   <div id="addAlbumBody">
-    <div class="form-group">
-      <label for="title">Album Name</label>
-      <input type="text" class="form-control" id="albumNameTextbox" required [(ngModel)]="album.AlbumName" name="albumName" />
+    <i id="createAlbumThumbnail" class="fas fa-images fa-10x"></i>
+    <div id="albumNameAndDescriptionBody">
+      <div class="form-group">
+        <label for="title">Album Name</label>
+        <input type="text" class="form-control" id="albumNameTextbox" required [(ngModel)]="album.AlbumName"
+          name="albumName" />
+      </div>
+      <div>
+        <label for="Description">Album Description</label>
+        <input type="textfield" class="form-control" id="albumDescriptionTextbox" required
+          [(ngModel)]="album.AlbumDescription" name="Description" />
+      </div>
+      <br>
+      <button (click)="addAlbum()" class="btn btn-success">Add Album</button>
     </div>
-    <div>
-      <label for="Description">Album Description</label>
-      <input type="textfield" class="form-control" id="albumDescriptionTextbox" required [(ngModel)]="album.AlbumDescription"
-        name="Description" />
-    </div>
-    <br>
-    <button (click)="addAlbum()" class="btn btn-success">Add Album</button>
   </div>
 </div>
