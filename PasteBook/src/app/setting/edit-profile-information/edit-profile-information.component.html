@@ -1,31 +1,29 @@
-<p>edit-profile-information works!</p>
+<div class="container">
+    <h3>Personal Information</h3>
+    <div *ngIf="message" class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>Success!</strong> User Updated
+        <button (click)="removeMessage()" type="button" data-bs-dismiss="alert" aria-label="Close">X</button>
+    </div>
+    <form [formGroup]="editUser" (ngSubmit)="UpdateData()">
+        <div class="row g-3" id="personalInfoBody">
+            <div class="col-md-3">
+                <label class="form-label">First Name</label>
+                <input type="text" class="form-control" placeholder="Enter First Name" formControlName="firstName">
 
-{{editUser.value | json}}
-<h3>Update User</h3>
-<div *ngIf="message" class="alert alert-success alert-dismissible fade show" role="alert">
-    <strong>Success!</strong> User Updated
-    <button (click)="removeMessage()" type="button" data-bs-dismiss="alert" aria-label="Close">X</button>
+                <label class="form-label">Last Name</label>
+                <input type="text" class="form-control" placeholder="Enter Last Name" formControlName="lastName">
+
+                <label class="form-label">Birthdate</label>
+                <input type="date" class="form-control" placeholder="Enter Birth Date" formControlName="birthDate">
+
+                <label class="form-label">Gender</label>
+                <input type="text" class="form-control" placeholder="Enter Gender" formControlName="gender">
+
+                <label class="form-label">Mobile Number</label>
+                <input type="text" class="form-control" placeholder="Enter Mobile Number"
+                    formControlName="mobileNumber">
+            </div>
+        </div>
+        <button type="submit" id="updateButton" class="btn btn-primary">Update</button>
+    </form>
 </div>
-<form [formGroup]="editUser" (ngSubmit)="UpdateData()">
-    <div class="mb-3">
-        <label class="form-label">First Name</label>
-        <input type="text" class="form-control" placeholder="Enter First Name" formControlName="firstName">
-    </div>
-    <div class="mb-3">
-        <label class="form-label">Last Name</label>
-        <input type="text" class="form-control" placeholder="Enter Last Name" formControlName="lastName">
-    </div>
-    <div class="mb-3">
-        <label class="form-label">Birthdate</label>
-        <input type="datetime" class="form-control" placeholder="Enter Birth Date" formControlName="birthDate">
-    </div>
-    <div class="mb-3">
-        <label class="form-label">Gender</label>
-        <input type="text" class="form-control" placeholder="Enter Gender" formControlName="gender">
-    </div>
-    <div class="mb-3">
-        <label class="form-label">Mobile Number</label>
-        <input type="text" class="form-control" placeholder="Enter Mobile Number" formControlName="mobileNumber">
-    </div>
-    <button type="submit" class="btn btn-primary">Update</button>
-</form>
