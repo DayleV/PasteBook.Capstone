@@ -23,7 +23,8 @@ export class ProfileDisplayComponent implements OnInit {
   error: boolean = false;
 
   constructor(route: ActivatedRoute, private profileDisplayService: ProfileDisplayService, 
-    private router: Router, private postService: PostService, private authService: AuthService, private userService: UserService) {
+    private router: Router, private postService: PostService, private authService: AuthService, 
+    private userService: UserService) {
       this.route = route;
   }
 

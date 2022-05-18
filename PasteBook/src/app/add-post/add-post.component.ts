@@ -6,6 +6,7 @@ import { UserAuth } from '../security/Model/user-auth';
 import { IPost } from './model/add-post';
 import { IUsers } from '../profile-display/model/profile-display';
 import { AddPostService } from './add-post.service';
+import { catchError, EMPTY } from 'rxjs';
 
 
 @Component({
@@ -34,30 +35,28 @@ export class AddPostComponent implements OnInit {
 
   ngOnInit(): void {
     this.user = this.authService.getLoggedInUser()!;
-    // let str = (String(this.route.snapshot.paramMap.get('string'))).match(/\d+/);
-    // let id = str? str[0]: 0;
-    
-    // this.profileService.getUserById(Number(id)).pipe(
-    //   catchError(err => {
-    //     if(Number(err.status) === 404){
-    //       this.error = true;
-    //     }
-    //     return EMPTY
-    //   })
-    // ).subscribe(users => {
-    // this.users = users;
-    // });
-    
 
-    // if(id != this.user.userId){
-    //   this.checker = false;
-    // }
+    let str = (String(this.route.snapshot.paramMap.get('string'))).match(/\d+/);
+    let id = str? str[0]: 0;
+    
+    this.addPostService.getUserById(Number(id)).pipe(
+      catchError(err => {
+        if(Number(err.status) === 404){
+          this.error = true;
+        }
+        return EMPTY
+      })
+    ).subscribe(users => {
+    this.users = users;
+    });
+
+    if(id != this.user.userId){
+      this.checker = false;
+    }
   }
-
   addPost(): void {
     this.post.UserId = this.user.userId;
     this.addPostService.addPosts(this.post).subscribe(post => this.post = post);
-    this.ngOnInit();
   }
 
 }

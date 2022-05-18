@@ -71,10 +71,10 @@ export class ProfileComponent implements OnInit {
         }
   }
 
-  // addPost(): void {
-  //   this.post.UserId = this.user.userId;
-  //   this.profileService.addPosts(this.post).subscribe(post => this.post = post);
-  // }
+  addPost(): void {
+    this.post.UserId = this.user.userId;
+    this.profileService.addPosts(this.post).subscribe(post => this.post = post);
+  }
 
   userFriend: IUser_Friends = {
     userId: this.user.userId,
