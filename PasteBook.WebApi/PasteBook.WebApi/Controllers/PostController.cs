@@ -115,9 +115,9 @@ namespace PasteBook.WebApi.Controllers
         {
             if (ModelState.IsValid)
             {
+                post.PostDate = DateTime.Now;
                 var newPost = await UnitOfWork.PostRepository.Insert(post);
                 await UnitOfWork.CommitAsync();
-
                 return StatusCode(StatusCodes.Status201Created, newPost);
             }
 
