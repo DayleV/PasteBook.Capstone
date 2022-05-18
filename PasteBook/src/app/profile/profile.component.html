@@ -1,5 +1,4 @@
 <h4>{{users.firstName}} {{users.lastName}} </h4>
-{{filterFriend | async | json}}
 <br>
 <div *ngIf="filterFriend | async as friends">
     <div *ngIf="friends.length === 0 && user.userId != users.userId; else elseblock">
