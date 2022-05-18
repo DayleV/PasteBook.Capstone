@@ -66,15 +66,14 @@ namespace PasteBook.WebApi.Controllers
             return Ok(images);
         }
 
-        [HttpGet("{albumId}")]
+        [HttpGet("byAlbum/{albumId}")]
         public async Task<IActionResult> GetImagesByAlbumId(int albumId)
         {
-            List<string> photos = new List<string>();
+            List<Photo> photos = new List<Photo>();
             var albumPhotos = await this.UnitOfWork.PhotoRepository.Find(p => p.AlbumId == albumId);
             foreach (Photo photo in albumPhotos)
             {
-                string photoUrl = photo.Image;
-                photos.Add(photoUrl);
+                photos.Add(photo);
             }
             return Ok(photos);
         }

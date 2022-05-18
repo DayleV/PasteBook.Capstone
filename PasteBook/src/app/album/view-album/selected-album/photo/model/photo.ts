@@ -1,4 +1,6 @@
 export interface IPhoto{
+    photoId? : number,
     albumId?: number,
-    Image?: File | null
+    image: string,
+    dateTime: Date;
 }
