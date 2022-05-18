@@ -2,84 +2,24 @@
 {{filterFriend | async | json}}
 <br>
 <div *ngIf="filterFriend | async as friends">
-    <div *ngIf="friends.length === 0; else elseblock">
+    <div *ngIf="friends.length === 0 && user.userId != users.userId; else elseblock">
         <button type="submit" (click)="addUserFriend()">Add Friend</button>
     </div>
     <ng-template #elseblock>
-        <div *ngIf="friends[0].requesterId == user.userId">
-            cancel request
+        <div *ngIf="friends[0].requesterId != user.userId && !(friends[0].status)">
+            <button (click)="acceptFriendRequest(friends[0].userFriendId, friends[0].friendId, friends[0].userId)">Accept Friend Request</button> 
         </div>
-        <div *ngIf="friends[0].requesterId != user.userId">
-            accept request
+        <div *ngIf="friends[0].requesterId == user.userId">
+            <button (click)="cancel(users.userId, user.userId)">Cancel Request</button> 
+        </div>
+        <div *ngIf="friends[0].status">
+            <button (click)="unfriend(users.userId, user.userId)">Unfriend</button>
         </div>
     </ng-template>
 </div>
 
 
-<!-- <div>
-    <h4>{{users.firstName}} {{users.lastName}} </h4>
-</div>
-
-{{filterFriend | async | json}}
-<br>
-
-<button *ngIf="!checker && !((filterFriend | async)?.length)" (click)="addUserFriend()">Add Friend</button>
-
-<div *ngFor="let friend of filterFriend | async">
-    <button 
-        *ngIf="!(friend.status) && friend.friendId != user.userId && friend.userId == users.userId" 
-        (click)="acceptFriendRequest(friend.userFriendId, friend.friendId, friend.userId)">
-        Accept Friend Request
-    </button>
-    <button 
-        *ngIf="!(friend.status) && friend.userId == user.userId" 
-        (click)="cancel(users.userId, user.userId)">
-        Cancel Pending Request
-    </button>
-    <button 
-        *ngIf="(friend.status)" 
-        (click)="unfriend(users.userId, user.userId)">
-        Unfriend
-    </button>
-</div> -->
-
-
-<!-- <div *ngIf="!checker">
-    <div *ngFor="let friend of filterFriend | async">
-        <button 
-            *ngIf="friend.friendId == user.userId && friend.userId == users.userId && !(friend.status)" 
-            (click)="acceptFriendRequest(request.userFriendId, request.friendId, request.userId)">
-            Accept Friend Request
-        </button>
-        <button 
-            *ngIf="request.friendId == user.userId && request.userId == users.userId && !(request.status)" 
-            (click)="cancelFriendRequest(request.userFriendId)">
-            Cancel Friend Request
-        </button>
-    </div>
-</div> -->
-
-<!-- 
-<div *ngIf="!checker && ((userFriend$ | async)?.length)">
-    <div *ngFor="let friend of userFriend$ | async">
-        <div *ngIf="friend.userFriend.friendId == users.userId || checker">
-            <button 
-                *ngIf="!(friend.userFriend.status)" 
-                (click)="cancel(friend.userFriend.userFriendId)">
-                Cancel Pending Request
-            </button>
-            <button 
-                *ngIf="(friend.userFriend.status) && friend.userFriend.userId == user.userId && friend.userFriend.friendId == users.userId" 
-                (click)="unfriend(users.userId, user.userId)">
-                Unfriend
-            </button>
-        </div>
-    </div>
-</div> -->
-
-
-
-<!-- <h2>Timeline</h2>
+<h2>Timeline</h2>
 <div style="width: 400px; margin: auto;">
     <div class="submit-form">
         <label for="Post">Post</label>
@@ -92,9 +32,10 @@
         name="Description"
         />
     </div>
-</div> -->
+    <button>Add Post</button>
+</div>
 
-<!-- <div>
+<div>
     <a href="{{users.firstName! + users.lastName! + users.userId}}/albums">My Albums</a>
     <div *ngFor="let album of albums$ | async">
         <div>
@@ -109,7 +50,7 @@
         <p>{{post.post.postDate | date:'medium'}}</p>
         <p>Comment: {{post.commentCount}} | Like: {{post.likeCount}}</p>
     </div>
-</div> -->
+</div>
 
 
 

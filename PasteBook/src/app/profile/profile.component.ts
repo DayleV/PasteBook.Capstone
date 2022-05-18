@@ -26,10 +26,8 @@ export class ProfileComponent implements OnInit {
   allFriends!: Observable<IUser_Friends[]> | undefined;
   filterFriend: Observable<any> | undefined;
 
-  // posts$!: Observable<IProfilePosts[]>;
-  // albums$!: Observable<IProfileAlbum[]>;
-  //userFriend$!: Observable<IUser_Friends[]>;
-  // getAllRequest$!: Observable<IUser_Friends[]>;
+  posts$!: Observable<IProfilePosts[]>;
+  albums$!: Observable<IProfileAlbum[]>;
   getAllRequest!: IUser_Friends[];
 
   users: IUsers | any = [];
@@ -45,6 +43,8 @@ export class ProfileComponent implements OnInit {
 
   async ngOnInit() {
     this.user = this.authService.getLoggedInUser()!;
+    this.posts$ = this.profileService.getPostsByUserId(Number(this.id));
+    this.albums$ = this.profileService.getAlbumsByUserId(Number(this.id));
 
     var str = (String(this.route.snapshot.paramMap.get('string'))).match(/\d+/);
     this.id = str? str[0]: 0;
@@ -71,32 +71,10 @@ export class ProfileComponent implements OnInit {
         }
   }
 
-    
-    
-    // this.posts$ = this.profileService.getPostsByUserId(Number(this.id));
-    // this.albums$ = this.profileService.getAlbumsByUserId(Number(this.id));
-
-  //   // login profile
-  //   this.userFriend$ = this.profileService.getFriendRequestsByUserId(Number(this.user.userId));
-
-  //   //per profile
-  //   this.userFriendd$ = this.profileService.getFriendRequestsByUserId(Number(this.id));
-
-  //   //all request
-  //   this.getAllRequest$ = this.profileService.getAllRequest();
-
-
-  //   this.profileService.getAllRequest().subscribe(response => this.getAllRequest = response);
-
-  //   if(this.id != this.user.userId){
-  //     this.checker = false;
-  //   }
+  // addPost(): void {
+  //   this.post.UserId = this.user.userId;
+  //   this.profileService.addPosts(this.post).subscribe(post => this.post = post);
   // }
-
-  addPost(): void {
-    this.post.UserId = this.user.userId;
-    this.profileService.addPosts(this.post).subscribe(post => this.post = post);
-  }
 
   userFriend: IUser_Friends = {
     userId: this.user.userId,
@@ -157,13 +135,6 @@ export class ProfileComponent implements OnInit {
     }
   }
 
-  // cancelFriendRequest(id: number | undefined): void {
-  //   this.profileService.delete(id).subscribe(userFriend => 
-  //     {this.userFriend = userFriend
-  //       this.ngOnInit();
-  // });
-  // }
-
   unfriend(friendId: number | undefined, userId: number | undefined): void {
     for (let request of this.getAllRequest){
       if(request.friendId == friendId || request.friendId == userId){
@@ -175,4 +146,5 @@ export class ProfileComponent implements OnInit {
       }
     }
   }
+
 }
