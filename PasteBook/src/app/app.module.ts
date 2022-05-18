@@ -31,6 +31,8 @@ import { EditProfileInformationComponent } from './setting/edit-profile-informat
 import { EditAccountInformationComponent } from './setting/edit-account-information/edit-account-information.component';
 import { NotificationComponent } from './navigation-bar/notification/notification.component';
 import { ProfileDisplayComponent } from './profile-display/profile-display.component';
+import { PostDisplayComponent } from './post-display/post-display.component';
+import { AddPostComponent } from './add-post/add-post.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +57,9 @@ import { ProfileDisplayComponent } from './profile-display/profile-display.compo
     EditProfileInformationComponent,
     EditAccountInformationComponent,
     NotificationComponent,
-    ProfileDisplayComponent
+    ProfileDisplayComponent,
+    PostDisplayComponent,
+    AddPostComponent
   ],
   imports: [
     BrowserModule,

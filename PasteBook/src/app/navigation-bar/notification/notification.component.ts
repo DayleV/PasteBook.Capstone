@@ -32,7 +32,7 @@ export class NotificationComponent implements OnInit {
       map(([notifs, users]) => notifs.map(notifs => ({
         ...notifs,
         friendId: users.find(u => notifs.friendId === u.userId)
-      })).filter(n => n.notifReadStatus === false))
+      })).filter(n => n.notifReadStatus === false && n.userId === Number(this.loggedInUser.userId)))
     );
   }
 

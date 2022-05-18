@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, EMPTY, Observable, of } from 'rxjs';
+import { Observable} from 'rxjs';
 import { ConfigurationService } from '../configuration/configuration.service';
 import { IProfileAlbum, IPost, IProfilePosts, IUsers } from './model/profile';
 

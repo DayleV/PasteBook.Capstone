@@ -2,6 +2,7 @@ import { Component, Input, NgModule, OnInit, Output, EventEmitter } from '@angul
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { BehaviorSubject, catchError, EMPTY, Observable, pipe, tap } from 'rxjs';
+import { NotificationService } from '../navigation-bar/notification/notification.service';
 import { AuthService } from '../security/auth.service';
 import { UserAuth } from '../security/Model/user-auth';
 import { IComment, ILike, IPost, IPostDetail, IPosts } from './Model/posts';
@@ -26,7 +27,7 @@ export class PostComponent implements OnInit {
   errorMessage: string ='';
 
   constructor(private postService: PostService, private route: ActivatedRoute,
-    private authService: AuthService) {
+    private authService: AuthService, private notifService: NotificationService) {
   }
 
   ngOnInit(): void {      
@@ -61,7 +62,7 @@ export class PostComponent implements OnInit {
     this.showComments = !this.showComments;
   }
 
-  AddComment(postId: number){
+  AddComment(postId: number, postUserId: number){
     if(this.comment){
       let newComment: IComment = {
         postId: Number(postId),
@@ -70,7 +71,12 @@ export class PostComponent implements OnInit {
         commentDate: new Date().toLocaleString()
       }
       this.postService.addComment(newComment).subscribe(
-        respone => this.ngOnInit()
+        respone => {
+          if(Number(this.user.userId != postUserId)){
+            this.notifService.CreateCommentNotif(Number(this.user.userId),Number(postId), Number(respone.commentId))
+          }
+          this.ngOnInit()
+        }
       );
     }
   }
@@ -84,7 +90,7 @@ export class PostComponent implements OnInit {
     });
   }
 
-  likePost(postId: number){
+  likePost(postId: number, postUserId: number){
     let newLike: ILike = {
       userId: Number(this.user.userId),
       postId: postId
@@ -92,7 +98,10 @@ export class PostComponent implements OnInit {
     this.postService.likePost(newLike).subscribe(
       respone => {
         this.isLiked = true;
-        this.ngOnInit()
+        if(Number(this.user.userId != postUserId)){
+          this.notifService.CreateLikeNotif(Number(this.user.userId),Number(postId), Number(respone.likeId))
+        }
+        this.ngOnInit();
       }
     );
   }
