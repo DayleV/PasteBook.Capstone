@@ -36,3 +36,21 @@ export interface IUsers {
     mobileNumber?: string;
     profileBlurb?: string;
 }
+
+export interface IUserFriend {
+    userFriend: {
+        userFriendId?: number;
+        userId?: number | undefined;
+        friendId: number | undefined;
+        status?: boolean
+    }
+    
+}
+
+export interface IUser_Friends {
+    userFriendId?: number,
+    userId?: number | undefined;
+    friendId?: number | undefined;
+    requesterId?: number | undefined;
+    status?: boolean;
+}

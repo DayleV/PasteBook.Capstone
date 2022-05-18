@@ -31,6 +31,8 @@ import { EditProfileInformationComponent } from './setting/edit-profile-informat
 import { EditAccountInformationComponent } from './setting/edit-account-information/edit-account-information.component';
 import { NotificationComponent } from './navigation-bar/notification/notification.component';
 import { ProfileDisplayComponent } from './profile-display/profile-display.component';
+import { DisplayAlbumComponent } from './display-album/display-album.component';
+import { DisplayFriendsComponent } from './display-friends/display-friends.component';
 import { PostDisplayComponent } from './post-display/post-display.component';
 import { AddPostComponent } from './add-post/add-post.component';
 
@@ -58,6 +60,8 @@ import { AddPostComponent } from './add-post/add-post.component';
     EditAccountInformationComponent,
     NotificationComponent,
     ProfileDisplayComponent,
+    DisplayAlbumComponent,
+    DisplayFriendsComponent,
     PostDisplayComponent,
     AddPostComponent
   ],

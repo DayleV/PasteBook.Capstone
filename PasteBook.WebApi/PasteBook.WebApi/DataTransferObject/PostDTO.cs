@@ -21,4 +21,9 @@ namespace PasteBook.WebApi.DataTransferObject
     {
         public Album Album { get; set; }
     }
+
+    public class FriendRequest
+    {
+        public UserFriend UserFriend { get; set; }
+    }
 }

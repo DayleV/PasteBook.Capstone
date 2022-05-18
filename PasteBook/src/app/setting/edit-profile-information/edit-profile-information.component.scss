@@ -1,0 +1,37 @@
+h3{
+    padding: 20px 0 20px 0;
+}
+
+form{
+    padding-bottom: 20px;
+
+    #personalInfoBody{
+        padding-bottom: 20px;
+        border-top: 2px solid black;
+        border-bottom: 2px solid black;
+
+        label{
+            padding: 3px;
+            font-weight: bold;
+        }
+        
+        input{
+            border-radius: 13px;
+            border-color: black;
+        }
+
+    }
+
+    #updateButton{
+        margin: 15px 0 0 1000px;
+    }
+
+}
+
+
+
+
+
+
+
+
