@@ -33,6 +33,8 @@ import { NotificationComponent } from './navigation-bar/notification/notificatio
 import { ProfileDisplayComponent } from './profile-display/profile-display.component';
 import { DisplayAlbumComponent } from './display-album/display-album.component';
 import { DisplayFriendsComponent } from './display-friends/display-friends.component';
+import { PostDisplayComponent } from './post-display/post-display.component';
+import { AddPostComponent } from './add-post/add-post.component';
 
 @NgModule({
   declarations: [
@@ -59,7 +61,9 @@ import { DisplayFriendsComponent } from './display-friends/display-friends.compo
     NotificationComponent,
     ProfileDisplayComponent,
     DisplayAlbumComponent,
-    DisplayFriendsComponent
+    DisplayFriendsComponent,
+    PostDisplayComponent,
+    AddPostComponent
   ],
   imports: [
     BrowserModule,
