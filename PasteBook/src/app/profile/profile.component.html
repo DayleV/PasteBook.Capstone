@@ -9,18 +9,18 @@
 
 <div *ngFor="let friend of filterFriend | async">
     <button 
-        *ngIf="!(friend.status) && friend.userId != user.userId" 
+        *ngIf="!(friend.status) && friend.friendId != user.userId && friend.userId == users.userId" 
         (click)="acceptFriendRequest(friend.userFriendId, friend.friendId, friend.userId)">
         Accept Friend Request
     </button>
     <button 
-        *ngIf="!(friend.status) && friend.userId == users.userId" 
-        (click)="cancel(friend.userFriendId)">
+        *ngIf="!(friend.status) && friend.userId == user.userId" 
+        (click)="cancel(users.userId, user.userId)">
         Cancel Pending Request
     </button>
     <button 
         *ngIf="(friend.status)" 
-        (click)="cancel(friend.userFriendId)">
+        (click)="unfriend(users.userId, user.userId)">
         Unfriend
     </button>
 </div>

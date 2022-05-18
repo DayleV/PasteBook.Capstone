@@ -30,7 +30,7 @@ export class ProfileComponent implements OnInit {
   // albums$!: Observable<IProfileAlbum[]>;
   //userFriend$!: Observable<IUser_Friends[]>;
   // getAllRequest$!: Observable<IUser_Friends[]>;
-  // getAllRequest!: IUser_Friends[];
+  getAllRequest!: IUser_Friends[];
 
   users: IUsers | any = [];
   route: ActivatedRoute;
@@ -60,8 +60,11 @@ export class ProfileComponent implements OnInit {
       this.profileUser
     ]).pipe(
       map(([allfriends, user]) => allfriends
-        .filter(af => af.userId === Number(user.userId) && af.friendId === Number(this.user.userId)))
+        .filter(af => af.userId === Number(user.userId) && af.friendId === Number(this.user.userId) ||
+         af.userId === Number(user.userId) && af.friendId === Number(this.user.userId)))
     );
+
+    this.profileService.getAllRequest().subscribe(response => this.getAllRequest = response);
 
     if(this.id != this.user.userId){
           this.checker = false;
@@ -104,20 +107,26 @@ export class ProfileComponent implements OnInit {
     this.userFriend.userId = this.users.userId;
     this.userFriend.friendId = this.user.userId,
     this.profileService.addUserFriendRequest(this.userFriend).subscribe(userFriend =>
-      userFriend
-  );
-
-  this.userFriend.userId = this.user.userId;
-    this.userFriend.friendId = this.users.userId,
-    this.profileService.addUserFriendRequest(this.userFriend).subscribe(userFriend => 
       this.ngOnInit()
   );
+
+    this.userFriend.userId = this.user.userId;
+      this.userFriend.friendId = this.users.userId,
+      this.profileService.addUserFriendRequest(this.userFriend).subscribe(userFriend => 
+        this.ngOnInit()
+    );
   }
 
-  cancel(id: number | undefined): void {
-    this.profileService.DeleteUserFriendRequest(id).subscribe(userFriend => 
-      this.ngOnInit()
-  );
+  cancel(profileId: number | undefined, userId: number | undefined): void {
+    for (let request of this.getAllRequest){
+      if(request.friendId == profileId || request.friendId == userId){
+        if(request.userId == profileId || request.userId == userId){
+          this.profileService.DeleteUserFriendRequest(request.userFriendId).subscribe(userFriend => 
+              this.ngOnInit()
+          );
+        }
+      }
+    }
   }
 
   acceptFriendRequest(id: number | undefined, friendId: number | undefined, userId: number | undefined): void {    
@@ -127,8 +136,23 @@ export class ProfileComponent implements OnInit {
     this.userFriend.status = true,
     this.profileService.update(id, this.userFriend).subscribe(userFriend => 
       {this.userFriend = userFriend
-        this.ngOnInit();  
+        
   });  
+    for (let request of this.getAllRequest){
+      if(request.friendId ==  userId){
+        if(request.userId == friendId){
+          this.userFriend.userFriendId = request.userFriendId,
+          this.userFriend.userId = request.friendId;
+          this.userFriend.friendId = request.userId,
+          request.status = true;
+          this.userFriend.status = request.status,
+          this.profileService.update(request.userFriendId, this.userFriend).subscribe(userFriend => 
+            {this.userFriend = userFriend
+              this.ngOnInit(); 
+          });
+        }
+      }
+    }
   }
 
   // cancelFriendRequest(id: number | undefined): void {
@@ -138,18 +162,15 @@ export class ProfileComponent implements OnInit {
   // });
   // }
 
-  // unfriend(friendId: number | undefined, userId: number | undefined): void {
-  //   for (let request of this.getAllRequest){
-  //     if(request.friendId == friendId || request.friendId == userId){
-  //       if(request.userId == friendId || request.userId == userId){
-  //         this.profileService.DeleteUserFriendRequest(request.userFriendId).subscribe(userFriend => 
-  //           {this.userFriend = userFriend
-  //             this.ngOnInit();
-  //         });
-  //       }
-  //     }
-  //   }
-  // }
-
-
+  unfriend(friendId: number | undefined, userId: number | undefined): void {
+    for (let request of this.getAllRequest){
+      if(request.friendId == friendId || request.friendId == userId){
+        if(request.userId == friendId || request.userId == userId){
+          this.profileService.DeleteUserFriendRequest(request.userFriendId).subscribe(userFriend => 
+            this.ngOnInit()
+            );
+        }
+      }
+    }
+  }
 }
