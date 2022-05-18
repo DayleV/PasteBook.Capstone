@@ -1,4 +1,22 @@
-<div>
+<h4>{{users.firstName}} {{users.lastName}} </h4>
+{{filterFriend | async | json}}
+<br>
+<div *ngIf="filterFriend | async as friends">
+    <div *ngIf="friends.length === 0; else elseblock">
+        <button type="submit" (click)="addUserFriend()">Add Friend</button>
+    </div>
+    <ng-template #elseblock>
+        <div *ngIf="friends[0].requesterId == user.userId">
+            cancel request
+        </div>
+        <div *ngIf="friends[0].requesterId != user.userId">
+            accept request
+        </div>
+    </ng-template>
+</div>
+
+
+<!-- <div>
     <h4>{{users.firstName}} {{users.lastName}} </h4>
 </div>
 
@@ -23,7 +41,7 @@
         (click)="unfriend(users.userId, user.userId)">
         Unfriend
     </button>
-</div>
+</div> -->
 
 
 <!-- <div *ngIf="!checker">

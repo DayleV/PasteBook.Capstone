@@ -51,5 +51,6 @@ export interface IUser_Friends {
     userFriendId?: number,
     userId?: number | undefined;
     friendId?: number | undefined;
+    requesterId?: number | undefined;
     status?: boolean;
 }

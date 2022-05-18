@@ -4,9 +4,8 @@
 <ng-template #elseBlock><div *ngIf="postDetail$ | async as PostDetail">
     <!-- <p>Post ID : {{PostDetail.post?.postId}}</p>
     <p>User ID : {{PostDetail.post?.userId}}</p> -->
-    <p>First Name : {{PostDetail.post?.user?.firstName}}</p>
-    <p>Last Name : {{PostDetail.post?.user?.lastName}}</p>
-    <div class="postBody" class="container-sm">
+    <div id="postBody" class="container-sm">
+        <p>First Name : {{PostDetail.post?.user?.firstName}} Last Name : {{PostDetail.post?.user?.lastName}}</p>
         <p>Post Content : {{PostDetail.post?.postContent}}</p>
         <div class="likeAndPost">
             <div class="likeAndIcon">
@@ -46,6 +45,7 @@
             <span>User ID : {{comment.userId}}</span> -->
              
             <span class="commentDate">
+                <p>First Name : {{PostDetail.post?.user?.firstName}} Last Name : {{PostDetail.post?.user?.lastName}}</p>
                 Comment Date: {{comment.commentDate}}
             </span> 
             <br>
@@ -54,5 +54,4 @@
         <br>
         </div>
     </div>
-
 </ng-template>
