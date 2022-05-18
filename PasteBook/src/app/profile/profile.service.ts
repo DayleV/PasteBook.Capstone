@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { ConfigurationService } from '../configuration/configuration.service';
-import { IProfileAlbum, IPost, IProfilePosts, IUsers } from './model/profile';
+import { IProfileAlbum, IPost, IProfilePosts, IUsers, IUserFriend, IUser_Friends } from './model/profile';
 
 @Injectable({
   providedIn: 'root'
@@ -16,8 +16,12 @@ export class ProfileService {
       console.log(this.apiUrl);
     }
 
-    getUserById(id: number): Observable<IUsers> {
+    getUserById(id: number | undefined): Observable<IUsers> {
       return this.http.get<IUsers>(`${this.apiUrl}users/${id}`);
+    }
+
+    getFriends(): Observable<IUser_Friends[]> {
+      return this.http.get<IUser_Friends[]>(this.apiUrl+'userfriends');
     }
 
     getPostsByUserId(id: number): Observable<IProfilePosts[]> {
@@ -25,12 +29,44 @@ export class ProfileService {
     }
 
     getAlbumsByUserId(id: number): Observable<IProfileAlbum[]> {
-      console.log(`${this.apiUrl}profile-album/${id}`)
       return this.http.get<IProfileAlbum[]>(`${this.apiUrl}profile-album/${id}`);
     }
+
+    // getFriendRequestsByUserId(id: number | undefined): Observable<IUserFriend[]> {
+    //   return this.http.get<IUserFriend[]>(`${this.apiUrl}friendrequest/${id}`);
+    // }
+
+    // getRequestById(id: number | undefined): Observable<IUser_Friends> {
+    //   return this.http.get<IUser_Friends>(`${this.apiUrl}friendrequest/${id}`);
+    // }
 
     addPosts(entity: IPost): Observable<IPost>{
       return this.http.post<IPost>(`${this.apiUrl}posts`, entity);
     }
+
+    addUserFriendRequest(entity: IUser_Friends): Observable<IUser_Friends>{
+      console.log(entity)
+      return this.http.post<IUser_Friends>(`${this.apiUrl}userfriends`, entity);
+    }
+
+    DeleteUserFriendRequest(id: number | undefined): Observable<IUser_Friends>{
+      return this.http.delete<IUser_Friends>(`${this.apiUrl}userfriends/${id}`);
+    }
+
+    getAllRequest(): Observable<IUser_Friends[]> {
+      return this.http.get<IUser_Friends[]>(`${this.apiUrl}userfriends`);
+    }
+
+    update(id: number | undefined, entity: IUser_Friends): Observable<IUser_Friends> {
+      console.log(entity)
+      console.log(id)
+      return this.http.put<IUser_Friends>(`${this.apiUrl}userfriends/${id}`, entity);
+    }
+
+    delete(id: number | undefined): Observable<IUser_Friends> {
+      return this.http.delete<IUser_Friends>(`${this.apiUrl}userfriends/${id}`);
+    }
+
+    
 
 }

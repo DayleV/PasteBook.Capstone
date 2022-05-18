@@ -1,7 +1,10 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PasteBook.WebApi.Data;
+using PasteBook.WebApi.DataTransferObject;
 using PasteBook.WebApi.Models;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace PasteBook.WebApi.Controllers
@@ -83,6 +86,22 @@ namespace PasteBook.WebApi.Controllers
                 return Ok(userFriend);
             }
             return BadRequest();
+        }
+
+        [HttpGet("/friendrequest/{UserId}")]
+        public async Task<IActionResult> GetAlbumsByUserId(int UserId, int friendId)
+        {
+            List<FriendRequest> userFeed = new List<FriendRequest>();
+            var userFriendRequest = await UnitOfWork.UserFriendRepository.Find(p => p.UserId == UserId);
+            //var userFriendRequestArranged = userFriendRequest.OrderBy(p => p.User.FirstName).ToList();
+            foreach (UserFriend userFriend in userFriendRequest)
+            {
+                userFeed.Add(new FriendRequest
+                {
+                    UserFriend = userFriend,
+                });
+            }
+            return Ok(userFeed);
         }
     }
 }
