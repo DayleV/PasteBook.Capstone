@@ -102,16 +102,18 @@ export class ProfileComponent implements OnInit {
 
   addUserFriend(): void {
     this.userFriend.userId = this.users.userId;
-    this.userFriend.friendId = this.user.userId,
+    this.userFriend.friendId = this.user.userId;
+    this.userFriend.requesterId = this.user.userId;
     this.profileService.addUserFriendRequest(this.userFriend).subscribe(userFriend =>
       userFriend
-  );
+    );
 
-  this.userFriend.userId = this.user.userId;
+    this.userFriend.userId = this.user.userId;
     this.userFriend.friendId = this.users.userId,
+    this.userFriend.requesterId = this.user.userId;
     this.profileService.addUserFriendRequest(this.userFriend).subscribe(userFriend => 
       this.ngOnInit()
-  );
+    );
   }
 
   cancel(id: number | undefined): void {
