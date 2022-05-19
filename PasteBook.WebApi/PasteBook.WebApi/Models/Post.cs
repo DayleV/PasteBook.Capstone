@@ -10,7 +10,6 @@ namespace PasteBook.WebApi.Models
     {
         [Key]
         public int PostId { get; set; }
-        public int TimelineId { get; set; }
         public int UserId { get; set; }
         public string PostContent { get; set; }
         public string WallUserId { get; set; }

@@ -10,8 +10,8 @@ using PasteBook.WebApi.Data;
 namespace PasteBook.WebApi.Migrations
 {
     [DbContext(typeof(PasteBookDb))]
-    [Migration("20220519092639_Add_WallUserId")]
-    partial class Add_WallUserId
+    [Migration("20220519093533_AddWallUserId_Update_Ward")]
+    partial class AddWallUserId_Update_Ward
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -185,11 +185,11 @@ namespace PasteBook.WebApi.Migrations
                     b.Property<DateTime>("PostDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("TimelineId")
-                        .HasColumnType("int");
-
                     b.Property<int>("UserId")
                         .HasColumnType("int");
+
+                    b.Property<string>("WallUserId")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("PostId");
 
