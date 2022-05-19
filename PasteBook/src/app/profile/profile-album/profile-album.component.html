@@ -1,5 +1,27 @@
 <div>
     <div *ngIf="user.userId == users.userId; else elseblock">
+        <a href="{{users.firstName! + users.lastName! + users.userId}}/albums" id="myAlbumHeader">My Albums</a>
+    </div>
+    <ng-template #elseblock>
+        <div *ngIf="user.userId != users.userId">
+            <a href="{{users.firstName! + users.lastName! + users.userId}}/albums" id="myAlbumHeader">{{users.firstName}}'s Albums</a>
+        </div>
+    </ng-template>
+    <div *ngFor="let album of albums$ | async | slice:0:6; let i=index" >
+        <div class="row g-3">
+            <div *ngIf="i < 6">
+                <a href="{{users.firstName! + users.lastName! + users.userId}}/albums/{{album.album.albumId}}">
+                    <i class="fa fa-picture-o fa-4x"></i>            
+                </a>
+                {{album.album.albumName}}
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- <div>
+    <div *ngIf="user.userId == users.userId; else elseblock">
         <a href="{{users.firstName! + users.lastName! + users.userId}}/albums" id="title">My Albums</a>
     </div>
     <ng-template #elseblock>
@@ -12,4 +34,4 @@
             <a href="{{users.firstName! + users.lastName! + users.userId}}/albums/{{album.album.albumId}}">{{album.album.albumName}}</a>
         </div> 
     </div>
-</div>
+</div> -->
