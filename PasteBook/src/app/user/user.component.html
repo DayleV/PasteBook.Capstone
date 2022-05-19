@@ -1,11 +1,12 @@
-<p>user works!</p>
-<p>List of users</p>
-<div *ngIf="filteredUsers$ | async as users">
-    <table>
-        <tr *ngFor="let user of users">
-            <td>{{user.firstName}}</td>
-            <td>{{user.lastName}}</td>
-            <a class="nav-link" [routerLink]="'/users'+'/'+user.firstName+user.lastName+user.userId"><i class="fa-solid fa-user"></i></a>
-        </tr>
-    </table>
-</div>
+
+<h4>Search Users for {{search$.value | json}}</h4>
+<section>
+    <div class="container" *ngIf="filteredUsers$ | async as users">
+        <div *ngFor="let user of users">
+            <div class="cont-nd">
+                <p class="name">{{user.firstName}} {{user.lastName}}</p>
+                <p class="link"><a class="nav-link" [routerLink]="'/users'+'/'+user.firstName+user.lastName+user.userId"><i class="fa-solid fa-user"></i></a></p>
+            </div>
+        </div>
+    </div>
+</section>

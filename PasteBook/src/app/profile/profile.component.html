@@ -2,23 +2,21 @@
     <div class="row">
       <div class="col">
         <h4>{{users.firstName}} {{users.lastName}} </h4>
-            {{filterFriend | async | json}}
+            <!-- {{filterFriend | async | json}} -->
             <br>
             <div *ngIf="filterFriend | async as friends">
                 <div *ngIf="friends.length === 0 && user.userId != users.userId; else elseblock">
                     <button type="submit" (click)="addUserFriend()">Add Friend</button>
                 </div>
                 <ng-template #elseblock>
-                    <div *ngIf="friends.length > 0">
-                        <div *ngIf="friends[0]?.requesterId != user.userId && !(friends[0]?.status)">
-                            <button (click)="acceptFriendRequest(friends[0]?.userFriendId, friends[0]?.friendId, friends[0]?.userId)">Accept Friend Request</button> 
-                        </div>
-                        <div *ngIf="friends[0]?.requesterId == user.userId">
-                            <button (click)="cancel(users.userId, user.userId)">Cancel Request</button> 
-                        </div>
-                        <div *ngIf="friends[0]?.status">
-                            <button (click)="unfriend(users.userId, user.userId)">Unfriend</button>
-                        </div>
+                    <div *ngIf="friends[0]?.requesterId != user.userId && !(friends[0]?.status) && user.userId != users.userId">
+                        <button (click)="acceptFriendRequest(friends[0].userFriendId, friends[0]?.friendId, friends[0]?.userId)">Accept Friend Request</button> 
+                    </div>
+                    <div *ngIf="friends[0]?.requesterId == user.userId">
+                        <button (click)="cancel(users.userId, user.userId)">Cancel Request</button> 
+                    </div>
+                    <div *ngIf="friends[0]?.status">
+                        <button (click)="unfriend(users.userId, user.userId)">Unfriend</button>
                     </div>
                 </ng-template>
             </div>
@@ -45,7 +43,7 @@
                 <p>Comment: {{post.commentCount}} | Like: {{post.likeCount}}</p>
             </div>
         </div>
-        <app-post-display></app-post-display>
+        <!-- <app-post-display></app-post-display> -->
       </div>
       <div class="col">
         
@@ -80,32 +78,11 @@
     </div>
 </div>
 
-<!-- <h2>Timeline</h2>
-<div style="width: 400px; margin: auto;">
-    <div class="submit-form">
-        <label for="Post">Post</label>
-        <input
-        type="textfield"
-        class="form-control"
-        id="title"
-        required
-        [(ngModel)]="post.PostContent"
-        name="Description"
-        />
-    </div>
-    <button>Add Post</button>
-</div> -->
-
-<div>
-    <a href="{{users.firstName! + users.lastName! + users.userId}}/albums">My Albums</a>
-    <div *ngFor="let album of albums$ | async">
-        <div>
-            <a href="{{users.firstName! + users.lastName! + users.userId}}/albums/{{album.album.albumId}}">{{album.album.albumName}}</a>
-        </div> 
-    </div>
-</div>
 
 
+
+<app-profile-album></app-profile-album>
+<app-profile-friend></app-profile-friend>
 
 
 
