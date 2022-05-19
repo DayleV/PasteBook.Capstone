@@ -1,7 +1,7 @@
+<div class="mb-4" *ngIf="isLoggedIn$|async">
+    <app-navigation-bar></app-navigation-bar>
+</div>
 <div class="container-fluid">
-    <div class="row mb-4" *ngIf="isLoggedIn$|async">
-        <app-navigation-bar></app-navigation-bar>
-    </div>
     <div class="row">
         <router-outlet></router-outlet>
     </div>
