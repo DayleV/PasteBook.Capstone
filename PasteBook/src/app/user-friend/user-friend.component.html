@@ -1,24 +1,26 @@
-<p>user-friend works!</p>
-<div class="container">
-    <h3>Logged In User: {{loggedInUser.firstName}}</h3>
-    <div id="searchFriendsBody">
-        <input name="search" type="text" [(ngModel)]="search" id="search" placeholder="Search Friends list"
-            (keyup)="EmitSearch()">
-        <i class='fas fa-search'></i>
-        {{search}}
-        <div id="listOfFriendsBody">
-            <h6>List of Friends</h6>
-            <div *ngIf="userFriends$ | async as friends">
-                <table>
-                    <tr *ngFor="let friend of friends">
-                        <td>{{friend.friendId.firstName}}</td>
-                        <td>{{friend.friendId.lastName}}</td>
-                        <a class="nav-link"
-                            [routerLink]="'/users'+'/'+friend.friendId.firstName+friend.friendId.lastName+friend.friendId.userId"><i
-                                class="fa-solid fa-user"></i></a>
-                    </tr>
-                </table>
+<section>
+    <div class="container">
+        <h4>Logged In User: {{loggedInUser.firstName}}</h4>
+        <div id="searchFriendsBody">
+            <input name="search" type="text" [(ngModel)]="search" id="search" placeholder="Search Friends list"
+                (keyup)="EmitSearch()">
+            <i class='fas fa-search'></i>
+            {{search}}
+            <div id="listOfFriendsBody">
+                <h6>List of Friends</h6>
+                <div *ngIf="userFriends$ | async as friends">
+                    <div *ngFor="let friend of friends">
+                        <div class="cont-nd">
+                            <p class="name">{{friend.friendId.firstName}} {{friend.friendId.lastName}}</p>
+                            <p class="link">
+                                <a class="nav-link"
+                                [routerLink]="'/users'+'/'+friend.friendId.firstName+friend.friendId.lastName+friend.friendId.userId">
+                                <i class="fa-solid fa-user"></i></a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-</div>
+</section>

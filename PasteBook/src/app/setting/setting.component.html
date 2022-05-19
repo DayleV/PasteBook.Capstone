@@ -1,15 +1,55 @@
 <div class="container-sm">
     <div id="settingsBody">
-        <h3>Account Information </h3>
+        <h3>User Information </h3>
         <p id="settingsBodyLink">
+            <span id="settingsBodyLink"> <a [routerLink]="['/settings/profile']">Edit Personal Information  &nbsp; | </a> &nbsp; </span>
             <span> <a [routerLink]="['/settings/..']">Edit Account Email &nbsp; | </a> &nbsp; </span> 
             <span> <a [routerLink]="['/settings/..']">Edit Account Password</a> </span>
         </p>
     </div>
-    <div id="settingsBody">
-        <h3>Personal Information</h3>
-        <span id="settingsBodyLink"> <a [routerLink]="['/settings/profile']">Edit Personal Information</a> </span>
-    </div>
 </div>
-
-<app-edit-account-information></app-edit-account-information>
+<div class="wrapper">
+    <div class="inner">
+      <form>
+            <div class="form-group">
+                <div class="form-wrapper">
+                    <label>First Name</label>
+                    <input
+                    class="form-control" 
+                    value="{{user.firstName}}"
+                    disabled>
+                </div>
+              <div class="form-wrapper">
+                <label>Last Name</label>
+                  <input  
+                  class="form-control" 
+                  value="{{user.lastName}}"
+                  disabled>
+              </div>
+            </div>
+          <div class="form-group">
+            <div class="form-wrapper">
+                <label>Birthdate</label>
+                  <input  
+                  class="form-control" 
+                  value="{{user.birthDate | date: 'MMMM d, y'}}"
+                  disabled>
+              </div>
+              <div class="form-wrapper">
+                <label>Gender</label>
+                  <input  
+                  class="form-control" 
+                  value="{{user.gender}}"
+                  disabled>
+              </div>
+          </div>
+          <div class="form-wrapper">
+            <label>Mobile Number</label>
+              <input  
+              class="form-control" 
+              value="{{user.mobileNumber}}"
+              disabled>
+          </div>
+      </form>
+    </div>
+  </div>

@@ -14,7 +14,7 @@
                 <input type="text" class="form-control" placeholder="Enter Last Name" formControlName="lastName">
 
                 <label class="form-label">Birthdate</label>
-                <input type="date" class="form-control" placeholder="Enter Birth Date" formControlName="birthDate">
+                <input type="date" class="form-control"  formControlName="birthDate">
 
                 <label class="form-label">Gender</label>
                 <input type="text" class="form-control" placeholder="Enter Gender" formControlName="gender">
@@ -24,6 +24,7 @@
                     formControlName="mobileNumber">
             </div>
         </div>
+        <button id="updateButton" routerLink="/settings" class="btn btn-primary">Back</button>
         <button type="submit" id="updateButton" class="btn btn-primary">Update</button>
     </form>
 </div>

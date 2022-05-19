@@ -5,6 +5,7 @@ import { UserService } from 'src/app/user/user.service';
 import { ActivatedRoute } from '@angular/router';
 import { UserAuth } from 'src/app/security/Model/user-auth';
 import { AuthService } from 'src/app/security/auth.service';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-edit-profile-information',
@@ -14,6 +15,7 @@ import { AuthService } from 'src/app/security/auth.service';
 export class EditProfileInformationComponent implements OnInit {
 
   loggedInUser: UserAuth ={};
+  user: IUsers = {};
 
   constructor(private userService: UserService, private router: ActivatedRoute, private authService: AuthService) { }
 
