@@ -2,14 +2,14 @@
     <div *ngIf="album">
         <div *ngIf="!isEdit">
             <div id="albumHeader">
-                <div id="albumNameAndEditButton">
+                <div id="albumNameAndEditButton" >
                     <h2>{{album.albumName}}</h2>
-                    <button (click)="updateAlbum()" id="editButton">
+                    <button *ngIf="user.userId == users[0]?.userId" (click)="updateAlbum()" id="editButton">
                         <i class="fas fa-edit fa-2x"></i>
                     </button>
                 </div>
                 <p> &nbsp; {{album.albumDescription}}</p>
-                <span>
+                <span *ngIf="user.userId == users[0]?.userId">
                     <a id="addPhotoLinks" [routerLink]="['/add-photo']">Add Photo
                         <i id="plusIcon" class="fa fa-plus fa-sm" aria-hidden="true"></i>
                     </a>
@@ -18,7 +18,7 @@
             <app-photo></app-photo>
         </div>
         <div *ngIf="checker">
-            <div *ngIf="isEdit">
+            <div *ngIf="user.userId == users[0]?.userId">
                 <div id="albumHeader">
                     <h2>
                         <input id="albumEditName" type="text" [(ngModel)]="album.albumName" value="{{album.albumName}}">

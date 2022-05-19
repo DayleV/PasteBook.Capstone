@@ -21,6 +21,7 @@ export class ViewAlbumComponent implements OnInit {
   albums$!: Observable<IProfileAlbum[]>;
   users: IUsers | any = [];
   checker: boolean = true;
+  userName!: string;
 
   route: ActivatedRoute;
 
@@ -32,18 +33,26 @@ export class ViewAlbumComponent implements OnInit {
 
   ngOnInit(): void {
     this.user = this.authService.getLoggedInUser()!;
-    var str = (String(this.route.snapshot.paramMap.get('string'))).match(/\d+/);
-    var id = str? str[0]: 0;
-
-    if(id != this.user.userId){
-      this.checker = false;
-    }
-
-    this.profileService.getUserById(Number(id)).subscribe(users => {
-    this.users = users;
-    });
     
-    this.albums$ = this.profileService.getAlbumsByUserId(Number(id));
+
+    this.route.paramMap.subscribe(
+      params => {
+        params.get('string')? this.userName = params.get('string')! : '';
+      }
+    );
+    
+    this.profileService.getUserByUserName(this.userName).subscribe(users => {
+      this.users = users;
+      this.albums$ = this.profileService.getAlbumsByUserId(this.users[0].userId);
+      });
+
+    // var str = (String(this.route.snapshot.paramMap.get('string'))).match(/\d+/);
+    // var id = str? str[0]: 0;
+    
+    // if(id != this.user.userId){
+    //   this.checker = false;
+    // }
+
   }
   albums: IAlbum = {
     UserId: this.user.userId,

@@ -28,6 +28,7 @@ export class SelectedAlbumComponent implements OnInit {
   isEdit: boolean;
   checker: boolean = true;
   selectedFile: File | any =  null;
+  userName!: string;
 
   constructor(private albumService: AlbumService, private photoService: PhotoService,
     route: ActivatedRoute, private router: Router, private http: HttpClient,
@@ -44,16 +45,19 @@ export class SelectedAlbumComponent implements OnInit {
 
     this.user = this.authService.getLoggedInUser()!;
 
-    var str = (String(this.route.snapshot.paramMap.get('string'))).match(/\d+/);
-    var id = str? str[0]: 0;
+    this.route.paramMap.subscribe(
+      params => {
+        params.get('string')? this.userName = params.get('string')! : '';
+      }
+    );
     
-    if(id != this.user.userId){
-      this.checker = false;
-    }
-    
-    this.profileService.getUserById(Number(id)).subscribe(users => {
-    this.users = users;
-    });
+    this.profileService.getUserByUserName(this.userName).subscribe(users => {
+      this.users = users;
+      });
+
+    // if(id != this.user.userId){
+    //   this.checker = false;
+    // }
   }
 
   cancel(){

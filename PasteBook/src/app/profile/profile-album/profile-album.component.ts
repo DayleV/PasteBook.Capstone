@@ -36,7 +36,7 @@ export class ProfileAlbumComponent implements OnInit {
 
     this.profileService.getUserByUserName(this.userName).subscribe(users => {
     this.users = users;
-    this.albums$ = this.profileService.getAlbumsByUserId(this.users.userId);
+    this.albums$ = this.profileService.getAlbumsByUserId(this.users[0].userId);
     });
 
     // this.profileService.getUserById(Number(this.id)).pipe(

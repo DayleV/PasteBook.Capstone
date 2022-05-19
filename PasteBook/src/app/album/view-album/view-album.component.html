@@ -1,12 +1,12 @@
 <div class="container">
-  <div *ngIf="user.userId == users.userId; else elseblock">
+  <div *ngIf="user.userId == users[0]?.userId; else elseblock">
     <h2 id="title">My Albums</h2>
   </div>
   <ng-template #elseblock>
-    <h3 *ngIf="user.userId != users.userId" id="title">{{users.firstName}}'s Albums</h3>
+    <h3 *ngIf="user.userId != users[0]?.userId" id="title">{{users[0]?.firstName}}'s Albums</h3>
   </ng-template>
 
-  <p *ngIf="user.userId == users.userId">
+  <p *ngIf="user.userId == users[0]?.userId">
     <span> 
       <a id="albumCrudLink" [routerLink]="['/add-album']">Create New Album 
         <i id="plusIcon" class="fa fa-plus fa-sm" aria-hidden="true"></i>
@@ -19,7 +19,7 @@
       &nbsp;
 
       <button onclick="document.getElementById('id01').style.display='block'" id="clear" data-toggle="modal">
-        <i class="fa-solid fa-xmark"></i>
+        <i *ngIf="user.userId == users[0]?.userId" class="fa-solid fa-xmark"></i>
       </button>
       <div id="id01" class="modal">
         <span onclick="document.getElementById('id01').style.display='none'" class="close"
@@ -31,14 +31,14 @@
 
             <div class="clearfix">
               <button type="button" class="cancelbtn" (click)="cancel()">Cancel</button>
-              <button type="button" class="deletebtn" *ngIf="user.userId == users.userId"
+              <button type="button" class="deletebtn" *ngIf="user.userId == users[0]?.userId"
                 (click)="deleteAlbum(album.album.albumId!)">Delete</button>
             </div>
           </div>
         </form>
       </div>
 
-      <a href="{{users.firstName! + users.lastName! + users.userId}}/albums/{{album.album.albumId}}">
+      <a href="{{users[0]?.userName}}/albums/{{album.album.albumId}}">
         <ul id="albumName">
           <li>
             <i class="fa fa-picture-o fa-5x">
@@ -49,7 +49,6 @@
           </li>
         </ul>
       </a>
-
     </div>
   </div>
 </div>
