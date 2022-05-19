@@ -35,6 +35,7 @@ import { AddPostComponent } from './add-post/add-post.component';
 import { ProfileAlbumComponent } from './profile/profile-album/profile-album.component';
 import { ProfileFriendComponent } from './profile/profile-friend/profile-friend.component';
 import { ProfilePostComponent } from './profile/profile-post/profile-post.component';
+import { ProfileBlurbComponent } from './profile/profile-blurb/profile-blurb.component';
 
 @NgModule({
   declarations: [
@@ -63,7 +64,8 @@ import { ProfilePostComponent } from './profile/profile-post/profile-post.compon
     AddPostComponent,
     ProfileAlbumComponent,
     ProfileFriendComponent,
-    ProfilePostComponent
+    ProfilePostComponent,
+    ProfileBlurbComponent
   ],
   imports: [
     BrowserModule,

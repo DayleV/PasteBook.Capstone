@@ -16,19 +16,11 @@ import { ProfileService } from './profile.service';
 export class ProfileComponent implements OnInit {
 
   user: UserAuth = {};
-  
-  post: IPost = {
-    UserId: this.user.userId,
-    PostContent: ''
-  }
 
   profileUser: Observable<IUsers> | undefined;
   allFriends!: Observable<IUser_Friends[]> | undefined;
   filterFriend: Observable<any> | undefined;
-
-  posts$!: Observable<IProfilePosts[]>;
   getAllRequest!: IUser_Friends[];
-
   users: IUsers | any = [];
   route: ActivatedRoute;
   id: any;
@@ -44,7 +36,6 @@ export class ProfileComponent implements OnInit {
 
   async ngOnInit() {
     this.user = this.authService.getLoggedInUser()!;
-    this.posts$ = this.profileService.getPostsByUserId(Number(this.id));
 
     var str = (String(this.route.snapshot.paramMap.get('string'))).match(/\d+/);
     this.id = str? str[0]: 0;
@@ -52,8 +43,6 @@ export class ProfileComponent implements OnInit {
     this.profileService.getUserById(Number(this.id)).subscribe(users => {
     this.users = users;
     });
-
-    this.posts$ = this.profileService.getPostsByUserId(Number(this.id));
 
     this.allFriends = this.profileService.getFriends();
     this.profileUser = this.profileService.getUserById(this.id);
@@ -71,12 +60,6 @@ export class ProfileComponent implements OnInit {
     if(this.id != this.user.userId){
           this.checker = false;
         }
-  }
-
-  addPost(): void {
-    this.post.UserId = this.user.userId;
-    console.log(this.post)
-    this.profileService.addPosts(this.post).subscribe(post => this.post = post);
   }
 
   userFriend: IUser_Friends = {
@@ -149,22 +132,4 @@ export class ProfileComponent implements OnInit {
       }
     }
   }
-
-  editBlurb(): void {
-    this.isEdit = true;
-    this.ngOnInit();
-  }
-
-  saveBlurb(id: number | undefined){
-    this.profileService.updateProfile(id, this.users).subscribe(user => this.users == user);
-    this.isEdit = false;
-    this.router.navigate([`users/${this.users.firstName! + this.users.lastName! + this.users.userId}`]);
-    this.ngOnInit();
-  }
-
-  cancelBlurb(): void {
-    this.isEdit = false;
-    this.ngOnInit();
-  }
-
 }
