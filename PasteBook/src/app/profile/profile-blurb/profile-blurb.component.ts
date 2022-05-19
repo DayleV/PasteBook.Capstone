@@ -16,6 +16,7 @@ export class ProfileBlurbComponent implements OnInit {
   route: ActivatedRoute;
   id: any;
   isEdit: boolean;
+  userName!: string;
 
   constructor(route: ActivatedRoute, private profileService: ProfileService, 
     private authService: AuthService, private router: Router) {
@@ -26,10 +27,13 @@ export class ProfileBlurbComponent implements OnInit {
   ngOnInit(): void {
     this.user = this.authService.getLoggedInUser()!;
 
-    var str = (String(this.route.snapshot.paramMap.get('string'))).match(/\d+/);
-    this.id = str? str[0]: 0;
-    
-    this.profileService.getUserById(Number(this.id)).subscribe(users => {
+    this.route.paramMap.subscribe(
+      params => {
+        params.get('string')? this.userName = params.get('string')! : '';
+      }
+    );
+
+    this.profileService.getUserByUserName(this.userName).subscribe(users => {
     this.users = users;
     });
   }

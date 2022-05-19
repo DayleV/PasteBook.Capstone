@@ -2,21 +2,21 @@
 <div>
     <h5>About Me</h5>
     <div *ngIf="!isEdit">
-        <input *ngIf="users.profileBlurb != null "
-        type="textarea" name="{{users.profileBlurb}}" 
-        placeholder="{{users.profileBlurb}}" 
+        <input *ngIf="users[0]?.profileBlurb != null "
+        type="textarea" name="{{users[0]?.profileBlurb}}" 
+        placeholder="{{users[0].profileBlurb}}" 
         readonly>
-        <input *ngIf="users.profileBlurb == null "
-        type="textarea" name="{{users.profileBlurb}}" 
+        <input *ngIf="users[0]?.profileBlurb == null "
+        type="textarea" name="{{users[0]?.profileBlurb}}" 
         placeholder="About Me" 
         readonly>
     </div>
     <div *ngIf="isEdit">
-        <input type="text" [(ngModel)]="users.profileBlurb" >
+        <input type="text" [(ngModel)]="users[0].profileBlurb" >
     </div>
 </div>
-<div *ngIf="user.userId == users.userId">
-    <div *ngIf="!isEdit && user.userId == users.userId">
+<div *ngIf="user.userId == users[0]?.userId">
+    <div *ngIf="!isEdit && user.userId == users[0]?.userId">
         <button (click)="editBlurb()">Edit</button>
     </div>
     <div *ngIf="isEdit">
