@@ -27,7 +27,6 @@ export class ProfileComponent implements OnInit {
   filterFriend: Observable<any> | undefined;
 
   posts$!: Observable<IProfilePosts[]>;
-  albums$!: Observable<IProfileAlbum[]>;
   getAllRequest!: IUser_Friends[];
 
   users: IUsers | any = [];
@@ -46,7 +45,6 @@ export class ProfileComponent implements OnInit {
   async ngOnInit() {
     this.user = this.authService.getLoggedInUser()!;
     this.posts$ = this.profileService.getPostsByUserId(Number(this.id));
-    this.albums$ = this.profileService.getAlbumsByUserId(Number(this.id));
 
     var str = (String(this.route.snapshot.paramMap.get('string'))).match(/\d+/);
     this.id = str? str[0]: 0;
