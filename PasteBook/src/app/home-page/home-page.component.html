@@ -16,13 +16,12 @@
             </div>          
           </div>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-6" *ngIf="userDetail">
           <img [src]="'https://localhost:44368/images/' + userDetail?.profilePicture" [alt]="userDetail?.profilePicture">
         </div>
       </div>
     </div>
     <div class="col-md-6">
-      {{userDetail|json}}
       <h2>Newsfeed</h2>
       <hr>
       <app-newsfeed></app-newsfeed>

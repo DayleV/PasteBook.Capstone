@@ -30,8 +30,8 @@ export class UserComponent implements OnInit {
       this.users$,
       this.search$
     ]).pipe(
-      map(([users, search]) => users.filter((users: any) => users.firstName.includes(search) ||
-      users.lastName.includes(search))
+      map(([users, search]) => users.filter((users: any) => users.firstName.toLocaleLowerCase().includes(search.toLocaleLowerCase()) ||
+      users.lastName.toLocaleLowerCase().includes(search.toLocaleLowerCase()))
     ));
   }
 }
