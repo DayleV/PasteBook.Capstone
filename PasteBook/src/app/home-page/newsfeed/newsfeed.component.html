@@ -1,15 +1,21 @@
-<p>newsfeed works!</p>
-<!-- <p>{{newsFeedPosts$|async|json}}</p> -->
-<div class="individualpost" *ngFor="let post of newsFeedPosts$ | async; index as i">
-    <!-- <div class="firstname_postheader">{{userFullNameMap.get(post.Post.UserId)}}</div> -->
-    <div class="class postcontent">
-        <p>{{post.post?.userId}}</p>
-        <p>{{post.post?.postContent}}</p>
-        <p>{{post.post?.postDate}}</p>
-    </div>
-    <div class="class likecommentholder">
-        <span><p>{{post.likeCount}}
-        <a text-align="right">{{post.commentCount}}</a></p></span>
+<div class="individualpost" *ngFor="let post of mapNewsFeedPosts$ | async; index as i">
+    <div class="container-fluid">
+        <div class="row p-3">
+            <div class="col-md-8 fs-4">{{post.post?.userId.firstName}} {{post.post?.userId.lastName}}</div>
+            <div class="col-md-4 text-end">                               
+                <a [routerLink]="['/', 'posts', post.post.postId]"><em>view post  </em><i class="fa-solid fa-arrow-right"></i> </a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 align-self-center">{{post.post?.postContent}}</div>
+        </div>
+        <div class="row justify-content-end">
+            <div class="col-md-12 text-end"><em>Posted last  {{post.post?.postDate | date}}</em></div>
+        </div>
+        <div class="row justify-content-between">
+            <div class="col"><i class="fa-solid fa-heart"></i>  {{post.likeCount}} Likes</div>
+            <div class="col text-end">{{post.commentCount}} Comments</div>
+        </div>
     </div>
     <hr>
 </div>

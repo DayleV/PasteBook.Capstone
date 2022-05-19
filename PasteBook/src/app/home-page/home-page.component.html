@@ -1,15 +1,28 @@
-<p>home-page works!</p>
-<!-- <div *ngIf="!error; else elseBlock" > -->
-    <div class="container">
-        <div class="row">
-          <div class="col">
-            <app-profile-display></app-profile-display>
+<div class="container">
+  <div class="row">
+    <div class="col-md-3">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="row"><h2>Good day,</h2></div>
+          <div class="row mb-4"><h2>{{user.firstName}} {{user.lastName}}</h2></div>
+          <div class="row mb-2">  
+            <div class="col-md-10">
+              <button type="button" class="btn btn-secondary btn-sm col-8">Create New Post</button>
+            </div>          
           </div>
-          <div class="col-6">
-            <h2>Newsfeed</h2>
-            <app-add-post></app-add-post>
-            <app-newsfeed></app-newsfeed>
-          </div>
-          <div class="col">
+          <div class="row">  
+            <div class="col-md-10">
+              <button type="button" class="btn btn-secondary btn-sm col-8">Create New Album</button>
+            </div>          
           </div>
         </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <h2>Newsfeed</h2>
+      <hr>
+      <app-newsfeed></app-newsfeed>
+    </div>
+  <div class="col-md-3">
+  </div>
+</div>

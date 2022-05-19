@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { combineLatest, map, Observable } from 'rxjs';
 import { AuthService } from 'src/app/security/auth.service';
 import { UserAuth } from 'src/app/security/Model/user-auth';
 import { IUsers } from 'src/app/user/Model/users';
 import { INewsFeedPosts } from './Model/newsfeedpost';
 import { NewsfeedapiService } from './newsfeedapi.service';
 import { UserService } from 'src/app/user/user.service';
+import { IPost } from 'src/app/post/Model/posts';
 
 @Component({
   selector: 'app-newsfeed',
@@ -14,26 +15,58 @@ import { UserService } from 'src/app/user/user.service';
 })
 export class NewsfeedComponent implements OnInit {
 
+  mapNewsFeedPosts$!:Observable<any>;
   newsFeedPosts$!:Observable<INewsFeedPosts[]>;
   loggedInUser: UserAuth = {};
-  users: IUsers[] = [];
+  users!:Observable<IUsers[]>;
   updateNewsFeedPosts: any;
-
-  //To Map UserId and User's Name
-  userFullNameMap: Map<number, string> = new Map();
 
   constructor(private service:NewsfeedapiService, private authService: AuthService, private userService: UserService) { }
 
   ngOnInit(): void {
     //To Use User's Profile Data
-    this.userService.getUsers().subscribe({
-      next: users => this.users = users
-    });
-    
+    this.users = this.service.getUsers();    
     this.loggedInUser = this.authService.getLoggedInUser()!;
     this.newsFeedPosts$ = this.service.getNewsFeedPosts(this.loggedInUser.userId!);
+
+    // this.updateNewsFeedPosts = setInterval(()=>{
+    //   this.newsFeedPosts$ = this.service.getNewsFeedPosts(this.loggedInUser.userId!);
+    // }, 60000);
+    
+    this.mapNewsFeedPosts$ = combineLatest([
+      this.newsFeedPosts$,
+      this.users
+    ]).pipe(
+      map(([posts, users]) => posts.map(
+        (posts: INewsFeedPosts) => ({
+          post: ({
+            postId: posts.post.postId,
+            userId: users.find(u => u.userId === posts.post.userId),
+            postContent: posts.post.postContent,
+            postDate: posts.post.postDate,
+          }),
+          commentCount: posts.commentCount,
+          likeCount: posts.likeCount
+        })))
+    );
+
     this.updateNewsFeedPosts = setInterval(()=>{
-      this.newsFeedPosts$ = this.service.getNewsFeedPosts(this.loggedInUser.userId!);
+      this.mapNewsFeedPosts$ = combineLatest([
+        this.newsFeedPosts$,
+        this.users
+      ]).pipe(
+        map(([posts, users]) => posts.map(
+          (posts: INewsFeedPosts) => ({
+            post: ({
+              postId: posts.post.postId,
+              userId: users.find(u => u.userId === posts.post.userId),
+              postContent: posts.post.postContent,
+              postDate: posts.post.postDate,
+            }),
+            commentCount: posts.commentCount,
+            likeCount: posts.likeCount
+          })))
+      );
     }, 60000);
   }
   
@@ -43,14 +76,4 @@ export class NewsfeedComponent implements OnInit {
       clearInterval(this.updateNewsFeedPosts);
     }
   }
-
-  // refreshUserFullNameMap(){
-  //   this.userService.getUsers().subscribe(data =>{
-  //     this.users = data;
-  //     for(let i=0; i < data.length; i++){
-  //       this.userFullNameMap.set(this.users[i].UserId, this.users[i].FirstName + this.users[i].LastName)
-  //     }
-  //   })
-  // }
-
 }
