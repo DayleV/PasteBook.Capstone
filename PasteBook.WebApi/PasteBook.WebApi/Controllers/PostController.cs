@@ -91,7 +91,6 @@ namespace PasteBook.WebApi.Controllers
             return Ok(userFeed);
         }
 
-        [AuthorizeAccess]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetPostById(int id)
         {
