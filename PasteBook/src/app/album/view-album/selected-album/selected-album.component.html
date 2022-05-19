@@ -1,29 +1,36 @@
-<div *ngIf="album">
-    <div>
+<div class="container">
+    <div *ngIf="album" id="albumHeader">
+
         <div *ngIf="!isEdit">
-            <h1>{{album.albumName}}</h1>
+            <div id="albumNameAndEditButton">
+                <h2>{{album.albumName}}</h2>
+                <button (click)="updateAlbum()" id="editButton">
+                    <i class="fas fa-edit fa-2x"></i>
+                </button>
+            </div>
+            <p> &nbsp; {{album.albumDescription}}</p>
+            <span>
+                <a href="" id="photoLinks">Add Photo &nbsp; | &nbsp;</a>
+            </span>
+            <span>
+                <a href="" id="photoLinks">Edit photos</a>
+            </span>
         </div>
-        <div *ngIf="isEdit">
-            <input type="text" [(ngModel)]="album.albumName" value="{{album.albumName}}">     
+        <div *ngIf="checker">
+            <div *ngIf="isEdit">
+                <h2>
+                    <input id="albumEditName" type="text" [(ngModel)]="album.albumName" value="{{album.albumName}}">
+                </h2>                
+                <div>
+                    <input id="albumEditDescription" type="text" [(ngModel)]="album.albumDescription">
+                </div>
+                <button (click)="saveAlbum()">Save</button>
+                <button (click)="cancel()">Cancel</button>
+            </div>
         </div>
     </div>
-    <div>
-        <div *ngIf="!isEdit">
-            <h1>{{album.albumDescription}}</h1>
-        </div>
-        <div *ngIf="isEdit">
-            <input type="text" [(ngModel)]="album.albumDescription">
-        </div>
-    </div>
-    <div *ngIf="checker">
-        <div *ngIf="!isEdit">
-            <button (click)="updateAlbum()">Edit</button>
-        </div>
-        <div *ngIf="isEdit">
-            <button (click)="saveAlbum()">Save</button>
-            <button (click)="cancel()">Cancel</button>
-        </div>
+    <br><br>
+    <div id="photos">
+        <app-photo></app-photo>
     </div>
 </div>
-<br><br>
-<app-photo></app-photo>

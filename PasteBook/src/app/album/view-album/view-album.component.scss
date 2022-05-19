@@ -1,32 +1,43 @@
 #title{
-    padding-top: 20px;
+    padding-top: 30px;
 }
 
-#createNewAlbum{
+#albumCrudLink{
     text-decoration: none;
-    color: black;
+    color: rgb(143, 141, 141);
+    font-weight: bold;
     &:hover{
         font-weight: bold;
-    }
-}
-
-#editAlbumList{
-    text-decoration: none;
-    color: black;
-    &:hover{
-        font-weight: bold;
+        color: black;
     }
 }
 
 #albumBody{
     border-top: 2px solid black;
-    padding: 20px;
+    padding-top: 30px;    
 }
 
 #albumName{
+    list-style: none;
     text-decoration: none;
     color: black;
     &:hover{
         color:rgb(70, 69, 69);
     }
+}
+
+p{
+    margin: 10px 0 5px 10px;
+}
+
+#albumList{
+    display: inline-block; 
+    padding-left: 40px;
+    width: 223px;
+}
+
+#a{
+    display: flex;
+    justify-content: center;
+    font-size: 18px;
 }

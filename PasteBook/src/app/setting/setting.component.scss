@@ -1,3 +1,24 @@
 h1{
     border-bottom: 1px solid black;
 }
+
+#settingsBody{
+    padding-top: 30px;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid black;
+}
+
+#settingsBodyLink{
+    margin: 10px 20px 0 0;
+}
+
+a{
+    text-decoration: none;
+    color: rgb(143, 141, 141);
+    font-weight: bold;
+    &:hover{
+        color: black;
+        cursor: pointer;
+    }
+}

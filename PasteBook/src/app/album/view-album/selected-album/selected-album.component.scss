@@ -1,0 +1,45 @@
+#albumHeader {
+    border-bottom: 2px solid black;
+    padding: 30px 0 5px 10px;
+}
+
+#editButton {
+    border: none;
+    border-radius: 5px;
+    height: 40px;
+
+    &:hover {
+        background-color: rgb(143, 141, 141);
+    }
+}
+
+#albumNameAndEditButton {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+#photoLinks {
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+    color: rgb(143, 141, 141);
+
+    &:hover {
+        color: black;
+    }
+}
+
+#albumEditName {
+    font-weight: 500;
+    margin-top: 10px;
+    border: none;
+    border-bottom: 1px solid black;
+    outline-width: 0;
+}
+
+#albumEditDescription {
+    resize: both;
+    width: 1100px;
+    display: flex;
+}

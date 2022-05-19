@@ -1,20 +1,23 @@
 <div class="container-sm">
   <h3 id="title">My Albums</h3>
   <p>
-    <span> <a id="createNewAlbum" [routerLink]="['/add-album']">Create New Album</a> </span> | 
-    <span id="editAlbumList"> Edit Album List</span>
+    <span> <a id="albumCrudLink" [routerLink]="['/add-album']">Create New Album &nbsp; | &nbsp;</a> </span>
+    <span id="albumCrudLink"> Edit Album List</span>
   </p>
   <div id="albumBody">
-    <ul>
-      <!-- {{albums$|async|json}} -->
-      <li *ngFor="let album of albums$ | async">
-        <button *ngIf="checker" (click)="deleteAlbum(album.album.albumId!)" id="clear">Delete</button>
-        <a id="albumName"
-          href="{{users.firstName! + users.lastName! + users.userId}}/albums/{{album.album.albumId}}">
-          <i class="fa fa-picture-o fa-4x"></i> 
-            {{album.album.albumName}}
-          </a>
-      </li>
-    </ul>
+    <!-- <button *ngIf="checker" (click)="deleteAlbum(album.album.albumId!)" id="clear">Delete</button> -->
+    <div *ngFor="let album of albums$ | async" id="albumList">
+      <a href="{{users.firstName! + users.lastName! + users.userId}}/albums/{{album.album.albumId}}">       
+        <ul id="albumName">
+          <li>       
+            <i class="fa fa-picture-o fa-5x">            
+              <span id="a">
+                {{album.album.albumName}} 
+              </span>
+            </i>          
+          </li>        
+        </ul>
+      </a>
+    </div>
   </div>
 </div>
