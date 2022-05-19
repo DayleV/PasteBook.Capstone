@@ -1,8 +1,7 @@
 <div class="container">
     <div class="row">
       <div class="col" *ngIf="filterFriend">
-        <h4>{{users[0]?.firstName}} {{users[0]?.lastName}} </h4>
-            <!-- {{filterFriend | async | json}} -->
+            {{filterFriend | async | json}}
             <br>
             <div *ngIf="filterFriend | async as friends">
                 <div *ngIf="friends.length === 0 && user.userId != users.userId; else elseblock">
