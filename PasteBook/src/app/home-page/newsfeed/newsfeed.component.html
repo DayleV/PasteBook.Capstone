@@ -1,7 +1,8 @@
 <div class="individualpost" *ngFor="let post of mapNewsFeedPosts$ | async; index as i">
     <div class="container-fluid">
         <div class="row p-3">
-            <div class="col-md-8 fs-4">{{post.post?.userId.firstName}} {{post.post?.userId.lastName}}</div>
+            <div class="col-md-2"><img src="https://localhost:44368/images/Image_202205181640261.png" alt=""></div>
+            <div class="col-md-6 fs-4">{{post.post?.userId.firstName}} {{post.post?.userId.lastName}}</div>
             <div class="col-md-4 text-end">                               
                 <a [routerLink]="['/', 'posts', post.post.postId]"><em>view post  </em><i class="fa-solid fa-arrow-right"></i> </a>
             </div>
