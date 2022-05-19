@@ -18,6 +18,7 @@ export class ProfileAlbumComponent implements OnInit {
   route: ActivatedRoute;
   id: any;
   error: boolean = false;
+  userName!: string;
   
   constructor(route: ActivatedRoute, private authService: AuthService,
     private profileService: ProfileService,) { 
@@ -27,25 +28,29 @@ export class ProfileAlbumComponent implements OnInit {
   ngOnInit(): void {
     this.user = this.authService.getLoggedInUser()!;
 
-    var str = (String(this.route.snapshot.paramMap.get('string'))).match(/\d+/);
-    this.id = str? str[0]: 0;
-    
-    // this.profileService.getUserById(Number(this.id)).subscribe(users => {
+    this.route.paramMap.subscribe(
+      params => {
+        params.get('string')? this.userName = params.get('string')! : '';
+      }
+    );
+
+    this.profileService.getUserByUserName(this.userName).subscribe(users => {
+    this.users = users;
+    this.albums$ = this.profileService.getAlbumsByUserId(this.users.userId);
+    });
+
+    // this.profileService.getUserById(Number(this.id)).pipe(
+    //   catchError(err => {
+    //     if(Number(err.status) === 404){
+    //       this.error = true;
+    //     }
+    //     return EMPTY
+    //   })
+    // ).subscribe(users => {
     // this.users = users;
     // });
 
-    this.profileService.getUserById(Number(this.id)).pipe(
-      catchError(err => {
-        if(Number(err.status) === 404){
-          this.error = true;
-        }
-        return EMPTY
-      })
-    ).subscribe(users => {
-    this.users = users;
-    });
 
-    this.albums$ = this.profileService.getAlbumsByUserId(Number(this.id));
   }
 
 }
