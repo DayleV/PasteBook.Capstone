@@ -1,5 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/security/auth.service';
 import { UserAuth } from 'src/app/security/Model/user-auth';
 import { ChangeaccountinfoService } from '../changeaccountinfo.service';
@@ -27,7 +28,7 @@ export class ChangeEmailComponent implements OnInit {
 
   loggedInUser: UserAuth = {};
 
-  constructor(private changeAccountInfoService: ChangeaccountinfoService, private authService: AuthService) { }
+  constructor(private changeAccountInfoService: ChangeaccountinfoService, private authService: AuthService, private route: Router) { }
 
   ngOnInit(): void {
     this.loggedInUser = this.authService.getLoggedInUser()!;
@@ -87,5 +88,9 @@ export class ChangeEmailComponent implements OnInit {
     this.changeAccountInfoService.updateUserEmail(this.updateEmailRequestData).subscribe(response => console.log(response));
   }
 
+  cancel() {
+    this.ngOnInit();
+    this.route.navigate([`/settings`]);
+  }
 
 }

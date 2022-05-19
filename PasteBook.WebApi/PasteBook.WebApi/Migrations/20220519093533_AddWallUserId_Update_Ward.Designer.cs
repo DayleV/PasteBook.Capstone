@@ -10,8 +10,8 @@ using PasteBook.WebApi.Data;
 namespace PasteBook.WebApi.Migrations
 {
     [DbContext(typeof(PasteBookDb))]
-    [Migration("20220519050948_AddTimelineTable")]
-    partial class AddTimelineTable
+    [Migration("20220519093533_AddWallUserId_Update_Ward")]
+    partial class AddWallUserId_Update_Ward
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -185,37 +185,17 @@ namespace PasteBook.WebApi.Migrations
                     b.Property<DateTime>("PostDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("TimelineId")
-                        .HasColumnType("int");
-
                     b.Property<int>("UserId")
                         .HasColumnType("int");
 
-                    b.HasKey("PostId");
+                    b.Property<string>("WallUserId")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.HasIndex("TimelineId");
+                    b.HasKey("PostId");
 
                     b.HasIndex("UserId");
 
                     b.ToTable("Posts");
-                });
-
-            modelBuilder.Entity("PasteBook.WebApi.Models.Timeline", b =>
-                {
-                    b.Property<int>("TimelineId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("TimelineId");
-
-                    b.HasIndex("UserId")
-                        .IsUnique();
-
-                    b.ToTable("Timelines");
                 });
 
             modelBuilder.Entity("PasteBook.WebApi.Models.User", b =>
@@ -250,6 +230,9 @@ namespace PasteBook.WebApi.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("WallUserId")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("UserId");
@@ -341,28 +324,9 @@ namespace PasteBook.WebApi.Migrations
 
             modelBuilder.Entity("PasteBook.WebApi.Models.Post", b =>
                 {
-                    b.HasOne("PasteBook.WebApi.Models.Timeline", "Timeline")
-                        .WithMany("Posts")
-                        .HasForeignKey("TimelineId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("PasteBook.WebApi.Models.User", "User")
                         .WithMany("Posts")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Timeline");
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("PasteBook.WebApi.Models.Timeline", b =>
-                {
-                    b.HasOne("PasteBook.WebApi.Models.User", "User")
-                        .WithOne("Timeline")
-                        .HasForeignKey("PasteBook.WebApi.Models.Timeline", "UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -408,11 +372,6 @@ namespace PasteBook.WebApi.Migrations
                     b.Navigation("Likes");
                 });
 
-            modelBuilder.Entity("PasteBook.WebApi.Models.Timeline", b =>
-                {
-                    b.Navigation("Posts");
-                });
-
             modelBuilder.Entity("PasteBook.WebApi.Models.User", b =>
                 {
                     b.Navigation("Albums");
@@ -420,8 +379,6 @@ namespace PasteBook.WebApi.Migrations
                     b.Navigation("Notifications");
 
                     b.Navigation("Posts");
-
-                    b.Navigation("Timeline");
 
                     b.Navigation("UserFriends");
                 });

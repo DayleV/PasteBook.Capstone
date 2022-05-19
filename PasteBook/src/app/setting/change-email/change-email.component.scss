@@ -1,0 +1,39 @@
+h2{
+    padding: 20px 0 20px 0;
+}
+
+form{
+    padding-bottom: 20px;
+
+    #accountEmailInfoBody{
+        padding-bottom: 20px;
+        border-top: 2px solid black;
+        border-bottom: 2px solid black;
+
+        label{
+            padding: 3px;
+            font-weight: bold;
+        }
+        
+        input{
+            border-radius: 13px;
+            border-color: black;
+        }
+
+    }
+
+    #editProfileButtons{
+        display: flex;
+        justify-content: right;
+
+        #cancelButton{
+            margin-top: 15px;
+        }
+    
+        #updateButton{
+            margin: 15px 10px 0 900px;
+        }
+    
+    }
+    
+}

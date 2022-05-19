@@ -43,8 +43,8 @@ const routes: Routes = [
   },
   {path: 'users/:string', component: ProfileComponent},
   {path: 'settings', component: SettingComponent},
-  {path: 'settings/changeemail', component: ChangeEmailComponent},
-  {path: 'settings/changepass', component: ChangePasswordComponent}
+  {path: 'settings/changeEmail', component: ChangeEmailComponent},
+  {path: 'settings/changePassword', component: ChangePasswordComponent}
 ];
 
 @NgModule({
