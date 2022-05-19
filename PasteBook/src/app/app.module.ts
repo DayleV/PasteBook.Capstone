@@ -36,6 +36,8 @@ import { ProfileAlbumComponent } from './profile/profile-album/profile-album.com
 import { ProfileFriendComponent } from './profile/profile-friend/profile-friend.component';
 import { ProfilePostComponent } from './profile/profile-post/profile-post.component';
 import { ProfileBlurbComponent } from './profile/profile-blurb/profile-blurb.component';
+import { ChangeEmailComponent } from './setting/change-email/change-email.component';
+import { ChangePasswordComponent } from './setting/change-password/change-password.component';
 
 @NgModule({
   declarations: [
@@ -65,7 +67,9 @@ import { ProfileBlurbComponent } from './profile/profile-blurb/profile-blurb.com
     ProfileAlbumComponent,
     ProfileFriendComponent,
     ProfilePostComponent,
-    ProfileBlurbComponent
+    ProfileBlurbComponent,
+    ChangeEmailComponent,
+    ChangePasswordComponent
   ],
   imports: [
     BrowserModule,
