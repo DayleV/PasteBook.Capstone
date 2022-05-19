@@ -1,14 +1,20 @@
 <div class="container-sm">
-  <h3 id="title">My Albums</h3>
-  <p>
-    <span> <a id="createNewAlbum" [routerLink]="['/add-album']">Create New Album</a> </span> | 
-    <span id="editAlbumList"> Edit Album List</span>
+  <div *ngIf="user.userId == users.userId; else elseblock">
+    <h3  id="title">My Albums</h3>
+  </div>
+  <ng-template #elseblock>
+    <h3 *ngIf="user.userId != users.userId" id="title">{{users.firstName}}'s Albums</h3>
+  </ng-template>
+
+  <p *ngIf="user.userId == users.userId">
+    <span> <a id="createNewAlbum" [routerLink]="['/add-album']">Create New Album</a> </span>  
+    <span id="editAlbumList"> | Edit Album List</span>
   </p>
   <div id="albumBody">
     <ul>
       <!-- {{albums$|async|json}} -->
       <li *ngFor="let album of albums$ | async">
-        <button *ngIf="checker" (click)="deleteAlbum(album.album.albumId!)" id="clear">Delete</button>
+        <button *ngIf="user.userId == users.userId" (click)="deleteAlbum(album.album.albumId!)" id="clear">Delete</button>
         <a id="albumName"
           href="{{users.firstName! + users.lastName! + users.userId}}/albums/{{album.album.albumId}}">
           <i class="fa fa-picture-o fa-4x"></i> 

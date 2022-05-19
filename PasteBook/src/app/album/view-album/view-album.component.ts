@@ -7,6 +7,7 @@ import { ProfileService } from 'src/app/profile/profile.service';
 import { AuthService } from 'src/app/security/auth.service';
 import { UserAuth } from 'src/app/security/Model/user-auth';
 import { AlbumService } from '../album.service';
+import { IAlbum } from '../model/album';
 
 @Component({
   selector: 'app-view-album',
@@ -44,9 +45,14 @@ export class ViewAlbumComponent implements OnInit {
     
     this.albums$ = this.profileService.getAlbumsByUserId(Number(id));
   }
+  albums: IAlbum = {
+    UserId: this.user.userId,
+    AlbumName: '',
+    AlbumDescription: '',
+  }
 
   deleteAlbum(id: number): void{
-    // this.albumService.delete(id).subscribe(albums => this.albums == albums);
-    // this.router.navigate(['view-albums']);
+    this.albumService.delete(id).subscribe(albums => this.albums == albums);
+    this.router.navigate(['view-albums']);
   }
 }

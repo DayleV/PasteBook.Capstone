@@ -32,6 +32,9 @@ import { DisplayAlbumComponent } from './display-album/display-album.component';
 import { DisplayFriendsComponent } from './display-friends/display-friends.component';
 import { PostDisplayComponent } from './post-display/post-display.component';
 import { AddPostComponent } from './add-post/add-post.component';
+import { ProfileAlbumComponent } from './profile/profile-album/profile-album.component';
+import { ProfileFriendComponent } from './profile/profile-friend/profile-friend.component';
+import { ProfilePostComponent } from './profile/profile-post/profile-post.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +60,10 @@ import { AddPostComponent } from './add-post/add-post.component';
     DisplayAlbumComponent,
     DisplayFriendsComponent,
     PostDisplayComponent,
-    AddPostComponent
+    AddPostComponent,
+    ProfileAlbumComponent,
+    ProfileFriendComponent,
+    ProfilePostComponent
   ],
   imports: [
     BrowserModule,
