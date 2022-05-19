@@ -37,10 +37,10 @@ namespace PasteBook.WebApi.Controllers
         [HttpGet("/timeline/{UserId}")]
         public async Task<IActionResult> GetPostsByUserId(int UserId, int friendId)
         {
+            //To get all loggedin user's post
             List<NewsFeedItem> userFeed = new List<NewsFeedItem>();
             var userPosts = await UnitOfWork.PostRepository.Find(p => p.UserId == UserId);
-            var userPostsArranged = userPosts.OrderByDescending(p => p.PostDate).ToList();
-            foreach (Post post in userPostsArranged)
+            foreach (Post post in userPosts)
             {
                 var postComments = await UnitOfWork.CommentRepository.Find(c => c.PostId == post.PostId);
                 var postLikes = await UnitOfWork.LikeRepository.Find(l => l.PostId == post.PostId);
@@ -51,6 +51,33 @@ namespace PasteBook.WebApi.Controllers
                     LikeCount = postLikes.Count()
                 });
             }
+/*            //To Get All Post of User's Friends
+            var userFriends = await UnitOfWork.UserFriendRepository.Find(f => f.UserId == UserId);
+            List<int> userfriends = new List<int>();
+            foreach (UserFriend userFriend in userFriends)
+            {
+                if (userFriend.Status)
+                {
+                    int friend = userFriend.FriendId;
+                    userfriends.Add(friend);
+                }
+            }
+            foreach (int friend in userfriends)
+            {
+                var friendPost = await UnitOfWork.PostRepository.Find(p => p.UserId == friend);
+                foreach (Post post in friendPost)
+                {
+                    var postComments = await UnitOfWork.CommentRepository.Find(c => c.PostId == post.PostId);
+                    var postLikes = await UnitOfWork.LikeRepository.Find(l => l.PostId == post.PostId);
+                    userFeed.Add(new NewsFeedItem
+                    {
+                        Post = post,
+                        CommentCount = postComments.Count(),
+                        LikeCount = postLikes.Count()
+                    });
+                }
+            }
+            userFeed.OrderByDescending(p => p.Post.PostDate);*/
             return Ok(userFeed);
         }
 

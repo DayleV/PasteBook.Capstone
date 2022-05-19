@@ -5,6 +5,7 @@ import { UserService } from 'src/app/user/user.service';
 import { ActivatedRoute } from '@angular/router';
 import { UserAuth } from 'src/app/security/Model/user-auth';
 import { AuthService } from 'src/app/security/auth.service';
+import { PhotoService } from 'src/app/album/view-album/selected-album/photo/photo.service';
 
 @Component({
   selector: 'app-edit-profile-information',
@@ -14,8 +15,10 @@ import { AuthService } from 'src/app/security/auth.service';
 export class EditProfileInformationComponent implements OnInit {
 
   loggedInUser: UserAuth ={};
+  selectedFile: File | null = null;
+  serverResponse:string = '';
 
-  constructor(private userService: UserService, private router: ActivatedRoute, private authService: AuthService) { }
+  constructor(private userService: UserService, private router: ActivatedRoute, private authService: AuthService,private photoService: PhotoService) { }
 
   editUser = new FormGroup({
   firstName: new FormControl(''),
@@ -48,6 +51,14 @@ export class EditProfileInformationComponent implements OnInit {
     }
     removeMessage() {
       this.message=false;
+    }
+
+    onFileSelected(event: any){
+      this.selectedFile = <File>event.target.files[0];
+    }
+
+    onUpload(){
+      this.photoService.submitProfilePhoto(this.selectedFile!,  this.loggedInUser.userId?.toString()).subscribe(response => this.serverResponse = response.toString());
     }
 }
 
