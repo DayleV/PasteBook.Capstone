@@ -21,7 +21,6 @@ export class HomePageComponent implements OnInit {
     this.profileService.getUserById(this.user.userId).subscribe(
       user => {
         this.userDetail = user
-        console.log('~~'+this.userDetail)
       }
     );
   }
