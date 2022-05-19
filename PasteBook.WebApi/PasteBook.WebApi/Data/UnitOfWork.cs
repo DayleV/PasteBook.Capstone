@@ -17,6 +17,7 @@ namespace PasteBook.WebApi.Data
         public IAuthenticationRepository AuthenticationRepository { get; }
         public IPhotoRepository PhotoRepository { get; }
         public INotificationRepository NotificationRepository { get; }
+        public ITimelineRepository TimelineRepository { get; }
     }
 
     public class UnitOfWork : IUnitOfWork, IDisposable
@@ -33,6 +34,7 @@ namespace PasteBook.WebApi.Data
         public IAuthenticationRepository AuthenticationRepository { get; private set; }
         public IPhotoRepository PhotoRepository { get; private set; }
         public INotificationRepository NotificationRepository { get; private set; }
+        public ITimelineRepository TimelineRepository { get; private set; }
 
         public UnitOfWork(PasteBookDb context)
         {
@@ -46,6 +48,7 @@ namespace PasteBook.WebApi.Data
             this.PhotoRepository = new PhotoRepository(context);
             this.AuthenticationRepository = new AuthenticationRepository(context);
             this.NotificationRepository = new NotificationRepository(context);
+            this.TimelineRepository = new TimelineRepository(context);
         }
 
         public async Task CommitAsync()

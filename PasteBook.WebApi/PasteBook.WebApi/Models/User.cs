@@ -34,6 +34,11 @@ namespace PasteBook.WebApi.Models
         [JsonIgnore]
         [IgnoreDataMember]
         public ICollection<Notification> Notifications { get; set; }
+        [JsonIgnore]
+        [IgnoreDataMember]
         public Authentication Authentication { get; set; }
+        [JsonIgnore]
+        [IgnoreDataMember]
+        public Timeline Timeline { get; set; }
     }
 }

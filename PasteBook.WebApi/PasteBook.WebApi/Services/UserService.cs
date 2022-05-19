@@ -39,8 +39,7 @@ namespace PasteBook.WebApi.Services
                     new Claim("UserId", user.UserId.ToString()),
                     new Claim("FirstName", user.FirstName),
                     new Claim("LastName", user.LastName),
-                    new Claim("UserName", user.UserName),
-                    new Claim("ProfilePicture", user.ProfilePicture)
+                    new Claim("UserName", user.UserName)
                 }),
                 Expires = DateTime.UtcNow.AddDays(this.appSettings.DurationInDays),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature),

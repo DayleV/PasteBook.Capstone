@@ -10,13 +10,19 @@ namespace PasteBook.WebApi.Models
     {
         [Key]
         public int PostId { get; set; }
+        public int TimelineId { get; set; }
         public int UserId { get; set; }
         public string PostContent { get; set; }
         public DateTime PostDate { get; set; }
+        [JsonIgnore]
+        [IgnoreDataMember]
         public User User { get; set; }
+        [JsonIgnore]
+        [IgnoreDataMember]
+        public Timeline Timeline { get; set; }
 
         //To Solve Self Referencing Loop for Post's like and comments, using Mvc.NewtonsoftJson package, (See https://stackoverflow.com/questions/7397207/json-net-error-self-referencing-loop-detected-for-type)
-        
+
         [JsonIgnore]
         [IgnoreDataMember]
         public ICollection<Like> Likes { get; set; }
