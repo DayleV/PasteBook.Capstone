@@ -42,8 +42,7 @@ namespace PasteBook.WebApi.Repositories
                     Gender = user.Gender,
                     MobileNumber = user.MobileNumber,
                     UserName = Regex.Replace(user.FirstName, @"\s", "") + Regex.Replace(user.LastName, @"\s", "") + rnd.Next().ToString(),
-                    ProfilePicture = "default-picture.png",
-                    Timeline = new Timeline()
+                    ProfilePicture = "default-picture.png"
                 }
             };
             await Insert(authentication);

@@ -17,9 +17,6 @@ namespace PasteBook.WebApi.Models
         [JsonIgnore]
         [IgnoreDataMember]
         public User User { get; set; }
-        [JsonIgnore]
-        [IgnoreDataMember]
-        public Timeline Timeline { get; set; }
 
         //To Solve Self Referencing Loop for Post's like and comments, using Mvc.NewtonsoftJson package, (See https://stackoverflow.com/questions/7397207/json-net-error-self-referencing-loop-detected-for-type)
 
