@@ -1,7 +1,7 @@
 <div class="container">
     <div class="row">
-      <div class="col">
-        <h4>{{users.firstName}} {{users.lastName}} </h4>
+      <div class="col" *ngIf="filterFriend">
+        <h4>{{users[0]?.firstName}} {{users[0]?.lastName}} </h4>
             <!-- {{filterFriend | async | json}} -->
             <br>
             <div *ngIf="filterFriend | async as friends">
@@ -21,10 +21,10 @@
                 </ng-template>
             </div>
       </div>
-        <app-profile-blurb></app-profile-blurb><br><br>
+        <!-- <app-profile-blurb></app-profile-blurb><br><br>
         <app-profile-album></app-profile-album><br><br>
         <app-profile-friend></app-profile-friend><br><br>
-        <app-profile-post></app-profile-post><br><br>
+        <app-profile-post></app-profile-post><br><br> -->
 
         <!-- <app-post-display></app-post-display> -->
       </div>

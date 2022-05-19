@@ -29,6 +29,24 @@ namespace PasteBook.WebApi.Controllers
             return Ok(users);
         }
 
+        [HttpGet("username/{userName}")]
+        public async Task<IActionResult> GetUserByUserName(string userName)
+        {
+            try
+            {
+                var user = await UnitOfWork.UserRepository.Find(u=>u.UserName.Equals(userName));
+                if (user is object)
+                {
+                    return Ok(user);
+                }
+            }
+            catch (Exception e)
+            {
+
+            }
+            return NotFound();
+        }
+
         [HttpGet("{id}")]
         public async Task<IActionResult> GetUserById(int id)
         {

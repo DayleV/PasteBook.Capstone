@@ -15,6 +15,10 @@ export class ProfileService {
       this.apiUrl = this.configService.settings.apiUrl;
     }
 
+    getUserByUserName(id: string): Observable<IUsers> {
+      return this.http.get<IUsers>(`${this.apiUrl}users/username/${id}`);
+    }
+
     getUserById(id: number | undefined): Observable<IUsers> {
       return this.http.get<IUsers>(`${this.apiUrl}users/${id}`);
     }

@@ -6,8 +6,8 @@
           <div class="row"><h3>Good day,</h3></div>
           <div class="row mb-4"><h4>{{user.firstName}} {{user.lastName}}</h4></div>
           <div class="row mb-2">  
-            <div class="col-md-12">
-              <button type="button" class="text-start btn btn-secondary btn-sm col-12">Create New Post</button>
+            <div class="col-md-12" *ngIf="userDetail">
+              <a [routerLink]="'users'+'/'+userDetail?.userName"><button type="button" class="text-start btn btn-secondary btn-sm col-12">Create New Post</button></a>
             </div>          
           </div>
           <div class="row">  
@@ -16,13 +16,12 @@
             </div>          
           </div>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-6" *ngIf="userDetail">
           <img [src]="'https://localhost:44368/images/' + userDetail?.profilePicture" [alt]="userDetail?.profilePicture">
         </div>
       </div>
     </div>
     <div class="col-md-6">
-      {{userDetail|json}}
       <h2>Newsfeed</h2>
       <hr>
       <app-newsfeed></app-newsfeed>

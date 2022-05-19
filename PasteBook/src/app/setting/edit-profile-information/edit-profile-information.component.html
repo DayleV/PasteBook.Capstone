@@ -24,7 +24,10 @@
                     formControlName="mobileNumber">
             </div>
         </div>
-        <button type="submit" id="updateButton" class="btn btn-primary">Update</button>
+        <div id="editProfileButtons">
+            <button type="submit" id="updateButton" class="btn btn-primary">Update</button>
+            <button id="cancelButton" (click)="cancel()" class="btn btn-danger">Cancel</button>
+        </div>
     </form>
     <div class="uploadphotocontainer">
         <div class="form-group">

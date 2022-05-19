@@ -8,6 +8,7 @@ export interface IUsers {
     gender?: string;
     mobileNumber?: string;
     profileBlurb?: string;
+    userName?: string;
 }
 
 export interface IPost {

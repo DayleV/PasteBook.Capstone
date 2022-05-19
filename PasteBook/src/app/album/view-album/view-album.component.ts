@@ -54,5 +54,12 @@ export class ViewAlbumComponent implements OnInit {
   deleteAlbum(id: number): void{
     this.albumService.delete(id).subscribe(albums => this.albums == albums);
     this.router.navigate(['view-albums']);
+    window.location.reload();
   }
+
+  cancel(){
+    this.ngOnInit();
+    this.router.navigate([`${this.user.firstName! + this.user.lastName! + this.user.userId}/albums`]);
+  }
+  
 }
