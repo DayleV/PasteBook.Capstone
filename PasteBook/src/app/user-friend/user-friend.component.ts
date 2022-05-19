@@ -34,8 +34,8 @@ export class UserFriendComponent implements OnInit {
       map(([friends, users, search]) => friends.map(friends => ({
           ...friends,
           friendId: users.find(u => friends.friendId === u.userId)}))
-          .filter((item: any) => item.friendId?.firstName?.includes(search) ||
-          item.friendId?.lastName?.includes(search)))
+          .filter((item: any) => item.friendId?.firstName?.toLocaleLowerCase().includes(search.toLocaleLowerCase()) ||
+          item.friendId?.lastName?.toLocaleLowerCase().includes(search.toLocaleLowerCase())))
     );
   }
   EmitSearch(){

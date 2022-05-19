@@ -4,4 +4,6 @@ export interface UserAuth extends UserAuthBase {
     userId?: number;
     firstName?: string;
     lastName?: string;
+    userName?: string;
+    profilePicture?: string;
 }

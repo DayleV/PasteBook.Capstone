@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { combineLatest, map, Observable } from 'rxjs';
+import { BehaviorSubject, combineLatest, map, Observable } from 'rxjs';
 import { catchError, EMPTY } from 'rxjs';
 import { PostService } from '../post/post.service';
 import { AuthService } from '../security/auth.service';
@@ -16,25 +16,18 @@ import { ProfileService } from './profile.service';
 export class ProfileComponent implements OnInit {
 
   user: UserAuth = {};
-  
-  post: IPost = {
-    UserId: this.user.userId,
-    PostContent: ''
-  }
 
   profileUser: Observable<IUsers> | undefined;
   allFriends!: Observable<IUser_Friends[]> | undefined;
   filterFriend: Observable<any> | undefined;
-
-  posts$!: Observable<IProfilePosts[]>;
   getAllRequest!: IUser_Friends[];
-
   users: IUsers | any = [];
   route: ActivatedRoute;
   id: any;
   checker: boolean = true;
   error: boolean = false;
   isEdit: boolean;
+  userName!: string;
 
   constructor(route: ActivatedRoute, private profileService: ProfileService, 
     private router: Router, private postService: PostService, private authService: AuthService) {
@@ -44,16 +37,15 @@ export class ProfileComponent implements OnInit {
 
   async ngOnInit() {
     this.user = this.authService.getLoggedInUser()!;
-    this.posts$ = this.profileService.getPostsByUserId(Number(this.id));
+    this.route.paramMap.subscribe(
+      params => {
+        params.get('string')? this.userName = params.get('string')! : '';
+      }
+    );
 
-    var str = (String(this.route.snapshot.paramMap.get('string'))).match(/\d+/);
-    this.id = str? str[0]: 0;
-    
-    this.profileService.getUserById(Number(this.id)).subscribe(users => {
+    this.profileService.getUserByUserName(this.userName).subscribe(users => {
     this.users = users;
     });
-
-    this.posts$ = this.profileService.getPostsByUserId(Number(this.id));
 
     this.allFriends = this.profileService.getFriends();
     this.profileUser = this.profileService.getUserById(this.id);
@@ -71,12 +63,6 @@ export class ProfileComponent implements OnInit {
     if(this.id != this.user.userId){
           this.checker = false;
         }
-  }
-
-  addPost(): void {
-    this.post.UserId = this.user.userId;
-    console.log(this.post)
-    this.profileService.addPosts(this.post).subscribe(post => this.post = post);
   }
 
   userFriend: IUser_Friends = {
@@ -149,22 +135,4 @@ export class ProfileComponent implements OnInit {
       }
     }
   }
-
-  editBlurb(): void {
-    this.isEdit = true;
-    this.ngOnInit();
-  }
-
-  saveBlurb(id: number | undefined){
-    this.profileService.updateProfile(id, this.users).subscribe(user => this.users == user);
-    this.isEdit = false;
-    this.router.navigate([`users/${this.users.firstName! + this.users.lastName! + this.users.userId}`]);
-    this.ngOnInit();
-  }
-
-  cancelBlurb(): void {
-    this.isEdit = false;
-    this.ngOnInit();
-  }
-
 }

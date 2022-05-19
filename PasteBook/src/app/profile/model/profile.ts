@@ -46,7 +46,6 @@ export interface IUserFriend {
     }
     
 }
-
 export interface IUser_Friends {
     userFriendId?: number,
     userId?: number | undefined;

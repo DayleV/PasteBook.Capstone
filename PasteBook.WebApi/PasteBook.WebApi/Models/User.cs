@@ -12,6 +12,7 @@ namespace PasteBook.WebApi.Models
         [Key]
         public int UserId { get; set; }
         public int AuthenticationId { get; set; }
+        public string UserName { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         //updated by ward
@@ -19,6 +20,7 @@ namespace PasteBook.WebApi.Models
         public DateTime BirthDate { get; set; }
         public string Gender { get; set; }
         public string MobileNumber { get; set; }
+        public string ProfilePicture { get; set; }
         public string ProfileBlurb { get; set; }
         [JsonIgnore]
         [IgnoreDataMember]
@@ -32,6 +34,11 @@ namespace PasteBook.WebApi.Models
         [JsonIgnore]
         [IgnoreDataMember]
         public ICollection<Notification> Notifications { get; set; }
+        [JsonIgnore]
+        [IgnoreDataMember]
         public Authentication Authentication { get; set; }
+        [JsonIgnore]
+        [IgnoreDataMember]
+        public Timeline Timeline { get; set; }
     }
 }

@@ -44,6 +44,13 @@ export class PhotoService {
       return this.http.post(`${this.apiUrl}/upload`, formData);
     }
 
+    submitProfilePhoto(fileToUpload: File, userId?:string){
+      const formData: FormData = new FormData();
+      formData.append('image', fileToUpload, fileToUpload.name);
+      formData.append('userId', userId!);
+      return this.http.post(`${this.apiUrl}/uploadprofilephoto`, formData);
+    }
+
     getPhotosByAlbumId(albumId:string): Observable<IPhoto[]>{
       return this.http.get<IPhoto[]>(`${this.apiUrl}/byAlbum/${albumId}`);
     }

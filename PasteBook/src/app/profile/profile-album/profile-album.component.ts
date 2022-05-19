@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
+import { catchError, EMPTY, Observable } from 'rxjs';
 import { AuthService } from 'src/app/security/auth.service';
 import { UserAuth } from 'src/app/security/Model/user-auth';
 import { IProfileAlbum, IUsers } from '../model/profile';
@@ -17,6 +17,7 @@ export class ProfileAlbumComponent implements OnInit {
   users: IUsers | any = [];
   route: ActivatedRoute;
   id: any;
+  error: boolean = false;
   
   constructor(route: ActivatedRoute, private authService: AuthService,
     private profileService: ProfileService,) { 
@@ -29,7 +30,18 @@ export class ProfileAlbumComponent implements OnInit {
     var str = (String(this.route.snapshot.paramMap.get('string'))).match(/\d+/);
     this.id = str? str[0]: 0;
     
-    this.profileService.getUserById(Number(this.id)).subscribe(users => {
+    // this.profileService.getUserById(Number(this.id)).subscribe(users => {
+    // this.users = users;
+    // });
+
+    this.profileService.getUserById(Number(this.id)).pipe(
+      catchError(err => {
+        if(Number(err.status) === 404){
+          this.error = true;
+        }
+        return EMPTY
+      })
+    ).subscribe(users => {
     this.users = users;
     });
 

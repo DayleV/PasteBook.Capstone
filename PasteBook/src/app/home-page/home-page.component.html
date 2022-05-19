@@ -2,19 +2,22 @@
   <div class="row mt-10">
     <div class="col-md-3">
       <div class="row">
-        <div class="col-md-12">
-          <div class="row"><h2>Good day,</h2></div>
-          <div class="row mb-4"><h2>{{user.firstName}} {{user.lastName}}</h2></div>
+        <div class="col-md-6">
+          <div class="row"><h3>Good day,</h3></div>
+          <div class="row mb-4"><h4>{{user.firstName}} {{user.lastName}}</h4></div>
           <div class="row mb-2">  
-            <div class="col-md-10">
-              <button type="button" class="text-start btn btn-secondary btn-sm col-8">Create New Post</button>
+            <div class="col-md-12" *ngIf="userDetail">
+              <a [routerLink]="'users'+'/'+userDetail?.userName"><button type="button" class="text-start btn btn-secondary btn-sm col-12">Create New Post</button></a>
             </div>          
           </div>
           <div class="row">  
-            <div class="col-md-10">
-              <button type="button" class="text-start btn btn-secondary btn-sm col-8">Create New Album</button>
+            <div class="col-md-12">
+              <button type="button" class="text-start btn btn-secondary btn-sm col-12">Create New Album</button>
             </div>          
           </div>
+        </div>
+        <div class="col-md-6" *ngIf="userDetail">
+          <img [src]="'https://localhost:44368/images/' + userDetail?.profilePicture" [alt]="userDetail?.profilePicture">
         </div>
       </div>
     </div>
