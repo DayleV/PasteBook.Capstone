@@ -12,3 +12,33 @@
 #listOfFriendsBody{
     padding-top: 20px;
 }
+
+.name {
+    float: left;
+    font-weight: normal;
+    margin: 0px;
+}
+
+.link {
+    float: right;
+    padding: 0px;
+    margin: 0px;
+}
+
+.cont-nd {
+    display: inline-block;
+    width: 100%;
+    margin-bottom: 10px;
+    border-bottom: solid #777 1px;
+}
+
+section {
+    width: 50%;
+    margin: 5% auto;
+    align-content: center;
+}
+
+h4 {
+    margin: 15px 0px;
+    text-align: center;
+}
