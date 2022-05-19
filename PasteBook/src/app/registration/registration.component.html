@@ -2,7 +2,7 @@
 <form [formGroup]="registrationform" (submit)="addNewUser()">
   <input type="submit" value="Submit">
   <input type="submit" value="Submit" [disabled]="registrationform.invalid"> 
-
+[(ngModel)]="newUser.EmailAddress"
 </form> -->
 <div class="wrapper">
   <div class="inner">
@@ -15,7 +15,6 @@
           name="EmailAddress"
           class="form-control ng-valid"
           formControlName="EmailAddress"
-          [(ngModel)]="newUser.EmailAddress"
           required
         >
         <div *ngIf="registrationform.controls['EmailAddress'].invalid 
@@ -37,7 +36,6 @@
             name="Password"
             class="form-control ng-valid"
             formControlName="Password"
-            [(ngModel)]="newUser.Password"
             required
           >
           <div *ngIf="registrationform.controls['Password'].invalid 
@@ -55,7 +53,6 @@
             name="ConfirmPassword"
             class="form-control ng-valid"
             formControlName="ConfirmPassword"
-            [(ngModel)]="newUser.ConfirmPassword"
             required
           >
           <div *ngIf="registrationform.controls['ConfirmPassword'].touched">
@@ -77,7 +74,6 @@
             class="form-control ng-valid"
             minlength="4"
             formControlName="FirstName"
-            [(ngModel)]="newUser.FirstName"
             required
           >
           <div *ngIf="registrationform.controls['FirstName'].invalid 
@@ -101,7 +97,6 @@
             name="LastName"
             class="form-control ng-valid"
             formControlName="LastName"
-            [(ngModel)]="newUser.LastName"
             required
           >
           <div *ngIf="registrationform.controls['LastName'].invalid 
@@ -123,7 +118,6 @@
             type="date"
             name="Birthdate"
             class="form-control  ng-valid"
-            [(ngModel)]="newUser.Birthdate"
             formControlName="Birthdate"
             required
           >
@@ -149,7 +143,6 @@
             type="text"
             name="Gender"
             formControlName="Gender"
-            [(ngModel)]="newUser.Gender"
         >
         
               <option value="">Choose Gender</option>
@@ -166,7 +159,6 @@
           type="text"
           name="MobileNumber"
           formControlName="MobileNumber"
-          [(ngModel)]="newUser.MobileNumber"
         >
         <div *ngIf="registrationform.controls['MobileNumber'].invalid 
                       && (registrationform.controls['MobileNumber'].dirty 

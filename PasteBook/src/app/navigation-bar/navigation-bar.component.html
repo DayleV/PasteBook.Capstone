@@ -1,14 +1,17 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container-fluid">
-    <form class="navbar-form" role="search">
-        <div class="input-group">
-            <input type="text" class="form-control" placeholder="search" name="searchInput" [(ngModel)]="searchInput">
-            <div class="input-group-btn">
-                <button class="btn btn-default" type="submit" (click)="search()"><i class="fa fa-search"></i></button>
-            </div>
-        </div>
-    </form>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+<nav class="navbar navbar-expand-lg navbar-light bg-light" style="padding: auto 0px;">
+    <div class="container-fluid" style="padding: auto 0px;">
+      <div class="col-md-3"></div>
+      <div class="col-md-6">
+        <form class="navbar-form" role="search">
+          <div class="input-group">
+              <input type="text" class="form-control" placeholder="search" name="searchInput" [(ngModel)]="searchInput">
+              <div class="input-group-btn">
+                  <button class="btn btn-default" type="submit" (click)="search()"><i class="fa fa-search"></i></button>
+              </div>
+          </div>
+      </form>
+      </div>
+      <div class="collapse navbar-collapse col-md-3" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item" *ngIf="userDetail">
             <a class="nav-link" [routerLink]="'users'+'/'+userDetail.userName"><i class="fa-solid fa-user"></i></a>
@@ -25,9 +28,9 @@
           <li class="nav-item">
             <button class="btn" type="submit" (click)="logout()"><i class="fa-solid fa-arrow-right-from-bracket"></i></button>
           </li>          
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <a class="nav-link" [routerLink]="['users']">users</a>
-          </li>          
+          </li>           -->
           <li class="nav-item">
             <a class="nav-link" [routerLink]="['friends']">friends</a>
           </li> 
@@ -35,3 +38,4 @@
       </div>
     </div>
   </nav>
+  
