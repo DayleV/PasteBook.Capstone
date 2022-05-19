@@ -22,6 +22,7 @@ namespace PasteBook.WebApi.Models
         public string MobileNumber { get; set; }
         public string ProfilePicture { get; set; }
         public string ProfileBlurb { get; set; }
+        public string WallUserId { get; set; }
         [JsonIgnore]
         [IgnoreDataMember]
         public ICollection<Post> Posts { get; set; }
@@ -37,8 +38,5 @@ namespace PasteBook.WebApi.Models
         [JsonIgnore]
         [IgnoreDataMember]
         public Authentication Authentication { get; set; }
-        [JsonIgnore]
-        [IgnoreDataMember]
-        public Timeline Timeline { get; set; }
     }
 }

@@ -17,7 +17,7 @@ export class ProfileComponent implements OnInit {
 
   user: UserAuth = {};
 
-  profileUser: Observable<IUsers> | undefined;
+  profileUser: Observable<IUsers[]> | undefined;
   allFriends!: Observable<IUser_Friends[]> | undefined;
   filterFriend: Observable<any> | undefined;
   getAllRequest!: IUser_Friends[];
@@ -48,14 +48,15 @@ export class ProfileComponent implements OnInit {
     });
 
     this.allFriends = this.profileService.getFriends();
-    this.profileUser = this.profileService.getUserById(this.id);
+    this.profileUser = this.profileService.getUserByUserName(this.userName);
     this.filterFriend = combineLatest([
       this.allFriends,
       this.profileUser
     ]).pipe(
-      map(([allfriends, user]) => allfriends
-        .filter(af => af.userId === Number(user.userId) && af.friendId === Number(this.user.userId) ||
-         af.userId === Number(user.userId) && af.friendId === Number(this.user.userId)))
+      map(([allfriends, user]) => 
+      allfriends
+        .filter(af => af.userId === Number(user[0].userId) && af.friendId === Number(this.user.userId) ||
+         af.userId === Number(user[0].userId) && af.friendId === Number(this.user.userId)))
     );
 
     this.profileService.getAllRequest().subscribe(response => this.getAllRequest = response);
@@ -71,7 +72,7 @@ export class ProfileComponent implements OnInit {
   }
 
   addUserFriend(): void {
-    this.userFriend.userId = this.users.userId;
+    this.userFriend.userId = this.users[0].userId;
     this.userFriend.friendId = this.user.userId;
     this.userFriend.requesterId = this.user.userId;
     this.profileService.addUserFriendRequest(this.userFriend).subscribe(userFriend =>
@@ -79,7 +80,7 @@ export class ProfileComponent implements OnInit {
     );
 
     this.userFriend.userId = this.user.userId;
-    this.userFriend.friendId = this.users.userId,
+    this.userFriend.friendId = this.users[0].userId,
     this.userFriend.requesterId = this.user.userId;
     this.profileService.addUserFriendRequest(this.userFriend).subscribe(userFriend => 
       this.ngOnInit()

@@ -26,7 +26,6 @@ namespace PasteBook.WebApi.Data
         public DbSet<Like> Likes { get; set; }
         public DbSet<Comment> Comments { get; set; }
         public DbSet<Authentication> Authentications { get; set; }
-        public DbSet<Timeline> Timelines { get; set; }
 
 
         //After migrate, Add connection string to User secrets and comment this 'OnConfiguring' Method

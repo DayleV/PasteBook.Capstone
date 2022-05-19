@@ -1,8 +1,8 @@
 
-<h4>Search Users for {{search$.value | json}}</h4>
 <section>
     <div class="container" *ngIf="filteredUsers$ | async as users">
         <div *ngFor="let user of users">
+            <h4 *ngIf="user != 0">List of Users</h4>
             <div class="cont-nd">
                 <p class="name">{{user.firstName}} {{user.lastName}}</p>
                 <p class="link"><a class="nav-link" [routerLink]="'/users'+'/'+user.userName"><i class="fa-solid fa-user"></i></a></p>
