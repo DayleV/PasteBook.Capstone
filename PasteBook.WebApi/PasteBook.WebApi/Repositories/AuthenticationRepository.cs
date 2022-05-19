@@ -37,7 +37,7 @@ namespace PasteBook.WebApi.Repositories
                     LastName = user.LastName,
                     BirthDate = user.BirthDate,
                     Gender = user.Gender,
-                    MobileNumber = user.MobileNumber,
+                    MobileNumber = user.MobileNumber
                 }
             };
             await Insert(authentication);
