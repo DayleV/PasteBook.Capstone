@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace PasteBook.WebApi.Controllers
 {
-    [Route("users")]
+    [Route("timeline")]
     [ApiController]
     public class TimelineController : ControllerBase
     {

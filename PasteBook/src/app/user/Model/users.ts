@@ -1,5 +1,6 @@
 export interface IUsers {
     userId?: number;
+    profilePicture?: string;
     authenticationId?: number;
     firstName?: string;
     lastName?: string;
