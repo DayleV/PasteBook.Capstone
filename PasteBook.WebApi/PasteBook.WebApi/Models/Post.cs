@@ -13,6 +13,7 @@ namespace PasteBook.WebApi.Models
         public int TimelineId { get; set; }
         public int UserId { get; set; }
         public string PostContent { get; set; }
+        public string WallUserId { get; set; }
         public DateTime PostDate { get; set; }
         [JsonIgnore]
         [IgnoreDataMember]
