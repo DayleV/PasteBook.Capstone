@@ -18,7 +18,7 @@ export class AddAlbumComponent implements OnInit {
   user: UserAuth = {};
 
   route: ActivatedRoute;
-  
+  message: boolean = false;
 
   constructor(private albumService: AlbumService, route: ActivatedRoute, 
     private router: Router, private authService: AuthService) 
@@ -41,4 +41,11 @@ export class AddAlbumComponent implements OnInit {
     this.albumService.addAlbum(this.album).subscribe(album => this.album == album);
     this.router.navigate([`${this.user.firstName! + this.user.lastName! + this.user.userId}/albums`]);
   }
+
+  cancel(){
+    this.ngOnInit();
+    this.router.navigate([`${this.user.firstName! + this.user.lastName! + this.user.userId}/albums`]);
+  }
+
+  
 }

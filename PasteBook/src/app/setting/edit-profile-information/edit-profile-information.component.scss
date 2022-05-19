@@ -22,10 +22,20 @@ form{
 
     }
 
-    #updateButton{
-        margin: 15px 0 0 1000px;
-    }
+    #editProfileButtons{
+        display: flex;
+        justify-content: right;
 
+        #cancelButton{
+            margin-top: 15px;
+        }
+    
+        #updateButton{
+            margin: 15px 10px 0 900px;
+        }
+    
+    }
+    
 }
 
 

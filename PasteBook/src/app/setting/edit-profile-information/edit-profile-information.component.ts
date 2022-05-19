@@ -2,7 +2,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { IUsers } from 'src/app/user/Model/users';
 import { UserService } from 'src/app/user/user.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UserAuth } from 'src/app/security/Model/user-auth';
 import { AuthService } from 'src/app/security/auth.service';
 
@@ -15,7 +15,7 @@ export class EditProfileInformationComponent implements OnInit {
 
   loggedInUser: UserAuth ={};
 
-  constructor(private userService: UserService, private router: ActivatedRoute, private authService: AuthService) { }
+  constructor(private userService: UserService, private router: ActivatedRoute, private authService: AuthService, private route: Router) { }
 
   editUser = new FormGroup({
   firstName: new FormControl(''),
@@ -48,6 +48,11 @@ export class EditProfileInformationComponent implements OnInit {
     }
     removeMessage() {
       this.message=false;
+    }
+
+    cancel(){
+      this.ngOnInit();
+      this.route.navigate([`/settings`]);
     }
 }
 

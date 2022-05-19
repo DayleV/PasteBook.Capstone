@@ -1,36 +1,37 @@
 <div class="container">
-    <div *ngIf="album" id="albumHeader">
-
+    <div *ngIf="album">
         <div *ngIf="!isEdit">
-            <div id="albumNameAndEditButton">
-                <h2>{{album.albumName}}</h2>
-                <button (click)="updateAlbum()" id="editButton">
-                    <i class="fas fa-edit fa-2x"></i>
-                </button>
+            <div id="albumHeader">
+                <div id="albumNameAndEditButton">
+                    <h2>{{album.albumName}}</h2>
+                    <button (click)="updateAlbum()" id="editButton">
+                        <i class="fas fa-edit fa-2x"></i>
+                    </button>
+                </div>
+                <p> &nbsp; {{album.albumDescription}}</p>
+                <span>
+                    <a id="addPhotoLinks" [routerLink]="['/add-photo']">Add Photo
+                        <i id="plusIcon" class="fa fa-plus fa-sm" aria-hidden="true"></i>
+                    </a>
+                </span>
             </div>
-            <p> &nbsp; {{album.albumDescription}}</p>
-            <span>
-                <a href="" id="photoLinks">Add Photo &nbsp; | &nbsp;</a>
-            </span>
-            <span>
-                <a href="" id="photoLinks">Edit photos</a>
-            </span>
+            <app-photo></app-photo>
         </div>
         <div *ngIf="checker">
             <div *ngIf="isEdit">
-                <h2>
-                    <input id="albumEditName" type="text" [(ngModel)]="album.albumName" value="{{album.albumName}}">
-                </h2>                
-                <div>
-                    <input id="albumEditDescription" type="text" [(ngModel)]="album.albumDescription">
+                <div id="albumHeader">
+                    <h2>
+                        <input id="albumEditName" type="text" [(ngModel)]="album.albumName" value="{{album.albumName}}">
+                    </h2>
+                    <div>
+                        <textarea name="albumDescription" id="albumDescription" cols="145" rows="4" autofocus [(ngModel)]="album.albumDescription"></textarea>
+                    </div>
                 </div>
-                <button (click)="saveAlbum()">Save</button>
-                <button (click)="cancel()">Cancel</button>
+                <div id="editAlbumButtons">
+                    <button (click)="saveAlbum()" id="saveButton" class="btn btn-primary">Save</button>
+                    <button (click)="cancel()" class="btn btn-danger">Cancel</button>
+                </div>
             </div>
         </div>
-    </div>
-    <br><br>
-    <div id="photos">
-        <app-photo></app-photo>
     </div>
 </div>

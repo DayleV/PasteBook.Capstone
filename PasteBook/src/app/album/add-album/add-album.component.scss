@@ -11,7 +11,7 @@
     justify-content: center;
 
     input{
-        border-radius: 15px;
+        border-radius: 10px;
     }
 }
 
@@ -35,4 +35,25 @@
 #albumText{
     padding: 20px 0 5px 10px;
     font-weight: bold;
+}
+
+#addAlbumButtons{
+    display: flex;
+    justify-content: right;
+    padding: 10px;
+}
+
+#saveButton{
+    margin-right: 5px;
+    width: 73px;
+}
+
+p{
+    margin: 10px 0 5px 10px;
+}
+
+#plusIcon{
+    padding: 3px 5px 3px 3px;
+    background-color: rgb(189, 186, 186);
+    border-radius: 2px;
 }
