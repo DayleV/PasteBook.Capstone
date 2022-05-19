@@ -10,6 +10,7 @@ using System.Linq;
 using PasteBook.WebApi.DataTransferObject;
 using PasteBook.WebApi.Models;
 using System;
+using System.Text.RegularExpressions;
 
 namespace PasteBook.WebApi.Controllers
 {
@@ -48,13 +49,13 @@ namespace PasteBook.WebApi.Controllers
                 //return StatusCode(StatusCodes.Status201Created, new { message = "Account Successfuly Created" });
 
                 //COMMENT ABOVE AND RUN TO CREATE DUMMY DATA OF AUTH AND USER
-                string[] acc = { "john", "doe", "jack", "bruce", "wayne" };
+                string[] acc = { "John Doe", "Carol", "jack Adrian", "Bernadette", "Donna" };
                 foreach (var item in acc)
                 {
                     var u = new UserRegistration
                     {
-                        EmailAddress = item + "@gmail.com",
-                        Password = item,
+                        EmailAddress = Regex.Replace(item.ToLower(), @"\s", "") + "@gmail.com",
+                        Password = "a",
                         FirstName = item,
                         LastName = item
                     };

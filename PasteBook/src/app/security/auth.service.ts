@@ -59,7 +59,9 @@ export class AuthService {
         token: token!,
         userId: decodedToken.tokenPayload.UserId,
         firstName: decodedToken.tokenPayload.FirstName,
-        lastName: decodedToken.tokenPayload.LastName
+        lastName: decodedToken.tokenPayload.LastName,
+        userName: decodedToken.tokenPayload.UserName,
+        profilePicture: decodedToken.tokenPayload.ProfilePicture
       };
       return user;
     }

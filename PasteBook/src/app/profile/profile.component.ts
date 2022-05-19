@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { combineLatest, map, Observable } from 'rxjs';
+import { BehaviorSubject, combineLatest, map, Observable } from 'rxjs';
 import { catchError, EMPTY } from 'rxjs';
 import { PostService } from '../post/post.service';
 import { AuthService } from '../security/auth.service';
@@ -27,6 +27,7 @@ export class ProfileComponent implements OnInit {
   checker: boolean = true;
   error: boolean = false;
   isEdit: boolean;
+  userName!: string;
 
   constructor(route: ActivatedRoute, private profileService: ProfileService, 
     private router: Router, private postService: PostService, private authService: AuthService) {
@@ -36,11 +37,13 @@ export class ProfileComponent implements OnInit {
 
   async ngOnInit() {
     this.user = this.authService.getLoggedInUser()!;
+    this.route.paramMap.subscribe(
+      params => {
+        params.get('string')? this.userName = params.get('string')! : '';
+      }
+    );
 
-    var str = (String(this.route.snapshot.paramMap.get('string'))).match(/\d+/);
-    this.id = str? str[0]: 0;
-    
-    this.profileService.getUserById(Number(this.id)).subscribe(users => {
+    this.profileService.getUserByUserName(this.userName).subscribe(users => {
     this.users = users;
     });
 

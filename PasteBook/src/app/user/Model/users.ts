@@ -1,5 +1,6 @@
 export interface IUsers {
     userId?: number;
+    profilePicture?: string;
     authenticationId?: number;
     firstName?: string;
     lastName?: string;
@@ -7,6 +8,7 @@ export interface IUsers {
     gender?: string;
     mobileNumber?: string;
     profileBlurb?: string;
+    userName?: string;
 }
 
 export interface IPost {

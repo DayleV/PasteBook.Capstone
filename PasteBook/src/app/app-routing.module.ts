@@ -16,6 +16,8 @@ import { LoginGuard } from './security/guard/login.guard';
 import { EditProfileInformationComponent } from './setting/edit-profile-information/edit-profile-information.component';
 import { SettingComponent } from './setting/setting.component';
 import { ProfileComponent } from './profile/profile.component';
+import { ChangeEmailComponent } from './setting/change-email/change-email.component';
+import { ChangePasswordComponent } from './setting/change-password/change-password.component';
 
 const routes: Routes = [
   {
@@ -40,7 +42,9 @@ const routes: Routes = [
     path: 'posts/:id', component: PostComponent
   },
   {path: 'users/:string', component: ProfileComponent},
-  {path: 'settings', component: SettingComponent}
+  {path: 'settings', component: SettingComponent},
+  {path: 'settings/changeemail', component: ChangeEmailComponent},
+  {path: 'settings/changepass', component: ChangePasswordComponent}
 ];
 
 @NgModule({

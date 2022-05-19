@@ -24,7 +24,15 @@
                     formControlName="mobileNumber">
             </div>
         </div>
-        <button id="updateButton" routerLink="/settings" class="btn btn-primary">Back</button>
-        <button type="submit" id="updateButton" class="btn btn-primary">Update</button>
+        <div id="editProfileButtons">
+            <button type="submit" id="updateButton" class="btn btn-primary">Update</button>
+            <button id="cancelButton" (click)="cancel()" class="btn btn-danger">Cancel</button>
+        </div>
     </form>
+    <div class="uploadphotocontainer">
+        <div class="form-group">
+            <label for="file">Choose file</label>   
+            <input type="file" (change)="onFileSelected($event)">
+            <input type="button" value="Upload Profile Picture" (click)="onUpload()">
+    </div>
 </div>

@@ -1,7 +1,9 @@
 <div class="container">
-  <h3 id="title">My Albums</h3>
+  <h2 id="title">My Albums</h2>
   <p>
-    <span id="createNewAlbum">Create New Album</span> | <span id="editAlbumList">Edit Album List</span>
+    <span id="createNewAlbum">Create New Album
+      <i id="plusIcon" class="fa fa-plus fa-sm" aria-hidden="true"></i>
+    </span>
   </p>
   <div id="addAlbumBody">
     <i id="createAlbumThumbnail" class="fas fa-images fa-10x"></i>
@@ -13,11 +15,13 @@
       </div>
       <div>
         <label for="Description" id="albumText">Album Description</label>
-        <input type="textfield" class="form-control" id="albumDescriptionTextbox" required
-          [(ngModel)]="album.AlbumDescription" name="Description" />
+        <textarea class="form-control" name="AlbumDescription" id="albumDescriptionTextbox"
+          [(ngModel)]="album.AlbumDescription"></textarea>
+        <br>
+        <div id="addAlbumButtons">
+          <button (click)="addAlbum()" class="btn btn-primary" id="saveButton">Save</button>
+          <button (click)="cancel()" class="btn btn-danger">Cancel</button>
+        </div>
       </div>
-      <br>
-      <button (click)="addAlbum()" class="btn btn-success">Add Album</button>
     </div>
   </div>
-</div>

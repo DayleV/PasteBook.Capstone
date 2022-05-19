@@ -77,5 +77,39 @@ namespace PasteBook.WebApi.Controllers
             }
             return Ok(photos);
         }
+
+        [HttpPost("uploadprofilephoto")]
+        public async Task<IActionResult> UploadProfileImages()
+        {
+            try
+            {
+                var files = HttpContext.Request.Form.Files;
+                var userId = Convert.ToInt32(HttpContext.Request.Form["userId"]);
+
+                User user = await UnitOfWork.UserRepository.FindByPrimaryKey(userId);
+                if (files != null && files.Count > 0)
+                {
+                    foreach (var file in files)
+                    {
+                        var path = this.PhotoService.SaveProfile(file, user.UserId);
+                        var newFileName = this.PhotoService.SavePath(file, user.UserId);
+                        Photo photo = new Photo();
+                        photo.Image = newFileName;
+                        photo.DateTime = DateTime.Now;
+                        user.ProfilePicture = photo.Image;
+                        this.UnitOfWork.UserRepository.Update(user);
+                        await this.UnitOfWork.PhotoRepository.Insert(photo);
+                        
+                    }
+                    await this.UnitOfWork.CommitAsync();
+                    return StatusCode(StatusCodes.Status201Created, new { message = "Profile Photo Uploaded" });
+                }
+            }
+            catch (Exception e)
+            {
+                Console.Write(e.Message);
+            }
+            return BadRequest();
+        }
     }
 }

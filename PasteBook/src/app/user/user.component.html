@@ -5,7 +5,7 @@
             <h4 *ngIf="user != 0">List of Users</h4>
             <div class="cont-nd">
                 <p class="name">{{user.firstName}} {{user.lastName}}</p>
-                <p class="link"><a class="nav-link" [routerLink]="'/users'+'/'+user.firstName+user.lastName+user.userId"><i class="fa-solid fa-user"></i></a></p>
+                <p class="link"><a class="nav-link" [routerLink]="'/users'+'/'+user.userName"><i class="fa-solid fa-user"></i></a></p>
             </div>
         </div>
     </div>

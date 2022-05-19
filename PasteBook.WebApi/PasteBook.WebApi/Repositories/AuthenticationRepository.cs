@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using System.Linq;
 using System.Text;
 using PasteBook.WebApi.DataTransferObject;
+using System.Text.RegularExpressions;
+using System;
 
 namespace PasteBook.WebApi.Repositories
 {
@@ -26,6 +28,7 @@ namespace PasteBook.WebApi.Repositories
         }
         public async Task<Authentication> InsertEncryptedUser(UserRegistration user, EncryptPassword encrypt)
         {
+            Random rnd = new Random();
             Authentication authentication = new Authentication
             {
                 EmailAddress = user.EmailAddress,
@@ -37,7 +40,10 @@ namespace PasteBook.WebApi.Repositories
                     LastName = user.LastName,
                     BirthDate = user.BirthDate,
                     Gender = user.Gender,
-                    MobileNumber = user.MobileNumber
+                    MobileNumber = user.MobileNumber,
+                    UserName = Regex.Replace(user.FirstName, @"\s", "") + Regex.Replace(user.LastName, @"\s", "") + rnd.Next().ToString(),
+                    ProfilePicture = "default-picture.png",
+                    Timeline = new Timeline()
                 }
             };
             await Insert(authentication);
