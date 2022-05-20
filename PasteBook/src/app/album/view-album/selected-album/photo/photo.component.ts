@@ -54,30 +54,4 @@ export class PhotoComponent implements OnInit {
     });
   }
 
-  
-  // uploadPhotoForm = new FormGroup(
-  //   {
-  //     albumId: new FormControl(''),
-  //     Image: new FormControl('',[Validators.required])
-  //   }
-  // )
-
-  // @Output() customSubmit = new EventEmitter();
-
-  // onSubmit(){
-  //   this.customSubmit.emit(this.uploadPhotoForm.value);
-  // }
-
-  // uploadFile(files: FileList){
-  //   //we can array file list here i = index;
-  //   this.fileToUpload = files.item(0);
-  //   this.uploadPhotoForm.patchValue({
-  //     Image: this.fileToUpload
-  //   })
-  //   this.uploadPhotoForm.get('Image')!.updateValueAndValidity;
-  // }
-
-  // uploadPhotoToAlbum():void{
-  //   this.photoService.addPhoto(this.newPhoto).subscribe(newPhoto => this.newPhoto = newPhoto);
-  // }
 }

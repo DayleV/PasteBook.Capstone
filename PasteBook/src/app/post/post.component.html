@@ -2,7 +2,7 @@
         <div *ngIf="mapUserToPosts$ | async as PostDetail">
             <div>
                 <div id="postBody">
-                    <h5><img [src]="'https://localhost:44368/images/'+PostDetail.post?.userId?.profilePicture" alt=""> {{PostDetail.post?.userId?.firstName | titlecase}} {{PostDetail.post?.userId?.lastName | titlecase}}</h5>
+                    <h5><img src="https://localhost:44368/images/Image_202205181640261.png" alt=""> {{PostDetail.post?.userId?.firstName}} {{PostDetail.post?.userId?.lastName}}</h5>
                     <p> &nbsp; {{PostDetail.post?.postContent}}</p>
                     <p id="postDate"><em>Posted last {{PostDetail.post?.postDate | date}}</em></p>
                     <div id="likeAndCommentRow">
@@ -37,16 +37,11 @@
                     <button class="btn btn-default" type="submit" (click)="ShowComments()">
                         <i class="fa-solid fa-sort-down"></i>
                     </button>
-                    <!-- <ng-template #elseBlock>
-                            <button class="btn btn-default" type="submit" (click)="ShowComments()">
-                                <i class="fa-solid fa-caret-down"></i>
-                            </button>
-                        </ng-template>       -->
                 </div>
                 <div *ngIf="showComments">
                     <div *ngFor="let comment of PostDetail.comments" id="commentBody">
                         <span id="commentHeader">
-                            <h6><img [src]="'https://localhost:44368/images/'+comment.userId.profilePicture" alt="" id="comment-picture"> {{comment.userId?.firstName | titlecase}}  {{comment.userId?.lastName | titlecase}}</h6>
+                            <h6><img src="https://localhost:44368/images/Image_202205181640261.png" alt="" id="comment-picture"> {{comment.userId?.firstName}}  {{comment.userId?.lastName}}</h6>
                             <p id="commentDate"><em>Comment Date: {{comment.commentDate}}</em></p>
                         </span>
                         <p>
