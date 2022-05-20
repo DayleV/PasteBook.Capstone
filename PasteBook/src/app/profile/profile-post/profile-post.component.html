@@ -1,9 +1,11 @@
 <div class="container-fluid">
-    <div class="row">
-        <textarea name="post" id="post" rows="3" [(ngModel)]="postContent"></textarea>
-    </div>
-    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-        <button [disabled]="!postContent" class="btn btn-primary me-md-2 btn-sm" type="button" (click)="addPost()">Add Post</button>
+    <div id="addPostTimeline">
+        <div class="row">
+            <textarea name="post" id="post" rows="3" [(ngModel)]="postContent" placeholder="Write Something Cool!"></textarea>
+        </div>
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+            <button id="addPostButton" [disabled]="!postContent" class="btn btn-primary me-md-2 btn-sm" type="button" (click)="addPost()">Add Post</button>
+        </div>
     </div>
 </div>
 <div class="individualpost" *ngFor="let post of result | async; index as i">

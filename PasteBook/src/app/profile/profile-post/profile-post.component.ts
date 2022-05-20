@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { combineLatest, concatMap, map, Observable, tap } from 'rxjs';
 import { INewsFeedPosts } from 'src/app/home-page/newsfeed/Model/newsfeedpost';
 import { NewsfeedapiService } from 'src/app/home-page/newsfeed/newsfeedapi.service';
+import { NotificationService } from 'src/app/navigation-bar/notification/notification.service';
 import { IPost } from 'src/app/post/Model/posts';
 import { PostService } from 'src/app/post/post.service';
 import { AuthService } from 'src/app/security/auth.service';
@@ -27,7 +28,7 @@ export class ProfilePostComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private profileService: ProfileService,
     private authService: AuthService, private postService: PostService,
-    private userService:NewsfeedapiService) {
+    private userService:NewsfeedapiService, private noifService: NotificationService) {
      }
 
   ngOnInit(): void {
@@ -65,9 +66,12 @@ export class ProfilePostComponent implements OnInit {
       userId: this.loggedInUser.userId,
       postContent: this.postContent,
       wallUserId: this.currentWallId
-      
     }
+
     this.profileService.addPosts(newPost).subscribe(post => {
+      if(Number(this.loggedInUser.userId) != Number(this.currentWallId)){
+        this.noifService.CreatePostNotif(this.currentWallId, post.postId!)
+      }
       this.postContent = '';
       this.ngOnInit();
     });

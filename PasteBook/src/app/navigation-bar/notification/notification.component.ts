@@ -13,10 +13,11 @@ import { NotificationService } from './notification.service';
 })
 export class NotificationComponent implements OnInit {
 
-  notifs$: Observable<INotification[]> | undefined;
-  users$: Observable<IUsers[]> | undefined;
+  notifs$!: Observable<INotification[]>;
+  users$!: Observable<IUsers[]>;
   notifWithUser$!: Observable<any[]> | null;
   loggedInUser: UserAuth = {};
+  updateNotification:any;
   
   constructor(private notifService: NotificationService) { }
 
@@ -34,6 +35,18 @@ export class NotificationComponent implements OnInit {
         friendId: users.find(u => notifs.friendId === u.userId)
       })).filter(n => n.notifReadStatus === false && n.userId === Number(this.loggedInUser.userId)))
     );
+
+    this.updateNotification = setInterval(()=>{
+      this.notifWithUser$ = combineLatest([
+        this.notifs$,
+        this.users$
+      ]).pipe(
+        map(([notifs, users]) => notifs.map(notifs => ({
+          ...notifs,
+          friendId: users.find(u => notifs.friendId === u.userId)
+        })).filter(n => n.notifReadStatus === false && n.userId === Number(this.loggedInUser.userId)))
+      );
+    }, 10000);
   }
 
   clear(){
