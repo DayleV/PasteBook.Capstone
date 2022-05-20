@@ -2,7 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { ConfigurationService } from '../configuration/configuration.service';
-import { IProfileAlbum, IPost, IProfilePosts, IUsers, IUserFriend, IUser_Friends } from './model/profile';
+import { IProfileAlbum, IProfilePosts, IUsers, IUserFriend, IUser_Friends } from './model/profile';
+import { IPost } from 'src/app/post/Model/posts';
 
 @Injectable({
   providedIn: 'root'

@@ -2,33 +2,37 @@
 <h3>{{users[0]?.firstName}} {{users[0]?.lastName}}</h3>
 <div class="container">
     <div class="row">
-      <div class="col" *ngIf="filterFriend">
-            <!-- {{filterFriend | async | json}} -->
-            <br>
-            <div *ngIf="filterFriend | async as friends">
-                <div *ngIf="friends.length === 0 && user.userId != users[0]?.userId; else elseblock">
-                    <button type="submit" (click)="addUserFriend()">Add Friend</button>
+        <div class="col-md-3" *ngIf="filterFriend">
+                <!-- {{filterFriend | async | json}} -->
+                <br>
+                <div *ngIf="filterFriend | async as friends">
+                    <div *ngIf="friends.length === 0 && user.userId != users[0]?.userId; else elseblock">
+                        <button type="submit" (click)="addUserFriend()">Add Friend</button>
+                    </div>
+                    <ng-template #elseblock>
+                        <div *ngIf="friends[0]?.requesterId != user.userId && !(friends[0]?.status) && user.userId != users[0]?.userId">
+                            <button (click)="acceptFriendRequest(friends[0].userFriendId, friends[0]?.friendId, friends[0]?.userId)">Accept Friend Request</button> 
+                        </div>
+                        <div *ngIf="friends[0]?.requesterId == user.userId">
+                            <button (click)="cancel(users[0]?.userId, user.userId)">Cancel Request</button> 
+                        </div>
+                        <div *ngIf="friends[0]?.status">
+                            <button (click)="unfriend(users[0]?.userId, user.userId)">Unfriend</button>
+                        </div>
+                    </ng-template>
                 </div>
-                <ng-template #elseblock>
-                    <div *ngIf="friends[0]?.requesterId != user.userId && !(friends[0]?.status) && user.userId != users[0]?.userId">
-                        <button (click)="acceptFriendRequest(friends[0].userFriendId, friends[0]?.friendId, friends[0]?.userId)">Accept Friend Request</button> 
-                    </div>
-                    <div *ngIf="friends[0]?.requesterId == user.userId">
-                        <button (click)="cancel(users[0]?.userId, user.userId)">Cancel Request</button> 
-                    </div>
-                    <div *ngIf="friends[0]?.status">
-                        <button (click)="unfriend(users[0]?.userId, user.userId)">Unfriend</button>
-                    </div>
-                </ng-template>
-            </div>
-      </div>
+        </div>
+        <div class="col-md-6">
+            <app-profile-post></app-profile-post><br><br>
+        </div>
+        <div class="col-md-3">
+        </div>
     </div>
 </div>
 
     <app-profile-blurb></app-profile-blurb><br><br>
     <app-profile-album></app-profile-album><br><br>
     <app-profile-friend></app-profile-friend><br><br>
-    <!-- <app-profile-post></app-profile-post><br><br> -->
 
 
 
