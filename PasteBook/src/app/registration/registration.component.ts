@@ -94,9 +94,16 @@ export class RegistrationComponent implements OnInit {
     return this.registrationform.get('MobileNumber');
   }
 
-  ngOnInit(): void {
-
-   }
+  checker(): void {
+    this.newUser = this.registrationform.value;
+    if(this.newUser.Password != this.newUser.ConfirmPassword){
+      return console.error('Wrong Password');
+    }
+    else{
+      this.addNewUser();
+    }
+  }
+  ngOnInit(): void {  }
 
   addNewUser(): void {
     if (this.registrationform.valid){
