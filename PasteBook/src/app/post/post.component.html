@@ -1,15 +1,10 @@
 <div class="container">
-    <div *ngIf="error > 0; else elseBlock">
-        <h1>{{errorMessage}}</h1>
-    </div>
-    <ng-template #elseBlock>
-        <div *ngIf="postDetail$ | async as PostDetail">
+        <div *ngIf="mapUserToPosts$ | async as PostDetail">
             <div>
                 <div id="postBody">
-                    <h5>First Name : {{PostDetail.post?.user?.firstName}} Last Name :
-                        {{PostDetail.post?.user?.lastName}}</h5>
+                    <h5><img src="https://localhost:44368/images/Image_202205181640261.png" alt=""> {{PostDetail.post?.userId?.firstName}} {{PostDetail.post?.userId?.lastName}}</h5>
                     <p> &nbsp; {{PostDetail.post?.postContent}}</p>
-                    <p id="postDate"><em>Posted last {{PostDetail.post?.postDate}}</em></p>
+                    <p id="postDate"><em>Posted last {{PostDetail.post?.postDate | date}}</em></p>
                     <div id="likeAndCommentRow">
                         <div id="like">
                             <p id="likeCount">{{likeCount}}</p>
@@ -27,7 +22,7 @@
                             </div>
                         </div>
                         <div>
-                            <p>Comments</p>
+                            <p>{{commentCount}} Comments</p>
                         </div>                    
                     </div>
                 </div>
@@ -62,5 +57,4 @@
                 </div>
             </div>
         </div>
-    </ng-template>
 </div>
