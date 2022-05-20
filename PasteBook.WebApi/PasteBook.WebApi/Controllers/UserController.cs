@@ -7,6 +7,7 @@ using PasteBook.WebApi.Helpers;
 using PasteBook.WebApi.Models;
 using System;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace PasteBook.WebApi.Controllers
@@ -99,6 +100,8 @@ namespace PasteBook.WebApi.Controllers
             {
                 return BadRequest();
             }
+            Random rnd = new Random();
+            user.UserName = Regex.Replace(user.FirstName, @"\s", "") + Regex.Replace(user.LastName, @"\s", "") + rnd.Next().ToString();
             UnitOfWork.UserRepository.Update(user);
             try
             {
