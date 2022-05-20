@@ -1,52 +1,69 @@
-<div class="container">
-    <h2>Edit Account Email</h2>
-    <form [formGroup]="updateEmailForm" (submit)="updateUserEmail()">
-        <div class="row g-3" id="accountEmailInfoBody">
-            <div class="col-md-3">
-                <label for="oldEmailAddress">Enter Old Email Address</label>
-                <input type="email" name="oldEmailAddress" class="form-control ng-valid"
-                    formControlName="oldEmailAddress" [(ngModel)]="updateEmailData.oldEmailAddress" required>
-                <div *ngIf="updateEmailForm.controls['oldEmailAddress'].invalid 
-                    && (updateEmailForm.controls['oldEmailAddress'].dirty 
-                    || updateEmailForm.controls['oldEmailAddress'].touched)">
-                    <div *ngIf="updateEmailForm?.errors?.['required']">
-                        This field is required.
-                    </div>
-                    <div *ngIf="updateEmailForm?.errors?.['pattern']">
-                        Please enter a valid email address.
-                    </div>
-                </div>
-                <label for="EmailAddress">New Email Address</label>
-                <input type="email" name="newEmailAddress" class="form-control ng-valid"
-                    formControlName="newEmailAddress" [(ngModel)]="updateEmailData.newEmailAddress" required>
-                <div *ngIf="updateEmailForm.controls['newEmailAddress'].invalid 
-                    && (updateEmailForm.controls['newEmailAddress'].dirty 
-                    || updateEmailForm.controls['newEmailAddress'].touched)">
-                    <div *ngIf="updateEmailForm?.errors?.['required']">
-                        This field is required.
-                    </div>
-                    <div *ngIf="updateEmailForm?.errors?.['pattern']">
-                        Please enter a valid email address.
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <label for="EmailAddress">Confirm New Email Address</label>
-                <input type="email" name="confirmNewEmailAddress" class="form-control ng-valid"
-                    formControlName="confirmNewEmailAddress" [(ngModel)]="updateEmailData.confirmNewEmailAddress"
-                    required>
-                <div *ngIf="updateEmailForm.controls['confirmNewEmailAddress'].invalid">
-                    <div *ngIf="updateEmailData.newEmailAddress != updateEmailData.confirmNewEmailAddress">
-                        New emails do not match.
+<div class="container-sm">
+    <div id="settingsBody">
+        <h2>Edit Account Email</h2>
+    </div>
+</div>
+
+<div class="wrapper">
+    <div class="inner">
+        <form [formGroup]="updateEmailForm" (submit)="updateUserEmail()">
+            <div class="form-group">
+                <div class="form-wrapper">
+                    <label for="oldEmailAddress">Enter Old Email Address</label>
+                    <input type="email" name="oldEmailAddress" class="form-control ng-valid"
+                        formControlName="oldEmailAddress" [(ngModel)]="updateEmailData.oldEmailAddress" required>
+                    <div *ngIf="updateEmailForm.controls['oldEmailAddress'].invalid 
+                        && (updateEmailForm.controls['oldEmailAddress'].dirty 
+                        || updateEmailForm.controls['oldEmailAddress'].touched)">
+                        <div *ngIf="updateEmailForm?.errors?.['required']">
+                            This field is required.
+                        </div>
+                        <div *ngIf="updateEmailForm?.errors?.['pattern']">
+                            Please enter a valid email address.
+                        </div>
                     </div>
                 </div>
 
-                <label for="EmailAddress">Enter Password</label>
-                <input type="password" name="OldPassword" class="form-control ng-valid" formControlName="oldPassword"
-                    [(ngModel)]="updateEmailData.oldPassword" required>
+                <div class="form-wrapper">
+                    <label for="EmailAddress">Enter Password</label>
+                    <input type="password" name="OldPassword" class="form-control ng-valid"
+                        formControlName="oldPassword" [(ngModel)]="updateEmailData.oldPassword" required>
+                </div>
             </div>
-        </div>
-        <button type="submit" (click)="updateUserEmail()" class="btn btn-primary">Update</button>
-        <button id="cancelButton" (click)="cancel()" class="btn btn-danger">Cancel</button>
-    </form>
+
+            <div class="form-group">
+                <div class="form-wrapper">
+                    <label for="EmailAddress">New Email Address</label>
+                    <input type="email" name="newEmailAddress" class="form-control ng-valid"
+                        formControlName="newEmailAddress" [(ngModel)]="updateEmailData.newEmailAddress" required>
+                    <div *ngIf="updateEmailForm.controls['newEmailAddress'].invalid 
+                        && (updateEmailForm.controls['newEmailAddress'].dirty 
+                        || updateEmailForm.controls['newEmailAddress'].touched)">
+                        <div *ngIf="updateEmailForm?.errors?.['required']">
+                            This field is required.
+                        </div>
+                        <div *ngIf="updateEmailForm?.errors?.['pattern']">
+                            Please enter a valid email address.
+                        </div>
+                    </div>
+                </div>
+                <div class="form-wrapper">
+                    <label for="EmailAddress">Confirm New Email Address</label>
+                    <input type="email" name="confirmNewEmailAddress" class="form-control ng-valid"
+                        formControlName="confirmNewEmailAddress" [(ngModel)]="updateEmailData.confirmNewEmailAddress"
+                        required>
+                    <div *ngIf="updateEmailForm.controls['confirmNewEmailAddress'].invalid">
+                        <div *ngIf="updateEmailData.newEmailAddress != updateEmailData.confirmNewEmailAddress">
+                            New email do not match.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="editProfileButtons">
+                <button id="updateButton" type="submit" (click)="updateUserEmail()"
+                    class="btn btn-primary">Update</button>
+                <button id="cancelButton" (click)="cancel()" class="btn btn-danger">Cancel</button>
+            </div>
+        </form>
+    </div>
 </div>
