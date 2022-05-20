@@ -83,8 +83,10 @@ export class PostComponent implements OnInit {
       }
       this.postService.addComment(newComment).subscribe(
         respone => {
+          console.log(this.user.userId)
+          console.log(postUserId)
           if(Number(this.user.userId != postUserId)){
-            this.notifService.CreateCommentNotif(Number(this.user.userId),Number(postId), Number(respone.commentId))
+            this.notifService.CreateCommentNotif(Number(postUserId),Number(postId), Number(respone.commentId))
           }
           this.comment = '';
           this.ngOnInit()
@@ -111,7 +113,7 @@ export class PostComponent implements OnInit {
       respone => {
         this.isLiked = true;
         if(Number(this.user.userId != postUserId)){
-          this.notifService.CreateLikeNotif(Number(this.user.userId),Number(postId), Number(respone.likeId))
+          this.notifService.CreateLikeNotif(Number(postUserId),Number(postId), Number(respone.likeId))
         }
         this.ngOnInit();
       }
