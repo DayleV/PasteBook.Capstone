@@ -48,8 +48,10 @@ export class PhotoComponent implements OnInit {
   }
 
   onUpload(){
-    this.photoService.addPhoto(this.selectedFile!, this.albumId).subscribe(response => this.serverResponse = response.toString());
-    window.location.reload();
+    this.photoService.addPhoto(this.selectedFile!, this.albumId).subscribe(response => {
+      this.serverResponse = response.toString()
+      window.location.reload();
+    });
   }
 
   
