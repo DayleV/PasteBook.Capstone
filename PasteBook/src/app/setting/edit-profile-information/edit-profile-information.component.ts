@@ -25,7 +25,9 @@ export class EditProfileInformationComponent implements OnInit {
     lastName: new FormControl(''),
     birthDate: new FormControl(''),
     gender: new FormControl(''),
-    mobileNumber: new FormControl('')
+    mobileNumber: new FormControl(''),
+    profilePicture: new FormControl(''),
+    profileBlurb: new FormControl('')
   });
   message: boolean = false;
 
@@ -40,7 +42,9 @@ export class EditProfileInformationComponent implements OnInit {
         lastName: new FormControl(result['lastName']),
         birthDate: new FormControl(result['birthDate']),
         gender: new FormControl(result['gender']),
-        mobileNumber: new FormControl(result['mobileNumber'])
+        mobileNumber: new FormControl(result['mobileNumber']),
+        profilePicture: new FormControl(result['profilePicture']),
+        profileBlurb: new FormControl(result['profilePicture'])
       });
     });
   }
