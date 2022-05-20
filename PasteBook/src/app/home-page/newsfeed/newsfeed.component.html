@@ -1,22 +1,33 @@
-<div class="individualpost" *ngFor="let post of mapNewsFeedPosts$ | async; index as i">
-    <div class="container-fluid">
-        <div class="row p-3">
-            <div class="col-md-2"><img src="https://localhost:44368/images/Image_202205181640261.png" alt=""></div>
-            <div class="col-md-6 fs-4">{{post.post?.userId.firstName}} {{post.post?.userId.lastName}}</div>
-            <div class="col-md-4 text-end">                               
-                <a [routerLink]="['/', 'posts', post.post.postId]"><em>view post  </em><i class="fa-solid fa-arrow-right"></i> </a>
+<p>{{totalNewsFeedPosts}}</p>
+<div infinite-scroll
+            [infiniteScrollDistance]="2"
+            [infiniteScrollThrottle]="1000"
+            [scrollWindow]="true"
+            [infiniteScrollDisabled] = disableAddScroll
+            (scrolled)="onScrollDown()" >
+    <div class="individualpost" *ngFor="let post of $any(mapNewsFeedPosts$ | async | slice: 0:limit); index as i">
+        <div class="container-fluid">
+            <div class="row p-3">
+                <div class="col-md-2"><img src="https://localhost:44368/images/Image_202205181640261.png" alt=""></div>
+                <div class="col-md-6 fs-4">{{post.post?.userId.firstName}} {{post.post?.userId.lastName}}</div>
+                <div class="col-md-4 text-end">                               
+                    <a [routerLink]="['/', 'posts', post.post.postId]"><em>view post  </em><i class="fa-solid fa-arrow-right"></i> </a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 align-self-center">{{post.post?.postContent}}</div>
+            </div>
+            <div class="row justify-content-end">
+                <div class="col-md-12 text-end"><em>Posted last  {{post.post?.postDate | date}}</em></div>
+            </div>
+            <div class="row justify-content-between">
+                <div class="col"><i class="fa-solid fa-heart"></i>  {{post.likeCount}} Likes</div>
+                <div class="col text-end">{{post.commentCount}} Comments</div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-12 align-self-center">{{post.post?.postContent}}</div>
-        </div>
-        <div class="row justify-content-end">
-            <div class="col-md-12 text-end"><em>Posted last  {{post.post?.postDate | date}}</em></div>
-        </div>
-        <div class="row justify-content-between">
-            <div class="col"><i class="fa-solid fa-heart"></i>  {{post.likeCount}} Likes</div>
-            <div class="col text-end">{{post.commentCount}} Comments</div>
-        </div>
+        <hr>
     </div>
-    <hr>
+    <div *ngIf="disableAddScroll">
+        <h1 text-align="center">You've reached the bottom!</h1>
+    </div>
 </div>
