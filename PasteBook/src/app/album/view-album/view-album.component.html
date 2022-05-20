@@ -3,7 +3,7 @@
     <h2 id="title">My Albums</h2>
   </div>
   <ng-template #elseblock>
-    <h3 *ngIf="user.userId != users[0]?.userId" id="title">{{users[0]?.firstName}}'s Albums</h3>
+    <h3 *ngIf="user.userId != users[0]?.userId" id="title">{{users[0]?.firstName | titlecase}}'s Albums</h3>
   </ng-template>
 
   <p *ngIf="user.userId == users[0]?.userId">

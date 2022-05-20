@@ -1,7 +1,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-3">
-            <h3>{{users[0]?.firstName}} {{users[0]?.lastName}}</h3>
+            <h3>{{users[0]?.firstName | titlecase}} {{users[0]?.lastName | titlecase}}</h3>
             <div class="container">
                 <div class="row">
                     <div class="col" *ngIf="filterFriend">
