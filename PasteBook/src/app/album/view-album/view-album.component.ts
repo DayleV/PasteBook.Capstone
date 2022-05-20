@@ -62,6 +62,7 @@ export class ViewAlbumComponent implements OnInit {
   }
 
   deleteAlbum(id: number): void{
+    console.log(id)
     this.albumService.delete(id).subscribe(albums => this.albums == albums);
     this.router.navigate(['view-albums']);
     window.location.reload();
