@@ -9,17 +9,17 @@
                         <br>
                         <div *ngIf="filterFriend | async as friends">
                             <div *ngIf="friends.length === 0 && user.userId != users[0]?.userId; else elseblock">
-                                <button type="submit" (click)="addUserFriend()">Add Friend</button>
+                                <button class="btn btn-primary" type="submit" (click)="addUserFriend()">Add Friend</button>
                             </div>
                             <ng-template #elseblock>
                                 <div *ngIf="friends[0]?.requesterId != user.userId && !(friends[0]?.status) && user.userId != users[0]?.userId">
-                                    <button (click)="acceptFriendRequest(friends[0].userFriendId, friends[0]?.friendId, friends[0]?.userId)">Accept Friend Request</button> 
+                                    <button class="btn btn-primary" (click)="acceptFriendRequest(friends[0].userFriendId, friends[0]?.friendId, friends[0]?.userId)">Accept Friend Request</button> 
                                 </div>
                                 <div *ngIf="friends[0]?.requesterId == user.userId">
-                                    <button (click)="cancel(users[0]?.userId, user.userId)">Cancel Request</button> 
+                                    <button class="btn btn-primary" (click)="cancel(users[0]?.userId, user.userId)">Cancel Request</button> 
                                 </div>
                                 <div *ngIf="friends[0]?.status">
-                                    <button (click)="unfriend(users[0]?.userId, user.userId)">Unfriend</button>
+                                    <button class="btn btn-primary" (click)="unfriend(users[0]?.userId, user.userId)">Unfriend</button>
                                 </div>
                             </ng-template>
                         </div>
