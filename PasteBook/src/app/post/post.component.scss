@@ -1,39 +1,74 @@
-#postBody {
-    padding: 20px;
-    cursor: pointer;
+@font-face {
+	font-family: "Muli-Regular";
+	src: url('../fonts/muli/Muli-Regular.ttf');
+}
+@font-face {
+	font-family: "Muli-SemiBold";
+	src: url('../fonts/muli/Muli-SemiBold.ttf');
+}
+@font-face {
+	font-family: "Muli-Bold";
+	src: url('../fonts/muli/Muli-Bold.ttf');
+}
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+body {
+	font-family: "Muli-Regular";
 }
 
-.likeAndPost{
+#likeAndCommentRow{
+   display: flex;
+   justify-content: space-between;
+}
+
+#like{
     display: flex;
-    justify-content: space-between;
-    border-bottom: 1px solid black;
-    padding: 10px;
 }
 
-.likeAndIcon{
-    display: flex;
-    justify-content: space-between;
+#likeCount{
+    margin: 0 0 0 5px;
+    font-size: 18.5px;
 }
 
-.commentBody{
-    margin-top: auto;
-    padding: 10px;
+#heartButton{
+    padding: 0 0 0 2px;
+}
+
+#postBody{
+    border-bottom: 2px solid black;
+}
+
+.container{
+    padding-top: 30px;
+    width: 60%;
+}
+
+#commentTextboxRow{
+    padding: 20px 0 20px 0;
     display: flex;
     justify-content: center;
 }
 
-.commentBox{
-    padding: 20px;
-    border-radius: 15px;
-}
-
-.commentContent{
-    border-bottom: 1px solid black;
-    padding: 10px;
-}
-
-.commentDate{
-    font-size: small;
+#postDate{
+    font-size: 13px;
     display: flex;
-    justify-content:space-between;
+    justify-content: right;
+    margin: 0;
+}
+
+#commentBody{
+    border-bottom: 1px solid black;
+    padding: 8px 8px 0 8px;
+}
+
+#commentHeader{
+    display: flex;
+    justify-content: space-between;
+}
+
+#commentDate{
+    font-size: 13px;
 }

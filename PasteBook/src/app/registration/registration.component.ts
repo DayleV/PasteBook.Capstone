@@ -3,6 +3,7 @@ import { IUserRegistrations } from './Model/userregistrations';
 import { RegistrationService } from './registration.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-registration',
@@ -11,6 +12,8 @@ import { Router } from '@angular/router';
 })
 
 export class RegistrationComponent implements OnInit {
+  text: string = '';
+
   newUser: IUserRegistrations = {
     EmailAddress: "",
     Password: "",
@@ -91,14 +94,42 @@ export class RegistrationComponent implements OnInit {
     return this.registrationform.get('MobileNumber');
   }
 
+  checker(): void {
+    this.newUser = this.registrationform.value;
+    if(this.newUser.Password != this.newUser.ConfirmPassword){
+      return console.error('Wrong Password');
+    }
+    else{
+      this.addNewUser();
+    }
+  }
   ngOnInit(): void {  }
 
   addNewUser(): void {
-    // this.userfriendService.addFriend(this.userfriend);
+    if (this.registrationform.valid){
+      // this.userfriendService.addFriend(this.userfriend);
     // console.log(this.userfriend);
     this.newUser = this.registrationform.value;
-    this.registrationService.addUser(this.newUser).subscribe(newUser => this.newUser = newUser);
-    this.registrationform.reset();
-    this.router.navigateByUrl('/');
+    this.registrationService.addUser(this.newUser).subscribe(newUser => 
+      {this.newUser = newUser
+        alert("Registration Succesful")
+        //this.text = "Registration Succesful"
+        this.router.navigateByUrl('/');
+        this.registrationform.reset();
+    },
+       (error: HttpErrorResponse) => {
+        if(error.status == 400){
+          //alert("Email already existed")
+          this.text = "Email already existed"
+          this.router.navigateByUrl('/registration');
+        }
+    });
+  }
+    else {
+      //alert("Registration Succesful")
+      this.text = "Invalid Credentials"
+      //this.router.navigateByUrl('/registration');
+    }
+    
   }
 }
