@@ -19,8 +19,10 @@
             <!-- <div *ngIf="loginform.controls['emailAddress'].invalid
                   && (loginform.controls['emailAddress'].dirty 
                   || loginform.controls['emailAddress'].touched)"> -->
-              <div *ngIf="emailAddress?.errors?.['required'] && emailAddress?.touched; else elseblock">
-                <span style="color: red; font-size: 12px;">This field is required.</span>
+              <div *ngIf="emailAddress?.errors?.['required'] && emailAddress?.touched || isChecker; else elseblock">
+                <span *ngIf="!(emailAddress?.touched) && !(emailAddress?.dirty) && isChecker" style="color: red; font-size: 12px;">Email Address is required.</span>
+                <span *ngIf="emailAddress?.errors?.['required'] && (emailAddress?.touched) && (emailAddress?.dirty)" style="color: red; font-size: 12px;">Email Address is required.</span>
+                <span *ngIf="isChecker">&nbsp;</span>
               </div>
               <ng-template #elseblock>
                 <div *ngIf="true">&nbsp;</div>
@@ -44,8 +46,10 @@
             <!-- <div *ngIf="loginform.controls['password'].invalid 
             && (loginform.controls['password'].dirty 
             || loginform.controls['password'].touched)"> -->
-              <div *ngIf="password?.errors?.['required'] && password?.touched; else elseblock">
-                <span style="color: red; font-size: 12px;">This field is required.</span>
+              <div *ngIf="password?.errors?.['required'] && password?.touched || isChecker; else elseblock">
+                <span *ngIf="!(password?.touched) && !(password?.dirty) && isChecker" style="color: red; font-size: 12px;">Password is required.</span>
+                <span *ngIf="password?.errors?.['required'] && (password?.touched) && (password?.dirty)" style="color: red; font-size: 12px;">Password is required.</span>
+                <span *ngIf="isChecker">&nbsp;</span>
               </div>
               <ng-template #elseblock>
                 <div *ngIf="true">&nbsp;</div>
