@@ -16,16 +16,19 @@
             aria-describedby="emailHelp" 
             placeholder="Enter email"
             required>
-            <div *ngIf="loginform.controls['emailAddress'].invalid
+            <!-- <div *ngIf="loginform.controls['emailAddress'].invalid
                   && (loginform.controls['emailAddress'].dirty 
-                  || loginform.controls['emailAddress'].touched)">
-              <div *ngIf="emailAddress?.errors?.['required']">
-                This field is required.
+                  || loginform.controls['emailAddress'].touched)"> -->
+              <div *ngIf="emailAddress?.errors?.['required'] && emailAddress?.touched; else elseblock">
+                <span style="color: red; font-size: 12px;">This field is required.</span>
               </div>
-              <div *ngIf="emailAddress?.errors?.['pattern']">
+              <ng-template #elseblock>
+                <div *ngIf="true">&nbsp;</div>
+              </ng-template>
+              <!-- <div *ngIf="emailAddress?.errors?.['pattern']">
                 Please enter a valid email address.
-              </div>
-            </div>
+              </div> -->
+            <!-- </div> -->
             <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
         </div>
         <div class="form-wrapper">
@@ -38,13 +41,16 @@
             formControlName="password"
             placeholder="Password"
             required>
-            <div *ngIf="loginform.controls['password'].invalid 
+            <!-- <div *ngIf="loginform.controls['password'].invalid 
             && (loginform.controls['password'].dirty 
-            || loginform.controls['password'].touched)">
-              <div *ngIf="password?.errors?.['required']">
-                This field is required.
+            || loginform.controls['password'].touched)"> -->
+              <div *ngIf="password?.errors?.['required'] && password?.touched; else elseblock">
+                <span style="color: red; font-size: 12px;">This field is required.</span>
               </div>
-            </div>
+              <ng-template #elseblock>
+                <div *ngIf="true">&nbsp;</div>
+              </ng-template>
+            <!-- </div> -->
         </div>
       </div>
       <button type="submit">Login</button>

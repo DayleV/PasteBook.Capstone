@@ -75,6 +75,7 @@ form {
 .form-group {
 	display: flex;
 	.form-wrapper {
+		margin: 0px;
 		width: 50%;
 		&:first-child {
 			margin-right: 20px;
@@ -82,7 +83,6 @@ form {
 	}
 }
 .form-wrapper {
-	margin-bottom: 17px;
 	label {
 		margin-bottom: 9px;
 		display: block;
@@ -94,7 +94,7 @@ form {
 	width: 100%;
 	height: 40px;
 	padding: 0 20px;
-	border-radius: 20px;
+	border-radius: 10px;
 	font-family: "Muli-Bold";
 	background:none;
 	&:focus {
@@ -107,7 +107,6 @@ button {
 	width: 152px;
 	height: 40px;
 	margin: auto;
-	margin-top: 29px;
 	cursor: pointer;
 	display: flex;
 	align-items: center;

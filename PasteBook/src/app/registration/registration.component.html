@@ -7,9 +7,13 @@
 <div class="wrapper">
   <div class="inner">
     <form [formGroup]="registrationform" (submit)="checker()">
-      <h3>Registration Form</h3>
+      <h3 style="margin-bottom: 5px;">Registration Form</h3>
+      <p *ngIf="text == ''">&nbsp;</p>
+      <p *ngIf="text != ''" style="color: red;">{{text}}</p>
+
+      <!-- EMAIL -->
       <div class="form-wrapper">
-        <label for="EmailAddress">Email Address</label>
+        <label for="EmailAddress">Email Address<span style="color: red;">*</span></label>
         <input
           type="email"
           name="EmailAddress"
@@ -17,57 +21,27 @@
           formControlName="EmailAddress"
           required
         >
-        <div *ngIf="registrationform.controls['EmailAddress'].invalid 
+        <!-- <div *ngIf="registrationform.controls['EmailAddress'].invalid 
                     && (registrationform.controls['EmailAddress'].dirty 
-                    || registrationform.controls['EmailAddress'].touched)">
-            <div *ngIf="EmailAddress?.errors?.['required']">
-              This field is required.
+                    || registrationform.controls['EmailAddress'].touched)"> -->
+            <div *ngIf="EmailAddress?.touched && !(EmailAddress?.dirty); else elseblock">
+              <div *ngIf="EmailAddress?.errors?.['required'] && EmailAddress?.touched; else elseblock">
+                <span style="color: red; font-size: 12px;">Email Address is required.</span>
+              </div>
+              <div *ngIf="EmailAddress?.errors?.['pattern']">
+                <span style="color: red; font-size: 12px;">Please enter a valid email address.</span>
+              </div>
             </div>
-            <div *ngIf="EmailAddress?.errors?.['pattern']">
-              Please enter a valid email address.
-            </div>
-        </div>
+            <ng-template #elseblock>
+              <div *ngIf="true">&nbsp;</div>
+            </ng-template>
+        <!-- </div> -->
       </div>
+
+      <!-- FIRSTNAME LASTNAME -->
       <div class="form-group">
         <div class="form-wrapper">
-          <label for="Password">Password</label>
-          <input
-            type="password"
-            name="Password"
-            class="form-control ng-valid"
-            formControlName="Password"
-            required
-          >
-          <div *ngIf="registrationform.controls['Password'].invalid 
-                      && (registrationform.controls['Password'].dirty 
-                      || registrationform.controls['Password'].touched)">
-              <div *ngIf="Password?.errors?.['required']">
-                This field is required.
-              </div>
-          </div>
-        </div>
-        <div class="form-wrapper">
-          <label for="ConfirmPassword">ConfirmPassword</label>
-          <input
-            type="password"
-            name="ConfirmPassword"
-            class="form-control ng-valid"
-            formControlName="ConfirmPassword"
-            required
-          >
-          <!-- <div *ngIf="registrationform.controls['ConfirmPassword'].touched"> -->
-              <div *ngIf="newUser.Password != newUser.ConfirmPassword">
-                Passwords do not match.
-              </div>
-              <div *ngIf="Password?.errors?.['required']">
-                This field is required.
-              </div>
-          <!-- </div> -->
-        </div>
-      </div>
-      <div class="form-group">
-        <div class="form-wrapper">
-          <label for="FirstName">First Name</label>
+          <label for="FirstName">First Name<span style="color: red;">*</span></label>
           <input
             type="text"
             name="FirstName"
@@ -76,22 +50,28 @@
             formControlName="FirstName"
             required
           >
-          <div *ngIf="registrationform.controls['FirstName'].invalid 
+          <!-- <div *ngIf="registrationform.controls['FirstName'].invalid 
                       && (registrationform.controls['FirstName'].dirty 
-                      || registrationform.controls['FirstName'].touched)">
-              <div *ngIf="FirstName?.errors?.['required']">
-                This field is required.
+                      || registrationform.controls['FirstName'].touched)"> -->
+              <div *ngIf="FirstName?.touched && !(FirstName?.dirty); else elseblock">
+                <div *ngIf="FirstName?.errors?.['required'] && FirstName?.touched">
+                  <span style="color: red; font-size: 12px;">First name is required.</span>
+                </div>
+                <!-- <div *ngIf="FirstName?.errors?.['minLength']">
+                  Minimum Length is 4.
+                </div> -->
+                <div *ngIf="FirstName?.errors?.['pattern']">
+                  <span style="color: red; font-size: 12px;">Please enter a valid first name.</span>
+                </div>
               </div>
-              <div *ngIf="FirstName?.errors?.['minLength']">
-                Minimum Length is 4.
-              </div>
-              <div *ngIf="FirstName?.errors?.['pattern']">
-                Please enter a valid first name.
-              </div>
-          </div>
+              <ng-template #elseblock>
+                <div *ngIf="!(FirstName?.touched) || FirstName?.dirty">&nbsp;</div>
+              </ng-template>
+              
+          <!-- </div> -->
         </div>
         <div class="form-wrapper">
-          <label for="LastName">Last Name</label>
+          <label for="LastName">Last Name<span style="color: red;">*</span></label>
           <input
             type="text"
             name="LastName"
@@ -99,18 +79,145 @@
             formControlName="LastName"
             required
           >
-          <div *ngIf="registrationform.controls['LastName'].invalid 
+          <!-- <div *ngIf="registrationform.controls['LastName'].invalid 
                       && (registrationform.controls['LastName'].dirty 
-                      || registrationform.controls['LastName'].touched)">
-              <div *ngIf="LastName?.errors?.['required']">
-                This field is required.
+                      || registrationform.controls['LastName'].touched)"> -->
+              <div *ngIf="LastName?.touched && !(FirstName?.dirty); else elseblock">
+                <div *ngIf="LastName?.errors?.['required'] && LastName?.touched">
+                  <span style="color: red; font-size: 12px;">Last name is required.</span>
+                </div>
+                <div *ngIf="LastName?.errors?.['pattern']">
+                  <span style="color: red; font-size: 12px;">Please enter a last name.</span>
+                </div>
               </div>
-              <div *ngIf="LastName?.errors?.['pattern']">
-                Please enter a last name.
-              </div>
-          </div>
+              <ng-template #elseblock>
+                <div *ngIf="!(FirstName?.touched) || FirstName?.dirty">&nbsp;</div>
+              </ng-template>
+              
+          <!-- </div> -->
         </div>
       </div>
+
+        <!-- PASSWORD CONFIRMPASSWORD -->
+        <div class="form-group">
+          <div class="form-wrapper">
+            <label for="Password">Password<span style="color: red;">*</span></label>
+            <input
+              type="password"
+              name="Password"
+              class="form-control ng-valid"
+              formControlName="Password"
+              required
+            >
+            <!-- <div *ngIf="registrationform.controls['Password'].invalid 
+                        && (registrationform.controls['Password'].dirty 
+                        || registrationform.controls['Password'].touched)"> -->
+                <div *ngIf="Password?.errors?.['required'] && Password?.touched; else elseblock">
+                  <span style="color: red; font-size: 12px;">Password is required.</span> 
+                </div>
+                <ng-template #elseblock>
+                  <div *ngIf="true">&nbsp;</div>
+                </ng-template>
+            <!-- </div> -->
+          </div>
+          <div class="form-wrapper">
+            <label for="ConfirmPassword">ConfirmPassword<span style="color: red;">*</span></label>
+            <input
+              type="password"
+              name="ConfirmPassword"
+              class="form-control ng-valid"
+              formControlName="ConfirmPassword"
+              required
+            >
+            <!-- <div *ngIf="registrationform.controls['ConfirmPassword'].touched"> -->
+                <div *ngIf="Password?.value != ConfirmPassword?.value && ConfirmPassword?.touched">
+                  <span style="color: red; font-size: 12px;">Password do not match.</span>
+                </div>
+                <!-- <div *ngIf="Password?.errors?.['required']">
+                  This field is required.
+                </div> -->
+            <!-- </div> -->
+          </div>
+        </div>
+
+        <!-- BIRTHDATE GENDER -->
+        <div class="form-group">
+          <div class="form-wrapper">
+            <label for="Birthdate">Birthdate<span style="color: red;">*</span></label>
+            <input
+              type="date"
+              name="Birthdate"
+              class="form-control  ng-valid"
+              formControlName="Birthdate"
+              required
+            >
+            <!-- <div *ngIf="registrationform.controls['Birthdate'].invalid 
+                        && (registrationform.controls['Birthdate'].dirty 
+                        || registrationform.controls['Birthdate'].touched)"> -->
+                <div *ngIf="Birthdate?.errors?.['required'] && Birthdate?.touched; else elseblock">
+                  <span style="color: red; font-size: 12px;">Birthdate is required.</span>
+                </div>
+                <ng-template #elseblock>
+                  <div *ngIf="true">&nbsp;</div>
+                </ng-template>
+            <!-- </div> -->
+          </div>
+          <div class="form-wrapper">
+            <label for="Gender">Gender</label>
+            <!-- <input
+              class="form-control "
+              type="text"
+              name="Gender"
+              formControlName="Gender"
+              [(ngModel)]="newUser.Gender"
+            > -->
+            <select
+              class="form-control select"
+              type="text"
+              name="Gender"
+              formControlName="Gender"
+            >
+                <option value="">Choose Gender</option>
+                <option value="Female">Female</option>
+                <option value="Male">Male</option>
+                <option value="Others">Others</option>
+          </select>
+          <div *ngIf="Gender?.errors?.['required'] && Gender?.touched; else elseblock">
+            <span style="color: red; font-size: 12px;">Gender is required</span>
+          </div>
+          <ng-template #elseblock>
+            <div *ngIf="true">&nbsp;</div>
+          </ng-template>
+          </div>
+        </div>
+
+        <!-- PHONENUMBER -->
+        <div class="form-wrapper">
+          <label for="MobileNumber">Mobile Number</label>
+          <input
+            class="form-control "
+            type="text"
+            name="MobileNumber"
+            formControlName="MobileNumber"
+          >
+          <!-- <div *ngIf="registrationform.controls['MobileNumber'].invalid"> -->
+              <div *ngIf="MobileNumber?.errors?.['pattern']; else elseblock">
+                <span style="color: red; font-size: 12px;">Enter a valid mobile number.</span>
+              </div>
+              <ng-template #elseblock>
+                <div *ngIf="true">&nbsp;</div>
+              </ng-template>
+          <!-- </div> -->
+        </div>
+        <button type="submit">Register Now</button>
+        <span>Back to <a href="/">Login</a> </span>
+    </form>
+  </div>
+</div>
+
+
+      
+<!--       
       <div class="form-group">
         <div class="form-wrapper">
           <label for="Birthdate">Birthdate</label>
@@ -130,7 +237,7 @@
           </div>
         </div>
         <div class="form-wrapper">
-          <label for="Gender">Gender</label>
+          <label for="Gender">Gender</label> --> 
           <!-- <input
             class="form-control "
             type="text"
@@ -138,7 +245,7 @@
             formControlName="Gender"
             [(ngModel)]="newUser.Gender"
           > -->
-          <select
+          <!-- <select
           class="form-control select"
             type="text"
             name="Gender"
@@ -169,4 +276,4 @@
       <button type="submit">Register Now</button>
     </form>
   </div>
-</div>
+</div> -->
