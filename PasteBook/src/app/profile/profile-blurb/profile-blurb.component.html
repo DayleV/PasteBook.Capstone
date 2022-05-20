@@ -19,22 +19,8 @@
         [(ngModel)]="users[0].profileBlurb"
         readonly
         style="border: none;"></textarea>
-        <!-- <textarea rows="10" *ngIf="users[0]?.profileBlurb == null "
-        type="textarea" name="{{users[0]?.profileBlurb}}" 
-        placeholder="About Me"  
-        [(ngModel)]="users[0].profileBlurb"
-        readonly></textarea> -->
     </div>
     <div *ngIf="isEdit">
         <textarea [(ngModel)]="users[0].profileBlurb" rows="3"></textarea>
     </div>
 </div>
-<!-- <div *ngIf="user.userId == users[0]?.userId">
-    <div *ngIf="!isEdit && user.userId == users[0]?.userId">
-        <button (click)="editBlurb()">Edit</button>
-    </div>
-    <div *ngIf="isEdit">
-        <button (click)="saveBlurb(user.userId)">Save</button>
-        <button (click)="cancelBlurb()">Cancel</button>
-    </div>
-</div> -->

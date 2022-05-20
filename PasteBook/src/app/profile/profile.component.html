@@ -7,7 +7,6 @@
             <div class="container">
                 <div class="row">
                     <div *ngIf="filterFriend">
-                        <!-- {{filterFriend | async | json}} -->
                         <br>
                         <div *ngIf="filterFriend | async as friends">
                             <div *ngIf="friends.length === 0 && user.userId != users[0]?.userId; else elseblock">
@@ -52,6 +51,5 @@
                 <app-profile-album></app-profile-album><br><br>
             <app-profile-friend></app-profile-friend><br><br>
             </div>
-            <!-- <app-profile-post></app-profile-post><br><br> -->
     </div>
 </div>
