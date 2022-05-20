@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PasteBook.WebApi.Data;
+using PasteBook.WebApi.Helpers;
 using PasteBook.WebApi.Models;
 using System.Threading.Tasks;
 
@@ -8,6 +9,7 @@ namespace PasteBook.WebApi.Controllers
 {
     [Route("comments")]
     [ApiController]
+    [AuthorizeAccess]
     public class CommentController : ControllerBase
     {
         public IUnitOfWork UnitOfWork { get; private set; }

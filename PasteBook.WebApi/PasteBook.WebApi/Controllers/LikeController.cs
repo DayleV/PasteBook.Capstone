@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PasteBook.WebApi.Data;
+using PasteBook.WebApi.Helpers;
 using PasteBook.WebApi.Models;
 using System.Threading.Tasks;
 
@@ -8,6 +9,7 @@ namespace PasteBook.WebApi.Controllers
 {
     [Route("likes")]
     [ApiController]
+    [AuthorizeAccess]
     public class LikeController : ControllerBase
     {
         public IUnitOfWork UnitOfWork { get; private set; }

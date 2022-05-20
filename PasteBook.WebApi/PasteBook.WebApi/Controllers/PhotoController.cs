@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PasteBook.WebApi.Data;
 using PasteBook.WebApi.DataObjectTransfer;
+using PasteBook.WebApi.Helpers;
 using PasteBook.WebApi.Models;
 using PasteBook.WebApi.Services;
 using System;
@@ -15,6 +16,7 @@ namespace PasteBook.WebApi.Controllers
 {
     [Route("photos")]
     [ApiController]
+    [AuthorizeAccess]
     public class PhotoController : ControllerBase
     {
         public IUnitOfWork UnitOfWork { get; private set; }

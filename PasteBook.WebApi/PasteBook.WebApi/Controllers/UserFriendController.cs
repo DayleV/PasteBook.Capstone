@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using PasteBook.WebApi.Data;
 using PasteBook.WebApi.DataTransferObject;
+using PasteBook.WebApi.Helpers;
 using PasteBook.WebApi.Models;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,7 @@ namespace PasteBook.WebApi.Controllers
 {
     [Route("userfriends")]
     [ApiController]
+    [AuthorizeAccess]
     public class UserFriendController : ControllerBase
     {
         public IUnitOfWork UnitOfWork { get; private set; }
