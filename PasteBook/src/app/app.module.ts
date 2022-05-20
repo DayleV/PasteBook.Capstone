@@ -27,11 +27,6 @@ import { SettingComponent } from './setting/setting.component';
 import { EditProfileInformationComponent } from './setting/edit-profile-information/edit-profile-information.component';
 import { EditAccountInformationComponent } from './setting/edit-account-information/edit-account-information.component';
 import { NotificationComponent } from './navigation-bar/notification/notification.component';
-import { ProfileDisplayComponent } from './profile-display/profile-display.component';
-import { DisplayAlbumComponent } from './display-album/display-album.component';
-import { DisplayFriendsComponent } from './display-friends/display-friends.component';
-import { PostDisplayComponent } from './post-display/post-display.component';
-import { AddPostComponent } from './add-post/add-post.component';
 import { ProfileAlbumComponent } from './profile/profile-album/profile-album.component';
 import { ProfileFriendComponent } from './profile/profile-friend/profile-friend.component';
 import { ProfilePostComponent } from './profile/profile-post/profile-post.component';
@@ -61,10 +56,6 @@ import { HomeFriendComponent } from './home-page/home-friend/home-friend.compone
     EditProfileInformationComponent,
     EditAccountInformationComponent,
     NotificationComponent,
-    DisplayAlbumComponent,
-    DisplayFriendsComponent,
-    PostDisplayComponent,
-    AddPostComponent,
     ProfileAlbumComponent,
     ProfileFriendComponent,
     ProfilePostComponent,
