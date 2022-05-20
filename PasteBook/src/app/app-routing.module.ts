@@ -50,8 +50,7 @@ const routes: Routes = [
     canActivate:[AuthenticatedGuard]
   },
   {
-    path: 'registration', component: RegistrationComponent, 
-    canActivate:[AuthenticatedGuard]
+    path: 'registration', component: RegistrationComponent
   },
   {
     path: 'settings/profile', component: EditProfileInformationComponent, 
