@@ -28,7 +28,7 @@ export class ProfilePostComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private profileService: ProfileService,
     private authService: AuthService, private postService: PostService,
-    private userService:NewsfeedapiService, private noifService: NotificationService) {
+    private newsfeedapiService:NewsfeedapiService, private noifService: NotificationService) {
      }
 
   ngOnInit(): void {
@@ -37,7 +37,7 @@ export class ProfilePostComponent implements OnInit {
       params => {
         params.get('string')? this.userName = params.get('string')! : '';
         
-        this.users = this.userService.getUsers();  
+        this.users = this.newsfeedapiService.getUsers();  
         
         this.profileService.getUserByUserName(this.userName)
         .pipe(
