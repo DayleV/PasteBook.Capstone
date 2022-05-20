@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { combineLatest, map, Observable } from 'rxjs';
+import { combineLatest, map, Observable, tap } from 'rxjs';
 import { AuthService } from 'src/app/security/auth.service';
 import { UserAuth } from 'src/app/security/Model/user-auth';
 import { IUsers } from 'src/app/user/Model/users';
@@ -18,6 +18,7 @@ export class NotificationComponent implements OnInit {
   notifWithUser$!: Observable<any[]> | null;
   loggedInUser: UserAuth = {};
   updateNotification:any;
+  isEmpty: boolean = true;
   
   constructor(private notifService: NotificationService) { }
 
@@ -34,7 +35,7 @@ export class NotificationComponent implements OnInit {
         ...notifs,
         friendId: users.find(u => notifs.friendId === u.userId)
       })).filter(n => n.notifReadStatus === false && n.userId === Number(this.loggedInUser.userId)))
-    );
+    ).pipe(tap(n => n.length>0?this.isEmpty = false: this.isEmpty = true));
 
     this.updateNotification = setInterval(()=>{
       this.notifWithUser$ = combineLatest([
@@ -45,13 +46,16 @@ export class NotificationComponent implements OnInit {
           ...notifs,
           friendId: users.find(u => notifs.friendId === u.userId)
         })).filter(n => n.notifReadStatus === false && n.userId === Number(this.loggedInUser.userId)))
-      );
+      ).pipe(tap(n => n.length>0?this.isEmpty = false: this.isEmpty = true));
     }, 10000);
   }
 
   clear(){
     this.notifService.clearNotification(this.loggedInUser.userId!).subscribe(
-      response => this.notifWithUser$ = null
+      response => {
+        this.notifWithUser$ = null;
+        this.isEmpty = true;
+      }
     )
   }
 }
