@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BehaviorSubject, combineLatest, map, Observable } from 'rxjs';
 import { catchError, EMPTY } from 'rxjs';
+import { NotificationService } from '../navigation-bar/notification/notification.service';
 import { PostService } from '../post/post.service';
 import { AuthService } from '../security/auth.service';
 import { UserAuth } from '../security/Model/user-auth';
@@ -30,7 +31,8 @@ export class ProfileComponent implements OnInit {
   userName!: string;
 
   constructor(route: ActivatedRoute, private profileService: ProfileService, 
-    private router: Router, private postService: PostService, private authService: AuthService) {
+    private router: Router, private postService: PostService, private authService: AuthService,
+    private noifService: NotificationService) {
       this.route = route;
       this.isEdit = false;
   }
@@ -73,14 +75,18 @@ export class ProfileComponent implements OnInit {
     this.userFriend.friendId = this.user.userId;
     this.userFriend.requesterId = this.user.userId;
     this.profileService.addUserFriendRequest(this.userFriend).subscribe(userFriend =>
-      userFriend
+      {
+        this.noifService.CreateFriendRequestNotif(this.users[0].userId!, userFriend.userFriendId!)
+      }
     );
 
     this.userFriend.userId = this.user.userId;
     this.userFriend.friendId = this.users[0].userId,
     this.userFriend.requesterId = this.user.userId;
     this.profileService.addUserFriendRequest(this.userFriend).subscribe(userFriend => 
-      this.ngOnInit()
+      {
+        this.ngOnInit()
+      }
     );
   }
 
