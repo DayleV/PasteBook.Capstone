@@ -13,7 +13,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 
 export class RegistrationComponent implements OnInit {
   text: string = '';
-  isTrue: boolean = true;
+  isChecker: boolean = false;
 
   newUser: IUserRegistrations = {
     EmailAddress: "",
@@ -132,6 +132,7 @@ export class RegistrationComponent implements OnInit {
     });
   }
     else {
+      this.isChecker = true;
       //alert("Registration Succesful")
       this.text = "Invalid Credentials"
       //this.router.navigateByUrl('/registration');

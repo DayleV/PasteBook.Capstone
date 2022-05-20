@@ -12,6 +12,7 @@ import { Login } from './Model/login';
 })
 export class LoginComponent implements OnInit {
   text: string = '';
+  isChecker: boolean = false;
 
   login: Login = {
     emailAddress: "",
@@ -45,6 +46,7 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit(){
+    this.isChecker = true;
     this.login = this.loginform.value;
     this.authService.login(this.login)
     .pipe()

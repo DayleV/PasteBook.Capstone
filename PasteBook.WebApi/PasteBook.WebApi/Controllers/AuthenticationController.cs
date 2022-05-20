@@ -37,19 +37,19 @@ namespace PasteBook.WebApi.Controllers
         {
             try
             {
-                //var auth = await UnitOfWork.AuthenticationRepository.EmailExist(user.EmailAddress);
-                //if (auth != null)
-                //{
-                //    return BadRequest(new { message = "Email Already Exist" });
+                var auth = await UnitOfWork.AuthenticationRepository.EmailExist(user.EmailAddress);
+                if (auth != null)
+                {
+                    return BadRequest(new { message = "Email Already Exist" });
 
-                //}
-                //await mailService.SendEmailAsync(user);
-                //var encryptPassword = authenticationService.Encrypt(user.Password);
-                //await UnitOfWork.AuthenticationRepository.InsertEncryptedUser(user, encryptPassword);
-                //return StatusCode(StatusCodes.Status201Created, new { message = "Account Successfuly Created" });
+                }
+                await mailService.SendEmailAsync(user);
+                var encryptPassword = authenticationService.Encrypt(user.Password);
+                await UnitOfWork.AuthenticationRepository.InsertEncryptedUser(user, encryptPassword);
+                return StatusCode(StatusCodes.Status201Created, new { message = "Account Successfuly Created" });
 
                 //COMMENT ABOVE AND RUN TO CREATE DUMMY DATA OF AUTH AND USER
-                string[] acc = { "John Doe", "Carol", "jack Adrian", "Bernadette", "Donna" };
+                /*string[] acc = { "John Doe", "Carol", "jack Adrian", "Bernadette", "Donna" };
                 foreach (var item in acc)
                 {
                     var u = new UserRegistration
@@ -62,7 +62,7 @@ namespace PasteBook.WebApi.Controllers
                     var encryptPassword = authenticationService.Encrypt(u.Password);
                     await UnitOfWork.AuthenticationRepository.InsertEncryptedUser(u, encryptPassword);
                 }
-                return Ok();
+                return Ok();*/
             }
             catch (Exception ex)
             {
