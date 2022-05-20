@@ -18,7 +18,6 @@ import { SettingComponent } from './setting/setting.component';
 import { ProfileComponent } from './profile/profile.component';
 import { ChangeEmailComponent } from './setting/change-email/change-email.component';
 import { ChangePasswordComponent } from './setting/change-password/change-password.component';
-import { ValidUserGuard } from './security/guard/valid-user.guard';
 
 const routes: Routes = [
   {
@@ -30,23 +29,62 @@ const routes: Routes = [
     path: 'login', component: LoginComponent, 
     canActivate:[LoginGuard]
   },
-  {path: 'users', component: UserComponent},
-  {path: ':string/albums', component: ViewAlbumComponent},
-  {path: 'add-album', component: AddAlbumComponent},
-  {path: ':string/albums/:id', component: SelectedAlbumComponent},
-  {path: 'friends', component: UserFriendComponent},
-  {path: 'registration', component: RegistrationComponent},
-  {path: 'settings/profile', component: EditProfileInformationComponent},
-  {path: 'friends', component: UserFriendComponent},
-  {path: 'registration', component: RegistrationComponent},
+  {
+    path: 'users', component: UserComponent, 
+    canActivate:[AuthenticatedGuard]
+  },
+  {
+    path: ':string/albums', component: ViewAlbumComponent, 
+    canActivate:[AuthenticatedGuard]
+  },
+  {
+    path: 'add-album', component: AddAlbumComponent, 
+    canActivate:[AuthenticatedGuard]
+  },
+  {
+    path: ':string/albums/:id', component: SelectedAlbumComponent, 
+    canActivate:[AuthenticatedGuard]
+  },
+  {
+    path: 'friends', component: UserFriendComponent, 
+    canActivate:[AuthenticatedGuard]
+  },
+  {
+    path: 'registration', component: RegistrationComponent, 
+    canActivate:[AuthenticatedGuard]
+  },
+  {
+    path: 'settings/profile', component: EditProfileInformationComponent, 
+    canActivate:[AuthenticatedGuard]
+  },
+  {
+    path: 'friends', component: UserFriendComponent, 
+    canActivate:[AuthenticatedGuard]
+  },
+  {
+    path: 'registration', component: RegistrationComponent, 
+    canActivate:[AuthenticatedGuard]
+  },
   {
     path: 'posts/:id', component: PostComponent, 
-    canActivate:[ValidUserGuard]
+    canActivate:[AuthenticatedGuard]
   },
-  {path: 'users/:string', component: ProfileComponent},
-  {path: 'settings', component: SettingComponent},
-  {path: 'settings/changeEmail', component: ChangeEmailComponent},
-  {path: 'settings/changePassword', component: ChangePasswordComponent}
+  {
+    path: 'users/:string', component: ProfileComponent, 
+    canActivate:[AuthenticatedGuard]
+  },
+  {
+    path: 'settings', component: SettingComponent, 
+    canActivate:[AuthenticatedGuard]
+  },
+  {
+    path: 'settings/changeEmail', component: ChangeEmailComponent, 
+    canActivate:[AuthenticatedGuard]
+  },
+  {
+    path: 'settings/changePassword', component: ChangePasswordComponent, 
+    canActivate:[AuthenticatedGuard]
+  }
 ];
 
 @NgModule({
