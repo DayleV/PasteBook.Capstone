@@ -24,6 +24,9 @@ a{
     text-decoration: none;
     font-weight: bold;
     color: black;
+    &:hover{
+        color: rgb(105, 104, 104);
+    }
 }
 
 // #clearNotifs{
@@ -91,10 +94,6 @@ body {
 #notifContent{
     background-color: #c1c1c1;
     font-size: 13px;
-    &:hover{
-        transition: 1000ms;
-        background-color: #7e7b7b;
-    }
 }
 
 #clearContent{
