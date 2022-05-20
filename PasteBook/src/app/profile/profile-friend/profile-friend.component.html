@@ -4,8 +4,8 @@
     <div *ngIf="userFriends$ | async as friends">
         <table>
             <tr *ngFor="let friend of friends">
-                <td>{{friend.friendId.firstName}}</td>
-                <td>{{friend.friendId.lastName}}</td>
+                <td>{{friend.friendId.firstName | titlecase}}</td>
+                <td>{{friend.friendId.lastName | titlecase}}</td>
                 <a class="nav-link"
                     href="/users/{{friend.friendId.userName}}"><i
                         class="fa-solid fa-user"></i></a>

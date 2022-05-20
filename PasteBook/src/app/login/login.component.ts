@@ -21,11 +21,11 @@ export class LoginComponent implements OnInit {
   loginform = new FormGroup(
     {
     emailAddress: new FormControl('', [
-      // Validators.required,
+      Validators.required,
       // Validators.pattern(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)
     ]),
       password: new FormControl('', [
-      // Validators.required,
+      Validators.required,
     ]),
   },
   
