@@ -1,5 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/security/auth.service';
 import { UserAuth } from 'src/app/security/Model/user-auth';
 import { ChangeaccountinfoService } from '../changeaccountinfo.service';
@@ -26,7 +27,7 @@ export class ChangePasswordComponent implements OnInit {
 
   loggedInUser: UserAuth = {};
 
-  constructor(private changeAccountInfoService: ChangeaccountinfoService, private authService: AuthService) { }
+  constructor(private changeAccountInfoService: ChangeaccountinfoService, private authService: AuthService, private route: Router) { }
 
   ngOnInit(): void {
     this.loggedInUser = this.authService.getLoggedInUser()!;
@@ -74,5 +75,10 @@ export class ChangePasswordComponent implements OnInit {
     this.updatePasswordRequestData.oldPassword = this.updatePasswordData.oldPassword;
     this.updatePasswordRequestData.newPassword = this.updatePasswordData.newPassword;
     this.changeAccountInfoService.updateUserPassword(this.updatePasswordRequestData).subscribe(response => console.log(response));
+  }
+
+  cancel() {
+    this.ngOnInit();
+    this.route.navigate([`/settings`]);
   }
 }

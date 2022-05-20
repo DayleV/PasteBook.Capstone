@@ -89,7 +89,8 @@ namespace PasteBook.WebApi.Controllers
                         }
                 }
             }
-            return Ok(userFeed);
+            var orderedFeed = userFeed.OrderByDescending(p => p.Post.PostDate);
+            return Ok(orderedFeed);
         }
 
         [HttpGet("/profile-album/{UserId}")]

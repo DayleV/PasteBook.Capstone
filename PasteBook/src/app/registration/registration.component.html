@@ -160,9 +160,7 @@
           name="MobileNumber"
           formControlName="MobileNumber"
         >
-        <div *ngIf="registrationform.controls['MobileNumber'].invalid 
-                      && (registrationform.controls['MobileNumber'].dirty 
-                      || registrationform.controls['MobileNumber'].touched)">
+        <div *ngIf="registrationform.controls['MobileNumber'].invalid">
             <div *ngIf="MobileNumber?.errors?.['pattern']">
               Enter a valid mobile number.
             </div>

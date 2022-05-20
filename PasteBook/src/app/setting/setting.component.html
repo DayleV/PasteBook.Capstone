@@ -1,54 +1,41 @@
 <div class="container-sm">
-    <div id="settingsBody">
-        <h3>User Information </h3>
-        <p id="settingsBodyLink">
-            <span> <a [routerLink]="['/settings/changeEmail']">Edit Account Email &nbsp; | </a> &nbsp; </span> 
-            <span> <a [routerLink]="['/settings/changePassword']">Edit Account Password</a> </span>
-        </p>
-    </div>
+  <div id="settingsBody">
+    <h2>User Information </h2>
+    <p id="settingsBodyLink">
+      <span> <a [routerLink]="['/settings/changeEmail']">Edit Account Email &nbsp; | &nbsp;  </a> </span>
+      <span> <a [routerLink]="['/settings/changePassword']">Edit Account Password  &nbsp; | &nbsp; </a> </span>
+      <span> <a [routerLink]="['/settings/profile']">Edit Profile</a> </span>
+    </p>
+  </div>
 </div>
 <div class="wrapper">
-    <div class="inner">
-      <form>
-            <div class="form-group">
-                <div class="form-wrapper">
-                    <label>First Name</label>
-                    <input
-                    class="form-control" 
-                    value="{{user.firstName}}"
-                    disabled>
-                </div>
-              <div class="form-wrapper">
-                <label>Last Name</label>
-                  <input  
-                  class="form-control" 
-                  value="{{user.lastName}}"
-                  disabled>
-              </div>
-            </div>
-          <div class="form-group">
-            <div class="form-wrapper">
-                <label>Birthdate</label>
-                  <input  
-                  class="form-control" 
-                  value="{{user.birthDate | date: 'MMMM d, y'}}"
-                  disabled>
-              </div>
-              <div class="form-wrapper">
-                <label>Gender</label>
-                  <input  
-                  class="form-control" 
-                  value="{{user.gender}}"
-                  disabled>
-              </div>
-          </div>
-          <div class="form-wrapper">
-            <label>Mobile Number</label>
-              <input  
-              class="form-control" 
-              value="{{user.mobileNumber}}"
-              disabled>
-          </div>
-      </form>
-    </div>
+  <div class="inner">
+    <form>
+      <div class="form-group">
+        <div class="form-wrapper">
+          <label>First Name</label>
+          <input class="form-control" value="{{user.firstName}}" disabled>
+        </div>
+        <div class="form-wrapper">
+          <label>Last Name</label>
+          <input class="form-control" value="{{user.lastName}}" disabled>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="form-wrapper">
+          <label>Birthdate</label>
+          <input class="form-control" value="{{user.birthDate | date: 'MMMM d, y'}}" disabled>
+        </div>
+        <div class="form-wrapper">
+          <label>Gender</label>
+          <input class="form-control" value="{{user.gender}}" disabled>
+        </div>
+      </div>
+      <div class="form-wrapper">
+        <label>Mobile Number</label>
+        <input class="form-control" value="{{user.mobileNumber}}" disabled>
+      </div>
+    </form>
   </div>
+</div>
+
