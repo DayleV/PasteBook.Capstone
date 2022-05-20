@@ -1,6 +1,6 @@
 <div class="dropdown">
     <button class="btn" type="button" id="notification" data-bs-toggle="dropdown" aria-expanded="false">
-        <i class="fa-solid fa-bell"></i>
+        <i id="bell" class="fa-solid fa-bell justify-content-center"><span id="badge" *ngIf="!isEmpty"> </span></i>
     </button>
     <ul class="dropdown-menu" aria-labelledby="notification">
         <div  *ngIf="notifWithUser$ | async as notifs">

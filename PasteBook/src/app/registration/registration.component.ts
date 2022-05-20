@@ -3,6 +3,7 @@ import { IUserRegistrations } from './Model/userregistrations';
 import { RegistrationService } from './registration.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-registration',
@@ -103,11 +104,26 @@ export class RegistrationComponent implements OnInit {
   ngOnInit(): void {  }
 
   addNewUser(): void {
-    // this.userfriendService.addFriend(this.userfriend);
+    if (this.registrationform.valid){
+      // this.userfriendService.addFriend(this.userfriend);
     // console.log(this.userfriend);
     this.newUser = this.registrationform.value;
-    this.registrationService.addUser(this.newUser).subscribe(newUser => this.newUser = newUser);
-    this.registrationform.reset();
+    this.registrationService.addUser(this.newUser).subscribe(newUser => 
+      {this.newUser = newUser;
+      }, (error: HttpErrorResponse) => {
+        if(error.status == 400){
+          alert("Email already existed")
+          this.router.navigateByUrl('/registration');
+        }
+    });
+    alert("Registration Succesful")
     this.router.navigateByUrl('/');
+    this.registrationform.reset();
+    }
+    else {
+      alert("Invalid Credentials")
+      this.router.navigateByUrl('/registration');
+    }
+    
   }
 }

@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -49,6 +50,11 @@ export class LoginComponent implements OnInit {
     .subscribe(response => {
       if(response.token)
         this.router.navigateByUrl('/');
-    });
+    }, (error: HttpErrorResponse) => {
+      if(error.status == 401){
+        alert("Account doesn't Exist")
+        this.router.navigateByUrl('/login');
+      }
+  });
   }
 }
