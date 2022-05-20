@@ -27,7 +27,8 @@ export class EditProfileInformationComponent implements OnInit {
     gender: new FormControl(''),
     mobileNumber: new FormControl(''),
     profilePicture: new FormControl(''),
-    profileBlurb: new FormControl('')
+    profileBlurb: new FormControl(''),
+    userName: new FormControl('')
   });
   message: boolean = false;
 
@@ -44,7 +45,8 @@ export class EditProfileInformationComponent implements OnInit {
         gender: new FormControl(result['gender']),
         mobileNumber: new FormControl(result['mobileNumber']),
         profilePicture: new FormControl(result['profilePicture']),
-        profileBlurb: new FormControl(result['profilePicture'])
+        profileBlurb: new FormControl(result['profileBlurb']),
+        userName: new FormControl(result['userName'])
       });
     });
   }

@@ -33,8 +33,8 @@
             <h6>Gender</h6>
             <p>{{users[0]?.gender}}</p>
             <h6>Mobile Number</h6>
-            <p *ngIf="users[0].mobileNumber != null">---</p>
-            <p *ngIf="users[0].mobileNumber != null">{{users[0]?.mobileNumber}}</p>
+            <p *ngIf="users[0]?.mobileNumber != null">---</p>
+            <p *ngIf="users[0]?.mobileNumber != null">{{users[0]?.mobileNumber}}</p>
             <app-profile-blurb></app-profile-blurb>
         </div>
         <div class="col-md-6">
