@@ -26,11 +26,24 @@
                     </div>
                 </div>
             </div>
-            
+            <h6>Birthdate</h6>
+            <p>{{users[0]?.birthDate | date: 'MMMM d, y'}}</p>
+            <h6>Gender</h6>
+            <p>{{users[0]?.gender}}</p>
+            <h6>Mobile Number</h6>
+            <p>{{users[0]?.mobileNumber}}</p>
             <app-profile-blurb></app-profile-blurb>
         </div>
         <div class="col-md-6">
-            <app-profile-post></app-profile-post>
+            <h2>Timeline</h2>
+            <div *ngIf="filterFriend | async as friends">
+                <div *ngIf="user.userId == users[0]?.userId || (friends[0]?.status); else elseblock" >
+                    <app-profile-post></app-profile-post>
+                </div>
+                <ng-template #elseblock div class="col-md-6">
+    
+                </ng-template>
+            </div>
         </div>
             <div class="col-md-3">
                 <app-profile-album></app-profile-album><br><br>

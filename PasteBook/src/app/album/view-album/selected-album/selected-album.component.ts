@@ -38,22 +38,24 @@ export class SelectedAlbumComponent implements OnInit {
    }
 
   ngOnInit(): void{
-    this.id = Number(this.route.snapshot.paramMap.get('id'));
-    this.albumService.getAlbum(this.id).subscribe(album => {
-      this.album = album;
-      });
-
     this.user = this.authService.getLoggedInUser()!;
 
     this.route.paramMap.subscribe(
       params => {
         params.get('string')? this.userName = params.get('string')! : '';
+        this.id = Number(this.route.snapshot.paramMap.get('id'));
+        
+        this.albumService.getAlbum(this.id).subscribe(album => {
+        this.album = album;
+
+        this.profileService.getUserByUserName(this.userName).subscribe(users => {
+          this.users = users;
+          });
+      });
       }
     );
     
-    this.profileService.getUserByUserName(this.userName).subscribe(users => {
-      this.users = users;
-      });
+    
 
     // if(id != this.user.userId){
     //   this.checker = false;
@@ -63,7 +65,7 @@ export class SelectedAlbumComponent implements OnInit {
   cancel(){
     this.ngOnInit();
     this.isEdit = false;
-    this.router.navigate([`${this.users.firstName! + this.users.lastName! + this.users.userId}/albums/${this.id}`]);
+    this.router.navigate([`${this.users[0]?.userName}/albums/${this.id}`]);
   }
 
   updateAlbum(){
@@ -72,9 +74,12 @@ export class SelectedAlbumComponent implements OnInit {
   }
 
   saveAlbum(){
-    this.albumService.update(this.id, this.album).subscribe(album => this.album == album);
+    this.albumService.update(this.id, this.album).subscribe(album => 
+      {this.album == album
+        this.ngOnInit();
+      });
     this.isEdit = false;
-    this.router.navigate([`${this.users.firstName! + this.users.lastName! + this.users.userId}/albums/${this.id}`]);
+    this.router.navigate([`${this.users[0].userName}/albums/${this.id}`]);
   }
 
   onFileSelected(event: any){
@@ -82,7 +87,10 @@ export class SelectedAlbumComponent implements OnInit {
   }
 
   onUpload(){
-    this.photoService.addPhoto(this.selectedFile).subscribe(album => this.album == album);
+    this.photoService.addPhoto(this.selectedFile).subscribe(album => 
+      {this.album == album
+        this.ngOnInit();
+      });
     console.log(this.selectedFile)
   }
   

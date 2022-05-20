@@ -34,23 +34,24 @@ export class ProfileFriendComponent implements OnInit {
       this.route.paramMap.subscribe(
         params => {
           params.get('string')? this.userName = params.get('string')! : '';
+          this.profileService.getUserByUserName(this.userName).subscribe(users => {
+            this.user = users;
+            this.friends$ = this.user_friendService.getFriends(this.user[0].userId!);
+            this.users$ = this.user_friendService.getUser();
+      
+            this.userFriends$ = combineLatest([
+              this.friends$,
+              this.users$
+            ]).pipe(
+              map(([friends, users]) => friends.map(friends => ({
+                  ...friends,
+                  friendId: users.find(u => friends.friendId === u.userId)}))
+            ));
+          });
         }
       );
   
-      this.profileService.getUserByUserName(this.userName).subscribe(users => {
-        this.user = users;
-        this.friends$ = this.user_friendService.getFriends(this.user[0].userId!);
-        this.users$ = this.user_friendService.getUser();
-  
-        this.userFriends$ = combineLatest([
-          this.friends$,
-          this.users$
-        ]).pipe(
-          map(([friends, users]) => friends.map(friends => ({
-              ...friends,
-              friendId: users.find(u => friends.friendId === u.userId)}))
-        ));
-      });
+     
     }
 
 }
