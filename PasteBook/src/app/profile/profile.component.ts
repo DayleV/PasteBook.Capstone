@@ -42,30 +42,27 @@ export class ProfileComponent implements OnInit {
     this.route.paramMap.subscribe(
       params => {
         params.get('string')? this.userName = params.get('string')! : '';
+        this.profileService.getUserByUserName(this.userName).subscribe(users => {
+          this.users = users;
+          });
+      
+          this.allFriends = this.profileService.getFriends();
+          this.profileUser = this.profileService.getUserByUserName(this.userName);
+          this.filterFriend = combineLatest([
+            this.allFriends,
+            this.profileUser
+          ]).pipe(
+            map(([allfriends, user]) => 
+            allfriends
+              .filter(af => af.userId === Number(user[0].userId) && af.friendId === Number(this.user.userId) ||
+               af.userId === Number(user[0].userId) && af.friendId === Number(this.user.userId)))
+          );
+      
+          this.profileService.getAllRequest().subscribe(response => this.getAllRequest = response);
       }
     );
 
-    this.profileService.getUserByUserName(this.userName).subscribe(users => {
-    this.users = users;
-    });
-
-    this.allFriends = this.profileService.getFriends();
-    this.profileUser = this.profileService.getUserByUserName(this.userName);
-    this.filterFriend = combineLatest([
-      this.allFriends,
-      this.profileUser
-    ]).pipe(
-      map(([allfriends, user]) => 
-      allfriends
-        .filter(af => af.userId === Number(user[0].userId) && af.friendId === Number(this.user.userId) ||
-         af.userId === Number(user[0].userId) && af.friendId === Number(this.user.userId)))
-    );
-
-    this.profileService.getAllRequest().subscribe(response => this.getAllRequest = response);
-
-    if(this.id != this.user.userId){
-          this.checker = false;
-        }
+    
   }
 
   userFriend: IUser_Friends = {
