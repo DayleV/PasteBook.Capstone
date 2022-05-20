@@ -1,7 +1,9 @@
 <div class="wrapper">
   <div class="inner">
     <form [formGroup]="loginform" (ngSubmit)="onSubmit()">
-      <h3>Log In</h3>
+      <h3 style="margin-bottom: 10px;">Log In</h3>
+        <p *ngIf="text == ''">&nbsp;</p>
+        <p *ngIf="text != ''" style="color: red;">{{text}}</p>
       <div class="form-group">
         <div class="form-wrapper">
           <label for="emailAddress">Email address</label>

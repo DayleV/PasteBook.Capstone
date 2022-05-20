@@ -11,6 +11,7 @@ import { Login } from './Model/login';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
+  text: string = '';
 
   login: Login = {
     emailAddress: "",
@@ -20,11 +21,11 @@ export class LoginComponent implements OnInit {
   loginform = new FormGroup(
     {
     emailAddress: new FormControl('', [
-      Validators.required,
-      Validators.pattern(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)
+      // Validators.required,
+      // Validators.pattern(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)
     ]),
       password: new FormControl('', [
-      Validators.required,
+      // Validators.required,
     ]),
   },
   
@@ -52,7 +53,7 @@ export class LoginComponent implements OnInit {
         this.router.navigateByUrl('/');
     }, (error: HttpErrorResponse) => {
       if(error.status == 401){
-        alert("Account doesn't Exist")
+        this.text = "User does not exist";
         this.router.navigateByUrl('/login');
       }
   });

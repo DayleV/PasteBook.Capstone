@@ -1,57 +1,60 @@
-<div *ngIf="error > 0; else elseBlock">
-    <h1>{{errorMessage}}</h1>
-</div>
-<ng-template #elseBlock><div *ngIf="postDetail$ | async as PostDetail">
-    <!-- <p>Post ID : {{PostDetail.post?.postId}}</p>
-    <p>User ID : {{PostDetail.post?.userId}}</p> -->
-    <div id="postBody" class="container-sm">
-        <p>First Name : {{PostDetail.post?.user?.firstName}} Last Name : {{PostDetail.post?.user?.lastName}}</p>
-        <p>Post Content : {{PostDetail.post?.postContent}}</p>
-        <div class="likeAndPost">
-            <div class="likeAndIcon">
-                <p>like count : {{likeCount}}</p>
-                <div *ngIf="isLiked">
-                    <button class="btn btn-default" type="submit" (click)="unLikePost(PostDetail.post?.postId!)">
-                        <i [ngClass]="{'fa-solid fa-thumbs-up' : isLiked === true}"></i>
-                    </button>
+<div class="container">
+        <div *ngIf="mapUserToPosts$ | async as PostDetail">
+            <div>
+                <div id="postBody">
+                    <h5><img src="https://localhost:44368/images/Image_202205181640261.png" alt=""> {{PostDetail.post?.userId?.firstName}} {{PostDetail.post?.userId?.lastName}}</h5>
+                    <p> &nbsp; {{PostDetail.post?.postContent}}</p>
+                    <p id="postDate"><em>Posted last {{PostDetail.post?.postDate | date}}</em></p>
+                    <div id="likeAndCommentRow">
+                        <div id="like">
+                            <p id="likeCount">{{likeCount}}</p>
+                            <div *ngIf="isLiked">
+                                <button id="heartButton" class="btn btn-default" type="submit"
+                                    (click)="unLikePost(PostDetail.post?.postId!)">
+                                    <i [ngClass]="{'fa-solid fa-heart' : isLiked === true}"></i>
+                                </button>
+                            </div>
+                            <div *ngIf="!isLiked">
+                                <button id="heartButton" class="btn btn-default" type="submit"
+                                    (click)="likePost(PostDetail.post?.postId!, PostDetail.post?.user?.userId!)">
+                                    <i [ngClass]="{'fa fa-heart-o' : isLiked === false}"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div>
+                            <p>{{commentCount}} Comments</p>
+                        </div>                    
+                    </div>
                 </div>
-                <div *ngIf="!isLiked">
-                    <button class="btn btn-default" type="submit" (click)="likePost(PostDetail.post?.postId!, PostDetail.post?.user?.userId!)">
-                        <i [ngClass]="{'fa-regular fa-thumbs-up' : isLiked === false}"></i>
+            </div>        
+
+            <div>
+                <div id="commentTextboxRow">
+                    <textarea rows="2" cols="80" name="comment" type="text" [(ngModel)]="comment" id="commentTextbox"
+                        placeholder="Enter Comment"
+                        (keyup.enter)="AddComment(PostDetail.post?.postId!, PostDetail.post?.user?.userId!)">
+                        </textarea>
+                    <button class="btn btn-default" type="submit" (click)="ShowComments()">
+                        <i class="fa-solid fa-sort-down"></i>
                     </button>
+                    <!-- <ng-template #elseBlock>
+                            <button class="btn btn-default" type="submit" (click)="ShowComments()">
+                                <i class="fa-solid fa-caret-down"></i>
+                            </button>
+                        </ng-template>       -->
+                </div>
+                <div *ngIf="showComments">
+                    <div *ngFor="let comment of PostDetail.comments" id="commentBody">
+                        <span id="commentHeader">
+                            <h6>First Name : {{PostDetail.post?.user?.firstName}} Last Name :{{PostDetail.post?.user?.lastName}}</h6>
+                            <p id="commentDate"><em>Comment Date: {{comment.commentDate}}</em></p>
+                        </span>
+                        <p>
+                            <span> &nbsp; &nbsp; <em>{{comment.commentContent}}</em></span>
+                        </p>
+                    </div>
+                    <br>
                 </div>
             </div>
-            <p>Post Date : {{PostDetail.post?.postDate}}</p>                
         </div>
-    </div>
-
-    <div class="commentBody">       
-        <input class="commentBox" size="130" name="comment" type="text" [(ngModel)]="comment" id="comment" placeholder="Enter Comment"
-            (keyup.enter)="AddComment(PostDetail.post?.postId!, PostDetail.post?.user?.userId!)">
-        <button *ngIf="showComments; else elseBlock" class="btn btn-default" type="submit" (click)="ShowComments()">
-            <i class="fa-solid fa-sort-up"></i>
-        </button>
-        <ng-template #elseBlock>
-            <button class="btn btn-default" type="submit" (click)="ShowComments()">
-                <i class="fa-solid fa-caret-down"></i>
-            </button>
-        </ng-template>      
-        <!-- <p>Add comment: (enter to add)</p> -->
-    </div>
-    <div *ngIf="showComments" class="container-sm">
-        <div *ngFor="let comment of PostDetail.comments" class="commentContent">
-            <!-- <span>Comment ID : {{comment.commentId}}</span>
-            <span>Post ID : {{comment.postId}}</span>
-            <span>User ID : {{comment.userId}}</span> -->
-             
-            <span class="commentDate">
-                <p>First Name : {{PostDetail.post?.user?.firstName}} Last Name : {{PostDetail.post?.user?.lastName}}</p>
-                Comment Date: {{comment.commentDate}}
-            </span> 
-            <br>
-            <span >Comment Content : {{comment.commentContent}}</span>          
-        </div>
-        <br>
-        </div>
-    </div>
-</ng-template>
+</div>

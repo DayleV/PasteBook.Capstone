@@ -18,6 +18,7 @@ import { SettingComponent } from './setting/setting.component';
 import { ProfileComponent } from './profile/profile.component';
 import { ChangeEmailComponent } from './setting/change-email/change-email.component';
 import { ChangePasswordComponent } from './setting/change-password/change-password.component';
+import { ValidUserGuard } from './security/guard/valid-user.guard';
 
 const routes: Routes = [
   {
@@ -39,7 +40,8 @@ const routes: Routes = [
   {path: 'friends', component: UserFriendComponent},
   {path: 'registration', component: RegistrationComponent},
   {
-    path: 'posts/:id', component: PostComponent
+    path: 'posts/:id', component: PostComponent, 
+    canActivate:[ValidUserGuard]
   },
   {path: 'users/:string', component: ProfileComponent},
   {path: 'settings', component: SettingComponent},
