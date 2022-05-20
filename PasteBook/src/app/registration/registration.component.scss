@@ -43,6 +43,8 @@ a:hover {
     outline: none;
 }
 .wrapper {
+	padding: 10px;
+	margin: 0px;
 	min-height: 100vh;
 	background-size: cover;
 	background-repeat: no-repeat;
@@ -197,4 +199,11 @@ a {
 
 span {
 	color: red;
+}
+
+#login {
+	text-align: center;
+	right: 0;
+	margin: 10px;
+	padding-top: 5px;
 }
