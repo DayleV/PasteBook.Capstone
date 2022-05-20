@@ -57,3 +57,13 @@ p{
     background-color: rgb(189, 186, 186);
     border-radius: 2px;
 }
+
+a {
+    text-decoration: none;
+    color: black;
+	font-family: "Muli-Regular";
+
+    :visited {
+        color: black;
+    }
+}

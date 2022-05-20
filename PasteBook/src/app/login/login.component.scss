@@ -56,6 +56,7 @@ a:hover {
 	padding-top: 68px;
 	padding-bottom: 48px;
 	background-image: url('../images/registration-form-2.jpg');
+	background-repeat:repeat-x;
 	h3 {
 		text-transform: uppercase;
 		font-size: 22px;
@@ -94,7 +95,7 @@ form {
 	padding: 0 20px;
 	border-radius: 20px;
 	font-family: "Muli-Bold";
-	background:none;
+	background-color: white ;
 	&:focus {
 		border: 1px solid #ae3c33;
 	}
