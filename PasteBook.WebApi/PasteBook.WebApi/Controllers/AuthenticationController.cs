@@ -45,7 +45,10 @@ namespace PasteBook.WebApi.Controllers
                 }
                 await mailService.SendEmailAsync(user);
                 var encryptPassword = authenticationService.Encrypt(user.Password);
-                await UnitOfWork.AuthenticationRepository.InsertEncryptedUser(user, encryptPassword);
+                var newAuth = await UnitOfWork.AuthenticationRepository.InsertEncryptedUser(user, encryptPassword);
+                newAuth.User.UserName = newAuth.User.FirstName + newAuth.User.LastName + (newAuth.User.UserId).ToString();
+                this.UnitOfWork.AuthenticationRepository.Update(newAuth);
+                await UnitOfWork.CommitAsync();
                 return StatusCode(StatusCodes.Status201Created, new { message = "Account Successfuly Created" });
 
                 //COMMENT ABOVE AND RUN TO CREATE DUMMY DATA OF AUTH AND USER

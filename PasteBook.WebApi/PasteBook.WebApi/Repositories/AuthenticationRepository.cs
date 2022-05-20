@@ -41,7 +41,6 @@ namespace PasteBook.WebApi.Repositories
                     BirthDate = user.BirthDate,
                     Gender = user.Gender,
                     MobileNumber = user.MobileNumber,
-                    UserName = Regex.Replace(user.FirstName, @"\s", "") + Regex.Replace(user.LastName, @"\s", "") + rnd.Next().ToString(),
                     ProfilePicture = "default-picture.png"
                 }
             };
