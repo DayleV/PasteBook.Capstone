@@ -113,29 +113,22 @@ export class RegistrationComponent implements OnInit {
 
   addNewUser(): void {
     if (this.registrationform.valid){
-      // this.userfriendService.addFriend(this.userfriend);
-    // console.log(this.userfriend);
     this.newUser = this.registrationform.value;
     this.registrationService.addUser(this.newUser).subscribe(newUser => 
       {this.newUser = newUser
         alert("Registration Succesful")
-        //this.text = "Registration Succesful"
         this.router.navigateByUrl('/');
         this.registrationform.reset();
     },
        (error: HttpErrorResponse) => {
         if(error.status == 400){
-          //alert("Email already existed")
-          this.text = "Email already existed"
-          //this.router.navigateByUrl('/registration');
+          this.text = "Email already existed";
         }
     });
   }
     else {
       this.isChecker = true;
-      //alert("Registration Succesful")
-      this.text = "Invalid Credentials"
-      //this.router.navigateByUrl('/registration');
+      this.text = "Invalid Credentials";
     }
     
   }

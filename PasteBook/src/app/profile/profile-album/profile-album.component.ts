@@ -38,20 +38,6 @@ export class ProfileAlbumComponent implements OnInit {
         }
     );
 
-   
-
-    // this.profileService.getUserById(Number(this.id)).pipe(
-    //   catchError(err => {
-    //     if(Number(err.status) === 404){
-    //       this.error = true;
-    //     }
-    //     return EMPTY
-    //   })
-    // ).subscribe(users => {
-    // this.users = users;
-    // });
-
-
   }
 
 }

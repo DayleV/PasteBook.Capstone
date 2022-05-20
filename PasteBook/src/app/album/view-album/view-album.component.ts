@@ -44,16 +44,6 @@ export class ViewAlbumComponent implements OnInit {
           });
       }
     );
-    
-    
-
-    // var str = (String(this.route.snapshot.paramMap.get('string'))).match(/\d+/);
-    // var id = str? str[0]: 0;
-    
-    // if(id != this.user.userId){
-    //   this.checker = false;
-    // }
-
   }
   albums: IAlbum = {
     UserId: this.user.userId,
