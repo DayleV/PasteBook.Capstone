@@ -16,7 +16,7 @@
                             </div>
                             <div *ngIf="!isLiked">
                                 <button id="heartButton" class="btn btn-default" type="submit"
-                                    (click)="likePost(PostDetail.post?.postId!, PostDetail.post?.user?.userId!)">
+                                    (click)="likePost(PostDetail.post?.postId!, PostDetail.post?.userId?.userId!)">
                                     <i [ngClass]="{'fa fa-heart-o' : isLiked === false}"></i>
                                 </button>
                             </div>
@@ -32,7 +32,7 @@
                 <div id="commentTextboxRow">
                     <textarea rows="2" cols="80" name="comment" type="text" [(ngModel)]="comment" id="commentTextbox"
                         placeholder="Enter Comment"
-                        (keyup.enter)="AddComment(PostDetail.post?.postId!, PostDetail.post?.user?.userId!)">
+                        (keyup.enter)="AddComment(PostDetail.post?.postId!, PostDetail.post?.userId?.userId!)">
                         </textarea>
                     <button class="btn btn-default" type="submit" (click)="ShowComments()">
                         <i class="fa-solid fa-sort-down"></i>
