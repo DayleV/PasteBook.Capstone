@@ -18,7 +18,7 @@
             <app-photo></app-photo>
         </div>
         <div *ngIf="checker">
-            <div *ngIf="user.userId == users[0]?.userId">
+            <div *ngIf="isEdit">
                 <div id="albumHeader">
                     <h2>
                         <input id="albumEditName" type="text" [(ngModel)]="album.albumName" value="{{album.albumName}}">

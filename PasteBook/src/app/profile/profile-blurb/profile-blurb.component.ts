@@ -30,12 +30,13 @@ export class ProfileBlurbComponent implements OnInit {
     this.route.paramMap.subscribe(
       params => {
         params.get('string')? this.userName = params.get('string')! : '';
-      }
+        this.profileService.getUserByUserName(this.userName).subscribe(users => {
+          this.users = users;
+          });
+        }
     );
 
-    this.profileService.getUserByUserName(this.userName).subscribe(users => {
-    this.users = users;
-    });
+    
   }
 
   editBlurb(): void {

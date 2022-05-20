@@ -31,13 +31,14 @@ export class ProfileAlbumComponent implements OnInit {
     this.route.paramMap.subscribe(
       params => {
         params.get('string')? this.userName = params.get('string')! : '';
-      }
+        this.profileService.getUserByUserName(this.userName).subscribe(users => {
+          this.users = users;
+          this.albums$ = this.profileService.getAlbumsByUserId(this.users[0].userId);
+          });
+        }
     );
 
-    this.profileService.getUserByUserName(this.userName).subscribe(users => {
-    this.users = users;
-    this.albums$ = this.profileService.getAlbumsByUserId(this.users[0].userId);
-    });
+   
 
     // this.profileService.getUserById(Number(this.id)).pipe(
     //   catchError(err => {
