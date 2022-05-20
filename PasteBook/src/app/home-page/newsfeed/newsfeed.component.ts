@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { combineLatest, map, Observable } from 'rxjs';
+import { combineLatest, map, Observable, tap } from 'rxjs';
 import { AuthService } from 'src/app/security/auth.service';
 import { UserAuth } from 'src/app/security/Model/user-auth';
 import { IUsers } from 'src/app/user/Model/users';
@@ -20,6 +20,9 @@ export class NewsfeedComponent implements OnInit {
   loggedInUser: UserAuth = {};
   users!:Observable<IUsers[]>;
   updateNewsFeedPosts: any;
+  totalNewsFeedPosts: number = 0;
+  limit:number = 10;
+  disableAddScroll:boolean = false;
 
   constructor(private service:NewsfeedapiService, private authService: AuthService, private userService: UserService) { }
 
@@ -48,7 +51,7 @@ export class NewsfeedComponent implements OnInit {
           commentCount: posts.commentCount,
           likeCount: posts.likeCount
         })))
-    );
+    ).pipe(tap(x => this.totalNewsFeedPosts = x.length));
 
     this.updateNewsFeedPosts = setInterval(()=>{
       this.mapNewsFeedPosts$ = combineLatest([
@@ -68,6 +71,13 @@ export class NewsfeedComponent implements OnInit {
           })))
       );
     }, 60000);
+  }
+
+  onScrollDown(){
+    this.limit += 10;
+    if(this.limit > this.totalNewsFeedPosts){
+      this.disableAddScroll = true;
+    }
   }
   
   //To disable refresh when in other routes
