@@ -38,13 +38,14 @@ export class ViewAlbumComponent implements OnInit {
     this.route.paramMap.subscribe(
       params => {
         params.get('string')? this.userName = params.get('string')! : '';
+        this.profileService.getUserByUserName(this.userName).subscribe(users => {
+          this.users = users;
+          this.albums$ = this.profileService.getAlbumsByUserId(this.users[0].userId);
+          });
       }
     );
     
-    this.profileService.getUserByUserName(this.userName).subscribe(users => {
-      this.users = users;
-      this.albums$ = this.profileService.getAlbumsByUserId(this.users[0].userId);
-      });
+    
 
     // var str = (String(this.route.snapshot.paramMap.get('string'))).match(/\d+/);
     // var id = str? str[0]: 0;
