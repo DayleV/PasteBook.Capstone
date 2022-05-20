@@ -75,6 +75,7 @@ export class ChangePasswordComponent implements OnInit {
     this.updatePasswordRequestData.oldPassword = this.updatePasswordData.oldPassword;
     this.updatePasswordRequestData.newPassword = this.updatePasswordData.newPassword;
     this.changeAccountInfoService.updateUserPassword(this.updatePasswordRequestData).subscribe(response => console.log(response));
+    this.route.navigate([`/settings`]);
   }
 
   cancel() {

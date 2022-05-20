@@ -86,6 +86,7 @@ export class ChangeEmailComponent implements OnInit {
     this.updateEmailRequestData.emailAddress = this.updateEmailData.newEmailAddress;
     this.updateEmailRequestData.oldPassword = this.updateEmailData.oldPassword;
     this.changeAccountInfoService.updateUserEmail(this.updateEmailRequestData).subscribe(response => console.log(response));
+    this.route.navigate([`/settings`]);
   }
 
   cancel() {
