@@ -1,0 +1,49 @@
+.container{
+    padding: 10px 0 0 10px;
+}
+
+.input-group{
+    margin: 0;
+    padding: 0 0 30px 0;
+    display: flex;
+    justify-content: right;
+}
+
+#addPhoto{
+    display: flex;
+    width: 310px;
+}
+
+#chooseFileButton{
+    border-radius: 5px 0 0 5px;
+    font-size: 13px;
+    opacity: .8;
+    border: 2px solid black;
+    font-weight: bold;
+    &:hover{
+        opacity: 1;
+    }
+}
+
+#uploadButton{
+    width: 100px;
+    background-color: lightgray;
+    border-radius: 0 5px 5px 0;
+    font-size: 13px;
+    opacity: .8;
+    border-top: 2px solid black ;
+    border-right: 2px solid black;
+    border-bottom: 2px solid black;
+    font-weight: bold;
+    &:hover{
+        opacity: 1;
+    }
+}
+
+#albumPhotos{
+    column-count: 4;
+}
+
+.albumphotos{
+    padding: 10px;
+}

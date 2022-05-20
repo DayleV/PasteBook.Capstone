@@ -64,6 +64,7 @@ export class EditProfileInformationComponent implements OnInit {
 
   onUpload() {
     this.photoService.submitProfilePhoto(this.selectedFile!, this.loggedInUser.userId?.toString()).subscribe(response => this.serverResponse = response.toString());
+    this.message = true;
   }
 
 
