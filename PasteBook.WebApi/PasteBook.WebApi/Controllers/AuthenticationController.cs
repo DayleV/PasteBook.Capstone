@@ -92,7 +92,7 @@ namespace PasteBook.WebApi.Controllers
             var response = this.userService.GenerateResponse(user.FirstOrDefault());
             return Ok(response);
         }
-
+        [AuthorizeAccess]
         [HttpPost("change-password")]
         public async Task<IActionResult> ChangePassword(ChangePasswordRequest model)
         {

@@ -1,7 +1,0 @@
-<div class="comment">
-    <div *ngFor="let post of posts$ | async">
-        <p>{{post.post.postContent}}</p>
-        <p>{{post.post.postDate | date:'medium'}}</p>
-        <p>Comment: {{post.commentCount}} | Like: {{post.likeCount}}</p>
-    </div>
-</div>

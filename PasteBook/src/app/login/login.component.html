@@ -16,9 +16,6 @@
             aria-describedby="emailHelp" 
             placeholder="Enter email"
             required>
-            <!-- <div *ngIf="loginform.controls['emailAddress'].invalid
-                  && (loginform.controls['emailAddress'].dirty 
-                  || loginform.controls['emailAddress'].touched)"> -->
               <div *ngIf="emailAddress?.errors?.['required'] && emailAddress?.touched || isChecker; else elseblock">
                 <span *ngIf="!(emailAddress?.touched) && !(emailAddress?.dirty) && isChecker" style="color: red; font-size: 12px;">Email Address is required.</span>
                 <span *ngIf="emailAddress?.errors?.['required'] && (emailAddress?.touched) && (emailAddress?.dirty)" style="color: red; font-size: 12px;">Email Address is required.</span>
@@ -27,11 +24,7 @@
               <ng-template #elseblock>
                 <div *ngIf="true">&nbsp;</div>
               </ng-template>
-              <!-- <div *ngIf="emailAddress?.errors?.['pattern']">
-                Please enter a valid email address.
-              </div> -->
-            <!-- </div> -->
-            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+            <small id="emailHelp" class="form-text" style="color: black;">We'll never share your email with anyone else.</small>
         </div>
         <div class="form-wrapper">
           <label for="password">Password</label>
@@ -43,9 +36,6 @@
             formControlName="password"
             placeholder="Password"
             required>
-            <!-- <div *ngIf="loginform.controls['password'].invalid 
-            && (loginform.controls['password'].dirty 
-            || loginform.controls['password'].touched)"> -->
               <div *ngIf="password?.errors?.['required'] && password?.touched || isChecker; else elseblock">
                 <span *ngIf="!(password?.touched) && !(password?.dirty) && isChecker" style="color: red; font-size: 12px;">Password is required.</span>
                 <span *ngIf="password?.errors?.['required'] && (password?.touched) && (password?.dirty)" style="color: red; font-size: 12px;">Password is required.</span>
@@ -54,7 +44,6 @@
               <ng-template #elseblock>
                 <div *ngIf="true">&nbsp;</div>
               </ng-template>
-            <!-- </div> -->
         </div>
       </div>
       <button type="submit">Login</button>

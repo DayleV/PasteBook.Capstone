@@ -54,12 +54,6 @@ export class SelectedAlbumComponent implements OnInit {
       });
       }
     );
-    
-    
-
-    // if(id != this.user.userId){
-    //   this.checker = false;
-    // }
   }
 
   cancel(){

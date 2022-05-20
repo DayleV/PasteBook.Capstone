@@ -14,6 +14,7 @@ namespace PasteBook.WebApi.Controllers
 {
     [Route("users")]
     [ApiController]
+    [AuthorizeAccess]
     public class UserController : ControllerBase
     {
         public IUnitOfWork UnitOfWork { get; private set; }

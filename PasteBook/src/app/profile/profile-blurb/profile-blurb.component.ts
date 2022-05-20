@@ -49,11 +49,6 @@ export class ProfileBlurbComponent implements OnInit {
       this.isEdit = false;
       this.router.navigate([`users/${this.users[0]?.userName}`]);
       this.ngOnInit();});
-    // this.profileService.updateProfile(id, this.users[0]).subscribe(user => this.users[0] == user);
-    
-    // this.isEdit = false;
-    // this.router.navigate([`users/${this.users[0]?.userName}`]);
-    // this.ngOnInit();
   }
 
   cancelBlurb(): void {

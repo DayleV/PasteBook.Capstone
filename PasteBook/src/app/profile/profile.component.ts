@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { BehaviorSubject, combineLatest, map, Observable } from 'rxjs';
-import { catchError, EMPTY } from 'rxjs';
+import { combineLatest, map, Observable } from 'rxjs';
 import { NotificationService } from '../navigation-bar/notification/notification.service';
 import { PostService } from '../post/post.service';
 import { AuthService } from '../security/auth.service';
 import { UserAuth } from '../security/Model/user-auth';
-import { IProfileAlbum, IPost, IProfilePosts, IUsers, IUserFriend, IUser_Friends } from './model/profile';
+import { IUsers, IUser_Friends } from './model/profile';
 import { ProfileService } from './profile.service';
 
 @Component({

@@ -23,7 +23,6 @@ export class LoginComponent implements OnInit {
     {
     emailAddress: new FormControl('', [
       Validators.required,
-      // Validators.pattern(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)
     ]),
       password: new FormControl('', [
       Validators.required,

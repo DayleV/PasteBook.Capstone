@@ -1,7 +1,7 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { BehaviorSubject, Observable, of, tap } from 'rxjs';
+import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { ConfigurationService } from '../configuration/configuration.service';
 import { Login } from '../login/Model/login';
 import { token } from './Model/token';
@@ -34,7 +34,6 @@ export class AuthService {
     if(token){
       localStorage.setItem('token', JSON.stringify(token));
       this.isLoggedIn$.next(true);
-      // sessionStorage.setItem('token', JSON.stringify(token));
     }
   }
 

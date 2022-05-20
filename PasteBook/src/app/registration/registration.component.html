@@ -1,9 +1,3 @@
-<!-- <h2>Registration Form</h2>
-<form [formGroup]="registrationform" (submit)="addNewUser()">
-  <input type="submit" value="Submit">
-  <input type="submit" value="Submit" [disabled]="registrationform.invalid"> 
-[(ngModel)]="newUser.EmailAddress"
-</form> -->
 <div class="wrapper">
   <div class="inner">
     <form [formGroup]="registrationform" (submit)="checker()">
@@ -21,9 +15,6 @@
           formControlName="EmailAddress"
           required
         >
-        <!-- <div *ngIf="registrationform.controls['EmailAddress'].invalid 
-                    && (registrationform.controls['EmailAddress'].dirty 
-                    || registrationform.controls['EmailAddress'].touched)"> -->
             <div *ngIf="EmailAddress?.touched && !(EmailAddress?.dirty) || isChecker; else elseblock">
               <div *ngIf="EmailAddress?.errors?.['required'] && EmailAddress?.touched || isChecker">
                 <span *ngIf="!(EmailAddress?.touched) && !(EmailAddress?.dirty) && isChecker" style="font-size: 12px;">Email Address is required.</span>
@@ -35,7 +26,6 @@
             <ng-template #elseblock>
               <div *ngIf="true">&nbsp;</div>
             </ng-template>
-        <!-- </div> -->
       </div>
 
       <!-- FIRSTNAME LASTNAME -->
@@ -50,9 +40,6 @@
             formControlName="FirstName"
             required
           >
-          <!-- <div *ngIf="registrationform.controls['FirstName'].invalid 
-                      && (registrationform.controls['FirstName'].dirty 
-                      || registrationform.controls['FirstName'].touched)"> -->
               <div *ngIf="FirstName?.touched && !(FirstName?.dirty) || isChecker; else elseblock">
                 <div *ngIf="FirstName?.errors?.['required'] && FirstName?.touched || isChecker">
                 <span *ngIf="!(FirstName?.touched) && !(FirstName?.dirty) && isChecker" style="font-size: 12px;">First name is required.</span>
@@ -65,7 +52,6 @@
                 <div *ngIf="true">&nbsp;</div>
               </ng-template>
               
-          <!-- </div> -->
         </div>
         <div class="form-wrapper">
           <label for="LastName">Last Name<span>*</span></label>
@@ -76,9 +62,6 @@
             formControlName="LastName"
             required
           >
-          <!-- <div *ngIf="registrationform.controls['LastName'].invalid 
-                      && (registrationform.controls['LastName'].dirty 
-                      || registrationform.controls['LastName'].touched)"> -->
                <div *ngIf="LastName?.touched && !(LastName?.dirty) || isChecker; else elseblock">
                   <div *ngIf="LastName?.errors?.['required'] && LastName?.touched || isChecker">
                     <span *ngIf="!(LastName?.touched) && !(LastName?.dirty) && isChecker" style="font-size: 12px;">Last name is required.</span>
@@ -91,7 +74,6 @@
                 <div *ngIf="true">&nbsp;</div>
               </ng-template>
               
-          <!-- </div> -->
         </div>
       </div>
 
@@ -106,9 +88,6 @@
               formControlName="Password"
               required
             >
-            <!-- <div *ngIf="registrationform.controls['Password'].invalid 
-                        && (registrationform.controls['Password'].dirty 
-                        || registrationform.controls['Password'].touched)"> -->
                 <div *ngIf="Password?.touched && !(Password?.dirty) || isChecker; else elseblock">
                   <div *ngIf="Password?.errors?.['required'] && Password?.touched || isChecker">
                     <span *ngIf="!(Password?.touched) && !(Password?.dirty) && isChecker" style="font-size: 12px;">Password is required.</span>
@@ -130,14 +109,9 @@
               formControlName="ConfirmPassword"
               required
             >
-            <!-- <div *ngIf="registrationform.controls['ConfirmPassword'].touched"> -->
                 <div *ngIf="Password?.value != ConfirmPassword?.value && ConfirmPassword?.touched || isChecker">
                   <span *ngIf="Password?.value != ConfirmPassword?.value || !(Password?.touched) && !(Password?.dirty) && isChecker" style="font-size: 12px;">Password do not match.</span>
                 </div>
-                <!-- <div *ngIf="Password?.errors?.['required']">
-                  This field is required.
-                </div> -->
-            <!-- </div> -->
           </div>
         </div>
 
@@ -152,9 +126,6 @@
               formControlName="Birthdate"
               required
             >
-            <!-- <div *ngIf="registrationform.controls['Birthdate'].invalid 
-                        && (registrationform.controls['Birthdate'].dirty 
-                        || registrationform.controls['Birthdate'].touched)"> -->
                 <div *ngIf="Birthdate?.errors?.['required'] && Birthdate?.touched || isChecker; else elseblock">
                   <span *ngIf="!(Birthdate?.touched) && !(Birthdate?.dirty) && isChecker" style="font-size: 12px;">Birthdate is required.</span>
                   <span *ngIf="Birthdate?.errors?.['required'] && (Birthdate?.touched) && (Birthdate?.dirty)" style="font-size: 12px;">Birthdate is required.</span>
@@ -163,17 +134,9 @@
                 <ng-template #elseblock>
                   <div *ngIf="true">&nbsp;</div>
                 </ng-template>
-            <!-- </div> -->
           </div>
           <div class="form-wrapper">
             <label for="Gender">Gender<span>*</span></label>
-            <!-- <input
-              class="form-control "
-              type="text" 
-              name="Gender"
-              formControlName="Gender"
-              [(ngModel)]="newUser.Gender"
-            > -->
             <select
               class="form-control select"
               type="text"
@@ -205,80 +168,16 @@
             name="MobileNumber"
             formControlName="MobileNumber"
           >
-          <!-- <div *ngIf="registrationform.controls['MobileNumber'].invalid"> -->
               <div *ngIf="MobileNumber?.errors?.['pattern']; else elseblock">
                 <span style="font-size: 12px;">Enter a valid mobile number.</span>
               </div>
               <ng-template #elseblock>
                 <div *ngIf="true">&nbsp;</div>
               </ng-template>
-          <!-- </div> -->
         </div>
         <button type="submit">Register Now</button>
-        <p>Back to <a routerLink="/login">Login</a> </p>
+        <p style="color: white;">Back to <a routerLink="/login" style="color: white;">Login</a> </p>
     </form>
   </div>
 </div>
 
-
-      
-<!--       
-      <div class="form-group">
-        <div class="form-wrapper">
-          <label for="Birthdate">Birthdate</label>
-          <input
-            type="date"
-            name="Birthdate"
-            class="form-control  ng-valid"
-            formControlName="Birthdate"
-            required
-          >
-          <div *ngIf="registrationform.controls['Birthdate'].invalid 
-                      && (registrationform.controls['Birthdate'].dirty 
-                      || registrationform.controls['Birthdate'].touched)">
-              <div *ngIf="Birthdate?.errors?.['required']">
-                This field is required.
-              </div>
-          </div>
-        </div>
-        <div class="form-wrapper">
-          <label for="Gender">Gender</label> --> 
-          <!-- <input
-            class="form-control "
-            type="text"
-            name="Gender"
-            formControlName="Gender"
-            [(ngModel)]="newUser.Gender"
-          > -->
-          <!-- <select
-          class="form-control select"
-            type="text"
-            name="Gender"
-            formControlName="Gender"
-        >
-        
-              <option value="">Choose Gender</option>
-              <option value="Female">Female</option>
-              <option value="Male">Male</option>
-              <option value="Others">Others</option>
-        </select>
-        </div>
-      </div>
-      <div class="form-wrapper">
-        <label for="MobileNumber">Mobile Number</label>
-        <input
-          class="form-control "
-          type="text"
-          name="MobileNumber"
-          formControlName="MobileNumber"
-        >
-        <div *ngIf="registrationform.controls['MobileNumber'].invalid">
-            <div *ngIf="MobileNumber?.errors?.['pattern']">
-              Enter a valid mobile number.
-            </div>
-        </div>
-      </div>
-      <button type="submit">Register Now</button>
-    </form>
-  </div>
-</div> -->
