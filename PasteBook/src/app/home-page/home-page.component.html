@@ -2,22 +2,35 @@
   <div class="row mt-10">
     <div class="col-md-3">
       <div class="row">
-        <div class="col-md-6">
-          <div class="row"><h3>Good day,</h3></div>
-          <div class="row mb-4"><h4>{{user.firstName | titlecase}} {{user.lastName | titlecase}}</h4></div>
+          <img [src]="'https://localhost:44368/Images/' + userDetail?.profilePicture" [alt]="userDetail?.profilePicture">
+          <div class="row" style="text-align: center;">
+            <h3>Good day,</h3>
+          </div>
+          <div class="row mb-4" style="text-align: center;"><h4>{{user.firstName}} {{user.lastName}}</h4></div>
           <div class="row mb-2">  
             <div class="col-md-12" *ngIf="userDetail">
-              <a [routerLink]="'users'+'/'+userDetail?.userName"><button type="button" class="text-start btn btn-secondary btn-sm col-12">Create New Post</button></a>
+              <a [routerLink]="'users'+'/'+userDetail?.userName">
+                <button type="button" 
+                class="text-start btn btn-primary btn-sm col-12"
+                style="text-align: center">
+                <i class="fa fa-plus"></i>
+                Create New Post
+                </button>
+              </a>
             </div>          
           </div>
-          <div class="row">  
+          <div class="row" >  
             <div class="col-md-12">
-              <button type="button" class="text-start btn btn-secondary btn-sm col-12">Create New Album</button>
+              <button type="button" 
+              class="text-start btn btn-primary btn-sm col-12" 
+              routerLink="/add-album"
+              style="text-align: center;">
+              <i class="fa fa-plus"></i>
+              Create New Album
+            </button>
             </div>          
           </div>
-        </div>
         <div class="col-md-6" *ngIf="userDetail">
-          <img [src]="'https://localhost:44368/images/' + userDetail?.profilePicture" [alt]="userDetail?.profilePicture">
         </div>
       </div>
     </div>
@@ -27,5 +40,6 @@
       <app-newsfeed></app-newsfeed>
     </div>
     <div class="col-md-3">
+      <app-home-friend></app-home-friend>
   </div>
 </div>

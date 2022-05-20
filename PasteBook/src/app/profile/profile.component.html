@@ -1,10 +1,12 @@
 <div class="container">
     <div class="row">
         <div class="col-md-3">
-            <h3>{{users[0]?.firstName | titlecase}} {{users[0]?.lastName | titlecase}}</h3>
+                <img [src]="'https://localhost:44368/Images/' + users[0]?.profilePicture" 
+            [alt]="users[0]?.profilePicture">
+            <h3 style="text-align: center;">{{users[0]?.firstName | titlecase}} {{users[0]?.lastName | titlecase}}</h3>
             <div class="container">
                 <div class="row">
-                    <div class="col" *ngIf="filterFriend">
+                    <div *ngIf="filterFriend">
                         <!-- {{filterFriend | async | json}} -->
                         <br>
                         <div *ngIf="filterFriend | async as friends">

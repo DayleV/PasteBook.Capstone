@@ -39,6 +39,7 @@ import { ProfileBlurbComponent } from './profile/profile-blurb/profile-blurb.com
 import { ChangeEmailComponent } from './setting/change-email/change-email.component';
 import { ChangePasswordComponent } from './setting/change-password/change-password.component';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { HomeFriendComponent } from './home-page/home-friend/home-friend.component';
 
 @NgModule({
   declarations: [
@@ -70,7 +71,8 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
     ProfilePostComponent,
     ProfileBlurbComponent,
     ChangeEmailComponent,
-    ChangePasswordComponent
+    ChangePasswordComponent,
+    HomeFriendComponent
   ],
   imports: [
     BrowserModule,

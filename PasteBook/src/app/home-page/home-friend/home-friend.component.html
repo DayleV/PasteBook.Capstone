@@ -1,0 +1,21 @@
+<section>
+    <div class="container">
+        <a routerLink="/friends"><h4>Friends List</h4></a>
+        <div id="searchFriendsBody">
+            <div id="listOfFriendsBody">
+                <div *ngIf="userFriends$ | async as friends ">
+                    <div *ngFor="let friend of $any(friends | slice: 0:6)">
+                        <div class="cont-nd" style="display: flex; justify-content: space-between">
+                            <p class="name">{{friend.friendId.firstName}} {{friend.friendId.lastName}}</p>
+                            <p class="link">
+                                <a class="nav-link"
+                                [routerLink]="'/users'+'/'+friend.friendId.firstName+friend.friendId.lastName+friend.friendId.userId">
+                                <i class="fa-solid fa-user"></i></a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
