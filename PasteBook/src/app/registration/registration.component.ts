@@ -13,6 +13,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 
 export class RegistrationComponent implements OnInit {
   text: string = '';
+  isTrue: boolean = true;
 
   newUser: IUserRegistrations = {
     EmailAddress: "",
@@ -52,6 +53,7 @@ export class RegistrationComponent implements OnInit {
       Validators.required
     ]),
     Gender: new FormControl('', [
+      Validators.required,
       Validators.pattern(/^[A-Za-z ]+$/)
     ]),
     MobileNumber: new FormControl('', [
@@ -72,6 +74,10 @@ export class RegistrationComponent implements OnInit {
 
   get Password() {
     return this.registrationform.get('Password');
+  }
+  
+  get ConfirmPassword() {
+    return this.registrationform.get('ConfirmPassword');
   }
 
   get FirstName() {
@@ -121,7 +127,7 @@ export class RegistrationComponent implements OnInit {
         if(error.status == 400){
           //alert("Email already existed")
           this.text = "Email already existed"
-          this.router.navigateByUrl('/registration');
+          //this.router.navigateByUrl('/registration');
         }
     });
   }
