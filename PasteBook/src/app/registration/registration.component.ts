@@ -12,6 +12,8 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 
 export class RegistrationComponent implements OnInit {
+  text: string = '';
+
   newUser: IUserRegistrations = {
     EmailAddress: "",
     Password: "",
@@ -102,20 +104,24 @@ export class RegistrationComponent implements OnInit {
     // console.log(this.userfriend);
     this.newUser = this.registrationform.value;
     this.registrationService.addUser(this.newUser).subscribe(newUser => 
-      {this.newUser = newUser;
-      }, (error: HttpErrorResponse) => {
+      {this.newUser = newUser
+        alert("Registration Succesful")
+        //this.text = "Registration Succesful"
+        this.router.navigateByUrl('/');
+        this.registrationform.reset();
+    },
+       (error: HttpErrorResponse) => {
         if(error.status == 400){
-          alert("Email already existed")
+          //alert("Email already existed")
+          this.text = "Email already existed"
           this.router.navigateByUrl('/registration');
         }
     });
-    alert("Registration Succesful")
-    this.router.navigateByUrl('/');
-    this.registrationform.reset();
-    }
+  }
     else {
-      alert("Invalid Credentials")
-      this.router.navigateByUrl('/registration');
+      //alert("Registration Succesful")
+      this.text = "Invalid Credentials"
+      //this.router.navigateByUrl('/registration');
     }
     
   }

@@ -7,7 +7,9 @@
 <div class="wrapper">
   <div class="inner">
     <form [formGroup]="registrationform" (submit)="addNewUser()">
-      <h3>Registration Form</h3>
+      <h3 style="margin-bottom: 5px;">Registration Form</h3>
+      <p *ngIf="text == ''">&nbsp;</p>
+      <p *ngIf="text != ''" style="color: red;">{{text}}</p>
       <div class="form-wrapper">
         <label for="EmailAddress">Email Address</label>
         <input
