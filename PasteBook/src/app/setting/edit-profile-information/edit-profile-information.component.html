@@ -15,11 +15,11 @@
             <div class="form-group">
                 <div class="form-wrapper">
                     <label>First Name</label>
-                    <input type="text" class="form-control" placeholder="Enter First Name" formControlName="firstName">
+                    <input type="text" class="form-control" placeholder="Enter First Name" formControlName="firstName" [value]="editUser.get('firstName')?.value | titlecase">
                 </div>
                 <div class="form-wrapper">
                     <label>Last Name</label>
-                    <input type="text" class="form-control" placeholder="Enter Last Name" formControlName="lastName">
+                    <input type="text" class="form-control" placeholder="Enter Last Name" formControlName="lastName" [value]="editUser.get('lastName')?.value | titlecase">
                 </div>
             </div>
 

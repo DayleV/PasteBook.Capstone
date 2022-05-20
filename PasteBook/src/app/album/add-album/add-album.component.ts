@@ -41,9 +41,8 @@ export class AddAlbumComponent implements OnInit {
     this.albumService.addAlbum(this.album).subscribe(album => 
       {this.album == album
         this.ngOnInit();
-    });
-    this.router.navigate([`${this.user.userName}/albums`]);
-    
+        this.router.navigate([`${this.user.userName}/albums`]);
+    }); 
   }
 
   cancel(){

@@ -101,7 +101,7 @@ namespace PasteBook.WebApi.Controllers
                 return BadRequest();
             }
             Random rnd = new Random();
-            user.UserName = Regex.Replace(user.FirstName, @"\s", "") + Regex.Replace(user.LastName, @"\s", "") + rnd.Next().ToString();
+            user.UserName = Regex.Replace(user.FirstName, @"\s", "") + Regex.Replace(user.LastName, @"\s", "") + user.UserId.ToString();
             UnitOfWork.UserRepository.Update(user);
             try
             {

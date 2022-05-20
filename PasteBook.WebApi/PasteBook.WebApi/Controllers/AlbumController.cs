@@ -54,9 +54,17 @@ namespace PasteBook.WebApi.Controllers
             var album = await UnitOfWork.AlbumRepository.FindByPrimaryKey(id);
             if (album != null)
             {
-                UnitOfWork.AlbumRepository.Delete(album);
-                await UnitOfWork.CommitAsync();
-                return Ok(album);
+                var photos = await UnitOfWork.PhotoRepository.Find(c => c.AlbumId == id);
+                if (photos != null)
+                {
+                    foreach (Photo photo in photos)
+                    {
+                        await UnitOfWork.PhotoRepository.Delete(photo.PhotoId); 
+                    }
+                    UnitOfWork.AlbumRepository.Delete(album);
+                    await UnitOfWork.CommitAsync();
+                    return Ok(album);
+                }
             }
             return NotFound();
         }
