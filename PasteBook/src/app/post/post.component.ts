@@ -55,7 +55,15 @@ export class PostComponent implements OnInit {
               postContent: post.post?.postContent,
               postDate: post.post?.postDate,
             }),
-            comments: post.comments,
+            comments: post.comments?.map(
+              c => ({
+                commentId: c.commentId,
+                postId: c.postId,
+                userId: users.find(u => u.userId === c.userId),
+                commentContent: c.commentContent,
+                commentDate: c.commentDate
+              })
+            ),
             likes: post.likes
           }))).pipe(tap( p => {
             if(p){
@@ -65,7 +73,7 @@ export class PostComponent implements OnInit {
           }));
       });
   }
-  checkCommentStatus(comments: IComment[]){
+  checkCommentStatus(comments: any[]){
     this.commentCount = comments.length;
   }
 
@@ -84,7 +92,7 @@ export class PostComponent implements OnInit {
       this.postService.addComment(newComment).subscribe(
         respone => {
           if(Number(this.user.userId != postUserId)){
-            this.notifService.CreateCommentNotif(Number(this.user.userId),Number(postId), Number(respone.commentId))
+            this.notifService.CreateCommentNotif(Number(postUserId),Number(postId), Number(respone.commentId))
           }
           this.comment = '';
           this.ngOnInit()
@@ -111,7 +119,7 @@ export class PostComponent implements OnInit {
       respone => {
         this.isLiked = true;
         if(Number(this.user.userId != postUserId)){
-          this.notifService.CreateLikeNotif(Number(this.user.userId),Number(postId), Number(respone.likeId))
+          this.notifService.CreateLikeNotif(Number(postUserId),Number(postId), Number(respone.likeId))
         }
         this.ngOnInit();
       }

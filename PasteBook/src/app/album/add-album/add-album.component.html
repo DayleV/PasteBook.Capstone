@@ -19,7 +19,7 @@
           [(ngModel)]="album.AlbumDescription"></textarea>
         <br>
         <div id="addAlbumButtons">
-          <button (click)="addAlbum()" class="btn btn-primary" id="saveButton">Save</button>
+          <button (click)="addAlbum()" class="btn btn-primary" id="saveButton" [disabled]="!album.AlbumName || !album.AlbumDescription">Save</button>
           <button (click)="cancel()" class="btn btn-danger">Cancel</button>
         </div>
       </div>
