@@ -1,10 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { combineLatest, map, Observable } from 'rxjs';
-import { catchError, EMPTY } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
+import { combineLatest, concatMap, map, Observable, tap } from 'rxjs';
+import { INewsFeedPosts } from 'src/app/home-page/newsfeed/Model/newsfeedpost';
+import { NewsfeedapiService } from 'src/app/home-page/newsfeed/newsfeedapi.service';
+import { IPost } from 'src/app/post/Model/posts';
+import { PostService } from 'src/app/post/post.service';
 import { AuthService } from 'src/app/security/auth.service';
 import { UserAuth } from 'src/app/security/Model/user-auth';
-import { IPost, IProfilePosts, IUsers } from '../model/profile';
+import { IUsers } from '../model/profile';
 import { ProfileService } from '../profile.service';
 
 
@@ -14,49 +17,60 @@ import { ProfileService } from '../profile.service';
   styleUrls: ['./profile-post.component.scss']
 })
 export class ProfilePostComponent implements OnInit {
-  user: UserAuth = {};
-  
-  post: IPost = {
-    UserId: this.user.userId,
-    PostContent: ''
-  }
-  posts$!: Observable<IProfilePosts[]>;
-  users: IUsers | any = [];
-  route: ActivatedRoute;
-  id: any;
-  error: boolean = false;
+  loggedInUser: UserAuth = {};
+  userName!: string;
+  users!:Observable<IUsers[]>;
+  result!: any;
+  mapUserToResult$!:Observable<any>;
+  currentWallId!: number;
+  postContent!: string;
 
-  constructor(route: ActivatedRoute, private profileService: ProfileService,
-    private authService: AuthService) {
-      this.route = route;
+  constructor(private route: ActivatedRoute, private profileService: ProfileService,
+    private authService: AuthService, private postService: PostService,
+    private userService:NewsfeedapiService) {
      }
 
   ngOnInit(): void {
-    this.user = this.authService.getLoggedInUser()!;
-    this.posts$ = this.profileService.getPostsByUserId(Number(this.id));
-
-    var str = (String(this.route.snapshot.paramMap.get('string'))).match(/\d+/);
-    this.id = str? str[0]: 0;
-
-    this.profileService.getUserById(Number(this.id)).pipe(
-      catchError(err => {
-        if(Number(err.status) === 404){
-          this.error = true;
-        }
-        return EMPTY
-      })
-    ).subscribe(users => {
-    this.users = users;
-    });
-    
-
-    this.posts$ = this.profileService.getPostsByUserId(Number(this.id));
+    this.loggedInUser = this.authService.getLoggedInUser()!;
+    this.route.paramMap.subscribe(
+      params => {
+        params.get('string')? this.userName = params.get('string')! : '';
+        
+        this.users = this.userService.getUsers();  
+        
+        this.profileService.getUserByUserName(this.userName)
+        .pipe(
+          tap(u => this.currentWallId = u[0].userId!),
+          concatMap(users => users.map((u:IUsers)=>this.postService.getPostsByUserId((u.userId)?.toString()!))),
+          map(posts => combineLatest([
+            posts,
+            this.users
+          ]).pipe(
+            map(([posts, users])=> posts.map(
+              (post: INewsFeedPosts) => ({
+                post: ({
+                  postId: post.post.postId,
+                  userId: users.find(u => u.userId === post.post.userId),
+                  postContent: post.post.postContent,
+                  postDate: post.post.postDate
+                }),
+                commentCount: post.commentCount,
+                likeCount: post.likeCount
+          })))))).subscribe(response => this.result = response);
+      });        
   }
 
   addPost(): void {
-    this.post.UserId = this.user.userId;
-    console.log(this.post)
-    this.profileService.addPosts(this.post).subscribe(post => this.post = post);
+    let newPost:IPost = {
+      userId: this.loggedInUser.userId,
+      postContent: this.postContent,
+      wallUserId: this.currentWallId
+      
+    }
+    this.profileService.addPosts(newPost).subscribe(post => {
+      this.postContent = '';
+      this.ngOnInit();
+    });
   }
 
 }

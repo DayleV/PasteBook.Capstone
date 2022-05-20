@@ -14,6 +14,7 @@ export interface IPostDetail{
 export interface IPost {
     postId?: number,
     userId?: number,
+    wallUserId?: number,
     postContent?: string,
     postDate?: Date,
     user?: IUsers

@@ -33,6 +33,24 @@ namespace PasteBook.WebApi.Controllers
             var users = await UnitOfWork.PostRepository.FindAll();
             return Ok(users);
         }
+        [HttpGet("profile/{UserId}")]
+        public async Task<IActionResult> FindProfilePost(int UserId)
+        {
+            List<NewsFeedItem> wallPosts = new List<NewsFeedItem>();
+            var posts = await UnitOfWork.PostRepository.Find(p => p.WallUserId == UserId);
+            foreach(Post post in posts.OrderByDescending(u => u.PostDate))
+            {
+                var postComments = await UnitOfWork.CommentRepository.Find(c => c.PostId == post.PostId);
+                var postLikes = await UnitOfWork.LikeRepository.Find(l => l.PostId == post.PostId);
+                wallPosts.Add(new NewsFeedItem
+                {
+                    Post = post,
+                    CommentCount = postComments.Count(),
+                    LikeCount = postLikes.Count()
+                });
+            }
+            return  Ok(wallPosts);
+        }
 
         [HttpGet("/timeline/{UserId}")]
         public async Task<IActionResult> GetPostsByUserId(int UserId)
@@ -40,7 +58,7 @@ namespace PasteBook.WebApi.Controllers
             //To get all loggedin user's post
             List<NewsFeedItem> userFeed = new List<NewsFeedItem>();
             var userPosts = await UnitOfWork.PostRepository.Find(p => p.UserId == UserId);
-            foreach (Post post in userPosts)
+            foreach (Post post in userPosts.OrderByDescending(u => u.PostDate))
             {
                 var postComments = await UnitOfWork.CommentRepository.Find(c => c.PostId == post.PostId);
                 var postLikes = await UnitOfWork.LikeRepository.Find(l => l.PostId == post.PostId);
@@ -96,13 +114,7 @@ namespace PasteBook.WebApi.Controllers
         {
             try
             {
-                var currentLoggedInUser = this.httpContextAccessor.HttpContext.Items["UserId"];
-                var post = await UnitOfWork.PostRepository.FindByPrimaryKey(id);
-                var validAccess = await this.UnitOfWork.UserFriendRepository.Find(
-                    user => user.UserId.Equals(currentLoggedInUser) || 
-                    (user.UserId.Equals(post.UserId) && user.FriendId.Equals(currentLoggedInUser)));
-                if (validAccess.Count() == 0)
-                    return Unauthorized();
+                var post = await UnitOfWork.PostRepository.FindByPrimaryKey(id);                
                 var postComments = await UnitOfWork.CommentRepository.Find(c => c.PostId == id);
                 var postLikes = await UnitOfWork.LikeRepository.Find(l => l.PostId == id);
                 var postUser = await UnitOfWork.UserRepository.FindByPrimaryKey(post.UserId);

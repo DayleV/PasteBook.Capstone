@@ -13,5 +13,5 @@ export interface INewsFeedPosts{
         postDate?: Date
     },
     commentCount?: number,
-    likeCount?: string,
+    likeCount?: number,
 }

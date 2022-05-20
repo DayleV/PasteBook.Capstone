@@ -1,7 +1,7 @@
 export interface IPost {
     PostId?: number,
     UserId?: number,
-    PostContent: string,
+    PostContent?: string,
     PostDate?: Date
 }
 
