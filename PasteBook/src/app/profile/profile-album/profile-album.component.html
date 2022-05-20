@@ -1,6 +1,6 @@
 <div>
     <div *ngIf="user.userId == users[0]?.userId; else elseblock">
-        <a href="{{user.userName}}/albums" id="myAlbumHeader">My Albums</a>
+        <a href="{{user.userName}}/albums" id="myAlbumHeader"><strong>My Albums</strong></a>
     </div>
     <ng-template #elseblock>
         <div *ngIf="user.userId != users[0]?.userId">
@@ -9,12 +9,12 @@
     </ng-template>
     <div *ngFor="let album of albums$ | async | slice:0:6; let i=index" >
         <div class="row g-3">
-            <div *ngIf="i < 6">
+            <div *ngIf="i < 6" id="albumList">
                 <a href="{{users[0]?.userName}}/albums/{{album.album.albumId}}">
-                    <i class="fa fa-picture-o fa-4x"></i>            
-                </a>
-                {{album.album.albumName}}
+                    <i class="fa fa-picture-o fa-3x"></i>            
+                </a>           
             </div>
+            <span id="albumName">{{album.album.albumName}}</span>
         </div>
     </div>
 </div>
