@@ -15,6 +15,7 @@ namespace PasteBook.WebApi.Controllers
 {
     [Route("notifications")]
     [ApiController]
+    [AuthorizeAccess]
     public class NotificationController : ControllerBase
     {
         public IUnitOfWork UnitOfWork { get; private set; }
