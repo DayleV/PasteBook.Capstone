@@ -68,7 +68,7 @@ export class ViewAlbumComponent implements OnInit {
 
   cancel(){
     this.ngOnInit();
-    this.router.navigate([`${this.user.firstName! + this.user.lastName! + this.user.userId}/albums`]);
+    this.router.navigate([`${this.user.userName}/albums`]);
   }
   
 }

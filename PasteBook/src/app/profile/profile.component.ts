@@ -102,9 +102,8 @@ export class ProfileComponent implements OnInit {
     this.userFriend.friendId = userId,
     this.userFriend.status = true,
     this.profileService.update(id, this.userFriend).subscribe(userFriend => 
-      {this.userFriend = userFriend
-        
-  });  
+      userFriend 
+    );  
     for (let request of this.getAllRequest){
       if(request.friendId ==  userId){
         if(request.userId == friendId){
@@ -114,9 +113,8 @@ export class ProfileComponent implements OnInit {
           request.status = true;
           this.userFriend.status = request.status,
           this.profileService.update(request.userFriendId, this.userFriend).subscribe(userFriend => 
-            {this.userFriend = userFriend
-              this.ngOnInit(); 
-          });
+              this.ngOnInit()
+          );
         }
       }
     }
@@ -128,7 +126,7 @@ export class ProfileComponent implements OnInit {
         if(request.userId == friendId || request.userId == userId){
           this.profileService.DeleteUserFriendRequest(request.userFriendId).subscribe(userFriend => 
             this.ngOnInit()
-            );
+        );
         }
       }
     }
