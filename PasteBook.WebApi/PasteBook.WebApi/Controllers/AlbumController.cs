@@ -61,10 +61,10 @@ namespace PasteBook.WebApi.Controllers
                     {
                         await UnitOfWork.PhotoRepository.Delete(photo.PhotoId); 
                     }
-                    UnitOfWork.AlbumRepository.Delete(album);
-                    await UnitOfWork.CommitAsync();
-                    return Ok(album);
                 }
+                UnitOfWork.AlbumRepository.Delete(album);
+                await UnitOfWork.CommitAsync();
+                return Ok(album);
             }
             return NotFound();
         }
