@@ -61,7 +61,6 @@ import { HomeFriendComponent } from './home-page/home-friend/home-friend.compone
     EditProfileInformationComponent,
     EditAccountInformationComponent,
     NotificationComponent,
-    ProfileDisplayComponent,
     DisplayAlbumComponent,
     DisplayFriendsComponent,
     PostDisplayComponent,
