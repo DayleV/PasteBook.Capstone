@@ -5,40 +5,42 @@
     <ul class="dropdown-menu" aria-labelledby="notification">
         <div  *ngIf="notifWithUser$ | async as notifs">
             <div *ngFor="let notif of notifs">
-                <li>
-                    <span *ngIf="notif.userFriendId" class="dropdown-item">
+                <li class="row">
+                    <span *ngIf="notif.userFriendId" class="dropdown-item">                  
                         <a [routerLink]="['/users/',notif.friendId.userName]">
-                            {{notif.friendId.firstName}} {{notif.friendId.lastName}}
-                        </a>                     
-                        sent you a friend request
+                            {{notif.friendId.firstName}}
+                        </a> sent you a friend request
                     </span>
                     <span *ngIf="notif.postId && !notif.commentId && !notif.likeId" class="dropdown-item">
                         <a [routerLink]="['/users/',notif.friendId.userName]">
-                            {{notif.friendId.firstName}} {{notif.friendId.lastName}}
-                        </a> 
-                        has posted in you <span><a [routerLink]="['/users/',loggedInUser.userName]">
+                            {{notif.friendId.firstName}}
+                        </a> has posted in you <span><a [routerLink]="['/users/',loggedInUser.userName]">
                             timeline
                         </a></span>
                     </span>
                     <span *ngIf="notif.commentId && notif.postId" class="dropdown-item">
                         <a [routerLink]="['/users/',notif.friendId.userName]">
-                            {{notif.friendId.firstName}} {{notif.friendId.lastName}}
-                        </a> 
-                        commented in your <span><a [routerLink]="['posts',notif.postId]">post</a></span>
-                        
+                            {{notif.friendId.firstName}}
+                        </a>commented in your <span><a [routerLink]="['posts',notif.postId]">post</a></span>
                     </span>
                     <span *ngIf="notif.likeId && notif.postId" class="dropdown-item">
                         <a [routerLink]="['/users/',notif.friendId.userName]">
-                            {{notif.friendId.firstName}} {{notif.friendId.lastName}}
-                        </a> 
-                        has liked your <span><a [routerLink]="['posts',notif.postId]">post</a></span>
+                            {{notif.friendId.firstName}}
+                        </a>has liked your <span><a [routerLink]="['posts',notif.postId]">post</a></span>
                     </span>
                 </li>
             </div>
         </div>
         
         <li>
-            <button class="btn" type="submit" (click)="clear()"><i class="fa-solid fa-trash-can"></i></button>
+            <!-- <div class="row justify-content-end align-items-center">
+                <div class="col-md-2">
+                    <button class="btn" type="submit" (click)="clear()"><i class="fa-solid fa-trash-can"></i></button>
+                </div>
+            </div> -->
+            <div class="d-flex flex-row-reverse">
+                <button class="btn" type="submit" (click)="clear()"><i class="fa-solid fa-trash-can"></i></button>
+            </div>
         </li>
     </ul>
 </div>
