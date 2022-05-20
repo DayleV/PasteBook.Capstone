@@ -1,6 +1,6 @@
 <div class="container-sm">
     <div id="settingsBody">
-        <h2>Edit Account Email</h2>
+        <h2>Change Account Email</h2>
     </div>
 </div>
 
@@ -61,7 +61,12 @@
             </div>
             <div id="editProfileButtons">
                 <button id="updateButton" type="submit" (click)="updateUserEmail()"
-                    class="btn btn-primary">Update</button>
+                    class="btn btn-primary" 
+                    [disabled]="!updateEmailData.confirmNewEmailAddress || 
+                    !updateEmailData.newEmailAddress ||
+                    !updateEmailData.oldPassword ||
+                    !updateEmailData.oldEmailAddress
+                    ">Update</button>
                 <button id="cancelButton" (click)="cancel()" class="btn btn-danger">Cancel</button>
             </div>
         </form>

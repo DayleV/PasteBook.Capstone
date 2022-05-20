@@ -1,15 +1,10 @@
 <div class="container">
-    <div *ngIf="error > 0; else elseBlock">
-        <h1>{{errorMessage}}</h1>
-    </div>
-    <ng-template #elseBlock>
-        <div *ngIf="postDetail$ | async as PostDetail">
+        <div *ngIf="mapUserToPosts$ | async as PostDetail">
             <div>
                 <div id="postBody">
-                    <h5>First Name : {{PostDetail.post?.user?.firstName}} Last Name :
-                        {{PostDetail.post?.user?.lastName}}</h5>
+                    <h5><img src="https://localhost:44368/images/Image_202205181640261.png" alt=""> {{PostDetail.post?.userId?.firstName}} {{PostDetail.post?.userId?.lastName}}</h5>
                     <p> &nbsp; {{PostDetail.post?.postContent}}</p>
-                    <p id="postDate"><em>Posted last {{PostDetail.post?.postDate}}</em></p>
+                    <p id="postDate"><em>Posted last {{PostDetail.post?.postDate | date}}</em></p>
                     <div id="likeAndCommentRow">
                         <div id="like">
                             <p id="likeCount">{{likeCount}}</p>
@@ -21,13 +16,13 @@
                             </div>
                             <div *ngIf="!isLiked">
                                 <button id="heartButton" class="btn btn-default" type="submit"
-                                    (click)="likePost(PostDetail.post?.postId!, PostDetail.post?.user?.userId!)">
+                                    (click)="likePost(PostDetail.post?.postId!, PostDetail.post?.userId?.userId!)">
                                     <i [ngClass]="{'fa fa-heart-o' : isLiked === false}"></i>
                                 </button>
                             </div>
                         </div>
                         <div>
-                            <p>Comments</p>
+                            <p>{{commentCount}} Comments</p>
                         </div>                    
                     </div>
                 </div>
@@ -37,7 +32,7 @@
                 <div id="commentTextboxRow">
                     <textarea rows="2" cols="80" name="comment" type="text" [(ngModel)]="comment" id="commentTextbox"
                         placeholder="Enter Comment"
-                        (keyup.enter)="AddComment(PostDetail.post?.postId!, PostDetail.post?.user?.userId!)">
+                        (keyup.enter)="AddComment(PostDetail.post?.postId!, PostDetail.post?.userId?.userId!)">
                         </textarea>
                     <button class="btn btn-default" type="submit" (click)="ShowComments()">
                         <i class="fa-solid fa-sort-down"></i>
@@ -51,7 +46,7 @@
                 <div *ngIf="showComments">
                     <div *ngFor="let comment of PostDetail.comments" id="commentBody">
                         <span id="commentHeader">
-                            <h6>First Name : {{PostDetail.post?.user?.firstName}} Last Name :{{PostDetail.post?.user?.lastName}}</h6>
+                            <h6><img src="https://localhost:44368/images/Image_202205181640261.png" alt="" id="comment-picture"> {{comment.userId?.firstName}}  {{comment.userId?.lastName}}</h6>
                             <p id="commentDate"><em>Comment Date: {{comment.commentDate}}</em></p>
                         </span>
                         <p>
@@ -62,5 +57,4 @@
                 </div>
             </div>
         </div>
-    </ng-template>
 </div>

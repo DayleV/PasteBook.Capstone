@@ -1,13 +1,12 @@
 <section>
     <div class="container">
-        <h4>Logged In User: {{loggedInUser.firstName}}</h4>
+        <h3>Friends</h3>
         <div id="searchFriendsBody">
             <input name="search" type="text" [(ngModel)]="search" id="search" placeholder="Search Friends list"
                 (keyup)="EmitSearch()">
             <i class='fas fa-search'></i>
             {{search}}
             <div id="listOfFriendsBody">
-                <h6>List of Friends</h6>
                 <div *ngIf="userFriends$ | async as friends">
                     <div *ngFor="let friend of friends">
                         <div class="cont-nd">

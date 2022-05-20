@@ -38,6 +38,7 @@ import { ProfilePostComponent } from './profile/profile-post/profile-post.compon
 import { ProfileBlurbComponent } from './profile/profile-blurb/profile-blurb.component';
 import { ChangeEmailComponent } from './setting/change-email/change-email.component';
 import { ChangePasswordComponent } from './setting/change-password/change-password.component';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 @NgModule({
   declarations: [
@@ -77,7 +78,8 @@ import { ChangePasswordComponent } from './setting/change-password/change-passwo
     HttpClientModule,
     ReactiveFormsModule,
     FlexLayoutModule,
-    FormsModule
+    FormsModule,
+    InfiniteScrollModule
   ],
   providers: [{ provide: JWT_OPTIONS, useValue: JWT_OPTIONS}, JwtHelperService],
   bootstrap: [AppComponent]

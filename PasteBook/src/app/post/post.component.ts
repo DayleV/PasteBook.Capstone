@@ -1,10 +1,12 @@
 import { Component, Input, NgModule, OnInit, Output, EventEmitter } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { BehaviorSubject, catchError, EMPTY, Observable, pipe, tap } from 'rxjs';
+import { BehaviorSubject, catchError, combineLatest, EMPTY, map, Observable, pipe, tap } from 'rxjs';
 import { NotificationService } from '../navigation-bar/notification/notification.service';
 import { AuthService } from '../security/auth.service';
 import { UserAuth } from '../security/Model/user-auth';
+import { UserFriendService } from '../user-friend/user-friend.service';
+import { IUsers } from '../user/Model/users';
 import { IComment, ILike, IPost, IPostDetail, IPosts } from './Model/posts';
 import { PostService } from './post.service';
 
@@ -17,6 +19,7 @@ export class PostComponent implements OnInit {
 
   postDetail$!: Observable<IPostDetail>;
   likeCount!: number | undefined;
+  commentCount!: number | undefined;
   isLiked: boolean = false;
   id! :string;
   user: UserAuth = {};
@@ -25,9 +28,12 @@ export class PostComponent implements OnInit {
   showComments: boolean = false;
   error!: number;
   errorMessage: string ='';
+  mapUserToPosts$!: Observable<any>;
+  users!: Observable<IUsers[]>;
 
   constructor(private postService: PostService, private route: ActivatedRoute,
-    private authService: AuthService, private notifService: NotificationService) {
+    private authService: AuthService, private notifService: NotificationService,
+    private userService: UserFriendService) {
   }
 
   ngOnInit(): void {      
@@ -35,29 +41,42 @@ export class PostComponent implements OnInit {
     this.route.paramMap.subscribe(
       params => {
         this.id = params.get('id')!;
+
+        this.postDetail$ = this.postService.getPostsById(this.id)
+        this.users = this.userService.getUser();
+        this.mapUserToPosts$ = combineLatest([
+          this.postDetail$,
+          this.users
+        ]).pipe(
+          map(([post, users]) => ({
+            post: ({
+              postId: post.post?.postId,
+              userId: users.find(u => u.userId === post.post?.userId),
+              postContent: post.post?.postContent,
+              postDate: post.post?.postDate,
+            }),
+            comments: post.comments?.map(
+              c => ({
+                commentId: c.commentId,
+                postId: c.postId,
+                userId: users.find(u => u.userId === c.userId),
+                commentContent: c.commentContent,
+                commentDate: c.commentDate
+              })
+            ),
+            likes: post.likes
+          }))).pipe(tap( p => {
+            if(p){
+              this.checkLikeStatus(p.likes!);
+              this.checkCommentStatus(p.comments!);
+            }
+          }));
       });
-      
-    this.postDetail$ = this.postService.getPostsById(this.id).pipe(
-      catchError(err => {
-        this.error = err.status;
-        this.HandleError(err.status);
-        return EMPTY;
-      }),
-      tap(p => {
-        if(p)
-          this.checkLikeStatus(p.likes!);
-      })
-    );
   }
-  HandleError(status: number): string{
-    if(status === 404)
-      this.errorMessage = "Post Not Found";
-
-    if(status === 401)
-      this.errorMessage = "Unauthorized Access";
-
-    return this.errorMessage;
+  checkCommentStatus(comments: any[]){
+    this.commentCount = comments.length;
   }
+
   ShowComments(){
     this.showComments = !this.showComments;
   }
@@ -73,8 +92,9 @@ export class PostComponent implements OnInit {
       this.postService.addComment(newComment).subscribe(
         respone => {
           if(Number(this.user.userId != postUserId)){
-            this.notifService.CreateCommentNotif(Number(this.user.userId),Number(postId), Number(respone.commentId))
+            this.notifService.CreateCommentNotif(Number(postUserId),Number(postId), Number(respone.commentId))
           }
+          this.comment = '';
           this.ngOnInit()
         }
       );
@@ -99,7 +119,7 @@ export class PostComponent implements OnInit {
       respone => {
         this.isLiked = true;
         if(Number(this.user.userId != postUserId)){
-          this.notifService.CreateLikeNotif(Number(this.user.userId),Number(postId), Number(respone.likeId))
+          this.notifService.CreateLikeNotif(Number(postUserId),Number(postId), Number(respone.likeId))
         }
         this.ngOnInit();
       }

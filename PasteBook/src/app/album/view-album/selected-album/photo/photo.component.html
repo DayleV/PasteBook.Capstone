@@ -1,14 +1,16 @@
-<p>upload photo works!</p>
-<div class="albumphotos" *ngFor="let photos of photoList$ | async; index as i">
-    <img [src]="apiUrl + photos.image" width="200" height="200">
-</div>
-<div class="container">
-        <div class="form-group">
-            <label for="file">Choose file</label>   
-            <input type="file" (change)="onFileSelected($event)">
-            <input type="button" value="upload" (click)="onUpload()">
+<div class="container-sm">
+    <div class="container">       
+        <div class="input-group">
+            <div id="addPhoto">
+                <input type="file" class="form-control" (change)="onFileSelected($event)" id="chooseFileButton">
+                <input type="button" class="form-control" value="Add photo" (click)="onUpload()" id="uploadButton">
+            </div>
             <h1>{{serverResponse}}</h1>
         </div>
-        <h2>SAMPLE IMAGE</h2>
-        <img [src]="apiUrl">
+    </div>
+    <div id="albumPhotos">
+        <div class="albumphotos" *ngFor="let photos of photoList$ | async; index as i">
+            <img [src]="apiUrl + photos.image" width="200" height="200">
+        </div>
+    </div>
 </div>
